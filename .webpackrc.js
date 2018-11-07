@@ -1,7 +1,7 @@
 const path = require('path');
 import { ENV } from './src/utils/utils';
 
-const distPath = process.env.X_ENV === 'pro' ? 'qtw' : 'test';
+const distPath = process.env.X_ENV === 'pro' ? 'qtw-mobile' : 'test';
 
 export  default {
   "entry": "src/index.js",
@@ -11,7 +11,7 @@ export  default {
   "ignoreMomentLocale": true,
   "theme": "./src/theme/theme.js",
   "extraBabelPlugins": [
-    ["import", { "libraryName": "antd-mobile", "libraryDirectory": "es", "style": true }],
+    ["import", {"libraryName": "antd-mobile", "style": true}],
   ],
   "alias": {
     "~": path.resolve(__dirname, "./src"),

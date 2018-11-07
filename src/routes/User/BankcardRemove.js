@@ -4,12 +4,12 @@ import { connect } from 'dva';
 @connect(state => ({
   global: state.global,
 }))
-export default class Reset extends React.Component {
+export default class BankcardRemove extends React.Component {
 
   render(){
     return(
       <div>
-        找回密码
+        银行卡解绑成功
       </div>
     )
   }

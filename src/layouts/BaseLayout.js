@@ -109,7 +109,6 @@ export default class BaseLayout extends React.Component {
                 )
               )
             }
-
             <Route component={NotFound} />
           </Switch>
 
