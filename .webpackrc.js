@@ -11,7 +11,7 @@ export  default {
   "ignoreMomentLocale": true,
   "theme": "./src/theme/theme.js",
   "extraBabelPlugins": [
-    ["import", {"libraryName": "antd-mobile", "style": true}],
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }],
   ],
   "alias": {
     "~": path.resolve(__dirname, "./src"),

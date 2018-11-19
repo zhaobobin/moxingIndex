@@ -60,7 +60,7 @@ const BaseRoutes = app => [
           },
           {
             name: '活动详情',
-            key: 'activity-list',
+            key: 'activity-detail',
             path: 'activity-detail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Activity/ActivityDetail')),
           },
@@ -72,7 +72,7 @@ const BaseRoutes = app => [
           },
           {
             name: '公告详情',
-            key: 'notices-list',
+            key: 'notices-detail',
             path: 'notices-detail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Activity/NoticesDetail')),
           },
@@ -84,7 +84,7 @@ const BaseRoutes = app => [
           },
           {
             name: '帮助中心详情',
-            key: 'help-list',
+            key: 'help-detail',
             path: 'help-detail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Help/HelpDetail')),
           },
@@ -97,7 +97,7 @@ const BaseRoutes = app => [
           },
           {
             name: '公司新鲜事详情',
-            key: 'news-list',
+            key: 'news-detail',
             path: 'news-detail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Found/About/NewsDetail')),
           },
@@ -254,6 +254,13 @@ const BaseRoutes = app => [
                 component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/RiskManage')),
               },
               {
+                name: '风险评估结果',
+                key: 'risk-result',
+                path: 'risk-result',
+                userType: '1',
+                component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/RiskManage')),
+              },
+              {
                 name: '站内信息',
                 key: 'message-manage',
                 path: 'message-manage',
@@ -262,6 +269,64 @@ const BaseRoutes = app => [
               },
             ]
           }
+        ]
+      },
+
+      //结果页
+      {
+        name: '结果页',
+        key: 'result',
+        path: 'result',
+        isHide: true,
+        children: [
+          {
+            name: '开户成功',
+            key: 'kaihu-result',
+            path: 'kaihu-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/KaihuResult')),
+          },
+          {
+            name: '充值成功',
+            key: 'cz-result',
+            path: 'cz-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/CzResult')),
+          },
+          {
+            name: '提现成功',
+            key: 'tx-result',
+            path: 'tx-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/TxResult')),
+          },
+          {
+            name: '银行卡绑卡成功',
+            key: 'bank-add',
+            path: 'bank-add',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/BankcardAdd')),
+          },
+          {
+            name: '银行卡解绑成功',
+            key: 'bank-remove',
+            path: 'bank-remove',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/BankcardRemove')),
+          },
+          {
+            name: '智享出借成功',
+            key: 'zxfw-result',
+            path: 'zxfw-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/ZxfwResult')),
+          },
+          {
+            name: '出借成功',
+            key: 'lend-result',
+            path: 'lend-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/LendResult')),
+          },
+          {
+            name: '债转成功',
+            key: 'lend-result',
+            path: 'zhaiquan-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/ZhaiquanResult')),
+          },
         ]
       },
 

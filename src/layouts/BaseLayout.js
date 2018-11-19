@@ -16,8 +16,9 @@ export default class BaseLayout extends React.Component {
 
   componentDidMount(){
     const { isAuth } = this.props.global;
-    if(!isAuth) this.validateToken();     //页面F5刷新时执行token验证
-    this.saveNavData();
+    if(!isAuth && Storage.get(ENV.storageRefreshToken)) {
+      this.validateToken();     //页面F5刷新时执行token验证
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
@@ -37,15 +38,6 @@ export default class BaseLayout extends React.Component {
       callback: (res) => {}
     })
   };
-
-  //保存路由配置
-  saveNavData(){
-    const { navData } = this.props;
-    this.props.dispatch({
-      type: 'global/saveNavData',
-      payload: navData[0].children
-    })
-  }
 
   //获取页面标题
   getPageTitle() {
@@ -87,12 +79,11 @@ export default class BaseLayout extends React.Component {
   render(){
 
     const { getRouteData } = this.props;
-    const { navData } = this.props.global;
 
-    const layout = navData.length > 0 ?
+    const layout = (
       <div className={styles.layout}>
 
-        <GlobalHeader/>
+        {/*<GlobalHeader/>*/}
 
         <GlobalContent>
 
@@ -115,8 +106,7 @@ export default class BaseLayout extends React.Component {
         </GlobalContent>
 
       </div>
-      :
-      null;
+    );
 
     return(
       <DocumentTitle title={this.getPageTitle()}>

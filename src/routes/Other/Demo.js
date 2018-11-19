@@ -17,12 +17,17 @@ export default class Demo extends React.Component {
         <dl>
           <dt><strong>结果页</strong></dt>
           <dd>
-            <p><Link to="/user/register/success">开户结果页</Link></p>
-            <p><Link to="/user/cz-result">充值成功</Link></p>
-            <p><Link to="/user/tx-result">提现成功</Link></p>
-            <p><Link to="/user/bank-add">银行卡绑卡成功</Link></p>
-            <p><Link to="/user/bank-remove">银行卡解绑成功</Link></p>
-            <p><Link to="/user/lend-result">出借成功</Link></p>
+            <p><Link to="/result/kaihu-result">开户结果页</Link></p>
+
+            <p><Link to="/result/cz-result">充值成功</Link></p>
+            <p><Link to="/result/tx-result">提现成功</Link></p>
+
+            <p><Link to="/result/bank-add">银行卡绑卡成功</Link></p>
+            <p><Link to="/result/bank-remove">银行卡解绑成功</Link></p>
+
+            <p><Link to="/result/zxfw-result">智享出借成功</Link></p>
+            <p><Link to="/result/lend-result">出借成功</Link></p>
+            <p><Link to="/result/zhaiquan-result">债转成功</Link></p>
           </dd>
         </dl>
 
@@ -53,6 +58,14 @@ export default class Demo extends React.Component {
             <p><Link to="/invitation">邀请好友</Link></p>
             <p><Link to="/invitation-list">邀请好友列表</Link></p>
             <p><Link to="/platform">平台优势</Link></p>
+          </dd>
+        </dl>
+
+        <dl>
+          <dt><strong>其他</strong></dt>
+          <dd>
+            <p><p><Link to="/account/info-manage/risk-manage">风险测评</Link></p></p>
+            <p><p><Link to="/share">分享页面</Link></p></p>
           </dd>
         </dl>
 

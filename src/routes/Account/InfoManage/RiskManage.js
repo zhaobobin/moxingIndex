@@ -9,7 +9,7 @@ export default class RiskManage extends React.Component {
   render(){
     return(
       <div>
-        风险测评
+        风险测评答题
       </div>
     )
   }

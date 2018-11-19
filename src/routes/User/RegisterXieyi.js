@@ -4,12 +4,12 @@ import { connect } from 'dva';
 @connect(state => ({
   global: state.global,
 }))
-export default class LendResult extends React.Component {
+export default class RegisterXieyi extends React.Component {
 
   render(){
     return(
       <div>
-        出借成功
+        注册协议
       </div>
     )
   }
