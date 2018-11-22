@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'dva';
-import { NavBar, Icon } from 'antd-mobile';
 import { getTitle } from '~/utils/utils'
 
 @connect(state => ({
@@ -22,13 +21,9 @@ export default class GlobalHeader extends React.Component {
   render(){
 
     return(
-      <NavBar
-        mode="dark"
-        icon={<Icon type="left" />}
-        onLeftClick={this.goBack}
-      >
+      <div>
         {this.state.title}
-      </NavBar>
+      </div>
     )
   }
 

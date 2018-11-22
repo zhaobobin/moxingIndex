@@ -1,12 +1,10 @@
 const path = require('path');
 import { ENV } from './src/utils/utils';
 
-const distPath = process.env.X_ENV === 'pro' ? 'qtw-mobile' : 'test';
-
 export  default {
   "entry": "src/index.js",
-  "outputPath": "./dist/" + distPath,
-  "publicPath": "/" + distPath + "/",
+  "outputPath": "./dist/qtw-mobile",
+  "publicPath": "/qtw-mobile/",
   "hash": true,
   "ignoreMomentLocale": true,
   "theme": "./src/theme/theme.js",

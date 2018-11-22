@@ -83,8 +83,6 @@ export default class BaseLayout extends React.Component {
     const layout = (
       <div className={styles.layout}>
 
-        {/*<GlobalHeader/>*/}
-
         <GlobalContent>
 
           <Switch>
