@@ -35,37 +35,37 @@ export default class Demo extends React.Component {
           <dt><strong>发现板块</strong></dt>
           <dd>
             <p><Link to="/found">发现首页</Link></p>
-            <p><Link to="/download">下载</Link></p>
-            <p><Link to="/activity-list">活动列表</Link></p>
-            <p><Link to="/activity-detail/123">活动详情</Link></p>
-            <p><Link to="/notices-list">公告列表</Link></p>
-            <p><Link to="/notices-detail/123">公告详情</Link></p>
-            <p><Link to="/help-list">帮助中心</Link></p>
-            <p><Link to="/help-detail/123">帮助中心详情</Link></p>
-            <p><Link to="/news-list">公司新鲜事</Link></p>
-            <p><Link to="/news-detail/123">公司新鲜事详情</Link></p>
-            <p><Link to="/aboutus">关于我们</Link></p>
-            <p><Link to="/info">信息披露</Link></p>
-            <p><Link to="/beian">备案信息</Link></p>
-            <p><Link to="/organization">组织信息</Link></p>
-            <p><Link to="/examine">审核信息</Link></p>
-            <p><Link to="/disclosure">经营信息</Link></p>
-            <p><Link to="/event">重大事项</Link></p>
-            <p><Link to="/other">其他事项</Link></p>
-            <p><Link to="/education">出借人教育</Link></p>
-            <p><Link to="/operate">运营报告</Link></p>
-            <p><Link to="/operate-detail/123">运营报告详情</Link></p>
-            <p><Link to="/invitation">邀请好友</Link></p>
-            <p><Link to="/invitation-list">邀请好友列表</Link></p>
-            <p><Link to="/platform">平台优势</Link></p>
+            <p><Link to="/found/download">下载</Link></p>
+            <p><Link to="/found/activity-list">活动列表</Link></p>
+            <p><Link to="/found/activity-detail/123">活动详情</Link></p>
+            <p><Link to="/found/notices-list">公告列表</Link></p>
+            <p><Link to="/found/notices-detail/123">公告详情</Link></p>
+            <p><Link to="/found/help-list">帮助中心</Link></p>
+            <p><Link to="/found/help-detail/123">帮助中心详情</Link></p>
+            <p><Link to="/found/news-list">公司新鲜事</Link></p>
+            <p><Link to="/found/news-detail/123">公司新鲜事详情</Link></p>
+            <p><Link to="/found/aboutus">关于我们</Link></p>
+            <p><Link to="/found/info">信息披露</Link></p>
+            <p><Link to="/found/beian">备案信息</Link></p>
+            <p><Link to="/found/organization">组织信息</Link></p>
+            <p><Link to="/found/examine">审核信息</Link></p>
+            <p><Link to="/found/disclosure">经营信息</Link></p>
+            <p><Link to="/found/event">重大事项</Link></p>
+            <p><Link to="/found/other">其他事项</Link></p>
+            <p><Link to="/found/education">出借人教育</Link></p>
+            <p><Link to="/found/operate">运营报告</Link></p>
+            <p><Link to="/found/operate-detail/123">运营报告详情</Link></p>
+            <p><Link to="/found/invitation">邀请好友</Link></p>
+            <p><Link to="/found/invitation-list">邀请好友列表</Link></p>
+            <p><Link to="/found/platform">平台优势</Link></p>
           </dd>
         </dl>
 
         <dl>
           <dt><strong>其他</strong></dt>
           <dd>
-            <p><p><Link to="/account/info-manage/risk-manage">风险测评</Link></p></p>
-            <p><p><Link to="/share">分享页面</Link></p></p>
+            <p><Link to="/account/info-manage/risk-manage">风险测评</Link></p>
+            <p><Link to="/share">分享页面</Link></p>
           </dd>
         </dl>
 
