@@ -16,9 +16,10 @@ export default class BaseLayout extends React.Component {
 
   componentDidMount(){
     const { isAuth } = this.props.global;
-    let searchParams = window.location.href.split('?')[1],
-      paramsObj = getSearchString(searchParams);
 
+    let paramsObj = '',
+      searchParams = window.location.href.split('?')[1];
+    if(searchParams) paramsObj = getSearchString(searchParams);
     //处理app调用h5
     if(paramsObj.platform && paramsObj.platform === 'app'){
       Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
