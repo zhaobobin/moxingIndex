@@ -6,7 +6,7 @@ import './theme/base.css';
 const history = process.env.NODE_ENV === 'production' ? {history: browserHistory()} : {};
 
 // 1. Initialize2
-const app = dva({});
+const app = dva(history);
 
 // 2. Plugins
 // app.use({});

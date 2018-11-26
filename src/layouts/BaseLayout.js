@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
-import { ENV, Storage } from '~/utils/utils';
+import { ENV, Storage, getSearchString } from '~/utils/utils';
 import DocumentTitle from 'react-document-title';
 import NotFound from "~/routes/Other/404";
 
@@ -16,8 +16,18 @@ export default class BaseLayout extends React.Component {
 
   componentDidMount(){
     const { isAuth } = this.props.global;
-    if(!isAuth && Storage.get(ENV.storageRefreshToken)) {
-      this.validateToken();     //页面F5刷新时执行token验证
+    let searchParams = window.location.href.split('?')[1],
+      paramsObj = getSearchString(searchParams);
+
+    //处理app调用h5
+    if(paramsObj.platform && paramsObj.platform === 'app'){
+      Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
+      Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
+      this.saveUserinfo(paramsObj)
+    }else{
+      if(!isAuth && Storage.get(ENV.storageRefreshToken)) {
+        this.validateToken();     //页面F5刷新时执行token验证
+      }
     }
   }
 
@@ -26,6 +36,17 @@ export default class BaseLayout extends React.Component {
       window.scrollTo(0, 0);
     }
   }
+
+  //保存用户信息 http://localhost:8001/#/demo?accessToken=c572cadb54a74357aec2f932d7285c76&refreshToken=18b9e1df769f48d0adf5d407456f8cb6&userId=18111457224731&platform=app
+  saveUserinfo = (paramsObj) => {
+    this.props.dispatch({
+      type: 'global/changeUserInfo',
+      payload: {
+        accessToken: paramsObj.accessToken,
+        userId: paramsObj.userId
+      },
+    })
+  };
 
   //验证token
   validateToken = () => {

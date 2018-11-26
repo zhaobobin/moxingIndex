@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import { Toast } from 'antd-mobile';
+import { notification } from 'antd';
 import request from '~/utils/request';
 import {ENV, Storage} from '~/utils/utils';
 
@@ -132,7 +132,9 @@ export default {
         });
         yield put(routerRedux.push({ pathname: '/' }));
       }else{
-        Toast.info('退出失败！', 1);
+        notification.error({
+          message: '退出失败'
+        });
       }
     },
 
@@ -201,11 +203,6 @@ export default {
       yield callback(res);
 
       yield put({ type: 'changeLoading', payload: false });
-
-      //系统异常提示
-      // if(res.code === -1){
-      // Toast.info(res.message, 1);
-      // }
 
     },
 

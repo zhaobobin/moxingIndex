@@ -1,5 +1,5 @@
 import fetch from 'dva/fetch';
-import { Toast } from 'antd-mobile';
+import { notification } from 'antd';
 import { ENV, Storage } from "./utils";
 
 function checkStatus(response) {
@@ -22,33 +22,45 @@ function checkStatus(response) {
 export default function request(url, options) {
 
   //打包正式接口
+  let api = url;
   if(process.env.NODE_ENV === 'production'){
-    url = ENV.api + url ;
+    api = ENV.apiName + url ;
   }
 
-  const defaultOptions = {
-    credentials: 'include',                           //跨域访问携带cookie
-  };
-
   let newOptions = {
-    ...defaultOptions,
+    credentials: 'include',                           //跨域访问携带cookie
     ...options,
   };
 
   if (newOptions.method === 'POST') {
-    newOptions.headers = {
+
+    let newOptionsHeaders = {
       Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
       'accessToken': Storage.get(ENV.storageAccessToken) || null,
       ...newOptions.headers,
     };
-    //newOptions.body = JSON.stringify(newOptions.body);
-    let params = "";
-    for(let i in options.body){
-      params += i + "=" + options.body[i] + "&";
+
+    //风险测评接口传输json格式
+    // console.log(url)
+    if(url === '/api/risk/saveRisk'){
+      newOptions.headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+        ...newOptionsHeaders,
+      };
+      newOptions.body = JSON.stringify(newOptions.body);
+    }else{
+      newOptions.headers = {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        ...newOptionsHeaders,
+      };
+      let params = "";
+      for(let i in options.body){
+        params += i + "=" + options.body[i] + "&";
+      }
+      params = params.substring(0, params.length - 1);
+      newOptions.body = params;
     }
-    params = params.substring(0, params.length - 1);
-    newOptions.body = params;
+
   }
 
   return fetch(url, newOptions)
@@ -56,10 +68,14 @@ export default function request(url, options) {
     .then(response => response.json())
     .catch(error => {
       if (error.code) {
-        Toast.info(error.name, 1);
+        notification.error({
+          message: error.name
+        });
       }
       if ('stack' in error && 'message' in error) {
-        Toast.info('请求错误', 1);
+        notification.error({
+          message: '请求错误'
+        });
       }
       return error;
     });
