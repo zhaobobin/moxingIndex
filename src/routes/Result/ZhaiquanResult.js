@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd';
+import {ENV} from '~/utils/utils'
 import styles from './Result.less'
 
 import img_success from '~/assets/com/success@2x.png'
@@ -12,7 +13,7 @@ import ResultJson from './ResultJson'
 export default class ZhaiquanResult extends React.Component {
 
   redirect = (action) => {
-    window.location.href = window.location.href + '?action=' + action;
+    window.location.href = ENV.siteUrl + '?action=' + action;
   };
 
   render(){

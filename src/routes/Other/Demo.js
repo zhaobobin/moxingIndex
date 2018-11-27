@@ -67,6 +67,8 @@ export default class Demo extends React.Component {
             <p><Link to="/account/info-manage/risk-manage">风险测评</Link></p>
             <p><Link to="/account/info-manage/risk-result">风险测评-结果页</Link></p>
             <p><Link to="/share">分享页面</Link></p>
+            <p><Link to="/user/register">用户注册</Link></p>
+            <p><Link to="/user/register-result">用户注册-结果页</Link></p>
           </dd>
         </dl>
 

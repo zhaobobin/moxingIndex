@@ -39,13 +39,37 @@
 注册协议： /user/register-xieyi
 
 
-## 页面跳转动作 http://m.qutouwang.com/?action=xxx
+## 页面跳转动作 http://m.qutouwang.com/#/result/zxfw-result?action=qtw_lend
 
-开通认证： open
-
-查看记录： look
-
-出借： lend
-
-添加银行卡： add-bank
-
+```
+  export default {
+    look: {
+      name: '查看记录相关',
+      action: 'qtw_look'
+    },
+    lend: {
+      name: '立即出借/继续出借',
+      action: 'qtw_lend'
+    },
+    open: {
+      name: '开户',
+      action: 'qtw_open'
+    },
+    addcard: {
+      name: '绑卡',
+      action: 'qtw_addcard'
+    },
+    removecard: {
+      name: '解绑卡',
+      action: 'qtw_removecard'
+    },
+    cz: {
+      name: '充值',
+      action: 'qtw_cz'
+    },
+    tx: {
+      name: '提现',
+      action: 'qtw_tx'
+    }
+  }
+```
