@@ -169,7 +169,7 @@ export function goBack(){
  * @param url
  * @returns {Object}
  */
-function getSearchString(url) {
+export function getSearchString(url) {
   // 以&分隔字符串，获得类似name=xiaoli这样的元素数组
   var arr = url.split("&");
   var obj = new Object();

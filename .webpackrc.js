@@ -2,7 +2,7 @@ const path = require('path');
 import { ENV } from './src/utils/utils';
 
 //qtw-mobile 测试、准生产，qtw-mobile-pro 生产环境
-const distPath = process.env.X_ENV === 'pro' ? 'qtw-mobile-pro' : 'qtw-mobile';
+const distPath = process.env.X_ENV === 'pro' ? 'qtw-mobile' : 'qtw-mobile';
 
 export  default {
   "entry": "src/index.js",

@@ -21,7 +21,7 @@ export default class BaseLayout extends React.Component {
       searchParams = window.location.href.split('?')[1];
     if(searchParams) paramsObj = getSearchString(searchParams);
     //处理app调用h5
-    if(paramsObj.platform && paramsObj.platform === 'app'){
+    if(paramsObj.equipmentType === 'app' && paramsObj.accessToken){
       Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
       Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
       this.saveUserinfo(paramsObj)
