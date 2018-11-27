@@ -1,0 +1,43 @@
+@import '../../theme/index.less';
+
+.smscode{
+  height:40px;
+  position:relative;
+
+  .btn{
+    margin:0;
+    padding:0 5px;
+    border: none;
+    font-size:12px;
+    text-align:right;
+    position:absolute;
+    right:0;
+    top:0;
+
+    &.null{
+      color:@color_orange2;
+      background:#fff;
+    }
+    &.actived{
+      color:@color_orange;
+      background:#fff;
+    }
+    &.disabled{
+      color:@color_orange2;
+      background:#fff;
+    }
+  }
+
+  .clearInput {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    font-size: 14px;
+    &:hover {
+      color: #999;
+    }
+    &:active {
+      color: #666;
+    }
+  }
+}

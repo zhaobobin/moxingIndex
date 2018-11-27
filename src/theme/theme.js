@@ -1,8 +1,8 @@
 export default {
-  "primary-color": "#F18925",                         // 全局主色
-  "processing-color": "#FFE9D4",                      // 处理主色
-  "link-color": "#F18925",                            // 链接色
-  "success-color": "#F18925",                         // 成功色
+  "primary-color": "#0D2F55",                         // 全局主色
+  "processing-color": "#0D2F55",                      // 处理主色
+  "link-color": "#0D2F55",                            // 链接色
+  "success-color": "#0D2F55",                         // 成功色
   "warning-color": "#FC514F",                         // 警告色
   "error-color": "#FC514F",                           // 错误色
 
@@ -13,9 +13,9 @@ export default {
   "text-color-secondary" : "#888",                    // 次文本色
   // "disabled-color" : "#FFE9D4",                       // 失效色
   // "disable-bg": "#FFE9D4",                            // 失效色
-  "btn-disable-color": "#FFE9D4",                     // 按钮失效色
-  "btn-disable-bg": "#FFE9D4",                        // 按钮失效色
-  "btn-disable-border": "#FFE9D4",                    // 按钮失效色
+  "btn-disable-color": "#9EACBB",                     // 按钮失效色
+  "btn-disable-bg": "#9EACBB",                        // 按钮失效色
+  "btn-disable-border": "#9EACBB",                    // 按钮失效色
   "border-radius-base": "3px",                        // 组件/浮层圆角
   "btn-border-radius-base": "3px",                    // 按钮圆角
   "border-color-base": "#d9d9d9",                     // 边框色

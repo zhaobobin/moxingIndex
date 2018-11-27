@@ -21,6 +21,15 @@ export default {
 
     navData: [],                //导航菜单
 
+    kaihuInfo: {                //开户专用
+      userId: '',               //用户id
+      cifName: '',              //姓名
+      idNum: '',                //身份证号
+      authAmt: '',              //授权金额（元）
+      authDue: '',              //授权期限（月）
+      equipmentType: 'pc'
+    }
+
   },
 
   subscriptions: {
@@ -133,7 +142,30 @@ export default {
         yield put(routerRedux.push({ pathname: '/' }));
       }else{
         notification.error({
-          message: '退出失败'
+          message: '退出失败！',
+          description: res.message,
+        });
+      }
+    },
+
+    //初始化账户 - 查询账户信息、资产信息
+    *initAccount({ payload, callback }, { call, put }) {
+      const res1 = yield call(
+        (params) => {return request('/api/personalCenter/getPersonalCenter', {method: 'POST', body: params})},
+        payload
+      );
+      const res2 = yield call(
+        (params) => {return request('/api/personalCenterUser/getAssetDetails', {method: 'POST', body: params})},
+        payload
+      );
+      yield callback(res2);
+      if(res2.code === 0){
+        yield put({
+          type: 'changeAssetInfo',
+          payload: {
+            userInfo: res1.data,
+            assetInfo: res2.data,
+          }
         });
       }
     },
@@ -186,7 +218,7 @@ export default {
     //exp如果不为空：在查询时，先检查本地存储数据是否过期，再读取远程数据；并且在查询成功后，本地存储查询结果。
     *post({ url, payload, callback }, { call, put }) {
 
-      yield put({ type: 'changeLoading', payload: true });
+      //yield put({ type: 'changeLoading', payload: true });
 
       let res, exp = payload.exp, storage = Storage.get(url, exp);
 
@@ -202,13 +234,21 @@ export default {
 
       yield callback(res);
 
-      yield put({ type: 'changeLoading', payload: false });
+      //yield put({ type: 'changeLoading', payload: false });
+
+      //系统异常提示
+      // if(res.code === -1){
+      //   notification.error({
+      //     message: '失败',
+      //     description: res.message
+      //   })
+      // }
 
     },
 
     *get({ url, payload, callback }, { call, put }) {
 
-      yield put({ type: 'changeLoading', payload: true });
+      //yield put({ type: 'changeLoading', payload: true });
 
       const res = yield call(
         (params) => {return request(url, {method: 'GET', body: params})},
@@ -217,7 +257,7 @@ export default {
 
       yield callback(res);
 
-      yield put({ type: 'changeLoading', payload: false });
+      //yield put({ type: 'changeLoading', payload: false });
 
     },
   },
@@ -242,6 +282,27 @@ export default {
         currentUser: {
           ...state.currentUser,
           userInfo: payload.userInfo
+        },
+      };
+    },
+    //开户信息
+    changeKaihuInfo(state, {payload}){
+      return {
+        ...state,
+        kaihuInfo: {
+          ...state.kaihuInfo,
+          ...payload
+        },
+      };
+    },
+    //修改账户信息
+    changeAccountInfo(state, {payload}){
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          userInfo: Object.assign(state.currentUser.userInfo, payload.userInfo),
+          assetInfo: payload.assetInfo
         },
       };
     },

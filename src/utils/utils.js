@@ -7,9 +7,13 @@ const CryptoJS = require('crypto-js');  //引用AES源码js
  */
 export const ENV = {
 
-  api: 'http://192.168.1.77:85/qtw-invest-api',         //测试服务器ip
-  api2: 'http://192.168.55.13:8080',                    //朱旭ip
-  api3: 'http://192.168.55.70:8080',                    //张欢ip
+  api: 'http://192.168.1.77:85/qtw-invest-api',                   //测试服务器ip  出借号：18610313201，借款号：18610313202
+  api2: 'http://investtest.qutouwang.com/qtw-invest-api',         //准生产  出借号：18610313201、18610313202，借款人：18610313203
+  api3: 'http://192.168.55.70:8080',                              //张欢ip
+  api4: 'http://192.168.55.13:8080',                              //朱旭ip
+  api5: 'http://192.168.55.20:8080',                              //国强ip
+
+  apiName: 'qtw-invest-api',                                      //生产项目接口名称
 
   appname: '去投网',
   hometitle: '【去投网】P2P理财- 中国领先的互联网理财借贷P2P平台',
@@ -41,6 +45,7 @@ export const ENV = {
   storageTheme: 'qtw-theme',
   storageCurrentMenu: 'qtw-currentMenu',
   storagePagesize: 'qtw-pagesize',
+  storageHistory: 'qtw-history',          //路由历史
 };
 
 /**
@@ -130,10 +135,6 @@ export function Decrypt(k, text) {
 
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 通用工具函数 start!!! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
-export function getTitle(){
-  return document.title;
-}
-
 /**
  * 浏览器后退
  * -1后退、0去首页
@@ -168,7 +169,7 @@ export function goBack(){
  * @param url
  * @returns {Object}
  */
-export function getSearchString(url) {
+function getSearchString(url) {
   // 以&分隔字符串，获得类似name=xiaoli这样的元素数组
   var arr = url.split("&");
   var obj = new Object();
@@ -302,20 +303,58 @@ export function file2base64(file, cb){
 
   };
 }
+
+/**
+ * 将base64转换为文件
+ * @param dataurl
+ * @returns {Blob}
+ */
+export function dataURLtoBlob(dataurl) {
+  let arr = dataurl.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], {type: mime});
+}
+
 /*************************** 空对象工具函数begin ***************************/
+
 /**
  * 空对象判断
+ * @param obj
+ * @returns {boolean}
  */
 export function isEmptyObject(obj){
 
-  for(var key in obj){
+  for(let key in obj){
     return false
   };
   return true
 };
 /*************************** 空对象工具函数end ***************************/
 
+/*************************** 空值工具函数begin ***************************/
+export function isEmptyValue(val){
+  if(val===''||val===null||val==='null'||val===undefined||val==='undefined') return true
+  return false;
+};
+/*************************** 空值工具函数end ***************************/
+
 /*************************** 数值工具函数 ***************************/
+
+/**
+ * 金额字符串转数值
+ * @param str
+ * @returns {number}
+ */
+export function str2Number(str){
+  let arr = str.split(',');
+  return parseFloat(arr.join(''));
+}
 
 /**
  * 金额数值格式化
@@ -542,9 +581,9 @@ export function getQueryPath(path = '', query = {}) {
   return path;
 }
 
-/* eslint no-useless-escape:0 */
-const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
-
 export function isUrl(path) {
+  let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
   return reg.test(path);
 }
+
+
