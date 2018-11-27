@@ -24,7 +24,10 @@ export default function request(url, options) {
   //打包正式接口
   let api = url;
   if(process.env.NODE_ENV === 'production'){
-    api = ENV.apiName + url ;
+    api = process.env.X_ENV === 'pro' ?
+      ENV.api1 + url
+      :
+      ENV.api2 + url;
   }
 
   let newOptions = {
@@ -63,7 +66,7 @@ export default function request(url, options) {
 
   }
 
-  return fetch(url, newOptions)
+  return fetch(api, newOptions)
     .then(checkStatus)
     .then(response => response.json())
     .catch(error => {
