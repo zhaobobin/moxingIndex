@@ -1,0 +1,42 @@
+@import '../../../theme/index.less';
+
+.contentBox{
+  margin-top: 20px;
+}
+.system{
+  margin: 17px 0 20px 0;
+  color: @color_orange;
+  font-weight:bold;
+  text-decoration:underline;
+}
+.listUl{
+  a{
+    color: @link;
+  }
+  li{
+    height: 33px;
+    line-height: 33px;
+    background: @color_gray;
+    text-indent: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    span{
+      display: inline-block;
+      width: 0;
+      border:5px solid @color_gray;
+      border-left-color: @color_888;
+      float: right;
+      margin: 12px 9px ;
+    }
+  }
+}
+.bottomBox{
+  margin: 20px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  img{
+    width: 67px;
+    height: 53px;
+  }
+}

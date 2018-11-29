@@ -49,7 +49,7 @@ export  default {
   },
   "proxy": {
     "/api": {
-      "target": ENV.api,
+      "target": ENV.api2,
       "changeOrigin": true,
       //"pathRewrite": { "^/api" : "" }
     }
