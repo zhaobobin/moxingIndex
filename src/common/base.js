@@ -364,6 +364,13 @@ const BaseRoutes = app => [
         isHide: true,
         component: dynamicWrapper(app, [], () => import('../routes/Other/Share')),
       },
+      {
+        name: '常见问题',
+        key: 'question',
+        path: 'question',
+        isHide: true,
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Question')),
+      },
 
     ]
   },
