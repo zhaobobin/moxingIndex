@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "start": "cross-env NO_PROXY=true roadhog server",
-    "build": "cross-env NODE_ENV=production X_ENV=dev roadhog build",
+    "build": "cross-env NODE_ENV=production X_ENV=test roadhog build",
+    "build:test": "cross-env NODE_ENV=production X_ENV=test roadhog build",
+    "build:dev": "cross-env NODE_ENV=production X_ENV=dev roadhog build",
     "build:pro": "cross-env NODE_ENV=production X_ENV=pro roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"

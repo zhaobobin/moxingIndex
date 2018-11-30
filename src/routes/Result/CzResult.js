@@ -13,7 +13,7 @@ import ResultJson from './ResultJson'
 export default class CzResult extends React.Component {
 
   redirect = (action) => {
-    window.location.href = ENV.siteUrl + '?action=' + action;
+    window.CzResult.toast(action);
   };
 
   render(){

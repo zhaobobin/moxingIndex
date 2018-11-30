@@ -2,12 +2,25 @@ const path = require('path');
 import { ENV } from './src/utils/utils';
 
 //qtw-mobile 测试、准生产，qtw-mobile-pro 生产环境
-const distPath = process.env.X_ENV === 'pro' ? 'qtw-mobile-pro' : 'qtw-mobile';
+let distPath;
+switch(process.env.X_ENV){
+  case 'test':
+    distPath = 'qtw-mobile-test';
+    break;
+  case 'dev':
+    distPath = 'qtw-mobile';
+    break;
+  case 'pro':
+    distPath = 'qtw-mobile';
+    break;
+  default:
+    distPath = 'qtw-mobile';
+}
 
 export  default {
   "entry": "src/index.js",
   "outputPath": "./dist/" + distPath,
-  "publicPath": "/" + distPath + "/",
+  "publicPath": "/",
   "hash": true,
   "ignoreMomentLocale": true,
   "theme": "./src/theme/theme.js",
@@ -49,7 +62,7 @@ export  default {
   },
   "proxy": {
     "/api": {
-      "target": ENV.api,
+      "target": ENV.api.test,
       "changeOrigin": true,
       //"pathRewrite": { "^/api" : "" }
     }

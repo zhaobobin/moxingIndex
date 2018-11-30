@@ -27,9 +27,27 @@ const BaseRoutes = app => [
         name: '我要出借',
         key: 'lend',
         path: 'lend',
-        component: dynamicWrapper(app, [], () => import('../routes/Lend/LendIndex')),
+        //component: dynamicWrapper(app, [], () => import('../routes/Lend/LendIndex')),
         children: [
-
+          {
+            name: '出借首页',
+            key: 'lend-index',
+            path: '',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/Lend/LendIndex')),
+          },
+          {
+            name: '散标详情',
+            key: 'sbdetail',
+            path: 'sbdetail',
+            component: dynamicWrapper(app, [], () => import('../routes/Lend/SbDetail')),
+          },
+          {
+            name: '变现详情',
+            key: 'bxdetail',
+            path: 'bxdetail',
+            component: dynamicWrapper(app, [], () => import('../routes/Lend/BxDetail')),
+          },
         ]
       },
 
@@ -43,6 +61,7 @@ const BaseRoutes = app => [
             name: '发现',
             key: 'found-index',
             path: '',
+            exact: true,
             component: dynamicWrapper(app, [], () => import('../routes/Found/FoundIndex')),
           },
 
@@ -340,8 +359,8 @@ const BaseRoutes = app => [
       },
       {
         name: '分享详情',
-        key: 'share',
-        path: 'share',
+        key: 'share-shouyi',
+        path: 'share-shouyi',
         isHide: true,
         component: dynamicWrapper(app, [], () => import('../routes/Other/Share')),
       },

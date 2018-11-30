@@ -7,12 +7,21 @@ const CryptoJS = require('crypto-js');  //引用AES源码js
  */
 export const ENV = {
 
-  api: 'http://192.168.1.77:85/qtw-invest-api',                   //测试服务器ip  出借号：18610313201，借款号：18610313202
-  api1: 'http://www.qutouwang.com/qtw-invest-api',                //生产
-  api2: 'http://investtest.qutouwang.com/qtw-invest-api',         //准生产  出借号：18610313201、18610313202，借款人：18610313203
-  api3: 'http://192.168.55.70:8080',                              //张欢ip
-  api4: 'http://192.168.55.13:8080',                              //朱旭ip
-  api5: 'http://192.168.55.20:8080',                              //国强ip
+  host: {
+    test: 'http://192.168.1.77:88',
+    pro: 'http://m.qutouwang.com',
+  },
+
+  api: {
+    auto: 'http://192.168.1.64:85/qtw-invest-api',                //自动化
+    test: 'http://192.168.1.77:85/qtw-invest-api',               //自动化
+    dev:  'http://investtest.qutouwang.com/qtw-invest-api',       //准生产  出借号：18610313202，借款人：18610313201，企业：13406660018 / abc123456
+    pro:  'http://www.qutouwang.com/qtw-invest-api',              //生产
+
+    api3: 'http://192.168.55.70:8080',                              //张欢ip
+    api4: 'http://192.168.55.13:8080',                              //朱旭ip
+    api5: 'http://192.168.55.20:8080',                              //国强ip
+  },
 
   apiName: 'qtw-invest-api',                                      //生产项目接口名称
 

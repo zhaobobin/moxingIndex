@@ -3,7 +3,10 @@ import dva from 'dva';
 import browserHistory from 'history/createBrowserHistory';
 import './theme/base.css';
 
-const history = process.env.NODE_ENV === 'production' ? {history: browserHistory()} : {};
+const history = process.env.NODE_ENV === 'production' && process.env.X_ENV === 'pro' ?
+  {history: browserHistory()}
+  :
+  {};
 
 // 1. Initialize2
 const app = dva(history);
