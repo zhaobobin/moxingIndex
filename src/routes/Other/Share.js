@@ -8,6 +8,7 @@ export default class Share extends React.Component {
 
   render(){
     return(
+    	
       <div className={styles.share}>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>  
       <div className={styles.sharemiddle}>
