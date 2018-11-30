@@ -27,6 +27,17 @@ export default class ReportDetail extends React.Component {
   componentDidMount(){
     let id = this.props.match.params.id;
     console.log(id)
+    this.props.dispatch({
+      type: 'global/post',
+      url:'/api/platform/findRunReportDetail',
+      payload:{
+        reportId:id
+      },
+      callback:(res)=>{
+        console.log(res)
+
+      }
+    })
   }
 
   componentWillReceiveProps(nextProps){

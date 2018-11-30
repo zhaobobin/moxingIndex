@@ -63,6 +63,7 @@ export default class Organization extends React.Component {
         <p ><span className={styles.title}>副总经理/风控负责人：</span><span className={styles.cont}>卢平</span></p>
         <h4 className={styles.Organization}> <span className={styles.content}>股东信息 <span></span></span></h4>
         <table className={styles. shareholder}>
+          <tbody>
           <tr>
             <td>姓名/机构名称</td>
             <td>占股比例</td>
@@ -75,6 +76,8 @@ export default class Organization extends React.Component {
             <td>恒远鑫达科技集团有限公司</td>
             <td>90%</td>
           </tr>
+          </tbody>
+
         </table>
         <h4 className={styles.Organization}> <span className={styles.content}>组织架构及从业人员概况 <span></span></span></h4>
         <p>组织架构</p>
@@ -82,15 +85,31 @@ export default class Organization extends React.Component {
         <p>从业人员概况（截至2018年8月31日）</p>
         {/*表格*/}
         <table className={styles.congye}>
+          <tbody>
           <tr>
-            <td>年龄构成</td>
-            <td>
-              <tr>
-                <td>1</td>
-            <td>2</td>
-              </tr>
-            </td>
+            <td className={styles.congyeTd} rowSpan="4">年龄构成</td>
+            <td className={styles.congyeTd2}>123</td>
+            <td>人数</td>
           </tr>
+          <tr>
+            <td className={styles.congyeTd2}>123</td>
+            <td>人数</td>
+          </tr>
+          <tr>
+            <td className={styles.congyeTd2}>123</td>
+            <td>人数</td>
+          </tr>
+          <tr>
+            <td className={styles.congyeTd2}>123</td>
+            <td>人数</td>
+          </tr>
+          <tr>
+            <td className={styles.congyeTd}></td>
+            <td className={styles.congyeTd2}>123</td>
+            <td>人数</td>
+          </tr>
+          </tbody>
+
         </table>
         <h4 className={styles.Organization}> <span className={styles.content}>信息安全测评认证信息 <span></span></span></h4>
   <p>暂无分支机构</p>
