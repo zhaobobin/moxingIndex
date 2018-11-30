@@ -66,11 +66,12 @@ export default class Demo extends React.Component {
           <dd>
             <p><Link to="/account/info-manage/risk-manage?equipmentType=app&accessToken=9de8800f7c1b434e81f61fcfe3e85587&userId=18111210469988">风险测评</Link></p>
             <p><Link to="/account/info-manage/risk-result?equipmentType=app">风险测评-结果页</Link></p>
-            <p><Link to="/share-shouyi?equipmentType=app">分享页面-晒一晒</Link></p>
+            <p><Link to="/share-shouyi?equipmentType=app&amount=1000">分享页面-晒一晒</Link></p>
             <p><Link to="/user/register?equipmentType=app">用户注册</Link></p>
             <p><Link to="/user/register-result?equipmentType=app">用户注册-结果页</Link></p>
             <p><Link to="/lend/sbdetail?equipmentType=app&accessToken=9de8800f7c1b434e81f61fcfe3e85587&userId=18111210469988">散标详情</Link></p>
             <p><Link to="/lend/bxdetail?equipmentType=app&accessToken=9de8800f7c1b434e81f61fcfe3e85587&userId=18111210469988">变现详情</Link></p>
+            <p><Link to="/question?equipmentType=app">常见问题</Link></p>
           </dd>
         </dl>
 

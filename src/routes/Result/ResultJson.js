@@ -26,5 +26,10 @@ export default {
   tx: {
     name: '提现',
     action: 'qtw_tx'
-  }
+  },
+  ca: {
+    name: '开通安心签',
+    action: 'qtw_ca'
+  },
+
 }
