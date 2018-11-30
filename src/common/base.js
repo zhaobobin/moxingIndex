@@ -175,6 +175,12 @@ const BaseRoutes = app => [
             path: 'education',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Info/Education')),
           },
+          {
+            name: '出借人教育-详情',
+            key: 'education-detail',
+            path: 'education-detail',
+            component: dynamicWrapper(app, [], () => import('../routes/Found/Info/EducationDetail')),
+          },
 
           {
             name: '运营报告',
