@@ -277,7 +277,7 @@ const BaseRoutes = app => [
                 key: 'risk-result',
                 path: 'risk-result',
                 userType: '1',
-                component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/RiskManage')),
+                component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/RiskResult')),
               },
               {
                 name: '站内信息',

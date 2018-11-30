@@ -31,7 +31,6 @@ export default class Demo extends React.Component {
             <p><Link to="/result/zhaiquan-result?equipmentType=app">债转成功</Link></p>
           </dd>
         </dl>
-
         <dl>
           <dt><strong>发现板块</strong></dt>
           <dd>
