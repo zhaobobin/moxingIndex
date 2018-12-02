@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import styles  from './ReportList.less';
 import { Tabs } from 'antd';
 import ReportListTwo from "~/components/Information/ReportListTwo";
+import Signature from "~/components/Information/signature";
 import Pagination  from '~/components/Common/Page/Pagination';
 import Information from "~/components/Information/Information";
 @connect(state => ({
@@ -91,10 +92,7 @@ export default class ReportList extends React.Component {
           </Tabs>
         </div>
 
-        <div className={styles.bottomBox}>
-          <span>法定代表人签名：</span>
-          <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-        </div>
+      <Signature/>
           </Information>
       </div>
     )

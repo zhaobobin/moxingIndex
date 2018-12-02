@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './Disclosure.less';
 import Information from "~/components/Information/Information";
+import Signature from "~/components/Information/signature";
 @connect(state => ({
   global: state.global,
 }))
@@ -31,7 +32,7 @@ export default class Disclosure extends React.Component {
                       {'title':'项目逾期率：','cont':'0.00%'},
                       {'title':'金额逾期率：','cont':'0.00%'},
                     ],
-        disclosureArray:{}
+        disclosureArray:[]
       }
   }
 
@@ -66,82 +67,82 @@ componentDidMount(){
           <tbody>
           <tr>
             <td>自成立以来的累计 借贷金额：</td>
-            <td>{disclosureArray.loanTotalAmt}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.loanTotalAmt}</td>
           </tr>
           <tr>
             <td>自成立以来的累计 借贷笔数：</td>
-            <td>{disclosureArray.loanTotalCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.loanTotalCount}</td>
           </tr>
           <tr>
             <td>借贷余额笔数：</td>
-            <td>{disclosureArray.loanBalanceCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.loanBalanceCount}</td>
           </tr>
           <tr>
             <td>借贷余额：</td>
-            <td>{disclosureArray.loanBalanceAmt}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.loanBalanceAmt}</td>
           </tr>
           <tr>
             <td>利息余额：</td>
-            <td>{disclosureArray.incomeBalanceAmt}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.incomeBalanceAmt}</td>
           </tr>
           <tr>
             <td>累计出借人数量：</td>
-            <td>{disclosureArray.lenderTotalCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.lenderTotalCount}</td>
           </tr>
           <tr>
             <td>累计借款人数量：</td>
-            <td>{disclosureArray.borrowerTotalCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.borrowerTotalCount}</td>
           </tr>
           <tr>
             <td>当前出借人数量：</td>
-            <td>{disclosureArray.lenderCurrentCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.lenderCurrentCount}</td>
           </tr>
           <tr>
             <td>当前借款人数量：</td>
-            <td>{disclosureArray.borrowerCurrentCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.borrowerCurrentCount}</td>
           </tr>
           <tr>
             <td>前十大借款人 待还金额占比：</td>
-            <td>{disclosureArray.topTenLoanPercent}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.topTenLoanPercent}</td>
           </tr>
           <tr>
             <td>最大单一借款人 待还金额占比：</td>
-            <td>{disclosureArray.topOneLoanPercent}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.topOneLoanPercent}</td>
           </tr>
           <tr>
             <td>关联关系借款余额 及笔数：</td>
-            <td>{disclosureArray.loanTotalAmt}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.loanTotalAmt}</td>
           </tr>
           <tr>
           <td>逾期金额：</td>
-          <td>{disclosureArray.overdueAmt}</td>
+          <td>{disclosureArray===''?'暂无':disclosureArray.overdueAmt}</td>
         </tr>
           <tr>
             <td>逾期笔数：</td>
-            <td>{disclosureArray.overdueCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.overdueCount}</td>
           </tr>
           <tr>
             <td>逾期90天（不含） 以上金额：</td>
-            <td>{disclosureArray.overdueMoreThreemouthAmt}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.overdueMoreThreemouthAmt}</td>
           </tr>
           <tr>
             <td>逾期90天（不含） 以上笔数：</td>
-            <td>{disclosureArray.overdueMoreThreemouthCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.overdueMoreThreemouthCount}</td>
           </tr>
           <tr>
             <td>累计代偿金额：</td>
-            <td>{disclosureArray.insteadTotalAmt}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.insteadTotalAmt}</td>
           </tr>
           <tr>
             <td>累计代偿笔数：</td>
-            <td>{disclosureArray.insteadTotalCount}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.insteadTotalCount}</td>
           </tr>
           <tr>
             <td>项目逾期率：</td>
-            <td>{disclosureArray.gradePrjOverdueRate}</td>
+            <td>{disclosureArray===''?'暂无':disclosureArray.gradePrjOverdueRate}</td>
           </tr><tr>
           <td>金额逾期率：</td>
-          <td>{disclosureArray.overdueRate}</td>
+          <td>{disclosureArray===''?'暂无':disclosureArray.overdueRate}</td>
         </tr>
           </tbody>
         </table>
@@ -158,10 +159,7 @@ componentDidMount(){
           <p className={styles.norm}>1.一次性偿还当月本金和利息，还款当月利息计息日不足 1 个月的，按 1 个月计算。 （=当月本金+当月利息+当月服务费）</p>
           <p className={styles.norm}>2. 若提前偿还全部剩余借款，只需在偿还当期借款时一次性偿还剩余全部本金及当期利息，而无需支付剩余借款期限的利息。 （=剩余全部本金+当月利息+部分服务费）</p>
         </div>
-        <div className={styles.bottomBox}>
-          <span>法定代表人签名：</span>
-          <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-        </div>
+        <Signature/>
 </Information>
       </div>
     )

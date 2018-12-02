@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from "./Organization.less";
 import Information from "~/components/Information/Information";
+import Signature from "~/components/Information/signature";
 @connect(state => ({
   global: state.global,
 }))
@@ -120,10 +121,7 @@ export default class Organization extends React.Component {
         <p ><span className={styles.title}>微博：</span><span className={styles.cont}>新浪去投网微博 https://weibo.com/qutouwang</span></p>
         <h4 className={styles.Organization}> <span className={styles.content}>平台上线运营时间 <span></span></span></h4>
 <p>2014年6月17日</p>
-        <div className={styles.bottomBox}>
-          <span>法定代表人签名：</span>
-          <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-        </div>
+        <Signature/>
 
 
 </Information>

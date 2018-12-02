@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import styles from './InfoIndex.less';
 import { Link } from 'dva/router';
 import Information from "~/components/Information/Information";
+import Signature from "~/components/Information/signature";
 import { Icon } from 'antd';
 @connect(state => ({
   global: state.global,
@@ -70,13 +71,8 @@ export default class InfoIndex extends React.Component {
                   </Link>
                 </ul>
 
-          <div className={styles.bottomBox}>
-            <span>法定代表人签名：</span>
-            <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-          </div>
-
-
-</Information>
+        <Signature/>
+        </Information>
       </div>
     )
   }

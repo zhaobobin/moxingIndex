@@ -4,6 +4,7 @@ import styles from "./Education.less";
 import {Link} from "react-router-dom";
 import { Icon } from 'antd';
 import Information from "~/components/Information/Information";
+import Signature from "~/components/Information/signature";
 @connect(state => ({
   global: state.global,
 }))
@@ -90,10 +91,7 @@ export default class Education extends React.Component {
           })
         }
 
-        <div className={styles.bottomBox}>
-          <span>法定代表人签名：</span>
-          <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-        </div>
+       <Signature/>
       </Information>
       </div>
     )
