@@ -13,7 +13,8 @@ import ResultJson from './ResultJson'
 export default class ZhaiquanResult extends React.Component {
 
   redirect = (action) => {
-    window.location.href = ENV.siteUrl + '?action=' + action;
+    window.location.href = window.location.href + '&action=' + action;
+    window.location.reload();
   };
 
   render(){
@@ -22,7 +23,7 @@ export default class ZhaiquanResult extends React.Component {
         <img src={img_success} alt="img_result"/>
         <h1>转让成功！</h1>
         <div className={styles.btns}>
-          <Button type="primary" onClick={() => this.redirect(ResultJson.lend.action)}>查看我的转让</Button>
+          <Button type="primary" onClick={() => this.redirect(ResultJson.lookZz.action)}>查看我的转让</Button>
         </div>
       </div>
     )

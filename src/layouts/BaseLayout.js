@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
-import { ENV, Storage, getSearchString } from '~/utils/utils';
+import { ENV, Storage, getUrlParams } from '~/utils/utils';
 import DocumentTitle from 'react-document-title';
 import NotFound from "~/routes/Other/404";
 
@@ -17,9 +17,7 @@ export default class BaseLayout extends React.Component {
   componentDidMount(){
     const { isAuth } = this.props.global;
 
-    let paramsObj = '',
-      searchParams = window.location.href.split('?')[1];
-    if(searchParams) paramsObj = getSearchString(searchParams);
+    let paramsObj = getUrlParams() || '';
     //处理app调用h5
     if(paramsObj.equipmentType === 'app' && paramsObj.accessToken){
       Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token

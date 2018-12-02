@@ -69,8 +69,10 @@ export default class Demo extends React.Component {
             <p><Link to="/share-shouyi?equipmentType=app&amount=1000">分享页面-晒一晒</Link></p>
             <p><Link to="/user/register?equipmentType=app">用户注册</Link></p>
             <p><Link to="/user/register-result?equipmentType=app">用户注册-结果页</Link></p>
-            <p><Link to="/lend/sbdetail?equipmentType=app&accessToken=9de8800f7c1b434e81f61fcfe3e85587&userId=18111210469988">散标详情</Link></p>
-            <p><Link to="/lend/bxdetail?equipmentType=app&accessToken=9de8800f7c1b434e81f61fcfe3e85587&userId=18111210469988">变现详情</Link></p>
+            <p><Link to="/user/register-xieyi?equipmentType=app">用户注册-协议</Link></p>
+            <p><Link to="/lend/zxdetail/xsb20181130001?equipmentType=app">智享详情</Link></p>
+            <p><Link to="/lend/sbdetail/bd18120100005?equipmentType=app">散标详情</Link></p>
+            <p><Link to="/lend/bxdetail/18111056560681?equipmentType=app">变现详情</Link></p>
             <p><Link to="/question?equipmentType=app">常见问题</Link></p>
           </dd>
         </dl>
