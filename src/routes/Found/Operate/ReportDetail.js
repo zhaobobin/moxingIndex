@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles  from './ReportDetail.less';
 import Information from "~/components/Information/Information";
+import Signature from "~/components/Information/signature";
 /*图表*/
 import ReactHighcharts from 'react-highcharts';
 const fontFamily = '"Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
@@ -239,11 +240,7 @@ export default class ReportDetail extends React.Component {
             <ReactHighcharts config={config} ref="chart"/>
           </div>
 
-          <div className={styles.bottomBox}>
-            <span>法定代表人签名：</span>
-            <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-          </div>
-
+        <Signature/>
 
 
 

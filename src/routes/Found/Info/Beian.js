@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './Beian.less';
 import Information from "~/components/Information/Information";
+import Signature from "~/components/Information/signature";
 @connect(state => ({
   global: state.global,
 }))
@@ -57,10 +58,11 @@ export default class Beian extends React.Component {
         <p className={styles.flow}>逾期前：预警电话&短信提醒；</p>
         <p className={styles.flow}>逾期初：电话催收；</p>
         <p className={styles.flow}>严重逾期：移交合作律所催缴&#8594拉入信用黑名单&#8594报送网络金融征信系统</p>
-        <div className={styles.bottomBox}>
-          <span>法定代表人签名：</span>
-          <img src={require("~/assets/account/find_autograph@2x.png")} alt="" className={styles.img}/>
-        </div>
+
+          <Signature/>
+
+
+
         </Information>
       </div>
     )
