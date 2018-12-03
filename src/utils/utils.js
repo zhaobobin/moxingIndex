@@ -176,11 +176,12 @@ export function goBack(){
 
 /**
  * 拆解url参数转换为对象
- * @param url
  * @returns {Object}
  */
-export function getSearchString(url) {
+export function getUrlParams() {
   // 以&分隔字符串，获得类似name=xiaoli这样的元素数组
+  let url = window.location.href.split('?')[1];
+  if(!url) return false;
   var arr = url.split("&");
   var obj = new Object();
 

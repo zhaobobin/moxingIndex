@@ -13,7 +13,8 @@ import ResultJson from './ResultJson'
 export default class BankcardRemove extends React.Component {
 
   redirect = (action) => {
-    window.location.href = ENV.siteUrl + '?action=' + action;
+    window.location.href = window.location.href + '&action=' + action;
+    window.location.reload();
   };
 
   render(){

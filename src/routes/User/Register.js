@@ -228,7 +228,8 @@ export default class Register extends React.Component {
         password: Encrypt(values.mobile, values.password),
         smsCheckCode: values.smscode,
         userType: 1,
-        invitationCode: values.invitationCode || ''
+        invitationCode: values.invitationCode || '',
+        channel: '',                                      //注册渠道
       },
       callback: (res) => {
         if(res.code === 0){

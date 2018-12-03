@@ -1,7 +1,15 @@
 export default {
-  look: {
-    name: '查看记录相关',
-    action: 'qtw_look'
+  lookCz: {
+    name: '查看充值记录',
+    action: 'qtw_look_cz'
+  },
+  lookTx: {
+    name: '查看提现记录',
+    action: 'qtw_look_tx'
+  },
+  lookZz: {
+    name: '查看债转记录',
+    action: 'qtw_look_zz'
   },
   lend: {
     name: '立即出借/继续出借',

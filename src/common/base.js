@@ -37,15 +37,21 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Lend/LendIndex')),
           },
           {
+            name: '智享详情',
+            key: 'zxdetail',
+            path: 'zxdetail/:id',
+            component: dynamicWrapper(app, [], () => import('../routes/Lend/ZxDetail')),
+          },
+          {
             name: '散标详情',
             key: 'sbdetail',
-            path: 'sbdetail',
+            path: 'sbdetail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Lend/SbDetail')),
           },
           {
             name: '变现详情',
             key: 'bxdetail',
-            path: 'bxdetail',
+            path: 'bxdetail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Lend/BxDetail')),
           },
         ]
