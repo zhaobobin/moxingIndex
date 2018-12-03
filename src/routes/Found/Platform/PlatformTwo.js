@@ -16,7 +16,7 @@ export default class PlatformTwo extends React.Component {
         <p className={styles.ServeTitle}>去投网服务</p>
         <p className={styles.Serve}>智享自动投标服务</p>
         <div className={styles.ServeBox}>
-          <img src={require("~/assets/platform/found_platform_chart@2x.png")} alt="" className={styles.ServeImg}/>
+          
         </div>
         <p className={styles.more}>更多优质产品敬请期待</p>
       </div>
