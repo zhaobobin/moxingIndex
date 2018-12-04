@@ -29,9 +29,92 @@
   }
 
   .body{
-.iconA{border:1px solid rgba(241,137,37,1);color: #F18925;height: 60px;width: 60px;text-align: center;}
+      h1,h2,h3,ul{margin: 0;padding: 0;};
+      .sb_top{overflow: hidden;position: relative; height: 240px;
+          background-image: linear-gradient(180deg, #0D2F55,#2A5381);color: #fff;
+          .sb_cirel{position: absolute;left: 50%;content: "";height: 6px; width: 6px;background-color: #E6EEFF;border-radius: 50%;top: 12%;
+                     }
+        .sb_border{background:url(../../assets/bg.png) no-repeat top center;height: 106px;
+    position: absolute;
+    top: 43px;
+    width: 227px;
+    left: 20%;background-size: cover;
+            //overflow: hidden;height:80px;
+//            span{width: 160px;
+//  height: 160px;
+//  border:1px dashed #E6EEFF;
+//  border-radius: 50%;
+//  -webkit-transform: rotate(45deg);display: block;}
+               }
+                @media screen and ( max-width: 320px ){
+             .sb_border{left: 15.5%;}
+          }
+             @media screen and ( width:412px ){
+                 .sb_border{left: 22.5%;}
+                 }
+                 @media screen and ( width:360px ){
+                 .sb_border{left: 18.5%;}
+                 }
+          :global{
+              .ant-progress-circle-trail{stroke:#71829B}
+              .ant-progress-circle .ant-progress-text{color: #9EACBB;font-size:14px;top: 49%;
+    left: 46%;}
+              .ant-progress-circle .ant-progress-text{top:55%}
+              .ant-progress{margin-top: 8%;}
+              .ant-progress-text:before{
+                content:"已加入";
+                }
+                .ant-progress-circle{position: relative;width: 250px;height: 250px;border-radius: 50%;}
+                
+          }
+          
+          .sb_top1{position: absolute;left: 11%;top:66%;color: #9EACBB;font-size:14px;}
+          @media screen and ( max-width: 360px ){
+             .sb_top1{left:4%} 
+          }
+          @media screen and ( max-width: 320px ){
+             .sb_top1{left:4%;top:64%} 
+          }
+          .sb_top2{position: absolute; width: 100%;top:30%;color: #9EACBB;font-size: 14px;font-weight: normal;text-align: center;
+          i{color: #fff;font-size: 40px;display: block;}
+          }
+      }
+.sb_middle{position: absolute;top:-2%;z-index: 6; top: 205px;  width: 100%; 
+     .sb_middlewid{width: 90%;margin: 0 auto;background-color: #fff;box-shadow:0px 10px 20px 0px rgba(240,244,249,1);border-radius:3px;-moz-box-shadow:0px 10px 20px 0px rgba(240,244,249,1);-webkit-box-shadow:0px 10px 20px 0px rgba(240,244,249,1);padding: 15px 0;
+      .border{border-right: 1px solid #EBEEF1;}
+        span{color: #888888;font-size: 14px;width: 50%;text-align: center;    display: inline-block;
+            i{color: #333333;font-size: 22px;display: block;}
+        }
+     }
+     }
+     .sb_contect{
+         h1{font-size: 20px;color: #333;border-bottom: 1px solid #E5E5E5;padding: 20px;    margin-top:56px;}
+       .sb_contectUl{padding:20px;
+           li{
+               margin-bottom: 10px;color: #333;
+               span{color: #888888;display: inline-block;width:22%;}
+           }
+           li:last-child{margin-bottom: 0;}
+         .iconA{
+    i{border:1px solid rgba(241,137,37,1);color: #F18925;height: 20px;width: 20px;line-height:16px;text-align: center;border-radius:50%;display: inline-block;font-size: 15px;position: absolute;z-index: 2;}
+    em{height: 20px;width: 20px;border-radius:50%;display: inline-block;background-color: #FDE7D6;position: absolute;margin-left: 3px;}
+} 
+     }
+     }    
   }
-.sharebottom{ background-color: #F5F5F5;color: #888888;padding: 20% 0;text-align: center;
-      span{display: block;}
+.sharebottom{ background-color: #F5F5F5;color: #888888;padding: 4% 0;text-align: center;margin-bottom: 17%;
+      span{display: block; margin-top: 1%;}      
+}
+.sbDownBut{
+    background-color: #fff;position: fixed;bottom:0;width: 100%;
+    span{background-color: #F18925;color: #fff;text-align: center;padding: 3% 0;width: 90%; border-radius: 3px;
+    font-size: 16px;
+    margin: 10px auto;display: block;}
 }
 }
+
+
+
+
+
+
