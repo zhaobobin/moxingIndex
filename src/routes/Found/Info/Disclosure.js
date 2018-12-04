@@ -10,28 +10,6 @@ export default class Disclosure extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        arr:[
-                      {'title':'自成立以来的累计 借贷金额：','cont':'93,105,900.00元'},
-                      {'title':'自成立以来的累计 借贷笔数：','cont':'93,105,900.00元'},
-                      {'title':'借贷余额笔数：','cont':'12218笔'},
-                      {'title':'借贷余额：','cont':'53,679,700.12 元'},
-                      {'title':'利息余额：','cont':'9,218,350.31 元'},
-                      {'title':'累计出借人数量：','cont':'2,231'},
-                      {'title':'累计借款人数量：','cont':'2,231'},
-                      {'title':'当前出借人数量：','cont':'2,231'},
-                      {'title':'当前借款人数量：','cont':'2,231'},
-                      {'title':'前十大借款人 待还金额占比：','cont':'2.21%'},
-                      {'title':'最大单一借款人 待还金额占比：','cont':'0.08%'},
-                      {'title':'关联关系借款余额 及笔数：','cont':'0'},
-                      {'title':'逾期金额：','cont':'0元'},
-                      {'title':'逾期笔数：','cont':'0笔'},
-                      {'title':'逾期90天（不含） 以上金额：','cont':'0元'},
-                      {'title':'逾期90天（不含） 以上笔数：','cont':'0笔'},
-                      {'title':'累计代偿金额：','cont':'9,003,360.36元'},
-                      {'title':'累计代偿笔数：','cont':'803笔'},
-                      {'title':'项目逾期率：','cont':'0.00%'},
-                      {'title':'金额逾期率：','cont':'0.00%'},
-                    ],
         disclosureArray:[]
       }
   }

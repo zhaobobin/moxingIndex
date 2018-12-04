@@ -20,10 +20,7 @@
    /* .TopicBox{
       height: 640px;
     }*/
-    .RadioBox{
-      white-space:normal;
-      word-wrap:break-word;
-    }
+
     .TopicBox flipOver:last-child{
       display: none;
     }
@@ -67,8 +64,9 @@
 }
 .radioStyle{
   height: 65px;
-  line-height: 65px;
-  display: block;
+  //line-height: 65px;
+  display: flex;
+  align-items: flex-start;
   font-size:15px;
   font-family:Roboto-Regular;
   font-weight:400;
@@ -102,3 +100,16 @@
   }
 
 
+.RadioBox{
+
+  :global {
+    .ant-radio{
+      margin: 3px 0;
+    }
+    span.ant-radio + *{
+      display: inline-block;
+      white-space:normal;
+      word-wrap:break-word;
+    }
+  }
+}
