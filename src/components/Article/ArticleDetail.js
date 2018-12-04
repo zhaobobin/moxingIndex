@@ -7,18 +7,28 @@ import Moment from 'moment';
 
 import styles from './ArticleDetail.less';
 
-const ArticleDetail = (props) => {
-   const detail = props;
+const ArticleDetail = ({detail, hideHead}) => {
 
   return(
     <div className={styles.detail}>
-      <div className={styles.head}>
 
-      </div>
+      {
+        hideHead ?
+          null
+          :
+          <div className={styles.head}>
+            <h1>{detail.title}</h1>
+            <p className={styles.info}>
+              <span>{detail.date}</span>
+              <span>来源：{detail.source}</span>
+            </p>
+          </div>
+      }
+
       <div className={styles.body}>
         {
           detail ?
-            <div className={styles.content} dangerouslySetInnerHTML={{__html: detail}} />
+            <div className={styles.content} dangerouslySetInnerHTML={{__html: detail.content}} />
             :
             null
         }

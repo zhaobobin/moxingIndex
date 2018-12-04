@@ -36,6 +36,7 @@ export default function request(url, options) {
 
     let newOptionsHeaders = {
       Accept: 'application/json',
+      'platform': 'h5',
       'accessToken': Storage.get(ENV.storageAccessToken) || null,
       ...newOptions.headers,
     };

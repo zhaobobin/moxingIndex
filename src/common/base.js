@@ -363,13 +363,6 @@ const BaseRoutes = app => [
 
       //其它
       {
-        name: '示例',
-        key: 'demo',
-        path: 'demo',
-        isHide: true,
-        component: dynamicWrapper(app, [], () => import('../routes/Other/Demo')),
-      },
-      {
         name: '分享详情',
         key: 'share-shouyi',
         path: 'share-shouyi',
@@ -382,6 +375,21 @@ const BaseRoutes = app => [
         path: 'question',
         isHide: true,
         component: dynamicWrapper(app, [], () => import('../routes/Other/Question')),
+      },
+      {
+        name: '协议',
+        key: 'xieyi',
+        path: 'xieyi/:oid',
+        isHide: true,
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Xieyi')),
+      },
+
+      {
+        name: '示例',
+        key: 'demo',
+        path: 'demo',
+        isHide: true,
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Demo')),
       },
 
     ]

@@ -39,6 +39,8 @@ input[type="number"]{
   line-height:38px;
   border-radius: 4px;
   font-size:16px;
+  background: #F18925;
+  border-color: #F18925;
 }
 
 :global(#qtw .ant-pagination){

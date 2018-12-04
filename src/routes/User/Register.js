@@ -180,14 +180,14 @@ export default class Register extends React.Component {
 
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/userRegister/findRegisterProtocolInfo',
+      url: '/api/protocol/view',
       payload: {},
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);
         if(res.code === 0){
           ArticleAlert({
-            title: '去投网平台注册及服务协议',
-            msg: '<p>尊敬的出借人： </p><p>出借有风险，当您（贵公司）出借时，可能获得利息，但同时也面临着风险。您（贵公司）在做出接受网络借贷信息中介机构服务和出借决策之前，请仔细阅读本风险提示书，全面认识网络借贷的风险和特性，认真考虑本服务存在的各项风险因素，并充分考虑自身的投资风险意识、风险识别能力和风险承受能力，谨慎做出接受服务和出借的决策。 </p><p>根据有关法律法规，网络借贷信息中介机构和出借人做出如下承诺、风险提示及声明：</p>',
+            title: res.data.title,
+            msg: res.data.content,
             btns: ['确认', '关闭'],
             callback: (res) => {
               console.log(res)
@@ -196,7 +196,7 @@ export default class Register extends React.Component {
         }
       }
     })
-    
+
   };
 
   //清空输入框
@@ -426,7 +426,7 @@ export default class Register extends React.Component {
                 <SmsValidate
                   boxStyle={{height: '50px'}}
                   inputStyle={{width: '100%'}}
-                  bottonStyle={{width: '130px', height: '48px', lingHeight: '48px'}}
+                  bottonStyle={{width: '120px', minWidth: 'auto', height: '48px', lingHeight: '48px', background: 'none', borderColor: '#fff'}}
                   action="register"
                   mobile={hasErrors(getFieldsError(['mobile'])) ? '' : getFieldValue('mobile')}
                   api='/api/userRegister/sendMobileCode'
