@@ -22,16 +22,77 @@
   color:@color_white ;
   font-size: 23px;
   margin: 22px 0 10px;
+  letter-spacing:3px;
 }
-.multipleImgBox{
+.multipleBox{
   width: 100%;
   display: flex;
   align-items: center;
   flex-flow: wrap;
   justify-content:space-around;
   margin-top: 20px;
-  .multipleImg{
+  div{
     width: 35%;
-    margin-bottom: 50px;
+    height: 113px;
+    margin-bottom: 25px;
+    p{
+      text-align: center;
+      color: @color_white;
+      margin-top: 70%;
+    }
+  }
+  .multipleImgBox1{
+    background-image: url("../../../assets/platform/found_platform_pg41@2x.png");
+    background-size: 100% 100%;
+  }
+  .multipleImgBox2{
+    background-image: url("../../../assets/platform/found_platform_pg42@2x.png");
+    background-size: 100% 100%;
+  }
+  .multipleImgBox3{
+    background-image: url("../../../assets/platform/found_platform_pg43@2x.png");
+    background-size: 100% 100%;
+  }
+  .multipleImgBox4{
+    background-image: url("../../../assets/platform/found_platform_pg44@2x.png");
+    background-size: 100% 100%;
+  }
+}
+.multipleContentBox{
+  width: 90%;
+  margin: auto;
+  background:rgba(14,60,105,0.5);
+  box-shadow:0px 0px 13px 0px rgba(83,195,249,1);
+  border-radius:7px;
+  position: relative;
+  color: @color_white;
+  padding: 30px 33px;
+  .multipleLt{
+    width: 10%;
+    position: absolute;
+    top: 17px;
+    left: 17px;
+  }
+  .multipleRt{
+    width: 10%;
+    position: absolute;
+    top: 17px;
+    right: 17px;
+  }
+  .multipleLb{
+    width: 10%;
+    position: absolute;
+    bottom: 17px;
+    left: 17px;
+  }
+  .multipleRb{
+    width: 10%;
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
+  }
+  p{
+    margin: 0;
+    font-size: 12px;
   }
 }

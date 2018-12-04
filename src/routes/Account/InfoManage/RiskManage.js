@@ -184,21 +184,7 @@ export default class RiskManage extends React.Component {
     this.setState({
       questions:newArray
     },()=>{
-      /* let questions=this.state.questions
-       console.log(questions)
-       for(let i=0;i<questions.length;i++){
-         if(questions.indexOf(typeof (questions[i])==='undefined')){
-           this.setState({
-             check:true
-           })
-         }else {
-           this.setState({
-             check:false
-           })
-         }
-       }*/
     })
-    // console.log(this.state.questions)
   };
 
   /*提交*/
@@ -214,6 +200,7 @@ export default class RiskManage extends React.Component {
   };
   /*接口*/
   jiekou(userId){
+    console.log(userId)
     let num=0;
     let questions=this.state.questions
     questions.forEach((val,key)=>{
@@ -249,7 +236,6 @@ export default class RiskManage extends React.Component {
     return(
 
       <div className={styles.Box2}>
-        风险测评答题
         <p className={styles.NavTitle}>尊敬的出借者:<br/>
           &nbsp; &nbsp; &nbsp; &nbsp;为了便于您了解自身的风险承受能力，
           选择合适的出借和服务，请您填写以下风险承受能力评估问卷，
