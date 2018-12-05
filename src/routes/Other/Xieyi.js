@@ -19,7 +19,7 @@ export default class Xieyi extends React.Component {
   }
 
   componentDidMount(){
-    let oid = this.props.oid;
+    let oid = this.props.match.params.oid;
     this.queryXieyi(oid);
   }
 
@@ -64,7 +64,7 @@ export default class Xieyi extends React.Component {
           this.loading ?
             <ToastLoading/>
             :
-            <ArticleDetail detail={detail} hideHead={true}/>
+            <ArticleDetail detail={detail}/>
         }
       </div>
     )

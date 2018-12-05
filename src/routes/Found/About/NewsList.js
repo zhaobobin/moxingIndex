@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Link  } from 'dva/router';
-import styles from './Newlist.less';
+import styles from './NewsList.less';
 import ToastLoading from '~/components/Common/ToastLoading'
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
+
 @connect(state => ({
   global: state.global,
 }))

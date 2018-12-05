@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { Link } from 'dva/router';
-import Moment from 'moment';
+import moment from 'moment';
 
 import styles from './ArticleDetail.less';
 
@@ -19,8 +19,8 @@ const ArticleDetail = ({detail, hideHead}) => {
           <div className={styles.head}>
             <h1>{detail.title}</h1>
             <p className={styles.info}>
-              <span>{detail.date}</span>
-              <span>来源：{detail.source}</span>
+              <span>{moment(detail.releaseTime).format('YYYY-MM-DD')}</span>
+              {/*<span>来源：{detail.source}</span>*/}
             </p>
           </div>
       }
