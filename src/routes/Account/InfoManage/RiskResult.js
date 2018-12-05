@@ -4,7 +4,6 @@ import { Link, Redirect } from 'dva/router';
 import {  Button } from 'antd';
 import styles from './RiskResult.less';
 import { ENV, Storage ,getSearchString} from '~/utils/utils';
-import ResultJson from '../../Result/ResultJson'
 
 /*图表*/
 import ReactHighcharts from 'react-highcharts';
@@ -18,6 +17,27 @@ export default class RiskResult extends React.Component {
     this.state = {
       data:{},
     }
+  }
+  componentDidMount(){
+    let { userInfo } = this.props.global.currentUser;
+    if(userInfo.riskFlag === '1') this.tijao(userInfo.userId);
+  }
+  tijao(userId){
+    this.props.dispatch({
+      type: 'global/post',
+      url:'/api/risk/findRiskResult',
+      payload:{
+        userId,
+      },
+      callback:(res)=>{
+        if(res.code === 0){
+          console.log(res)
+          this.setState({
+            data:res.data
+          })
+        }
+      }
+    })
   }
   redirect = (action) => {
     window.location.href = ENV.siteUrl + '?action=' + action;
@@ -97,32 +117,36 @@ export default class RiskResult extends React.Component {
         ]
       }]
     };
+
     return(
       <div className={styles.Box}>
-            <h3>评测完成，以下为您的测评结果</h3>
-        <div className={styles.imgBox}>
+              <p className={styles.title}>评测完成，以下为您的测评结果</p>
+        <div className={styles.ImgBox}>
           <img src={require("~/assets/account/my_risk@2x.png")} alt="" className={styles.img}/>
         </div>
-      <h2>稳健型</h2>
-        <div className={styles.ContentBox}>
-          <p>根据您所提供的回答,您的总分是:34份</p>
-          <p className={styles.capacity}>风险承受能力为: <span>稳健型</span></p>
-          <h4>稳健型:</h4>
-          <p>31-40分,希望本金不受本风险承受能力评估问卷结果系根据您填写问卷当时所提供的个人资料而推论得知，且其结果将作为您未来在去
-            投网中介平台出借参考所用。此问卷及其结果不构成与您进行交易之要约之引诱。去投网中介平台不对此份问卷之准确性及咨询是</p>
-        </div>
-        {/*图表*/}
-        <div className={styles.container}>
-          <ReactHighcharts config={config} ref="chart"/>
-        </div>
-            <div className={styles.statement}><span>重要声明:</span><br/>本风险承受能力评估问卷结果系根据您填写问卷当时所提供的个人资料而推论得知，且其结果将作为您未来在去<br/>
-              投网中介平台出借参考所用。此问卷及其结果不构成与您进行交易之要约之引诱。去投网中介平台不对此份问卷之准确性及咨询是否完整负责。您在此卷上所填的个人资料本公司将予以保密。
-              <p>出借人可在每个年度重新进行出借人风险承受能力评估及分级。</p>
-            </div>
-        <p className={styles.btnP}>
-          <Button type="primary"><Link to="/account/info-manage/risk-manage">重新评估</Link></Button>
-          <Button type="primary" onClick={() => this.redirect(ResultJson.lend.action)}>我要出借</Button>
-        </p>
+              <p className={styles.stability}>{resultObj.capacity}</p>
+              <div className={styles.stabilityContent}>
+                <p>根据您所提供的回答，您的总分是：<strong>{resultObj.totalScore}</strong> </p>
+                <p> 风险承受能力为：<strong>{resultObj.capacity}</strong></p>
+                <p> <strong>{resultObj.capacity}:</strong></p>
+                <p>{resultObj.gradeDesc}</p>
+                {/*图表*/}
+                <div className={styles.container}>
+                  <ReactHighcharts config={config} ref="chart"/>
+                </div>
+                <p className={styles.statement}>重要声明: </p>
+                <p>
+                  本风险承受能力评估问卷结果系根据您填写问卷当时所提供的个人资料而推论得知，
+                  且其结果将作为您未来在去投网中介平台出借参考所用。此问卷内容及其结果不构成与您进行交易之要约或要约之引诱。
+                  去投网中介平台不对此份问卷之准确性及咨询是否完整负责。您在此问卷上所填的个人资料本公司将予以保密。
+                </p>
+                <p> 出借人可在每个年度重新进行出借人风险承受能力评估及分级。</p>
+                <p className={styles.btnP}>
+                  <Button type="primary"><Link to="/account/info-manage/risk-manage">重新评估</Link></Button>
+                  <Button type="primary"><Link to="/lend">我要出借</Link></Button>
+                </p>
+              </div>
+
       </div>
     )
   }
