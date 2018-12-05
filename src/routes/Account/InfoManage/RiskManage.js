@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Form, Radio,Button } from 'antd';
 import styles from './RiskManage.less'
 import { ENV, Storage } from '~/utils/utils';
-import { Redirect, routerRedux } from 'dva/router';
+import {  routerRedux } from 'dva/router';
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 @connect(state => ({
@@ -183,7 +183,6 @@ export default class RiskManage extends React.Component {
     }
     this.setState({
       questions:newArray
-    },()=>{
     })
   };
 
@@ -200,7 +199,6 @@ export default class RiskManage extends React.Component {
   };
   /*接口*/
   jiekou(userId){
-    //console.log(userId)
     let num=0;
     let questions=this.state.questions
     questions.forEach((val,key)=>{
@@ -219,77 +217,58 @@ export default class RiskManage extends React.Component {
           //console.log(res)
           this.props.dispatch(routerRedux.push('/account/info-manage/risk-result'))
         } else{
-          alert('错误')
         }
       }
     })
   }
 
   Back=(index)=>{
-    // console.log(index)
-  };
+// console.log(index)
+  }
 
 
   render(){
-
-    const Appraisal=this.state.Appraisal;
+    const Appraisal=this.state.Appraisal
 
     return(
 
-      <div className={styles.container}>
-
-        <p className={styles.navTitle}>尊敬的出借者:<br/>
+      <div className={styles.Box2}>
+        <p className={styles.NavTitle}>尊敬的出借者:<br/>
           &nbsp; &nbsp; &nbsp; &nbsp;为了便于您了解自身的风险承受能力，
           选择合适的出借和服务，请您填写以下风险承受能力评估问卷，
           下列问题可协助评估您对出借和服务的风险承受能力，请您根据
           自身情况认真选择。评估结果仅供参考，不构成出借建议。为了及时了解您的风险承受能力，我们建议您
           持续做好动态评估。
         </p>
-
         <div className={styles.Answer}>
           <Form onSubmit={this.handleSubmit}>
             <FormItem>
               {
                 Appraisal.map((item,index)=>{
                   return(
-                    <div key={index} className={styles.topicBox}>
-
-                      <p className={styles.number}>
+                    <div key={index} className={styles.TopicBox}>
+                      <p className={styles.Topic}>
                         <span className={styles.Qid}>{item.id}</span>
                         <span className={styles.AllQid}>/14</span>
                       </p>
-
-                      <p className={styles.title}>{item.title}</p>
-
+                      <p className={styles.Title}>{item.title}</p>
                       <RadioGroup onChange={this.onChange}>
                         {
                           item.RadioGroup.map((cont,number)=>{
                             return(
                               <div key={number} className={styles.RadioBox}>
-                                <Radio className={styles.radioStyle} value={cont.value} key={number}>
-                                  {cont.content}
-                                </Radio>
+                                <Radio className={styles.radioStyle} value={cont.value} key={number}>{cont.content}</Radio>
                               </div>
                             )
                           })
                         }
                       </RadioGroup>
-
-                      <p className={styles.flipOver} onClick={this.Back(index)} style={{'display':'none'}}>上一页</p>
-
                     </div>
                   )
                 })
               }
             </FormItem>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className={styles.btn + " " + styles.submit}
-                style={{borderRadius: 0}}
-              >
-                提交
-              </Button>
+              <Button type="primary" htmlType="submit"  className={styles.submit}>提交</Button>
           </Form>
         </div>
 
