@@ -32,10 +32,12 @@ export default class Event extends React.Component {
           {
             this.state.arr.map((item,index)=>{
               return(
-                <tr key={index}>
+                <tbody key={index}>
+                <tr>
                   <td>{item.title}</td>
                   <td>{item.cont}</td>
                 </tr>
+                </tbody>
               )
             })
           }

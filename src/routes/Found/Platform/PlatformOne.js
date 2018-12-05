@@ -34,7 +34,8 @@ export default class PlatformOne extends React.Component {
           的服务。
         </div>
       </div>
-      <img src={require("~/assets/platform/found_platform_icon2@2x.png")} alt="" className={styles.Coin }/>
+      <img src={require("~/assets/platform/found_platform_icon2@2x.png")} alt="" className={styles.Coin}/>
+        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
     </div>
     )
   }

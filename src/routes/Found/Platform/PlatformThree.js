@@ -29,6 +29,9 @@ export default class PlatformThree extends React.Component {
               <p>账户资金只能提现到充值的银行卡，即使您的手机 丢失，旁人也无法盗走您的资金。</p>
           </div>
         </div>
+
+          <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
+
       </div>
     )
   }

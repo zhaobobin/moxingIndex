@@ -67,20 +67,20 @@ export default class SbDetail extends React.Component {
                    <div className={styles.sb_top}>
                    <div className={styles.sb_border}><span></span></div>
                    
-                   <div align="center"><Progress type="dashboard" percent={50} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF"/><span className={styles.sb_cirel}></span></div>
-                   <span className={styles.sb_top1}>已有5人出借</span><strong className={styles.sb_top2}><i>11.08%</i>年化利率</strong></div>
-                   <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>12个月</i>借款期限</span><span><i>20,000.00元</i>剩余金额</span></div></div>
+                   <div align="center"><Progress type="dashboard" percent={detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF"/><span className={styles.sb_cirel}></span></div>
+                   <span className={styles.sb_top1}>已有{detail.bidPeopleNum}人出借</span><strong className={styles.sb_top2}><i>{detail.businessRate}%</i>年化利率</strong></div>
+                   <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth}个月</i>借款期限</span><span><i>{detail.bidAmt}元</i>剩余金额</span></div></div>
                    <div className={styles.sb_contect}>
                    <h1>项目简介</h1>
                    <ul className={styles.sb_contectUl}>
-                     <li><span>项目名称</span>资金周转(B807110925204834)</li>
-                     <li><span>借款金额</span>55,000.00</li>
-                     <li><span>发标时间</span>2018-07-12 19:51:21</li>
-                     <li><span>封闭期</span>360天</li>
-                     <li><span>起投金额</span>100.00元</li>
-                     <li><span>还款方式</span>等额本息</li>
-                     <li><span>起息日</span>预计满标次日起息</li>
-                     <li className={styles.iconA}><span>信用等级</span><i>A</i><em>&nbsp;</em></li>
+                     <li><span>项目名称</span>{detail.applyTitle}</li>
+                     <li><span>借款金额</span>{detail.applyAmt}</li>
+                     <li><span>发标时间</span>{detail.issueTime}</li>
+                     <li><span>封闭期</span>{detail.closedDay}天</li>
+                     <li><span>起投金额</span>{detail.bidCash}元</li>
+                     <li><span>还款方式</span>{detail.returnMethod}</li>
+                     <li><span>起息日</span>{detail.beginDate}</li>
+                     <li className={styles.iconA}><span>信用等级</span><i>{detail.xyLevel}</i><em>&nbsp;</em></li>
                    </ul>
                    </div>
               </div>

@@ -19,7 +19,45 @@ export default class PlatformSeven extends React.Component {
           <img src={require("~/assets/platform/found_platform_rt@2x.png")} alt="" className={styles.SevenRt }/>
           <img src={require("~/assets/platform/found_platform_lb@2x.png")} alt="" className={styles.SevenLb }/>
           <img src={require("~/assets/platform/found_platform_rb@2x.png")} alt="" className={styles.SevenRb }/>
+
+          <p className={styles.SevenContP}>
+            <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
+            <span>实地尽职调查</span>
+          </p>
+          <div className={styles.SevenContDiv}>
+            <p>1.实地考察</p>
+            <p>2.财务状况评估</p>
+            <p>3.社保信息对照</p>
+            <p>4.纳税记录</p>
+          </div>
+          <p className={styles.SevenContP}>
+            <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
+            <span>实地尽职调查</span>
+          </p>
+          <div className={styles.SevenContDiv}>
+            <p>1.实地考察</p>
+            <p>2.财务状况评估</p>
+            <p>3.社保信息对照</p>
+            <p>4.纳税记录</p>
+          </div>
+          <p className={styles.SevenContP}>
+            <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
+            <span>实地尽职调查</span>
+          </p>
+          <div className={styles.SevenContDiv}>
+            <p>1.实地考察</p>
+            <p>2.财务状况评估</p>
+            <p>3.社保信息对照</p>
+            <p>4.纳税记录</p>
+          </div>
+          <p className={styles.SevenContP}>
+            <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
+          </p>
         </div>
+        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
+
+
+
       </div>
     )
   }
