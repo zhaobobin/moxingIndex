@@ -19,6 +19,10 @@ export default {
     name: '开户',
     action: 'qtw_open'
   },
+  jh: {
+    name: '激活',
+    action: 'qtw_jh'
+  },
   addcard: {
     name: '绑卡',
     action: 'qtw_addcard'
@@ -39,5 +43,6 @@ export default {
     name: '开通安心签',
     action: 'qtw_ca'
   },
+
 
 }

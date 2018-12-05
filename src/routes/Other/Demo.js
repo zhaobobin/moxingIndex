@@ -19,6 +19,7 @@ export default class Demo extends React.Component {
           <dt><strong>结果页</strong></dt>
           <dd>
             <p><Link to="/result/kaihu-result?equipmentType=app">开户结果页</Link></p>
+            <p><Link to="/result/jihuo-result?equipmentType=app">激活结果页</Link></p>
 
             <p><Link to="/result/cz-result?equipmentType=app&amount=100.00">充值成功</Link></p>
             <p><Link to="/result/tx-result?equipmentType=app&amount=100.00">提现成功</Link></p>
@@ -68,7 +69,7 @@ export default class Demo extends React.Component {
             <p><Link to="/share-shouyi?equipmentType=app&amount=1000">分享页面-晒一晒</Link></p>
             <p><Link to="/user/register?equipmentType=app">用户注册</Link></p>
             <p><Link to="/user/register-result?equipmentType=app">用户注册-结果页</Link></p>
-            <p><Link to="/xieyi/1?equipmentType=app">用户注册-协议</Link></p>
+            <p><Link to="/xieyi/49?equipmentType=app">协议查询</Link></p>
             <p><Link to="/lend/zxdetail/xsb20181130001?equipmentType=app">智享详情</Link></p>
             <p><Link to="/lend/sbdetail/bd18120100005?equipmentType=app">散标详情</Link></p>
             <p><Link to="/lend/bxdetail/18111056560681?equipmentType=app">变现详情</Link></p>

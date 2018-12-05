@@ -317,6 +317,12 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Result/KaihuResult')),
           },
           {
+            name: '激活成功',
+            key: 'jihuo-result',
+            path: 'jihuo-result',
+            component: dynamicWrapper(app, [], () => import('../routes/Result/JihuoResult')),
+          },
+          {
             name: '充值成功',
             key: 'cz-result',
             path: 'cz-result',

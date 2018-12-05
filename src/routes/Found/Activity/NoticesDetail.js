@@ -42,7 +42,7 @@ export default class NoticeDetail extends React.Component {
       },
       callback: (res) => {
         this.loading = false;
-        if(res.code === 0){
+        if(res.code === 0 && res.data){
           this.setState({data:res.data})//调的接口的数据复制给了noticedetail
         }
       }
