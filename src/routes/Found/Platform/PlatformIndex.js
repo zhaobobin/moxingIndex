@@ -10,6 +10,7 @@ import PlatformFive from './PlatformFive';
 import PlatformSix from './PlatformSix';
 import PlatformSeven from './PlatformSeven';
 import PlatformEight from './PlatformEight';
+
 @connect(state => ({
   global: state.global,
 }))
