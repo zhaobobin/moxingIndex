@@ -3,12 +3,12 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import styles from './HelpBrand.less';
+import styles from './AboutBrand.less';
 @connect(state => ({
   global: state.global,
 }))
 
-class HelpBrand extends React.Component {
+class AboutBrand extends React.Component {
 
   render(){
 
@@ -47,4 +47,4 @@ class HelpBrand extends React.Component {
   }
 
 }
-export default HelpBrand;
+export default AboutBrand;
