@@ -12,33 +12,7 @@ export default class Education extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        arr:{
-              'headTitle':'《网络借贷信息中介机构业务活动管理暂行办法》第九条规定网络借贷信息中介机构应当履行下列义务：“持续开展网络借贷知识普及和风险教育活动，加强信息披露工作，引导出借人以小额分散的方式参与网络借贷，确保出借人充分知悉借贷风险”。去投网平台根据监管规定开立专门的出借人教育专栏，并分为“法律法规”和“风险提示书”栏目，供平台用户了解学习。',
-            hint:[
-              {'title':'风险提示'},
-              {'title':'尊敬的出借人:','cont':'出借有风险，当您（贵公司）出借时，可能获得利息，但同时也面临着风险。您（贵公司）在做出接受网络借贷信息中介机构服务和出借决策之前，请仔细阅读本风险提示书，全面认识网络借贷出借人的禁止性行为及网络借贷的风险和特性，认真考虑本服务存在的各项风险因素，并充分考虑自身的投资风险意识、风险识别能力和风险承受能力，谨慎做出接受服务和出借的决策。 根据有关法律法规，网络借贷信息中介机构和出借人做出如下承诺、风险提示及声明：'},
-              {
-                'tiltle':'一、禁止性行为',
-                'contTiltle':'您作为网络借贷活动的出借人，不得从事以下行为或存在以下情形： ',
-                'cont1':'1、向网络借贷信息中介机构提供不真实、不准确、不完整的信息； ' ,
-                  'cont2':'2、使用非法资金或非自有资金进行出借；' ,
-                  'cont3':' 3、不具备与进行网络借贷活动相适应的风险认知和承受能力，投资于与自身风险承受能力不匹配的融资项目； ' ,
-                  'cont4':'4、其他借贷合同及有关协议约定的禁止性行为。'
-              }
-            ],
-          ul:[
-            '国务院办公厅关于印发互联网金融风险专项整治工作实施方案的通知',
-            '三部门关于进一步加强校园贷规范管理工作的通知 ',
-            '关于规范整顿“现金贷”业务的通知',
-            '中国银监会办公厅关于印发网络借贷信息中介机构业务活动信息披露指引的通知',
-            '中华人民共和国电子签名法（2015年修正） ',
-            '最高人民法院关于审理民间借贷案件适用法律若干问题的规定 ',
-            '中国银监会办公厅关于印发网络借贷资金存管业务指引的通知 ',
-            '中国人民银行、中国银行业监督管理委员会公告 ',
-            '人民银行等十部门发布《关于促进互联网金融健康发展的指导意见》 ',
-            '网络借贷信息中介机构业务活动管理暂行办法 ',
-          ]
-        }
+
     }
   }
   render(){
@@ -79,17 +53,60 @@ export default class Education extends React.Component {
           <p>7、其他风险 战争、自然灾害等不可抗力的出现，可能导致借贷本息遭受损失。代理机构违约等超出网络借贷信息中介机构自身直接控制能力范围之外的风险，也可能导致出借人的利益受损，从而带来风险。</p>
         </div>
         <h4 className={styles.EducationTitle}> <span className={styles.content}>法律法规 <span></span></span></h4>
-        {
-          this.state.arr.ul.map((item,index)=>{
-            return(
-              <ul key={index} className={styles.listUl}>
-                <Link to="/account/info-manage/risk-manage" >
-                  <li><span className={styles.LiCont}>{item}</span> <Icon type="right" /> </li>
-                </Link>
+              <ul className={styles.listUl}>
+                <li>
+                <a href='http://www.gov.cn/zhengce/content/2016-10/13/content_5118471.htm'>
+                <span className={styles.LiCont}>国务院办公厅关于印发互联网金融风险专项整治工作实施方案的通知</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.gov.cn/xinwen/2017-06/28/content_5206540.htm'>
+                  <span className={styles.LiCont}>三部门关于进一步加强校园贷规范管理工作的通知</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a target="_blank" href='https://hyxd.qutouwang.com/pdf/xjd.pdf'>
+                 <span className={styles.LiCont}>关于规范整顿“现金贷”业务的通知</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.cbrc.gov.cn/govView_C8D68D4C980A4410B9F4E21BA593B4F2.html'>
+                 <span className={styles.LiCont}>中国银监会办公厅关于印发网络借贷信息中介机构业务活动信息披露指引的通知</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.miit.gov.cn/n1146285/n1146352/n3054355/n3057254/n3057259/c3868973/content.html'>
+                 <span className={styles.LiCont}>中华人民共和国电子签名法（2015年修正）</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.court.gov.cn/zixun-xiangqing-15146.html'>
+                  <span className={styles.LiCont}>最高人民法院关于审理民间借贷案件适用法律若干问题的规定</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.cbrc.gov.cn/chinese/home/docDOC_ReadView/275.html'>
+                 <span className={styles.LiCont}>中国银监会办公厅关于印发网络借贷资金存管业务指引的通知</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.cbrc.gov.cn/chinese/home/docDOC_ReadView/275.html'>
+                 <span className={styles.LiCont}>中国人民银行、中国银行业监督管理委员会公告</span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.gov.cn/xinwen/2015-07/18/content_2899360.htm'>
+                  <span className={styles.LiCont}>人民银行等十部门发布《关于促进互联网金融健康发展的指导意见》 </span> <Icon type="right" />
+                </a>
+                </li>
+                <li>
+                <a href='http://www.cbrc.gov.cn/govView_37D312933F1A4CECBC18F9A96293F450.html'>
+                 <span className={styles.LiCont}>网络借贷信息中介机构业务活动管理暂行办法</span> <Icon type="right" />
+                </a>
+                </li>
+
               </ul>
-            )
-          })
-        }
+
 
        <Signature/>
       </Information>
