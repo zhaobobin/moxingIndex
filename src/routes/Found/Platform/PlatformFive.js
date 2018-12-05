@@ -19,7 +19,48 @@ export default class PlatformFive extends React.Component {
           <img src={require("~/assets/platform/found_platform_rt@2x.png")} alt="" className={styles.FiveRt }/>
           <img src={require("~/assets/platform/found_platform_lb@2x.png")} alt="" className={styles.FiveLb }/>
           <img src={require("~/assets/platform/found_platform_rb@2x.png")} alt="" className={styles.FiveRb }/>
+          <p className={styles.FiveDotP}>
+            <span></span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span className={styles.FiveSp}>确认借款人需求</span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span className={styles.FiveSp2}>申请资料审核</span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span></span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span></span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span className={styles.FiveSp}>信息分析</span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span className={styles.FiveSp2}>风险评估</span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span></span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span></span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span className={styles.FiveSp}>综合分析</span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span className={styles.FiveSp2}>方案制定</span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span></span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span></span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span className={styles.FiveSp}>撮合交易</span>
+          </p>
+          <p className={styles.shuxian}> <span></span></p>
+          <p className={styles.FiveDotP}>
+            <span className={styles.FiveSp2}>贷后管理</span><img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/><span></span>
+          </p>
+
+
+
+
         </div>
+
+
+
+
+          <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
+
       </div>
     )
   }
