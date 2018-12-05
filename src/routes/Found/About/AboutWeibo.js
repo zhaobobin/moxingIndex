@@ -3,12 +3,12 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import styles from './Helpweibo.less';
+import styles from './Aboutweibo.less';
 @connect(state => ({
   global: state.global,
 }))
 
-class HelpWeibo extends React.Component {
+class AboutWeibo extends React.Component {
 
   render(){
 
@@ -23,4 +23,4 @@ class HelpWeibo extends React.Component {
   }
 
 }
-export default HelpWeibo;
+export default AboutWeibo;

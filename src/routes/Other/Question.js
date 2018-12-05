@@ -21,6 +21,7 @@ export default class Question extends React.Component {
   	const Panel = Collapse.Panel;
     return(
       <div className={styles.question}>
+      <p  className={styles.questionWord}>去投网平台仅为信息发布平台，未以任何明示或暗示的方式对出借人提供担保或承诺保本保息，出借人应根据自身的出借偏好和风险承受能力进行独立判断和作出决策，并自行承担资金出借的风险与责任。网贷有风险，出借需谨慎。</p>
         <Collapse  bordered={false}  defaultActiveKey={['1']} accordion>
           <Panel header="1、什么是智享服务？" key="1">
             <p>智享自动投标服务（本网站称“智享服务”）是基于去投网网贷大数据，运用自动投标、分散出借、风险管理等方法实现的帮助出借人快速出借、智能匹配债权的自动投标工具，同时兼顾出借人回报和流动性的需求而推出的智能出借服务。该服务的宗旨是帮助出借人尽快匹配到合适的散标债权，提高资金利用效率，让出借更便捷、轻松、智能。</p>

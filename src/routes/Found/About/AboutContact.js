@@ -3,13 +3,13 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import styles from './HelpContact.less';
+import styles from './AboutContact.less';
 
 @connect(state => ({
   global: state.global,
 }))
 
-class HelpContact extends React.Component {
+class AboutContact extends React.Component {
 
   render(){
 
@@ -29,4 +29,4 @@ class HelpContact extends React.Component {
   }
 
 }
-export default HelpContact;
+export default AboutContact;

@@ -39,11 +39,10 @@ export default class Demo extends React.Component {
             <p><Link to="/found/activity-list?equipmentType=app">活动列表</Link></p>
             <p><Link to="/found/activity-detail/123?equipmentType=app">活动详情</Link></p>
             <p><Link to="/found/notices-list?equipmentType=app">公告列表</Link></p>
-            <p><Link to="/found/notices-detail/123?equipmentType=app">公告详情</Link></p>
+            <p><Link to="/found/notices-detail/57?equipmentType=app">公告详情</Link></p>
             <p><Link to="/found/help-list?equipmentType=app">帮助中心</Link></p>
-            <p><Link to="/found/help-detail/123?equipmentType=app">帮助中心详情</Link></p>
             <p><Link to="/found/news-list?equipmentType=app">公司新鲜事</Link></p>
-            <p><Link to="/found/news-detail/123?equipmentType=app">公司新鲜事详情</Link></p>
+            <p><Link to="/found/news-detail/22?equipmentType=app">公司新鲜事详情</Link></p>
             <p><Link to="/found/aboutus?equipmentType=app">关于我们</Link></p>
             <p><Link to="/found/info?equipmentType=app">信息披露</Link></p>
             <p><Link to="/found/beian?equipmentType=app">备案信息</Link></p>
@@ -69,7 +68,7 @@ export default class Demo extends React.Component {
             <p><Link to="/share-shouyi?equipmentType=app&amount=1000">分享页面-晒一晒</Link></p>
             <p><Link to="/user/register?equipmentType=app">用户注册</Link></p>
             <p><Link to="/user/register-result?equipmentType=app">用户注册-结果页</Link></p>
-            <p><Link to="/user/register-xieyi?equipmentType=app">用户注册-协议</Link></p>
+            <p><Link to="/xieyi/1?equipmentType=app">用户注册-协议</Link></p>
             <p><Link to="/lend/zxdetail/xsb20181130001?equipmentType=app">智享详情</Link></p>
             <p><Link to="/lend/sbdetail/bd18120100005?equipmentType=app">散标详情</Link></p>
             <p><Link to="/lend/bxdetail/18111056560681?equipmentType=app">变现详情</Link></p>

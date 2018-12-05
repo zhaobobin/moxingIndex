@@ -266,12 +266,13 @@ export default class RiskManage extends React.Component {
                           })
                         }
                       </RadioGroup>
+                      <p className={styles.flipOver} onClick={this.Back(index)} style={{'display':'none'}}>上一页</p>
                     </div>
                   )
                 })
               }
             </FormItem>
-              <Button type="primary" htmlType="submit"  className={styles.submit}>提交</Button>
+              <Button type="primary" htmlType="submit" className={styles.btn} className={styles.submit}>提交</Button>
           </Form>
         </div>
 
