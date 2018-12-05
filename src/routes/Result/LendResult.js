@@ -22,7 +22,12 @@ export default class LendResult extends React.Component {
       <div className={styles.result}>
         <img src={img_success} alt="img_result"/>
         <h1>出借成功！</h1>
+        <div>
+          <p></p>
+          <p></p>
+        </div>
         <div className={styles.btns}>
+          <Button type="default" onClick={() => this.redirect(ResultJson.lockCj.action)}>查看我的出借</Button>
           <Button type="primary" onClick={() => this.redirect(ResultJson.lend.action)}>继续出借</Button>
         </div>
       </div>

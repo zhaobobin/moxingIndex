@@ -7,6 +7,10 @@ export default {
     name: '查看提现记录',
     action: 'qtw_look_tx'
   },
+  lookCj: {
+    name: '查看出借记录',
+    action: 'qtw_look_cj'
+  },
   lookZz: {
     name: '查看债转记录',
     action: 'qtw_look_zz'
