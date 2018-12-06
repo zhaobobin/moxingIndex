@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'dva';
 import { Tabs } from 'antd';
 import styles from './HelpList.less';
-import Helplogin from './Helplogin';
-import Helpfunds from './Helpfunds';
-import Helpmind from './Helpmind';
-import Helpmoney from './Helpmoney';
-
+import HelpSecurity from './HelpSecurity';
+import HelpLending from './HelpLending';
+import HelpCash from './HelpCash';
+import HelpNoun from './HelpNoun';
+import HelpLegal from './HelpLegal';
 @connect(state => ({
   global: state.global,
 }))
-
 export default class HelpList extends React.Component {
 
   render(){
@@ -21,10 +20,11 @@ export default class HelpList extends React.Component {
     return(
       <div className={styles.helplist}>
       <Tabs defaultActiveKey="1" onChange={callback}>
-      <TabPane tab="登录注册" key="1"><Helplogin /></TabPane>
-      <TabPane tab="银行资金存管" key="2"><Helpfunds /></TabPane>
-      <TabPane tab="安心签" key="3"><Helpmind /></TabPane>
-      <TabPane tab="充值提现" key="4"><Helpmoney /></TabPane>      
+      <TabPane tab="安全与隐私" key="1"><HelpSecurity /></TabPane>
+      <TabPane tab="出借与借款" key="2"><HelpLending /></TabPane>
+      <TabPane tab="充值与提现" key="3"><HelpCash /></TabPane>
+      <TabPane tab="名词解释" key="4"><HelpNoun /></TabPane> 
+      <TabPane tab="法律声明" key="5"><HelpLegal /></TabPane>      
       </Tabs>
       </div>
     )

@@ -20,11 +20,11 @@ export default class AboutUs extends React.Component {
     return(
       <div className={styles.helplist}>
       <Tabs defaultActiveKey="1" onChange={callback}>      
-      <TabPane tab="去投网介绍" key="1"><AboutIntroduction /></TabPane>
+      <TabPane tab="去投网简介" key="1"><AboutIntroduction /></TabPane>
       <TabPane tab="业务模式" key="2"><AboutBusiness /></TabPane>
       <TabPane tab="品牌优势" key="3"><AboutBrand /></TabPane>
       <TabPane tab="联系我们" key="4"><AboutContact /></TabPane>
-      <TabPane tab="微博微信" key="5"><AboutWeibo /></TabPane>
+      <TabPane tab="微信微博" key="5"><AboutWeibo /></TabPane>
       </Tabs>
       </div>
     )
