@@ -10,33 +10,7 @@ export default class Organization extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        arr:[
-          {
-            'name':'工商信息',
-            'cont':[
-              { 'title':'全称：','content':'北京恒远鑫达投资管理有限公司'},
-              { 'title':'简称：','content':'去投网'},
-              { 'title':'统一社会信用代码：','content':'91110105061258400T'},
-              { 'title':'注册资本：','content':'15000万人民币'},
-              { 'title':'实缴注册资本：','content':'15000万人民币'},
-              { 'title':'注册地址：','content':'北京市朝阳区亮马桥甲40号1幢4层401内B02A室 邮编：100125'},
-              { 'title':'经营地址：','content':'北京市朝阳区亮马桥甲40号1幢4层401内B02A室 邮编：100125'},
-              { 'title':'成立时间：','content':'2014-03-07'},
-              { 'title':'经营期限：','content':'20年（2014-03-07到2034-03-06）'},
-              { 'title':'经营状态：','content':'开业'},
-              { 'title':'经营范围：','content':'投资管理；资产管理；项目投资；投资咨询；经济贸易咨询；房地产信息咨询； 销售家具、首饰、工艺品、建筑材料、金属材料、五金交电、机械设备、化工产品（不含危险化学品）、电子产品、通讯设备；工程咨询；专业承包；城市园林绿化施工；互联网信息服务。（“1、未经有关部门批准，不得以公开方式募集资金；2、不得公开开展证券类产品和金融衍生品交易互动；3、不得发放贷款；4、不得对所投资企业以外的其他企业提供担保；5、不得向投资者承诺投资本金不受损失或者承诺最低收益”；企业依法自主选择经营项目，开展经营活动；互联网信息服务以及依法须经批准的项目，经相关部门批准后依批准的内容开展经营活动；不得从事本市产业政策禁止和限制类项目的经营互动。）'},
-            ]
-          },
-          {
-            'name2':'主要人员信息',
-            'cont':[
-              {'title':'法定代表人：','content':'吴芷萱'},
-              {'title':'总裁：','content':'许义来'},
-              {'title':'财务负责人：','content':'张建'},
-              {'title':'副总经理/风控负责人：','content':'卢平'},
-            ]
-          }
-        ]
+
     }
   }
   render(){
@@ -74,7 +48,12 @@ export default class Organization extends React.Component {
             <td>10%</td>
           </tr>
           <tr>
-            <td>恒远鑫达科技集团有限公司</td>
+            <td>
+              <span>
+                 恒远鑫达科技集团有限公司
+              </span>
+
+            </td>
             <td>90%</td>
           </tr>
           </tbody>
@@ -88,32 +67,54 @@ export default class Organization extends React.Component {
         <table className={styles.congye}>
           <tbody>
           <tr>
-            <td className={styles.congyeTd} rowSpan="4">年龄构成</td>
-            <td className={styles.congyeTd2}>123</td>
-            <td>人数</td>
+            <td className={styles.congyeTd} rowSpan="5">年龄构成</td>
+            <td className={styles.congyeTd2}></td>
+            <td className={styles.renshu}>人数</td>
           </tr>
           <tr>
-            <td className={styles.congyeTd2}>123</td>
-            <td>人数</td>
+            <td className={styles.congyeTd2}>25岁及以下</td>
+            <td className={styles.renshu}> 4</td>
           </tr>
           <tr>
-            <td className={styles.congyeTd2}>123</td>
-            <td>人数</td>
+            <td className={styles.congyeTd2}>26-30岁</td>
+            <td className={styles.renshu}>13</td>
           </tr>
           <tr>
-            <td className={styles.congyeTd2}>123</td>
-            <td>人数</td>
+            <td className={styles.congyeTd2}>31-35岁</td>
+            <td className={styles.renshu}>8</td>
           </tr>
           <tr>
-            <td className={styles.congyeTd}></td>
-            <td className={styles.congyeTd2}>123</td>
-            <td>人数</td>
+            <td className={styles.congyeTd2}>35岁以上</td>
+            <td className={styles.renshu}>7</td>
+          </tr>
+          <tr>
+            <td className={styles.congyeTd} rowSpan="3">学历构成</td>
+            <td className={styles.congyeTd2}>专科及以下</td>
+            <td className={styles.renshu}>11</td>
+          </tr>
+          <tr>
+            <td className={styles.congyeTd2}>本科</td>
+            <td className={styles.renshu}>18</td>
+          </tr>
+          <tr>
+            <td className={styles.congyeTd2}>研究生及以上</td>
+            <td className={styles.renshu}>3</td>
+          </tr>
+          <tr>
+            <td>员工总数</td>
+
+            <td  colSpan='2' className={styles.zongshu}>
+            <span>
+              45
+            </span>
+
+            </td>
           </tr>
           </tbody>
 
         </table>
         <h4 className={styles.Organization}> <span className={styles.content}>信息安全测评认证信息 <span></span></span></h4>
-  <p>暂无分支机构</p>
+          <p>暂无分支机构</p>
         <h4 className={styles.Organization}> <span className={styles.content}>官方网站、官方手机应用及其他官方互联网渠道信息 <span></span></span></h4>
         <p ><span className={styles.title}>官方网址：</span><span className={styles.cont}>www.qutouwang.com</span></p>
         <p ><span className={styles.title}>平台APP名称：</span><span className={styles.cont}>去投网</span></p>
