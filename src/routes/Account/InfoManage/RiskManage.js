@@ -6,6 +6,7 @@ import { ENV, Storage } from '~/utils/utils';
 import { Redirect, routerRedux } from 'dva/router';
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
+
 @connect(state => ({
   global: state.global,
 }))
