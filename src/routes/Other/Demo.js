@@ -64,8 +64,8 @@ export default class Demo extends React.Component {
         <dl>
           <dt><strong>其他</strong></dt>
           <dd>
-            <p><Link to="/account/info-manage/risk-manage?equipmentType=app&accessToken=9de8800f7c1b434e81f61fcfe3e85587&userId=18111210469988">风险测评</Link></p>
-            <p><Link to="/account/info-manage/risk-result?equipmentType=app">风险测评-结果页</Link></p>
+            <p><Link to="/account/info-manage/risk-manage?equipmentType=app&accessToken=c418db088a6c426fb0092f4af308783a&userId=18110812439625">风险测评</Link></p>
+            <p><Link to="/account/info-manage/risk-result?equipmentType=app&accessToken=c418db088a6c426fb0092f4af308783a&userId=18110812439625">风险测评-结果页</Link></p>
             <p><Link to="/share-shouyi?equipmentType=app&amount=1000">分享页面-晒一晒</Link></p>
             <p><Link to="/user/register?equipmentType=app">用户注册</Link></p>
             <p><Link to="/user/register-result?equipmentType=app">用户注册-结果页</Link></p>
