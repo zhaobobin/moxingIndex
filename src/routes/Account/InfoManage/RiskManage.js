@@ -203,7 +203,7 @@ export default class RiskManage extends React.Component {
   jiekou(userId){
     //console.log(userId)
     let num=0;
-    let questions=this.state.questions
+    let questions=this.state.questions;
     questions.forEach((val,key)=>{
       num += val.question.score;
     });
@@ -229,7 +229,6 @@ export default class RiskManage extends React.Component {
   Back=(index)=>{
     // console.log(index)
   };
-
 
   render(){
 
