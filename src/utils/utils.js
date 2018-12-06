@@ -12,18 +12,18 @@ export const ENV = {
     pro: 'http://m.qutouwang.com',
   },
 
+  apiName: 'qtw-invest-api',                                      //生产项目接口名称
+
   api: {
-    auto: 'http://192.168.1.64:85/qtw-invest-api',                //自动化
-    test: 'http://192.168.1.77:88/qtw-invest-api',                //自动化
-    dev:  'http://m.qutouwang.com/qtw-invest-api',              //准生产  出借号：18610313202，借款人：18610313201，企业：13406660018 / abc123456
-    pro:  'http://m.qutouwang.com/qtw-invest-api',              //生产
+    auto: 'http://192.168.1.64:85/',                              //自动化
+    test: 'http://192.168.1.77:88/',                              //自动化
+    dev:  'http://m.qutouwang.com/',                              //准生产  出借号：18610313202，借款人：18610313201，企业：13406660018 / abc123456
+    pro:  'http://m.qutouwang.com/',                              //生产
 
     api3: 'http://192.168.55.70:8080',                              //张欢ip
     api4: 'http://192.168.55.13:8080',                              //朱旭ip
     api5: 'http://192.168.55.20:8080',                              //国强ip
   },
-
-  apiName: 'qtw-invest-api',                                      //生产项目接口名称
 
   appname: '去投网',
   hometitle: '【去投网】P2P理财- 中国领先的互联网理财借贷P2P平台',
