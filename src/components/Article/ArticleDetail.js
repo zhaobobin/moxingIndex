@@ -16,11 +16,11 @@ const ArticleDetail = ({detail, hideHead}) => {
         hideHead ?
           null
           :
-          <div className={styles.head}>
+          <div className={styles.head} align="center">
             <h1>{detail.title}</h1>
             <p className={styles.info}>
               <span>{moment(detail.releaseTime).format('YYYY-MM-DD')}</span>
-              {/*<span>来源：{detail.source}</span>*/}
+              <span>&nbsp;&nbsp;来源：{detail.source}</span>
             </p>
           </div>
       }

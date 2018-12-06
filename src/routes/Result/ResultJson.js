@@ -47,6 +47,9 @@ export default {
     name: '开通安心签',
     action: 'qtw_ca'
   },
-
+share: {
+    name: '晒一晒分享',
+    action: 'qtw_share'
+  },
 
 }

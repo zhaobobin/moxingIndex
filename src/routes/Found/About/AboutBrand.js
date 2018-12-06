@@ -18,7 +18,7 @@ class AboutBrand extends React.Component {
           <li className={styles.helpbrandLi1}>
             <div className={styles.brandImg}>
               <img src={require('../../../assets/help/aboutus_advantage1.png')} />
-              <div className={styles.brandWord}><span>平台优势</span>专业、高效！出借灵活，小额分期</div>
+              <div className={styles.brandWord}><span>平台优势</span>专业、高效！出借灵活，小额分散</div>
             </div>
             </li>
           <li className={styles.helpbrandLi2}>
