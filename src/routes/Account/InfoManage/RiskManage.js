@@ -200,7 +200,7 @@ export default class RiskManage extends React.Component {
   /*接口*/
   jiekou(userId){
     let num=0;
-    let questions=this.state.questions
+    let questions=this.state.questions;
     questions.forEach((val,key)=>{
       num += val.question.score;
     });
