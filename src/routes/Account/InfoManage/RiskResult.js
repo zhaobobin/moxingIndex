@@ -7,6 +7,7 @@ import { ENV, Storage ,getSearchString} from '~/utils/utils';
 
 /*图表*/
 import ReactHighcharts from 'react-highcharts';
+import ResultJson from "../../Result/ResultJson";
 const fontFamily = '"Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 @connect(state => ({
   global: state.global,
@@ -40,7 +41,9 @@ export default class RiskResult extends React.Component {
     })
   }
   redirect = (action) => {
-    window.location.href = ENV.siteUrl + '?action=' + action;
+    //window.CzResult.toast(action);      //与原生交互
+    window.location.href = window.location.href + '&action=' + action;
+    window.location.reload();
   };
   render(){
     const resultObj=this.state.data
@@ -50,27 +53,28 @@ export default class RiskResult extends React.Component {
       },
       chart: {
         spacing : [50, 0 , 110, 0],
+        height:500,
       },
       title: {
         text: '',
         floating:true,
-        x: -50,
-        y: 150,
+        x: 0,
+        y: 0,
         style: {
           color: '#888',
-          fontSize: 11,
+          fontSize: '12px',
           fontFamily: fontFamily
         },
       },
       subtitle: {
         text: '根据系统分级，建议不同级别出借人可出借资金额度为：',
         floating:true,
-        x: -185,
-        y: 380,
+        x: 0,
+        y: 320,
         style: {
           color: '#333',
-          fontSize: 11,
-          // fontWeight:400,
+          fontSize: '12px',
+          fontWeight:400,
           fontFamily: fontFamily
         },
       },
@@ -78,12 +82,15 @@ export default class RiskResult extends React.Component {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
       },
       legend: {
+        labelFormatter: function () {
+          return  this.name + this.y+'万'
+        },
         layout: 'horizontal',
         align: 'left',           //水平方向位置
         verticalAlign: 'bottom', //垂直方向位置
         symbolRadius: 0,
-        itemMarginTop: 5,
-        itemMarginBottom: 0,
+        // itemMarginTop: 5,
+        // itemMarginBottom: 0,
         x:0,
         y:80,
       },
@@ -96,24 +103,61 @@ export default class RiskResult extends React.Component {
             enabled: true,
             connectorWidth: 0,          //线长度
             style: {
-              fontSize:11
+              fontSize:12,
+              x:0,
+              y:0,
             }
-            //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
           },
         }
       },
-      /*颜色*/
-      /*colors:['#FFF18925','#FF0D2F55','#FF2E5F94','#FFFFFAF5','#FFFFE9D4'],*/
+      colors: [
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
+          stops: [
+            [0, '#F18925'],
+            [1, '#FFDCB7']
+          ]
+        },
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#051D37'],
+            [1, '#113858']
+          ]
+        },
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#2E5F94'],
+            [1, '#2E5F94']
+          ]
+        },
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#FFFAF5'],
+            [1, '#FFFAF5']
+          ]
+        },
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#FFE9D4'],
+            [1, '#FFE9D4']
+          ]
+        },
+      ],
       series: [{
         type: 'pie',
-        innerSize: '60%',                                   //圆环内填充比例
+        size:'50%',
+        innerSize: '75%',                                   //圆环内填充比例
         name: '出借资金额度',
         data: [
-          ['保守型500万', 1000],
-          ['相对保守型600万', 1000],
-          ['稳健型700万', 300],
-          ['相对积极型800万', 500],
-          ['积极型900万', 800],
+          ['相对保守型', 1000],
+          ['保守型', 1000],
+          ['稳健型', 300],
+          ['相对积极型', 500],
+          ['积极型', 800],
         ]
       }]
     };
@@ -142,8 +186,8 @@ export default class RiskResult extends React.Component {
                 </p>
                 <p> 出借人可在每个年度重新进行出借人风险承受能力评估及分级。</p>
                 <p className={styles.btnP}>
-                  <Button type="primary"><Link to="/account/info-manage/risk-manage">重新评估</Link></Button>
-                  <Button type="primary"><Link to="/lend">我要出借</Link></Button>
+                  <Button type="primary"  ><Link to="/account/info-manage/risk-manage">重新评估</Link></Button>
+                  <Button type="primary" onClick={() => this.redirect(ResultJson.lend.action)}>我要出借</Button>
                 </p>
               </div>
 

@@ -58,7 +58,7 @@ export default class InfoIndex extends React.Component {
                     <li>经营信息 <span></span> </li>
                   </Link>
                   <Link to='/found/event?equipmentType=app'>
-                    <li>重大信息 <span></span> </li>
+                    <li>重大事项 <span></span> </li>
                   </Link>
                   <Link to='/found/other?equipmentType=app'>
                     <li>其他信息 <span></span> </li>
