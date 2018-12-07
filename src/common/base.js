@@ -23,6 +23,65 @@ const BaseRoutes = app => [
         component: dynamicWrapper(app, [], () => import('../routes/Home/Home')),
       },
 
+      //新闻资讯
+      {
+        name: '新闻资讯',
+        key: 'news',
+        path: 'news',
+        isHide: true,
+        //component: dynamicWrapper(app, [], () => import('../routes/News/NewsIndex')),
+        children: [
+          {
+            name: '网站公告',
+            key: 'notices-list',
+            path: 'notices-list',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/News/NoticesList')),
+          },
+          {
+            name: '网站公告详情',
+            key: 'notices-detail',
+            path: 'notices-list/detail/:id',
+            exact: true,
+            isHide: true,
+            component: dynamicWrapper(app, [], () => import('../routes/News/NoticesDetail')),
+          },
+
+          {
+            name: '公司新鲜事',
+            key: 'news-list',
+            path: 'news-list',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/News/NewsList')),
+          },
+          {
+            name: '公司新鲜事详情',
+            key: 'news-detail',
+            path: 'news-list/detail/:id',
+            exact: true,
+            isHide: true,
+            component: dynamicWrapper(app, [], () => import('../routes/News/NewsDetail')),
+          },
+
+          {
+            name: '媒体报道',
+            key: 'report-list',
+            path: 'report-list',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/News/ReportList')),
+          },
+          {
+            name: '媒体报道详情',
+            key: 'report-detail',
+            path: 'report-list/detail/:id',
+            exact: true,
+            isHide: true,
+            component: dynamicWrapper(app, [], () => import('../routes/News/ReportDetail')),
+          },
+        ]
+      },
+      //新闻资讯 end
+
       {
         name: '我要出借',
         key: 'lend',
@@ -38,20 +97,20 @@ const BaseRoutes = app => [
           },
           {
             name: '智享详情',
-            key: 'zxdetail',
-            path: 'zxdetail/:id',
+            key: 'zxfwxq',
+            path: 'zxfwxq/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Lend/ZxDetail')),
           },
           {
             name: '散标详情',
-            key: 'sbdetail',
-            path: 'sbdetail/:id',
+            key: 'sbxq',
+            path: 'sbxq/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Lend/SbDetail')),
           },
           {
             name: '变现详情',
-            key: 'bxdetail',
-            path: 'bxdetail/:id',
+            key: 'zqxq',
+            path: 'zqxq/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Lend/BxDetail')),
           },
         ]
@@ -78,30 +137,6 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Found/Download')),
           },
           {
-            name: '活动列表',
-            key: 'activity-list',
-            path: 'activity-list',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/Activity/ActivityList')),
-          },
-          {
-            name: '活动详情',
-            key: 'activity-detail',
-            path: 'activity-detail/:id',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/Activity/ActivityDetail')),
-          },
-          {
-            name: '公告列表',
-            key: 'notices-list',
-            path: 'notices-list',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/Activity/NoticesList')),
-          },
-          {
-            name: '公告详情',
-            key: 'notices-detail',
-            path: 'notices-detail/:id',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/Activity/NoticesDetail')),
-          },
-          {
             name: '帮助中心',
             key: 'help-list',
             path: 'help-list',
@@ -112,19 +147,6 @@ const BaseRoutes = app => [
             key: 'help-detail',
             path: 'help-detail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Help/HelpDetail')),
-          },
-
-          {
-            name: '公司新鲜事',
-            key: 'news-list',
-            path: 'news-list',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/About/NewsList')),
-          },
-          {
-            name: '公司新鲜事详情',
-            key: 'news-detail',
-            path: 'news-detail/:id',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/About/NewsDetail')),
           },
           {
             name: '关于我们',

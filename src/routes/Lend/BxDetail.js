@@ -29,18 +29,18 @@ export default class BxDetail extends React.Component {
     }
   }
 
-  queryDetail(id){  	
-    this.props.dispatch({    	
+  queryDetail(id){
+    this.props.dispatch({
       type: 'global/post',
-      url: '/api/transferDebt/findTranferDebtInfo',     
-      payload: {      	
+      url: '/api/transferDebt/findTranferDebtInfo',
+      payload: {
         debtId: id
       },
       callback: (res) => {
         this.loading = false;
-        if(res.code === 0){        	
+        if(res.code === 0){
           this.setState({
-          
+
             detail: res.data.p2pPactIssueVo
           })
         }
@@ -67,7 +67,7 @@ export default class BxDetail extends React.Component {
               <div className={styles.body}>
                    <div className={styles.sb_top}>
                    <div className={styles.sb_border}><span></span></div>
-                   
+
                    <div align="center"><Progress type="dashboard" percent={detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF"/><span className={styles.sb_cirel}></span></div>
                    <span className={styles.sb_top1}>已有{detail.bidPeopleNum}人出借</span><strong className={styles.sb_top2}><i>{detail.businessRate}%</i>年化利率</strong></div>
                    <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth}个月</i>借款期限</span><span><i>{detail.bidAmt}元</i>剩余金额</span></div></div>
