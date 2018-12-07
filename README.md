@@ -39,7 +39,7 @@
 注册协议： /user/register-xieyi
 
 
-## 页面跳转动作 http://m.qutouwang.com/#/result/zxfw-result?action=qtw_lend
+## 页面跳转动作 http://m.qutouwang.com/result/zxfw-result?action=qtw_lend
 
 ```
   export default {

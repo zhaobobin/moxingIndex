@@ -19,7 +19,7 @@ export default class BaseLayout extends React.Component {
 
     let paramsObj = getUrlParams() || '';
     //处理app调用h5
-    if(paramsObj.equipmentType === 'app' && paramsObj.accessToken){
+    if(paramsObj.platform === 'app' && paramsObj.accessToken){
       Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
       Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
       this.saveUserinfo(paramsObj)
@@ -36,7 +36,7 @@ export default class BaseLayout extends React.Component {
     }
   }
 
-  //保存用户信息 http://localhost:8001/#/demo?accessToken=c572cadb54a74357aec2f932d7285c76&refreshToken=18b9e1df769f48d0adf5d407456f8cb6&userId=18111457224731&platform=app
+  //保存用户信息 http://localhost:8001/demo?accessToken=c572cadb54a74357aec2f932d7285c76&refreshToken=18b9e1df769f48d0adf5d407456f8cb6&userId=18111457224731&platform=app
   saveUserinfo = (paramsObj) => {
     this.props.dispatch({
       type: 'global/changeUserInfo',

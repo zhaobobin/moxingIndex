@@ -190,7 +190,7 @@ export default class Register extends React.Component {
             msg: res.data.content,
             btns: ['确认', '关闭'],
             callback: (res) => {
-              console.log(res)
+              //console.log(res)
             }
           })
         }

@@ -3,7 +3,7 @@ import dva from 'dva';
 import browserHistory from 'history/createBrowserHistory';
 import './theme/base.css';
 
-const history = process.env.NODE_ENV === 'production' && process.env.X_ENV === 'pro' ?
+const history = process.env.NODE_ENV === 'production' ?
   {history: browserHistory()}
   :
   {};
