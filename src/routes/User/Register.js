@@ -449,7 +449,7 @@ export default class Register extends React.Component {
                     >
                       已阅读并同意
                     </Checkbox>
-                    <a onClick={this.queryXieyi}>《去投网平台注册及服务协议》</a>
+                    <a onClick={this.queryXieyi}>《去投网用户注册协议》</a>
                   </span>
               )}
               <Button

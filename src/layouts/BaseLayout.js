@@ -9,6 +9,8 @@ import styles from './BaseLayout.less'
 import GlobalHeader from '~/components/Common/GlobalHeader';
 import GlobalContent from '~/components/Common/GlobalContent';
 
+const paramsObj = getUrlParams() || '';
+
 @connect(state => ({
   global: state.global,
 }))
@@ -17,7 +19,6 @@ export default class BaseLayout extends React.Component {
   componentDidMount(){
     const { isAuth } = this.props.global;
 
-    let paramsObj = getUrlParams() || '';
     //处理app调用h5
     if(paramsObj.platform === 'app' && paramsObj.accessToken){
       Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
@@ -65,11 +66,13 @@ export default class BaseLayout extends React.Component {
     const { pathname } = location;
     const routeData = getRouteData('BaseLayout');
 
+    let appname = paramsObj.platform === 'app' ? null : ' - ' + ENV.appname;
+
     let title = '';
     if(pathname === '/'){
       title = ENV.hometitle;
     }else{
-      title = this.foreachTitle(routeData, pathname).slice(3) + ' - ' + ENV.appname;
+      title = this.foreachTitle(routeData, pathname).slice(3) + appname;
     }
     return title;
   }

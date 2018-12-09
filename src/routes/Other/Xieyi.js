@@ -79,7 +79,7 @@ export default class Xieyi extends React.Component {
           this.loading ?
             <ToastLoading/>
             :
-            <ArticleDetail detail={detail}/>
+            <ArticleDetail detail={detail} hideHead={true}/>
         }
       </div>
     )
