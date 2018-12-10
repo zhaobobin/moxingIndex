@@ -6,10 +6,14 @@ import ResultJson from '~/routes/Result/ResultJson'
   global: state.global,
 }))
 export default class Share extends React.Component {
-redirect = (action) => {
+
+  redirect = (action) => {
     window.location.href = window.location.href + '&action=' + action;
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 500)
   };
+
   render(){
     return(
       <div className={styles.share}>
