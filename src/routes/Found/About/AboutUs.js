@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Tabs } from 'antd';
+import { Tabs, WhiteSpace } from 'antd-mobile';
 import styles from './aboutUs.less';
 import AboutIntroduction from './AboutIntroduction';
 import AboutBusiness from './AboutBusiness';
@@ -12,20 +12,33 @@ import AboutWeibo from './AboutWeibo';
 }))
 export default class AboutUs extends React.Component {
 
-  render(){
-    const TabPane = Tabs.TabPane;
-    function callback(key) {
-      console.log(key);
-    }
+ render(){
+  	const tabs = [
+{ title: '去投网简介' },
+{ title: '业务模式' },
+{ title: '品牌优势' },
+{ title: '联系我们' },
+{ title: '微信微博' },
+];   
     return(
-      <div className={styles.helplist}>
-      <Tabs defaultActiveKey="1" onChange={callback}>      
-      <TabPane tab="去投网简介" key="1"><AboutIntroduction /></TabPane>
-      <TabPane tab="业务模式" key="2"><AboutBusiness /></TabPane>
-      <TabPane tab="品牌优势" key="3"><AboutBrand /></TabPane>
-      <TabPane tab="联系我们" key="4"><AboutContact /></TabPane>
-      <TabPane tab="微信微博" key="5"><AboutWeibo /></TabPane>
-      </Tabs>
+      <div className={styles.helplist}>      
+      <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3} />}>
+  <div style={{ display: 'flex'}}>
+<p><AboutIntroduction /></p>
+</div>
+<div style={{ display: 'flex' }}>
+<p><AboutBusiness /></p>
+</div>
+<div style={{ display: 'flex'}}>
+<p><AboutBrand /></p>
+</div>
+<div style={{ display: 'flex' }}>
+<p><AboutContact /></p>
+</div>
+<div style={{ display: 'flex' }}>
+<p><AboutWeibo /></p>
+</div>
+  </Tabs>   
       </div>
     )
   }
