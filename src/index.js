@@ -9,7 +9,7 @@ const history = process.env.NODE_ENV === 'production' ?
   {};
 
 // 1. Initialize2
-const app = dva({});
+const app = dva(history);
 
 // 2. Plugins
 // app.use({});
