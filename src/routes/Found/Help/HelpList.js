@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Tabs } from 'antd';
+import { Tabs, WhiteSpace } from 'antd-mobile';
 import styles from './HelpList.less';
 import HelpSecurity from './HelpSecurity';
 import HelpLending from './HelpLending';
@@ -10,22 +10,35 @@ import HelpLegal from './HelpLegal';
 @connect(state => ({
   global: state.global,
 }))
-export default class HelpList extends React.Component {
 
+export default class HelpList extends React.Component {
+	
   render(){
-    const TabPane = Tabs.TabPane;
-    function callback(key) {
-      console.log(key);
-    }
-    return(
-      <div className={styles.helplist}>
-      <Tabs defaultActiveKey="1" onChange={callback}>
-      <TabPane tab="安全与隐私" key="1"><HelpSecurity /></TabPane>
-      <TabPane tab="出借与借款" key="2"><HelpLending /></TabPane>
-      <TabPane tab="充值与提现" key="3"><HelpCash /></TabPane>
-      <TabPane tab="名词解释" key="4"><HelpNoun /></TabPane> 
-      <TabPane tab="法律声明" key="5"><HelpLegal /></TabPane>      
-      </Tabs>
+  	const tabs = [
+{ title: '安全与隐私' },
+{ title: '出借与借款' },
+{ title: '充值与提现' },
+{ title: '名词解释' },
+{ title: '法律声明' },
+];
+    return(<div className={styles.helplist}>
+    	<Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3} />}>
+  <div style={{ display: 'flex'}}>
+<p><HelpSecurity /></p>
+</div>
+<div style={{ display: 'flex' }}>
+<p><HelpLending /></p>
+</div>
+<div style={{ display: 'flex'}}>
+<p><HelpCash /></p>
+</div>
+<div style={{ display: 'flex' }}>
+<p><HelpNoun /></p>
+</div>
+<div style={{ display: 'flex' }}>
+<p><HelpLegal /></p>
+</div>
+  </Tabs>      
       </div>
     )
   }
