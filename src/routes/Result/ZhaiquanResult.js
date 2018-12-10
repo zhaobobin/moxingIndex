@@ -14,7 +14,9 @@ export default class ZhaiquanResult extends React.Component {
 
   redirect = (action) => {
     window.location.href = window.location.href + '&action=' + action;
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 500)
   };
 
   render(){

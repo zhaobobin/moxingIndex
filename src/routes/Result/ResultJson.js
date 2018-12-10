@@ -51,5 +51,9 @@ export default {
     name: '分享-晒收益',
     action: 'qtw_share_shouyi'
   },
+  share_yaoqing: {
+    name: '分享-邀请好友',
+    action: 'qtw_share_yaoqing'
+  },
 
 }

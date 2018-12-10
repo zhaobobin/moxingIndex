@@ -14,7 +14,9 @@ export default class LendResult extends React.Component {
 
   redirect = (action) => {
     window.location.href = window.location.href + '&action=' + action;
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 500)
   };
 
   render(){
@@ -36,7 +38,7 @@ export default class LendResult extends React.Component {
           </p>
         </div>
         <div className={styles.btns}>
-          <Button type="default" onClick={() => this.redirect(ResultJson.lockCj.action)}>查看我的出借</Button>
+          <Button type="default" onClick={() => this.redirect(ResultJson.lookCj.action)}>查看我的出借</Button>
           <Button type="primary" onClick={() => this.redirect(ResultJson.lend.action)}>继续出借</Button>
         </div>
       </div>
