@@ -34,6 +34,12 @@ const UserRoutes = app => [
         component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
       },
       {
+        name: '用户注册协议',
+        key: 'register-xieyi',
+        path: 'user/register-xieyi',
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Xieyi')),
+      },
+      {
         name: '忘记密码',
         key: 'reset',
         path: 'user/reset/:step',

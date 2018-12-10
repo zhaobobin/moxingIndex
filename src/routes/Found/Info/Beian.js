@@ -17,6 +17,7 @@ export default class Beian extends React.Component {
     return(
       <div  >
         <Information>
+          <div className={styles.Box}>
         <h4 className={styles.Beian}> <span className={styles.content}>备案信息 <span></span></span></h4>
           <div className={styles.BeianContent}>
             <p>地方金融监管部门的备案登记信息：<span>无</span> </p>
@@ -30,7 +31,7 @@ export default class Beian extends React.Component {
         <h4 className={styles.Beian}> <span className={styles.content}>资金存管信息 <span></span></span></h4>
           <div className={styles.deposit}>
             <p>资金存管银行全称：<span>恒丰银行股份有限公司</span></p>
-            <p>三方存管协议：<span className={styles.agreement}>存管协议</span></p>
+            <p>三方存管协议：<span className={styles.agreement}> <a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> </span></p>
             <p>资金存管上线时间：<span>2017-07-01</span></p>
           </div>
 
@@ -62,7 +63,7 @@ export default class Beian extends React.Component {
           <Signature/>
 
 
-
+          </div>
         </Information>
       </div>
     )

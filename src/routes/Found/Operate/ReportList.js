@@ -16,12 +16,7 @@ export default class ReportList extends React.Component {
     this.state = {
       pageNum:1,
       pageSize:10,
-      list:[
-        {'cont':'去投网2018年4月运营报告','time':'2018-04-20'},
-        {'cont':'去投网2018年3月运营报告','time':'2018-04-20'},
-        {'cont':'去投网2018年2月运营报告','time':'2018-04-20'},
-        {'cont':'去投网2018年1月运营报告','time':'2018-04-20'},
-      ]
+      list:[]
     }
   }
   componentDidMount(){
@@ -31,8 +26,9 @@ export default class ReportList extends React.Component {
       payload:{
       },
       callback:(res)=>{
-       console.log(res)
-
+      this.setState({
+        list:res.data.list
+      })
       }
     })
   }
@@ -66,7 +62,6 @@ export default class ReportList extends React.Component {
                 <div className={styles.title}>去投网运营报告</div>
                 <div>2018-06-20</div>
               </div>
-
               <ul className={styles.ReportUl}>
                 {
                   this.state.list.map((item,index)=>{

@@ -30,7 +30,6 @@ export default class Education extends React.Component {
               data:res.data
             })
       }
-
       }
     })
   }

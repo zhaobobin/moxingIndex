@@ -195,15 +195,15 @@ export default class RiskManage extends React.Component {
       if (!err) {
         /*分数求和*/
         let { userInfo } = this.props.global.currentUser;
+        console.log(userInfo)
         this.jiekou(userInfo.userId);
       }
     });
   };
   /*接口*/
   jiekou(userId){
-    //console.log(userId)
     let num=0;
-    let questions=this.state.questions;
+    let questions=this.state.questions
     questions.forEach((val,key)=>{
       num += val.question.score;
     });
@@ -217,10 +217,24 @@ export default class RiskManage extends React.Component {
       },
       callback:(res)=>{
         if(res.code === 0){
-          //console.log(res)
-          this.props.dispatch(routerRedux.push('/account/info-manage/risk-result'))
+          if(!this.ajaxFlag) return;
+          this.ajaxFlag = false;
+          this.props.dispatch({
+            type: 'global/token',
+            payload: {
+              refreshToken: Storage.get(ENV.storageRefreshToken),
+              userId: Storage.get(ENV.storageUserId),
+              platform: 'pc',
+            },
+            callback: (res) => {
+              setTimeout(() => { this.ajaxFlag = true }, 500);
+              if(res.code===0){
+                this.props.dispatch(routerRedux.push('/account/info-manage/risk-result'))
+              }
+            }
+          })
         } else{
-          alert('错误')
+         alert('错误')
         }
       }
     })
@@ -231,10 +245,11 @@ export default class RiskManage extends React.Component {
   };
 
   render(){
-
+    const { cusType }=this.props.global.currentUser.userInfo;
     const Appraisal=this.state.Appraisal;
 
     return(
+    <div>
 
       <div className={styles.container}>
 
@@ -294,6 +309,9 @@ export default class RiskManage extends React.Component {
         </div>
 
       </div>
+
+    </div>
+
 
 
     )

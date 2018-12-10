@@ -114,14 +114,14 @@ export default class Organization extends React.Component {
 
         </table>
         <h4 className={styles.Organization}> <span className={styles.content}>信息安全测评认证信息 <span></span></span></h4>
-          <p>暂无分支机构</p>
+          <img src={require("~/assets/account/find_record_img2@2x.png")} alt="" className={styles.organizationImg}/>
         <h4 className={styles.Organization}> <span className={styles.content}>官方网站、官方手机应用及其他官方互联网渠道信息 <span></span></span></h4>
         <p ><span className={styles.title}>官方网址：</span><span className={styles.cont}>www.qutouwang.com</span></p>
         <p ><span className={styles.title}>平台APP名称：</span><span className={styles.cont}>去投网</span></p>
         <p ><span className={styles.title}>微信公众号：</span><span className={styles.cont}>去投网（QTW-DYH）</span></p>
         <p ><span className={styles.title}>微博：</span><span className={styles.cont}>新浪去投网微博 https://weibo.com/qutouwang</span></p>
         <h4 className={styles.Organization}> <span className={styles.content}>平台上线运营时间 <span></span></span></h4>
-<p>2014年6月17日</p>
+<p>2016年6月18日</p>
         <Signature/>
 
 

@@ -4,6 +4,7 @@ import styles from "./Other.less";
 import Map from 'react-amap/lib/map';
 import Marker from 'react-amap/lib/marker';
 import {Icon} from "antd";
+import { Link } from 'dva/router';
 import Information from "~/components/Information/Information";
 import Signature from "~/components/Information/signature";
 @connect(state => ({
@@ -41,22 +42,24 @@ export default class Other extends React.Component {
             <img src={require("~/assets/account/find_other_reportphone@2x.png")} alt="" className={styles.img}/>
             <p>
              客服、投诉、举报电话：400-181-0588 <br/>
-              <span className={styles.OtherSpan}>工作时间：9:00 - 21:00</span>
+              <span className={styles.OtherSpan}>工作时间：9:00 - 17：30</span>
             </p>
           </li>
           <li>
             <img src={require("~/assets/account/find_other_reportmaile@2x.png")} alt="" className={styles.img}/>
             <p>
              客服、投诉、举报邮箱:qutouwang@chinacfsc.com，<br/>
-              <span className={styles.OtherSpan}>工作时间：星期一至星期五，9:00 - 21:00（法定节假日除外）</span>
+              <span className={styles.OtherSpan}>工作时间：星期一至星期五，9:00 - 17：30（法定节假日除外）</span>
             </p>
 
           </li>
           <li>
             <img src={require("~/assets/account/find_other_help@2x.png")} alt="" className={styles.img}/>
             <p className={styles.online}>
+              <Link to='/help/safe'>
               在线帮助
               <Icon  type="right"  />
+              </Link>
             </p>
           </li>
         </ul>
