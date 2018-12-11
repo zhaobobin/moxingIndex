@@ -24,7 +24,8 @@ export default class RiskManage extends React.Component {
             {'value':'1-1','content':'18-25周岁','score':1},
             {'value':'1-2','content':'26-35周岁','score':2},
             {'value':'1-3','content':'36-50周岁','score':3},
-            {'value':'1-4','content':'66周岁以上','score':4}
+            {'value':'1-4','content':'51-65周岁','score':4},
+            {'value':'1-5','content':'66周岁以上','score':5}
           ]
         },
         {
@@ -250,7 +251,7 @@ export default class RiskManage extends React.Component {
   render(){
     const { cusType }=this.props.global.currentUser.userInfo;
     const Appraisal=this.state.Appraisal;
-console.log(this.props.global)
+      console.log(this.props.global)
     return(
     <div>
 

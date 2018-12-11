@@ -68,7 +68,7 @@ export default class RiskResult extends React.Component {
         },
         chart: {
           spacing : [50, 0 , 110, 0],
-          height:450,
+          height:420,
         },
         title: {
           text: '',
@@ -85,7 +85,7 @@ export default class RiskResult extends React.Component {
           text: '根据系统分级，建议不同级别出借人可出借资金额度为：',
           floating:true,
           x: 0,
-          y: 300,
+          y: 260,
           style: {
             color: '#333',
             fontSize: '12px',
