@@ -23,7 +23,7 @@ componentDidMount(){
   	console.log(this.props.global.currentUser.userInfo)
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/accountNotice/sharingNotification',
+      url: '/api/accountNotice/sharingNotification?productType=1',
       payload:{      	
         userId,       
         accessToken
@@ -53,7 +53,7 @@ componentDidMount(){
       <div className={styles.share}>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>
       <div className={styles.sharemiddle}>
-        <div className={styles.shareicon}>{data.headImg}<span>{data.userName}</span></div>
+        <div className={styles.shareicon}><img src={data.headImg || require("~/assets/share/bask_bg_01.jpg")} alt="" /><span>{data.userName}</span></div>
         <div className={styles.sharetip}>{data.annualIncome}</div>
         <div className={styles.sharemoney}><img src={require('../../assets/share/bask_goldcoin.png')} />{data.annualReturn}元</div>
         <p className={styles.shareword}>超越了{data.percentage}%的全国投友</p>
