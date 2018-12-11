@@ -19,11 +19,11 @@ componentDidMount(){
  }
 
   getshareData=()=>{
-  	let {userId, accessToken} = this.props.global.currentUser.userInfo;  
+ 	let {userId, accessToken} = this.props.global.currentUser.userInfo;  
   	console.log(this.props.global.currentUser.userInfo)
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/personalCenterUser/getAssetDetails',
+      url: '/api/accountNotice/sharingNotification',
       payload:{      	
         userId,       
         accessToken
@@ -33,10 +33,8 @@ componentDidMount(){
         this.loading = false;
         if(res.code === 0){  
         	console.log(res.data)
-          this.setState({
-          	
-          	data:res.data
-          	
+          this.setState({          	
+          	data:res.data          	
           })          
         }
       }
@@ -55,7 +53,7 @@ componentDidMount(){
       <div className={styles.share}>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>
       <div className={styles.sharemiddle}>
-        <div className={styles.shareicon}><img src={require('../../assets/share/bask_bg_03.jpg')} /><span>张**</span></div>
+        <div className={styles.shareicon}>{data.headImg}<span>{data.userName}</span></div>
         <div className={styles.sharetip}>{data.annualIncome}</div>
         <div className={styles.sharemoney}><img src={require('../../assets/share/bask_goldcoin.png')} />{data.annualReturn}元</div>
         <p className={styles.shareword}>超越了{data.percentage}%的全国投友</p>
