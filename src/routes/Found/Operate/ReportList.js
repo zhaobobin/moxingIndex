@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'dva';
 import styles  from './ReportList.less';
 import { Tabs } from 'antd';
+import moment from 'moment';
+import { Link } from 'dva/router';
 import ReportListTwo from "~/components/Information/ReportListTwo";
 import Signature from "~/components/Information/signature";
 import Pagination  from '~/components/Common/Page/Pagination';
@@ -67,8 +69,10 @@ export default class ReportList extends React.Component {
                   this.state.list.map((item,index)=>{
                    return(
                      <li key={index}>
-                       <span>{item.cont}</span>
-                       <span>{item.time}</span>
+                       <Link to={`platform-report/detail/${item.oid}`} className={styles.link}>
+                       <span>{item.reportName}</span>
+                       <span>{moment(item.showDataTime).format("YYYY-MM-DD ")}</span>
+                       </Link>
                      </li>
                    )
                   })

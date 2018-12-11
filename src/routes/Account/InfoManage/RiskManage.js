@@ -14,6 +14,7 @@ const FormItem = Form.Item;
 export default class RiskManage extends React.Component {
   constructor(props){
     super(props);
+    this.ajaxFlag = true;
     this.state = {
       Appraisal:[
         {
@@ -165,6 +166,20 @@ export default class RiskManage extends React.Component {
       questions:[],
     }
   }
+  // componentDidMount(){
+  //   this.props.dispatch({
+  //     type: 'global/token',
+  //     payload: {
+  //       refreshToken: Storage.get(ENV.storageRefreshToken),
+  //       userId: Storage.get(ENV.storageUserId),
+  //       platform: 'pc',
+  //     },
+  //     callback: (res) => {
+  //       console.log(res)
+  //       setTimeout(() => { this.ajaxFlag = true }, 500);
+  //     }
+  //   })
+  // }
 
   /*单选按钮*/
   onChange = (e) => {
@@ -194,19 +209,21 @@ export default class RiskManage extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         /*分数求和*/
-        let { userInfo } = this.props.global.currentUser;
-        console.log(userInfo)
-        this.jiekou(userInfo.userId);
+        this.jiekou();
       }
     });
   };
   /*接口*/
-  jiekou(userId){
+  jiekou(){
+    if(!this.ajaxFlag) return;
+    this.ajaxFlag = false;
+
     let num=0;
-    let questions=this.state.questions
+    let questions=this.state.questions;
     questions.forEach((val,key)=>{
       num += val.question.score;
     });
+    let { userId } = this.props.global.currentUser.userInfo;
     this.props.dispatch({
       type: 'global/post',
       url:'/api/risk/saveRisk',
@@ -217,25 +234,11 @@ export default class RiskManage extends React.Component {
       },
       callback:(res)=>{
         if(res.code === 0){
-          if(!this.ajaxFlag) return;
-          this.ajaxFlag = false;
-          this.props.dispatch({
-            type: 'global/token',
-            payload: {
-              refreshToken: Storage.get(ENV.storageRefreshToken),
-              userId: Storage.get(ENV.storageUserId),
-              platform: 'pc',
-            },
-            callback: (res) => {
-              setTimeout(() => { this.ajaxFlag = true }, 500);
-              if(res.code===0){
-                this.props.dispatch(routerRedux.push('/account/info-manage/risk-result'))
-              }
-            }
-          })
+          this.props.dispatch(routerRedux.push('/account/info-manage/risk-result'))
         } else{
          alert('错误')
         }
+        this.ajaxFlag = true;
       }
     })
   }
@@ -247,7 +250,7 @@ export default class RiskManage extends React.Component {
   render(){
     const { cusType }=this.props.global.currentUser.userInfo;
     const Appraisal=this.state.Appraisal;
-
+console.log(this.props.global)
     return(
     <div>
 
