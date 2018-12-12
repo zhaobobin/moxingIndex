@@ -284,22 +284,6 @@ const BaseRoutes = app => [
                 component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/BankManage')),
               },
               {
-                name: '银行卡绑卡成功',
-                key: 'bank-add',
-                path: 'bank-add',
-                userType: 'all',
-                isHide: true,
-                component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/BankcardAdd')),
-              },
-              {
-                name: '银行卡解绑成功',
-                key: 'bank-remove',
-                path: 'bank-remove',
-                userType: 'all',
-                isHide: true,
-                component: dynamicWrapper(app, [], () => import('../routes/Account/InfoManage/BankcardRemove')),
-              },
-              {
                 name: '风险评估',
                 key: 'risk-manage',
                 path: 'risk-manage',
