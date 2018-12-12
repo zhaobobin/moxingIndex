@@ -5,13 +5,15 @@ import  styles from './PlatformOne.less'
   global: state.global,
 }))
 export default class PlatformOne extends React.Component {
+  paging=(e)=>{
 
+  }
   render(){
     return(
     <div className={styles.PagesBox}>
       {/*第一页*/}
       <p className={styles.Pages}>
-        <span className={styles.Page}>第一页</span>
+        <span className={styles.Page} >第一页</span>
       </p>
       <div className={styles.TitleBox}>
         <p>等保三级认证</p>

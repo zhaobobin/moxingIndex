@@ -43,7 +43,6 @@ export default class InfoIndex extends React.Component {
               北京恒远鑫达投资管理有限公司-信息披露制度>>
             </a>
            </p>
-
                 <ul className={styles.listUl}>
                   <Link to='/found/beian?equipmentType=app'>
                     <li>备案信息 <span></span> </li>
