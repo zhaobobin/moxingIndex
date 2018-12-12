@@ -39,13 +39,14 @@ export default class RiskResult extends React.Component {
         if(res.code === 0){
           let chartArr=res.data.allGrade
           let chart=this.state.chart
-          let chartObj={}
-          for(let i in chartArr){
-            chartObj={'totalLending':chartArr[i].totalLending,'capacityDesc':chartArr[i].capacityDesc}
-            chart[i]=chartObj
+          let chartObj=[]
+          for(let i=0;i<chartArr.length;i++){
+            chartObj=[chartArr[i].capacityDesc, parseInt(chartArr[i].totalLending)]
+            chart.push(chartObj)
           }
           this.setState({
-            data:res.data
+            data:res.data,
+            chart:chart
           })
         }
       }
@@ -54,7 +55,9 @@ export default class RiskResult extends React.Component {
   redirect = (action) => {
     //window.CzResult.toast(action);      //与原生交互
     window.location.href = window.location.href + '&action=' + action;
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 500)
   };
   render(){
     let { cusType, riskFlag }=this.props.global.currentUser.userInfo;
@@ -164,13 +167,7 @@ export default class RiskResult extends React.Component {
           type: 'pie',
           innerSize: '60%',                                   //圆环内填充比例
           name: '出借资金额度',
-          data: [
-            [chart[0].capacityDesc, str2Number(chart[0].totalLending)],
-            [chart[1].capacityDesc, str2Number(chart[1].totalLending)],
-            [chart[2].capacityDesc,str2Number(chart[2].totalLending)],
-            [chart[3].capacityDesc, str2Number(chart[3].totalLending)],
-            [chart[4].capacityDesc,str2Number(chart[4].totalLending)],
-          ]
+          data: chart
         }]
       };
     }else {
