@@ -70,7 +70,7 @@ export default class BaseLayout extends React.Component {
 
     let title = '';
     if(pathname === '/'){
-      title = ENV.hometitle;
+      title = paramsObj.platform === 'app' ? '' : ENV.hometitle;
     }else{
       title = this.foreachTitle(routeData, pathname).slice(3) + appname;
     }
