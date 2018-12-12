@@ -66,7 +66,7 @@ export default class BaseLayout extends React.Component {
     const { pathname } = location;
     const routeData = getRouteData('BaseLayout');
 
-    let appname = paramsObj.platform === 'app' ? null : ' - ' + ENV.appname;
+    let appname = paramsObj.platform === 'app' ? '' : ' - ' + ENV.appname;
 
     let title = '';
     if(pathname === '/'){

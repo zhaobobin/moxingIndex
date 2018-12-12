@@ -5,13 +5,15 @@
     .ant-collapse > .ant-collapse-item > .ant-collapse-header{
       color:#333333;font-size: 15px;font-weight:500;
       i{color: #8493A8;}
-    }
-    .ant-collapse-borderless > .ant-collapse-item,.ant-collapse > .ant-collapse-item{border-bottom: 1px solid #F4F4F4;padding: 10px 0;}
+    }    
+    .am-tabs-pane-wrap p{ width: 100%;display: inline-block;}
+    .ant-collapse-borderless > .ant-collapse-item,.ant-collapse > .ant-collapse-item{border-bottom: 1px solid #F4F4F4;padding: 10px 0;display: inline-block;width: 100%;}
     .ant-collapse > .ant-collapse-item > .ant-collapse-header{
       padding: 0;padding-right: 18px;
     }
-    .ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow{right: 0;left: inherit;top:-11px;-webkit-transform: rotate(90deg);transform:rotate(90deg);}
-    .ant-collapse > .ant-collapse-item > .ant-collapse-header[aria-expanded="true"] .arrow{-webkit-transform: rotate(-180deg); transform:rotate(-180deg);}
+    .ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow{right: 0;left: inherit;top:-11px;-webkit-transform: rotate(90deg);transform:rotate(90deg);-moz-transform:rotate(90deg) ;}
+    .ant-collapse > .ant-collapse-item > .ant-collapse-header[aria-expanded='true'] .anticon-right svg{-webkit-transform: rotate(90deg);transform:rotate(90deg);-moz-transform:rotate(90deg) ;}
+    .ant-collapse > .ant-collapse-item > .ant-collapse-header[aria-expanded="true"] .arrow{-webkit-transform: rotate(-180deg); transform:rotate(-180deg);-moz-transform:rotate(180deg) ;}
     .ant-collapse-content > .ant-collapse-content-box{color: #888;padding: 0;}
   }
 }

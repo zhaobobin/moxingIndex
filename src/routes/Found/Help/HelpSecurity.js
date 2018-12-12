@@ -27,7 +27,7 @@ class HelpSecurity extends React.Component {
   getHelpList(){
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/home/pc/findHelpCenterList',
+      url: '/api/home/pc/findHelpCenterList?helpType=0',
       payload:{},
       callback: (res) => {
         this.loading = false;
