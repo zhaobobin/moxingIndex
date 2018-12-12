@@ -58,7 +58,7 @@ export default class Beian extends React.Component {
         <img src={require("~/assets/account/find_record_img5@2x.png")} alt=""  className={styles.flowImg}/>
         <p className={styles.flow}>逾期前：预警电话&短信提醒；</p>
         <p className={styles.flow}>逾期初：电话催收；</p>
-        <p className={styles.flow}>严重逾期：移交合作律所催缴&#8594拉入信用黑名单&#8594报送网络金融征信系统</p>
+        <p className={styles.flow}>严重逾期：移交合作律所催缴→拉入信用黑名单→报送网络金融征信系统</p>
 
           <Signature/>
 

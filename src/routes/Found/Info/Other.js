@@ -56,7 +56,7 @@ export default class Other extends React.Component {
           <li>
             <img src={require("~/assets/account/find_other_help@2x.png")} alt="" className={styles.img}/>
             <p className={styles.online}>
-              <Link to='/help/safe'>
+              <Link to='help-list'>
               在线帮助
               <Icon  type="right"  />
               </Link>

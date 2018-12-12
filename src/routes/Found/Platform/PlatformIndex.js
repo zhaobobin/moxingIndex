@@ -15,44 +15,25 @@ import PlatformEight from './PlatformEight';
   global: state.global,
 }))
 export default class PlatformIndex extends React.Component {
-
+  constructor(props){
+    super(props);
+    this.loading = true;
+    this.state = {
+      number:1,
+    }
+  }
   render(){
     return(
       <div className={styles.Box}>
-        <WingBlank>
-          <Carousel
-            autoplay={false}
-            vertical
-            infinite
-            beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-            afterChange={index => console.log('slide to', index)}
-          >
-            <PlatformOne/>
-          </Carousel>
 
-
-
-          <Carousel
-            autoplay={false}
-            vertical
-            infinite
-            beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-            afterChange={index => console.log('slide to', index)}
-          >
+            <PlatformOne />
             <PlatformTwo/>
-
-          </Carousel>
-
-
-        </WingBlank>
-
-
-        {/*<PlatformThree/>*/}
-        {/*<PlatformFour/>*/}
-        {/*<PlatformFive/>*/}
-        {/*<PlatformSix/>*/}
-        {/*<PlatformSeven/>*/}
-        {/*<PlatformEight/>*/}
+            <PlatformThree/>
+            <PlatformFour/>
+            <PlatformFive/>
+            <PlatformSix/>
+            <PlatformSeven/>
+            <PlatformEight/>
       </div>
     )
   }
