@@ -36,7 +36,7 @@ export default class Demo extends React.Component {
           <dt><strong>发现板块</strong></dt>
           <dd>
             <p><Link to="/found?platform=app">发现首页</Link></p>
-            <p><Link to="/found/download?platform=app">下载</Link></p>
+            <p><Link to="/download">H5下载</Link></p>
             <p><Link to="/news/notices-list?platform=app">公告列表</Link></p>
             <p><Link to="/news/notices-list/detail/68?platform=app">公告详情</Link></p>
             <p><Link to="/found/help-list?platform=app">帮助中心</Link></p>

@@ -131,12 +131,6 @@ const BaseRoutes = app => [
           },
 
           {
-            name: '下载',
-            key: 'download',
-            path: 'download',
-            component: dynamicWrapper(app, [], () => import('../routes/Found/Download')),
-          },
-          {
             name: '帮助中心',
             key: 'help-list',
             path: 'help-list',
@@ -374,6 +368,12 @@ const BaseRoutes = app => [
       },
 
       //其它
+      {
+        name: '下载',
+        key: 'download',
+        path: 'download',
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Download')),
+      },
       {
         name: '分享详情',
         key: 'share-shouyi',
