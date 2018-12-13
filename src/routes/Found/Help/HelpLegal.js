@@ -48,10 +48,7 @@ class HelpLegal extends React.Component {
       <div className={styles.helplogin}>
         {
           LawList.length > 0 ?
-            <Collapse bordered={false} defaultActiveKey={['0']} accordion>
-              {/*  <Panel header="01 我是否可以出借？" key="1">
-            {text}
-          </Panel>*/}
+            <Collapse bordered={false} defaultActiveKey={['0']} accordion>             
               {
                 LawList.map((data, index) => {
                   return (<Panel key={index} header={data.title}><div dangerouslySetInnerHTML={{ __html: data.content }} /></Panel>)

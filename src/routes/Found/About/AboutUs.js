@@ -22,20 +22,20 @@ export default class AboutUs extends React.Component {
 ];   
     return(
       <div className={styles.helplist}>      
-      <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3} />}>
-  <div style={{ display: 'flex'}}>
+      <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3.6} />}>
+  <div>
 <p><AboutIntroduction /></p>
 </div>
-<div style={{ display: 'flex' }}>
+<div>
 <p><AboutBusiness /></p>
 </div>
-<div style={{ display: 'flex'}}>
+<div>
 <p><AboutBrand /></p>
 </div>
-<div style={{ display: 'flex' }}>
+<div>
 <p><AboutContact /></p>
 </div>
-<div style={{ display: 'flex' }}>
+<div>
 <p><AboutWeibo /></p>
 </div>
   </Tabs>   
