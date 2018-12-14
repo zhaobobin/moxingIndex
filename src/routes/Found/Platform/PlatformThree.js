@@ -30,7 +30,6 @@ export default class PlatformThree extends React.Component {
           </div>
         </div>
 
-          <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
 
       </div>
     )

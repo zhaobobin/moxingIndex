@@ -26,7 +26,6 @@ export default class PlatformTwo extends React.Component {
         </div>
         <p className={styles.more}>更多优质产品敬请期待</p>
 
-          <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg}  />
       </div>
     )
   }

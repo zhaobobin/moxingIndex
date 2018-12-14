@@ -27,14 +27,12 @@ export default class Beian extends React.Component {
           </div>
         <h4 className={styles.Beian}> <span className={styles.content}>电信业务经营许可信息 <span></span></span> </h4>
           <img src={require("~/assets/account/find_record_img1@2x.png")} alt="" className={styles.permission}/>
-
         <h4 className={styles.Beian}> <span className={styles.content}>资金存管信息 <span></span></span></h4>
           <div className={styles.deposit}>
             <p>资金存管银行全称：<span>恒丰银行股份有限公司</span></p>
             <p>三方存管协议：<span className={styles.agreement}> <a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> </span></p>
             <p>资金存管上线时间：<span>2017-07-01</span></p>
           </div>
-
         <h4 className={styles.Beian}> <span className={styles.content}>公安机关核发的网站备案图标和编号 <span></span></span></h4>
           <p>京公网安备11010502036682号</p>
         <h4 className={styles.Beian}> <span className={styles.content}>信息安全测评认证信息 <span></span></span></h4>

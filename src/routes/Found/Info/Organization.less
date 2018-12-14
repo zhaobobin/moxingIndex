@@ -1,11 +1,13 @@
 @import '../../../theme/index.less';
-
+.OrganizationBox{
 .Organization{
-  margin: 20px auto;
-  font-weight: 900;
-  text-align: center;
+    margin:  auto;
+    padding: 20px 0 13px ;
+    font-weight: 900;
+    text-align: center;
+    font-size: 13px;
   .content{
-    position: relative;
+      position: relative;
     span{
       width: 100%;
       height: 50%;
@@ -16,62 +18,82 @@
     }
   }
 }
-.OrganizationBox{
+  .personnel{
+    font-size: 12px;
+    p{
+      margin-bottom: 10px;
+    }
+  }
+  .CongYeGk{
+    padding: 20px 0 14px ;
+    font-size:11px;
+    font-weight:400;
+    color:rgba(136,136,136,1);
+  }
+.OrganizationBoxCont{
+    font-size: 12px;
   p{
     display: flex;
     align-items: flex-start;
     margin-bottom: 10px;
   }
   .cont{
-       display: block;
-        text-align:justify;
-        font-weight:400;
-        color:rgba(51,51,51,1);
+      display: block;
+      text-align:justify;
+      font-weight:400;
+      color:rgba(51,51,51,1);
   }
 }
-
 .title{
-  color: rgba(136,136,136,1);
-  display: inline-block;
-  white-space:nowrap;
+    color: rgba(136,136,136,1);
+    display: inline-block;
+    white-space:nowrap;
 }
 /*股东*/
 .shareholder{
-  width: 100%;
-  font-size: 11px;
+    width: 100%;
+    font-size: 11px;
   td:nth-child(1){
     color:rgba(136,136,136,1);
   }
   td{
-    width: 50%;
-    border: 1px solid @color_gray;
-    padding: 11px 11px 11px 12px;
+      width: 50%;
+      border: 1px solid @color_gray;
+      padding: 11px 11px 11px 12px;
     span{
       text-align: left;
     }
   }
 }
 .organizationImg{
-  width: 100%;
+    width: 100%;
 }
 .congye{
-  width: 100%;
+    width: 100%;
   td{
     width: 30%;
     border: 1px solid @color_gray;
     padding: 11px 0 11px 12px;
   }
-  .congyeTd2{
+.congyeTd2{
     color:rgba(136,136,136,1);
   }
 }
 .zongshu{
-span{
-  margin-left: 148px;
-}
-
+    span{
+      margin-left: 148px;
+    }
 }
 .renshu{
   text-align: center;
-
+}
+.fenzhi{
+  font-size:11px;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  margin: 0;
+}
+.official{
+font-size: 12px;
+}
 }

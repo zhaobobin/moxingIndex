@@ -218,7 +218,7 @@ const BaseRoutes = app => [
           {
             name: '运营报告详情',
             key: 'operate-detail',
-            path: 'operate-detail/:123',
+            path: 'operate-detail/:id',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Operate/ReportDetail')),
           },
 

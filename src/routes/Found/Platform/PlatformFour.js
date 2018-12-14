@@ -39,7 +39,6 @@ export default class PlatformFour extends React.Component {
             <p>3.专人负责监督借款人借款后其资金流向。如发现借款人出现资金异常或产生逾期，专业团队通过资产清收、资产重组、法务诉讼等合规的方式，第时 间内保护资金安全。</p>
           </div>
         </div>
-        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
       </div>
     )
   }

@@ -47,51 +47,42 @@ export default class ReportList extends React.Component {
 
   render(){
      	const tabs = [
-{ title: '去投网运营报告' },
-{ title: '等级保护测评报告' },
-{ title: '系统安全评估报告' },
+    { title: '去投网运营报告' },
+    { title: '等级保护测评报告' },
+    { title: '系统安全评估报告' },
 ];
-    const {pageNum} = this.state;
+    const {pageNum,list} = this.state;
+    console.log(list)
     return(
       <div >
-    
         <div className={styles.PlatformReport}>
           <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={2.4} />}>            
-  <Information>
-  {/*去投网运营报告*/}
-<div className={styles.imgBackground}>
-<div><span className={styles.montNum}>6</span>月</div>
-    <div className={styles.title}>去投网运营报告</div>
-    <div>2018-06-20</div>
-  </div>
-  <ul className={styles.ReportUl}>
-    {
-      this.state.list.map((item,index)=>{
-       return(
-         <li key={index}>
-           <Link to={`platform-report/detail/${item.oid}`} className={styles.link}>
-           <span>{item.reportName}</span>
-           <span>{moment(item.showDataTime).format("YYYY-MM-DD ")}</span>
-           </Link>
-         </li>
-       )
-      })
-    }
-  </ul>
-</Information>
- {/*去投网运营报告 end*/}
+        <Information>
+        {/*去投网运营报告*/}
+          <ul  className={styles.reportUl}>
+            {
+              list.map((item,index)=>{
+                return(
+                  <li key={index}  className={index===0 ? styles.imgBackground:styles.reportLi}>
+                    <Link to={`/found/operate-detail/${item.oid}?platform=app`}>
+                      <span className={index===0 ? styles.contOne:''}>{item.reportName}</span> <span className={index===0 ?styles.timeOne:''}>{moment(item.showDataTime).format("YYYY-MM-DD ")}</span>
+                    </Link>
+                  </li>
+                )
+              })
+            }
+          </ul>
+      </Information>
+
   {/*等级保护测评报告*/}
-<Information>
-<ReportListTwo colorBlu='true'></ReportListTwo>
-</Information>
- {/*等级保护测评报告 end*/}
+        <Information>
+            <ReportListTwo colorBlu='true'></ReportListTwo>
+        </Information>
   {/*系统安全评估报告*/}
-<Information>
-<ReportListTwo ></ReportListTwo>
-</Information>
-{/*系统安全评估报告 end*/}
-  
-  </Tabs>   
+        <Information>
+            <ReportListTwo ></ReportListTwo>
+        </Information>
+      </Tabs>
         </div>
       <Signature/>
         

@@ -48,6 +48,9 @@ componentDidMount(){
             <Loading/>
             :
             <Information>
+              <div className={styles.Disclosure}>
+
+
               <h4 className={styles.Manage}> <span className={styles.content}>工商信息 <span></span></span></h4>
               {/*信息列表*/}
               <table  className={styles.ManageTable} >
@@ -138,14 +141,17 @@ componentDidMount(){
                 <h4 className={styles.Manage}> <span className={styles.content}>收费标准 <span></span></span></h4>
                 <p className={styles.disclosureP}><span className={styles.title}>充值手续费：</span><span className={styles.cont}>{disclosureArray.rechargeDesc}</span></p>
                 <p className={styles.disclosureP}><span className={styles.title}>提现手续费：</span><span className={styles.cont}>{disclosureArray.withdrawDesc}</span></p>
-                <p className={styles.title}>借款收费标准:</p>
+                <p className={styles.shoufeititle}>借款收费标准:</p>
+                <div className={styles.shoufeiBox}>
                 <p className={styles.disclosureP}>账户管理费比例：{disclosureArray.feeDesc}</p>
                 <p className={styles.disclosureP}>年化利率：{disclosureArray.rateDesc}</p>
                 <p className={styles.norm}>{disclosureArray.overdueFeeDesc}</p>
                 <p className={styles.norm}>{disclosureArray.prepaymentDesc}</p>
                 <p className={styles.norm}>{disclosureArray.withdrawDesc}</p>
+                </div>
               </div>
               <Signature/>
+              </div>
             </Information>
         }
 

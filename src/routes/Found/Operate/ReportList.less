@@ -2,7 +2,7 @@
 
 .PlatformReport{
  :global{
-         .am-tabs-default-bar-nextpage,.am-tabs-default-bar-prevpage{display: none;}
+      .am-tabs-default-bar-nextpage,.am-tabs-default-bar-prevpage{display: none;}
      .am-tabs-default-bar-tab.am-tabs-default-bar-tab-active{color: #0D2F55;}
      .am-tabs-default-bar-underline{border:none;}
      .HelpCenter__helplogin___2ue9S{padding: 10px 15px 15px 15px;}
@@ -16,8 +16,7 @@
 
 
 :global{
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {  
-         
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
   html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after{   
     background-color: #ffffff; height:0;  
   }
@@ -26,7 +25,7 @@
 {
   html:not([data-scale]) .am-tabs-default-bar-top .am-tabs-default-bar-tab::after{background-color: #ffffff; height:0;  }  
 }
-  
+
 }
 .imgBackground{
     background:url("../../../assets/account/find_other_platreport@2x.png");
@@ -34,40 +33,52 @@
     width: 100%;
     height: 100px;
     color: #FFFFFF;
-    padding-left: 13px;
-    .montNum{
-      font-size:30px;
-      font-weight:bold;
-      color:rgba(255,255,255,1);
-      margin: 0 5px;
-    }
-    .title{
-      font-size: 15px;
-      margin: 0;
+  a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction:column;
+    padding: 36px 0  0 13px;
+  }
+  .contOne{
+    font-size:15px;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    padding-bottom: 8px;
+  }
+  .timeOne{
+    font-size:11px;
+    font-weight:400;
+    color:rgba(255,255,255,1);
     }
   }
-
   .titleReport{
     font-size: 40px;
   }
-.ReportUl{
+.reportUl{
   width: 100%;
-  border-top: 1px solid #F6F6F6;
   margin-top: 13px;
-  li{
-    border-bottom: 1px solid #F6F6F6;
-    padding: 14px 0; color: #333;
-    .link{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-     span:nth-child(1){
-      color: #333;
-    }
-    span:nth-child(2){
-      color: #888;
+    .reportLi{
+      width: 100%;
+      padding: 14px 0 10px 0;
+      border-bottom: 0.5px solid #ccc ;
+      a{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span:nth-child(1){
+          font-size:12px;
+          font-weight:400;
+          color:rgba(51,51,51,1);
+        }
+        span:nth-child(2){
+          font-size:12px;
+          font-weight:400;
+          color:rgba(136,136,136,1);
+        }
+      }
     }
   }
-}
 }

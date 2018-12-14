@@ -59,7 +59,7 @@ export default class PlatformFive extends React.Component {
 
 
 
-          <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
+
 
       </div>
     )
