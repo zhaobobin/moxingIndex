@@ -54,7 +54,7 @@ export default class PlatformSeven extends React.Component {
             <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
           </p>
         </div>
-        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
+
 
 
 

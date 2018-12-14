@@ -165,8 +165,9 @@ export default class RiskResult extends React.Component {
         ],
         series: [{
           type: 'pie',
+          allowPointSelect: false,    //动画效果
           innerSize: '60%',                                   //圆环内填充比例
-          name: '出借资金额度',
+          name: '出借资金额度占比',
           data: chart
         }]
       };
@@ -272,7 +273,7 @@ export default class RiskResult extends React.Component {
         series: [{
           type: 'pie',
           innerSize: '60%',                                   //圆环内填充比例
-          name: '出借资金额度',
+          name: '出借资金额度占比',
           data: [
             ['保守型', 100],
 

@@ -24,8 +24,8 @@ export default class PlatformIndex extends React.Component {
   }
   render(){
     return(
+      <div className={styles.PlatformIndex}>
       <div className={styles.Box}>
-
             <PlatformOne />
             <PlatformTwo/>
             <PlatformThree/>
@@ -34,6 +34,8 @@ export default class PlatformIndex extends React.Component {
             <PlatformSix/>
             <PlatformSeven/>
             <PlatformEight/>
+        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
+      </div>
       </div>
     )
   }

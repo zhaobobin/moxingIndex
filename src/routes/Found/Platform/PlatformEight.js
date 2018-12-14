@@ -32,7 +32,6 @@ export default class PlatformEight extends React.Component {
             </div>
           </div>
         </div>
-        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
       </div>
     )
   }
