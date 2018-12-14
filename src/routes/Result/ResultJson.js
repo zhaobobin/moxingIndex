@@ -55,5 +55,21 @@ export default {
     name: '分享-邀请好友',
     action: 'qtw_share_yaoqing'
   },
+  share_wechat: {
+    name: '分享-微信',
+    action: 'qtw_share_wechat'
+  },
+  share_qq: {
+    name: '分享-qq',
+    action: 'qtw_share_qq'
+  },
+  share_friends: {
+    name: '分享-朋友圈',
+    action: 'qtw_share_friends'
+  },
+  risk: {
+    name: '风险测评',
+    action: 'qtw_risk'
+  },
 
 }
