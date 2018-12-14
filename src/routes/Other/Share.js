@@ -65,7 +65,7 @@ componentDidMount(){
         <div className={styles.sharebottom}>
         <img src={require('../../assets/share/bask_bg_03.jpg')}  className={styles.shareimg} />
         {
-               bidShare ?               
+               bidShare === '1' ?               
            <div className={styles.sharecon} align="center" >
 	        <div className={styles.shareBut_1}>
 	           <div className={styles.shareButimg}><img src={require('../../assets/share/bask_share.png')}  /><span>分享到</span><img src={require('../../assets/share/bask_share.png')}  /></div>
