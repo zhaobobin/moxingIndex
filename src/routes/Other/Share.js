@@ -49,6 +49,8 @@ componentDidMount(){
 
   render(){
   	const {data} = this.state;
+  	const { bidShare } = this.props;
+  	const bidSharedata = (bidShare  === '1');  //1是分享晒一晒,2是资产详情晒一晒
     return(
       <div className={styles.share}>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>
@@ -60,11 +62,26 @@ componentDidMount(){
         </div>
         <div className={styles.sharebottom}>
         <img src={require('../../assets/share/bask_bg_03.jpg')}  className={styles.shareimg} />
-        <div className={styles.sharecon} align="center">
-	        <div className={styles.shareBut} onClick={() => this.redirect(ResultJson.share_shouyi.action)}><span>分享</span></div>
+        {
+               bidSharedata ?               
+           <div className={styles.sharecon} align="center"  state={bidShare=='2'} >
+	        <div className={styles.shareBut} onClick={() => this.redirect(ResultJson.share_shouyi.action)}><span>下载去投网App</span></div>
 	        <p>京ICP证 京B2-20160180 | 京ICP备14014223</p>
 	        <p>北京恒远鑫达投资管理有限公司</p>
 	        </div>
+                :                
+	        <div className={styles.sharecon} align="center" state={bidShare=='1'} >
+	        <div className={styles.shareBut_1}>
+	           <div className={styles.shareButimg}><img src={require('../../assets/share/bask_share.png')}  /><span>分享到</span><img src={require('../../assets/share/bask_share.png')}  /></div>
+	          <ul className={styles.shareiconimg}>
+	             <li><img src={require('../../assets/share/bask_wechat.png')}  /><span>微信好友</span></li>
+	             <li><img src={require('../../assets/share/bask_qq.png')}  /><span>QQ</span></li>
+	             <li><img src={require('../../assets/share/bask_circleoffriends.png')}  /><span>朋友圈</span></li>
+	          </ul>
+	       </div>
+	       </div>
+            }
+        
         </div>
       </div>
     )

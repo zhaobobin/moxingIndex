@@ -22,20 +22,20 @@ export default class HelpList extends React.Component {
 { title: '法律声明' },
 ];
     return(<div className={styles.helplist}>
-    	<Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3} />}>
-  <div style={{ display: 'flex'}}>
+    	<Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3.6} />}>
+  <div>
 <p><HelpSecurity /></p>
 </div>
-<div style={{ display: 'flex' }}>
+<div>
 <p><HelpLending /></p>
 </div>
-<div style={{ display: 'flex'}}>
+<div>
 <p><HelpCash /></p>
 </div>
-<div style={{ display: 'flex' }}>
+<div>
 <p><HelpNoun /></p>
 </div>
-<div style={{ display: 'flex' }}>
+<div>
 <p><HelpLegal /></p>
 </div>
   </Tabs>      
