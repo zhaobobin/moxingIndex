@@ -371,7 +371,23 @@ const BaseRoutes = app => [
           },
         ]
       },
-
+ //活动专区
+      {
+        name: '活动专区',
+        key: 'hdzq',
+        path: 'hdzq',
+        isHide: true,
+        exact: true,
+        children: [         
+          {
+            name: '邀请好友-双旦迎新',
+            key: 'yaoqing-201812',
+            path: 'yaoqing-201812',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201812')),
+          },
+        ]
+      },
       //其它
       {
         name: 'App下载',
@@ -407,8 +423,7 @@ const BaseRoutes = app => [
         path: 'demo',
         isHide: true,
         component: dynamicWrapper(app, [], () => import('../routes/Other/Demo')),
-      },
-
+      },     
     ]
   },
 ];
