@@ -74,9 +74,9 @@ componentDidMount(){
 	        <div className={styles.shareBut_1}>
 	           <div className={styles.shareButimg}><img src={require('../../assets/share/bask_share.png')}  /><span>分享到</span><img src={require('../../assets/share/bask_share.png')}  /></div>
 	          <ul className={styles.shareiconimg}>
-	             <li><img src={require('../../assets/share/bask_wechat.png')}  /><span>微信好友</span></li>
-	             <li><img src={require('../../assets/share/bask_qq.png')}  /><span>QQ</span></li>
-	             <li><img src={require('../../assets/share/bask_circleoffriends.png')}  /><span>朋友圈</span></li>
+	             <li onClick={() => this.redirect(ResultJson.share_wechat.action)}><img src={require('../../assets/share/bask_wechat.png')}  /><span>微信好友</span></li>
+	             <li onClick={() => this.redirect(ResultJson.share_qq.action)}><img src={require('../../assets/share/bask_qq.png')}  /><span>QQ</span></li>
+	             <li onClick={() => this.redirect(ResultJson.share_friends.action)}><img src={require('../../assets/share/bask_circleoffriends.png')}  /><span>朋友圈</span></li>
 	          </ul>
 	       </div>
 	       </div>

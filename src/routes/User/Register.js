@@ -172,33 +172,6 @@ export default class Register extends React.Component {
     })
   };
 
-  //查询协议
-  queryXieyi = () => {
-
-    if(!this.ajaxFlag) return;
-    this.ajaxFlag = false;
-
-    this.props.dispatch({
-      type: 'global/post',
-      url: '/api/protocol/view',
-      payload: {},
-      callback: (res) => {
-        setTimeout(() => { this.ajaxFlag = true }, 500);
-        if(res.code === 0){
-          ArticleAlert({
-            title: res.data.title,
-            msg: res.data.content,
-            btns: ['确认', '关闭'],
-            callback: (res) => {
-              //console.log(res)
-            }
-          })
-        }
-      }
-    })
-
-  };
-
   //清空输入框
   emitEmpty(key){
     this.props.form.resetFields([key]);
@@ -449,7 +422,7 @@ export default class Register extends React.Component {
                     >
                       已阅读并同意
                     </Checkbox>
-                    <a onClick={this.queryXieyi}>《去投网用户注册协议》</a>
+                    <Link to="/xieyi/49">《去投网用户注册协议》</Link>
                   </span>
               )}
               <Button
