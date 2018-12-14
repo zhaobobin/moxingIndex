@@ -129,7 +129,12 @@ const BaseRoutes = app => [
             exact: true,
             component: dynamicWrapper(app, [], () => import('../routes/Found/FoundIndex')),
           },
-
+          {
+            name: '扫码下载',
+            key: 'download',
+            path: 'download',
+            component: dynamicWrapper(app, [], () => import('../routes/Found/Download')),
+          },
           {
             name: '帮助中心',
             key: 'help-list',
@@ -369,7 +374,7 @@ const BaseRoutes = app => [
 
       //其它
       {
-        name: '下载',
+        name: 'App下载',
         key: 'download',
         path: 'download',
         component: dynamicWrapper(app, [], () => import('../routes/Other/Download')),
