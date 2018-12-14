@@ -310,7 +310,8 @@ export default class RiskResult extends React.Component {
                 </p>
                 <p> 出借人可在每个年度重新进行出借人风险承受能力评估及分级。</p>
                 <p className={styles.btnP}>
-                  <Link to="/account/info-manage/risk-manage" className={styles.fiskNewBtn}>重新测评</Link>
+                  {/*<Link to="/account/info-manage/risk-manage" className={styles.fiskNewBtn}>重新测评</Link>*/}
+                  <button onClick={() => this.redirect(ResultJson.risk.action)} className={styles.fiskNewBtn}>重新测评</button>
                   <button type="primary" onClick={() => this.redirect(ResultJson.lend.action)} className={styles.chujieBtn}>立即出借</button>
                 </p>
               </div>

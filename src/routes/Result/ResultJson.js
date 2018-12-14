@@ -55,5 +55,9 @@ export default {
     name: '分享-邀请好友',
     action: 'qtw_share_yaoqing'
   },
+  risk: {
+    name: '风险测评',
+    action: 'qtw_risk'
+  },
 
 }
