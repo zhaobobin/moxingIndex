@@ -49,10 +49,8 @@ componentDidMount(){
   };
 
   render(){
-  	const {data} = this.state;
-  	//const { bidShare } = this.props;
-  	const bidShare = getUrlParams().bidShare;
-  	//const bidSharedata = (bidShare  === '1');  //1是分享晒一晒,2是资产详情晒一晒
+  	const {data} = this.state;  	
+  	const bidShare = getUrlParams().bidShare;  
     return(
       <div className={styles.share}>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>
