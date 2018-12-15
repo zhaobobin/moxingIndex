@@ -22,144 +22,84 @@ export default class RiskManage extends React.Component {
           'title':'您的年龄:',
           'RadioGroup':[
             {'value':'1-1','content':'18-25周岁','score':1},
-            {'value':'1-2','content':'26-35周岁','score':2},
-            {'value':'1-3','content':'36-50周岁','score':3},
-            {'value':'1-4','content':'51-65周岁','score':4},
-            {'value':'1-5','content':'66周岁以上','score':5}
+            {'value':'1-2','content':'26-35周岁','score':3},
+            {'value':'1-3','content':'36-50周岁','score':5},
+            {'value':'1-4','content':'51-65周岁','score':7},
+            {'value':'1-5','content':'66周岁以上','score':0}
           ]
         },
         {
           id:2,
           'title':'您的最高学历:',
           'RadioGroup':[
-            {'value':'2-1','content':'硕士研究生及以上','score':1},
-            {'value':'2-2','content':'大学本科/专科','score':2},
-            {'value':'2-3','content':'高中/中专','score':3},
-            {'value':'2-4','content':'初中及以下','score':4}
+            {'value':'2-1','content':'硕士研究生及同等学历以上','score':7},
+            {'value':'2-2','content':'大学本科','score':5},
+            {'value':'2-3','content':'大专','score':3},
+            {'value':'2-4','content':'高中/中专','score':1}
           ]
         },
         {
           id:3,
-          'title':'您的职业/收入:',
+          'title':'您的家庭可支配年收入是多少?',
           'RadioGroup':[
-            {'value':'3-1','content':'固定职业，收入稳定，变化不大','score':1},
-            {'value':'3-2','content':'固定职业，以佣金收入为主','score':2},
-            {'value':'3-3','content':'自由职业','score':3},
-            {'value':'3-4','content':'创业者或企业主','score':4}
+            {'value':'3-1','content':'10万元以下','score':1},
+            {'value':'3-2','content':'10-30万元','score':3},
+            {'value':'3-3','content':'30万-60万','score':5},
+            {'value':'3-4','content':'60万-100万','score':7},
+            {'value':'3-5','content':'100万以上','score':9}
           ]
         },
         {
           id:4,
-          'title':'您期望的出借期限:',
+          'title':'您愿意拿出多少比例的家庭存款进行投资:',
           'RadioGroup':[
-            {'value':'4-1','content':'2个月及以下','score':1},
-            {'value':'4-2','content':'3-6个月','score':2},
-            {'value':'4-3','content':'7-12个月','score':3},
-            {'value':'4-4','content':'13个月及以上','score':4}
+            {'value':'4-1','content':'80-100%','score':2},
+            {'value':'4-2','content':'50-80%','score':4},
+            {'value':'4-3','content':'20-50%','score':6},
+            {'value':'4-4','content':'10-20%','score':8},
+            {'value':'4-5','content':'0-10%','score':10}
+
           ]
         },
         {
           id:5,
-          'title':'您出借的目的是:',
+          'title':'您是否有投资经历，投资时间是多长:',
           'RadioGroup':[
-            {'value':'5-1','content':'出借保值，我不愿意承担任何出借风险','score':1},
-            {'value':'5-2','content':'资产在保值的基础上，有小幅度增长，我可以承担较低的出借风险','score':2},
-            {'value':'5-3','content':'资产稳健增长，我可以承担一定的出借风险','score':3},
-            {'value':'5-4','content':'资产迅速增长，我愿意承担较大的出借风险','score':4}
+            {'value':'5-1','content':'无任何出借经验','score':0},
+            {'value':'5-2','content':'1年以下','score':1},
+            {'value':'5-3','content':'1年-3年','score':3},
+            {'value':'5-4','content':'3年-5年','score':5},
+            {'value':'5-5','content':'5年以上','score':7}
           ]
         },
         {
           id:6,
-          'title':'您的健康状况是:',
+          'title':'您的投资经营可描述为:',
           'RadioGroup':[
-            {'value':'6-1','content':'良好','score':1},
-            {'value':'6-2','content':'一般','score':2},
-            {'value':'6-3','content':'较差','score':3},
-            {'value':'6-4','content':'差','score':4}
+            {'value':'6-1','content':'除银行储蓄外，基本没有其他投资经验','score':1},
+            {'value':'6-2','content':'购买过债券、保险等理财产品','score':3},
+            {'value':'6-3','content':'参与过股票、基金等产品的交易','score':5},
+            {'value':'6-4','content':'参与过权证、期货、期权等产品的交易','score':7}
           ]
         },
         {
           id:7,
-          'title':'您的出借经验年限是（包括但不限于基金、股票、银行产品、黄金、期货等）:',
+          'title':'您期望的出借期限:',
           'RadioGroup':[
-            {'value':'7-1','content':'无任何出借经验','score':1},
-            {'value':'7-2','content':'1年（不含）以下','score':2},
-            {'value':'7-3','content':'1年（含）-3年（不含）','score':3},
-            {'value':'7-4','content':'3年（含）以上','score':4}
+            {'value':'7-1','content':'3个月以下','score':1},
+            {'value':'7-2','content':'3-6个月','score':3},
+            {'value':'7-3','content':'7-12个月','score':5},
+            {'value':'7-4','content':'12个月以上','score':7}
           ]
         },
         {
           id:8,
-          'title':'您的风险承受能力符合以下哪种？',
+          'title':'您认为自己能承受的最大投资收益损失是多少:',
           'RadioGroup':[
-            {'value':'8-1','content':'厌恶风险，不愿意承受本金的损失','score':1},
-            {'value':'8-2','content':'虽然厌恶风险但愿意承担一些风险，可以承受本金10%以内的损失','score':2},
-            {'value':'8-3','content':'在深思熟虑后承担一定的风险，可以承受本金30%以内的损失','score':3},
-            {'value':'8-4','content':'以充分知晓网贷风险，敢冒风险，可以承受本金损失超过30%','score':4}
-          ]
-        },
-        {
-          id:9,
-          'title':'以下几种投资模式，您更偏好哪种模式:',
-          'RadioGroup':[
-            {'value':'9-1','content':'回报只有5%，但不亏损','score':1},
-            {'value':'9-2','content':'回报在15%左右，但可能亏损5%','score':2},
-            {'value':'9-3','content':'回报在30%左右，但可能亏损15%','score':3},
-            {'value':'9-4','content':'回报在50%左右，但可能亏损30%','score':4}
-          ]
-        },
-        {
-          id:10,
-          'title':'您的家庭年度收入为（以人民币计算）:',
-          'RadioGroup':[
-            {'value':'10-1','content':'10（不含）万元以下','score':1},
-            {'value':'10-2','content':'10（含）-30（不含）万元','score':2},
-            {'value':'10-3','content':'30（含）-50（不含）万元','score':3},
-            {'value':'10-4','content':'50（含）-100（不含）万元','score':4},
-            {'value':'10-5','content':'100（含）万元以上','score':5}
-
-          ]
-        },
-        {
-          id:11,
-          'title':'在您每年的家庭收入中，可用于出借的比例为:',
-          'RadioGroup':[
-            {'value':'11-1','content':'小于10%（不含）','score':1},
-            {'value':'11-2','content':'10%（含）至25%（不含）','score':2},
-            {'value':'11-3','content':'25%（含）至50%（不含）','score':3},
-            {'value':'11-4','content':'大于50%（含）','score':4}
-          ]
-        },
-        {
-          id:12,
-          'title':'您的家庭可出借资产状态为（以人民币计算）:',
-          'RadioGroup':[
-            {'value':'12-1','content':'20（不含）万元以下','score':1},
-            {'value':'12-2','content':'20（含）-50（不含）万元','score':2},
-            {'value':'12-3','content':'50（含）-100（不含）万元','score':3},
-            {'value':'12-4','content':'100（含）-600（不含）万元','score':4},
-            {'value':'12-5','content':'600（含）万元以上','score':5}
-
-          ]
-        },
-        {
-          id:13,
-          'title':'您目前使用过几家P2P平台进行出借？',
-          'RadioGroup':[
-            {'value':'13-1','content':'从未使用过','score':1},
-            {'value':'13-2','content':'1家','score':2},
-            {'value':'13-3','content':'2家','score':3},
-            {'value':'13-4','content':'3家及以上','score':4}
-          ]
-        },
-        {
-          id:14,
-          'title':'以下哪种资产状态符合您的实际情况？',
-          'RadioGroup':[
-            {'value':'14-1','content':'无自有住房和私家车','score':1},
-            {'value':'14-2','content':'无自有住房，有私家车','score':2},
-            {'value':'14-3','content':'有自有住房，无私家车','score':3},
-            {'value':'14-4','content':'有自有住房和私家车','score':4}
+            {'value':'8-1','content':'10%以内','score':0},
+            {'value':'8-2','content':'10%-30%','score':2},
+            {'value':'8-3','content':'30%-50%','score':4},
+            {'value':'8-4','content':'超过50%','score':6}
           ]
         },
       ],
@@ -167,20 +107,7 @@ export default class RiskManage extends React.Component {
       questions:[],
     }
   }
-  // componentDidMount(){
-  //   this.props.dispatch({
-  //     type: 'global/token',
-  //     payload: {
-  //       refreshToken: Storage.get(ENV.storageRefreshToken),
-  //       userId: Storage.get(ENV.storageUserId),
-  //       platform: 'pc',
-  //     },
-  //     callback: (res) => {
-  //       console.log(res)
-  //       setTimeout(() => { this.ajaxFlag = true }, 500);
-  //     }
-  //   })
-  // }
+
 
   /*单选按钮*/
   onChange = (e) => {

@@ -20,12 +20,45 @@ export default class PlatformIndex extends React.Component {
     this.loading = true;
     this.state = {
       number:1,
+      slide:true,
+      slideIndex:0
     }
+  }
+  btnClick=(e)=>{
+    this.setState({
+      slideIndex:this.state.slideIndex+1
+    })
+
   }
   render(){
     return(
       <div className={styles.PlatformIndex}>
-      <div className={styles.Box}>
+        <WingBlank>
+          <Carousel className={styles.carousel}
+                    vertical
+                    dots={false}
+                    dragging={false}
+                    swiping={true}
+                    infinite={false}
+                    autoplay={false}
+                    selectedIndex={this.state.slideIndex}
+                    beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+                    afterChange={index => {
+                      console.log(index)
+                      if(index>6){
+                        this.setState({
+                          slide:false,
+                          slideIndex:index
+                        })
+                      }else{
+                        this.setState({
+                          slide:true,
+                          slideIndex:index
+                        })
+                      }
+                    }
+                  }
+          >
             <PlatformOne />
             <PlatformTwo/>
             <PlatformThree/>
@@ -34,10 +67,10 @@ export default class PlatformIndex extends React.Component {
             <PlatformSix/>
             <PlatformSeven/>
             <PlatformEight/>
-        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt="" className={styles.belowImg }/>
-      </div>
+          </Carousel>
+        </WingBlank>
+        <img src={require("~/assets/platform/found_platform_next@2x.png")} alt=""  onClick={this.btnClick}  className={this.state.slide===false?styles.btn:styles.belowImg }  />
       </div>
     )
   }
-
 }

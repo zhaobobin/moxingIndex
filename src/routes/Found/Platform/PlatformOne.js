@@ -16,9 +16,7 @@ export default class PlatformOne extends React.Component {
         <span className={styles.Page} >第一页</span>
       </p>
       <div className={styles.TitleBox}>
-        <p>等保三级认证</p>
-        <p>银行资金存管</p>
-        <p>ICP经营许可证</p>
+        <img src={require("~/assets/platform/found_platform_bigword@2x.png")} alt="" className={styles.cont}/>
         <img src={require("~/assets/platform/found_platform_icon1@2x.png")} alt="" className={styles.ICP}/>
         <img src={require("~/assets/platform/found_platform_icon3@2x.png")} alt="" className={styles.Spaceman }/>
       </div>
@@ -37,7 +35,6 @@ export default class PlatformOne extends React.Component {
         </div>
       </div>
       <img src={require("~/assets/platform/found_platform_icon2@2x.png")} alt="" className={styles.Coin}/>
-
     </div>
     )
   }
