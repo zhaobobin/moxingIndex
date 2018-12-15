@@ -17,15 +17,22 @@ export default class Yaoqing201812 extends React.Component {
         <div className={styles.inventtop}><img src={require('../../../assets/invent/invent_app_snow.png')} /></div>       
       <div className={styles.inventmiddle}>
       <div className={styles.inventBg}>
-      <div className={styles.inventwidth}>     
+      <div className={styles.inventwidth}>
+       {
+          isAuth ?
+      <div className={styles.inventframe}>
+      <img src={require('../../../assets/invent/invent_app_frame.png')} />
            <ul  className={styles.inventUl}>
               <li><em>您已领取</em><span>999999.00</span>元</li>
               <li><em>您已邀请</em><span>999</span>人</li>
-           </ul>        
-           {/*
-           	<h1 className={styles.inventTitle}>好友多 红包多</h1>
+           </ul>    
+        </div>  
+        :
+        ""
+       }
+           	<h1 className={styles.inventTitle}>好友多 红包多&nbsp;&nbsp;</h1>
            <div className={styles.inventimgs}><img src={require('../../../assets/invent/invent_app_icon1.png')} /><img src={require('../../../assets/invent/invent_app_icon2.png')} /><img src={require('../../../assets/invent/invent_app_icon3.png')} /></div>
-           <p className={styles.inventP}>您再邀请xx位有效好友就可以领取xx元现</p>
+           <p className={styles.inventP}>您再邀请xx位有效好友就可以领取xx元现金红包</p>
            <div className={styles.inventTip}>
              <Carousel vertical autoplay>
                    <p>                            
@@ -63,7 +70,7 @@ export default class Yaoqing201812 extends React.Component {
            <div className={styles.inventbut}>           
            <Link to="/user/login"><img src={require('../../../assets/invent/invent_app_button2.png')} /></Link>
            </div>
-           }*/} 
+           }
         </div>  
       </div>   
       </div>    
