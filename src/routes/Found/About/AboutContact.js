@@ -21,7 +21,7 @@ class AboutContact extends React.Component {
         </div>
         <ul>
           <li><span>联系地址：</span><i>北京市朝阳区亮马桥路甲40号1幢4层401内B02A室</i></li>
-          <li><span>邮政编码：</span>100105</li>
+          <li><span>邮政编码：</span>100125</li>
           <li><span>客服、投诉、举报邮箱：</span>qutouwang@chinacfsc.com</li>
         </ul>
       </div>
