@@ -194,7 +194,6 @@ export default class ReportDetail extends React.Component {
       },
       chart: {
         spacing : [50, 0 , 110, 0],
-
       },
       title: {
         text: '',
