@@ -13,7 +13,7 @@ import { Encrypt, filterTel } from '~/utils/utils'
 import styles from './SmsValidate.less'
 
 let timer;
-const bottonStyle = {width: '160px', height: '40px', lineHeight: '38px'};
+const buttonStyle = {width: '160px', height: '40px', lineHeight: '40px'};
 
 @connect(state => ({
   global: state.global,
@@ -25,9 +25,10 @@ export default class SmsValidate extends React.Component {
     this.ajaxFlag = true;
     this.state = {
       mobile: '',
-      value: '',
+      value: '',                    //输入框文本
       btnStyle: styles.null,
-      btnText: '获取验证码'
+      btnText: '获取验证码',
+      sendNum: 0,                  //已发送次数
     }
   }
 
@@ -59,6 +60,7 @@ export default class SmsValidate extends React.Component {
   //改变输入值
   changeValue = (e) => {
     let value = e.target.value;
+    value = value.replace(/\D/g,'');
     this.setState({ value });
     this.props.callback(value);
   };
@@ -66,30 +68,40 @@ export default class SmsValidate extends React.Component {
   //清空输入框
   emitEmpty(){
     this.setState({ value: '' });
+    this.props.callback('clearError');
   };
 
   //查询拼图
-  queryPintu = () => {
+  queryPintu = (type) => {
+
+    if(!this.ajaxFlag) return;
+    this.ajaxFlag = false;
+
+    if(this.state.btnStyle !== styles.actived) return;
+
     let {mobile} = this.props;
     this.props.dispatch({
       type: 'global/post',
       url: '/api/userRegister/getCheckImg',
       payload:{
-        mobile: mobile
+        mobile,
       },
       callback: (res) => {
         if(res.code === 0){
-          this.querySmscode()
+
+          if(type === 'sms'){
+            this.querySmscode(res.data.num)
+          }else{
+            this.queryYuyinSmscode(res.data.num)
+          }
+
         }
       }
     })
   };
 
-  //查询短信验证码
-  querySmscode = () => {
-
-    if(!this.ajaxFlag) return;
-    this.ajaxFlag = false;
+  //发送短信验证码
+  querySmscode = (sendNum) => {
 
     let params = {},
       {action, mobile, api} = this.props;
@@ -113,9 +125,12 @@ export default class SmsValidate extends React.Component {
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);
         if(res.code === 0){
-          //发送成功后，执行倒计时
-          this.interval();
-          this.setState({ value: '' });
+          this.setState({
+            value: '',
+            sendNum,
+          });
+          this.interval();                                //发送成功后，执行倒计时
+          this.props.callback('clearError');              //通知父组件清空错误提示
           notification.success({
             message: '验证码发送成功',
             description: `已将短信验证码发送到您${filterTel(mobile)}的手机当中，请注意查收！`
@@ -130,33 +145,69 @@ export default class SmsValidate extends React.Component {
 
   };
 
+  //发送语音短信验证码
+  queryYuyinSmscode = (sendNum) => {
+
+    let {mobile} = this.props;
+
+    if(!mobile) return;
+
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/userRegister/sendVoiceCode',
+      payload: {
+        mobile,
+        smsCheckCode: Encrypt(mobile, mobile)
+      },
+      callback: (res) => {
+        setTimeout(() => { this.ajaxFlag = true }, 500);
+        if(res.code === 0){
+          this.setState({
+            value: '',
+            sendNum,
+          });
+          this.interval();                    //发送成功后，执行倒计时
+          notification.success({
+            message: '验证码发送成功',
+            description: `已将短信验证码发送到您${filterTel(mobile)}的手机当中，请注意查收！`
+          });
+        }else{
+          notification.error({
+            message: res.message
+          });
+        }
+      }
+    });
+  };
+
   //倒计时
   interval(){
     let num = 60;
-    this.setState({btnText: '重新发送(' + num + '秒)', btnStyle: styles.disabled});
+    this.setState({btnText: '重新发送(' + num + 's)', btnStyle: styles.disabled});
     timer = setInterval(() => {
       if(num === 1){
         this.setState({btnText: '再次发送', btnStyle: styles.actived});
         clearInterval(timer)
       }else{
         num--;
-        this.setState({btnText: '重新发送(' + num + '秒)'});
+        this.setState({btnText: '重新发送(' + num + 's)'});
       }
     }, 1000)
   }
 
   render(){
 
-    const { value, btnStyle, btnText } = this.state;
+    const { value, btnStyle, btnText, sendNum } = this.state;
 
     return(
       <div className={styles.smscode} style={this.props.boxStyle || null}>
         <Input
           size="large"
-          type="number"
+          maxLength="6"
+          autoComplete="off"
           style={this.props.inputStyle || null}
           value={value}
-          placeholder="手机验证码"
+          placeholder="请输入短信验证码"
           onChange={this.changeValue}
           suffix={
             value ?
@@ -169,14 +220,23 @@ export default class SmsValidate extends React.Component {
               null
           }
         />
-        <Button
-          style={this.props.bottonStyle || bottonStyle}
-          className={styles.btn + " " + btnStyle}
-          disabled={btnStyle !== styles.actived}
-          onClick={this.props.pintu ? this.queryPintu : this.querySmscode}
-        >
-          {btnText}
-        </Button>
+        <div className={styles.btns}>
+          <a
+            className={styles.btn + " " + btnStyle}
+            // disabled={btnStyle !== styles.actived}
+            onClick={() => this.queryPintu('sms')}
+          >
+            <span className={sendNum > 0 ? styles.showYuyin : null}>{btnText}</span>
+          </a>
+          {
+            sendNum > 0 ?
+              <span className={styles.yuyin} onClick={() => this.queryPintu('yuyin')}>
+                <i/>
+              </span>
+              :
+              null
+          }
+        </div>
       </div>
     )
   }

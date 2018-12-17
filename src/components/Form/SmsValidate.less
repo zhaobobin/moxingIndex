@@ -2,30 +2,72 @@
 
 .smscode{
   height:40px;
+  padding-right: 145px;
   position:relative;
 
-  .btn{
-    margin:0;
-    padding:0 5px;
-    border: none;
-    font-size:12px;
-    text-align:right;
+  .btns{
+
     position:absolute;
     right:0;
     top:0;
 
-    &.null{
-      color:@color_orange2;
-      background:#fff;
+    .btn{
+      display: block;
+      margin:0;
+      height:50px;
+      line-height:50px;
+      border-radius:4px;
+
+
+      &.null{
+        color:#bdbdbd;
+      }
+      &.actived{
+        color:#0D2F55;
+      }
+      &.disabled{
+        color:#0D2F55;
+      }
+
+      span{
+        display:block;
+        height:100%;
+        font-size:16px;
+        text-align:center;
+        &.showYuyin{
+          margin-right:40px;
+        }
+      }
     }
-    &.actived{
-      color:@color_orange;
-      background:#fff;
+
+    .yuyin{
+      display: block;
+      width: 40px;
+      height: 100%;
+      position: absolute;
+      top:0;
+      right:0;
+      cursor: pointer;
+
+      i{
+        display: block;
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -13px;
+        margin-top: -13px;
+        background: url(../../assets/sign/login_voice@2x.png) no-repeat center center;
+        background-size: 26px 26px;
+      }
+
     }
-    &.disabled{
-      color:@color_orange2;
-      background:#fff;
-    }
+
+  }
+
+  .hasYuyin .btn{
+    padding-left: 5px;
   }
 
   .clearInput {
@@ -38,6 +80,18 @@
     }
     &:active {
       color: #666;
+    }
+  }
+}
+
+.yuyinTooltip{
+  :global{
+    .ant-tooltip-arrow{
+      border-top-color: #F4F4F4;
+    }
+    .ant-tooltip-inner{
+      color: @color_333;
+      background-color: #F4F4F4;
     }
   }
 }

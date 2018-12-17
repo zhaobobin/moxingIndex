@@ -1,18 +1,24 @@
 import React from 'react';
 import { connect } from 'dva';
 import { NavLink, Link, routerRedux } from 'dva/router';
+import { Toast } from 'antd-mobile';
 import { Form, Input, Button, Icon, Checkbox, Radio } from 'antd'
-import {ENV, Storage, goBack, hasErrors, checkPhone, isPhone, checkPsdLevel, Encrypt} from "~/utils/utils";
+import {
+  ENV, Storage, goBack, hasErrors,
+  checkPhone, isPhone, checkPsdLevel,
+  Encrypt, getUrlParams, yaoqingDecrypt, filterTel
+} from "~/utils/utils";
 import styles from './Register.less';
 
 import logo from '~/assets/com/logo.png'
+import sign_banner from '~/assets/sign/fast_login_banner2@2x.png'
 import SmsValidate from '~/components/Form/SmsValidate'
-import { ResultAlert, ArticleAlert } from '~/components/Dialog/Dialog'
 
 const FormItem = Form.Item;
-const RadioGroup = Radio.Group;
 
 const keys = ['mobile', 'password', 'smscode', 'invitationCode', 'xieyi'];
+
+const urlInviCode = getUrlParams().invitationCode || '';
 
 @connect(state => ({
   global: state.global,
@@ -23,7 +29,9 @@ export default class Register extends React.Component {
   constructor(props){
     super(props);
     this.ajaxFlag = true;
+    this.phoneFlag = true;
     this.state = {
+      loading: false,
       loginType: 'psd',
       captcha: '',
       userType: 1,
@@ -34,56 +42,92 @@ export default class Register extends React.Component {
       psdLevel: '',
       psdLevelStyle: '',
       xieyiChecked: true,
-      showYaoqing: false
+      urlInviCode: urlInviCode ? yaoqingDecrypt(urlInviCode) : '',     //链接邀请码
+      showYaoqing: !!urlInviCode,
+      smscodeSended: false,       //短信验证码是否已发送
     }
   }
 
-  changeUserType = (e) => {
-    this.setState({
-      userType: e.target.value
-    })
-  };
-
   //监控手机号输入
   onChangeMobile = (rule, value, callback) => {
+    value = value.replace(/\D/g,'');
+    this.props.form.setFieldsValue({'mobile': value});
     if(checkPhone(value)){
-      if(!isPhone(value)) return;
+      callback()
+    }else{
+      callback('请输入正确的手机号码')
+    }
+  };
+
+  //手机失焦检测
+  mobileOnBlur = (e) => {
+    let value = e.target.value;
+    if(isPhone(value)){
       this.checkPhone(value, (res) => {
-        if(res){
-          callback(res);
-        }else{
-          callback()
-        }
+        if(!res) return;
+        this.props.form.setFields({
+          'mobile': {
+            value: value,
+            errors: [new Error(res)]
+          }
+        })
       })
     }else{
-      callback('请输入正确的手机号！')
+      this.props.form.setFields({
+        'mobile': {
+          value: value,
+          errors: [new Error('请输入正确的手机号')]
+        }
+      })
     }
   };
 
   //检查手机号是否注册
   checkPhone(mobile, cb){
+
+    if(!this.phoneFlag) return;
+    this.phoneFlag = false;
+
     let {isRegister} = this.state;
+
     this.props.dispatch({
       type: 'global/post',
       url: '/api/userRegister/checkPhone',
       payload:{
-        mobile: mobile
+        mobile: mobile,
+        platformType: 1,
       },
       callback: (res) => {
-        // 21073代表出借人登录，21074代表借款人登录
-        if(res.code === 21073 || res.code === 21074){
-          isRegister = true;
-          Storage.set(ENV.storageLastTel, mobile);      //已注册过的手机号，保存到本地存储
-          cb('此手机号已注册，请直接登录')
-        }else{
+
+        if(!res) return;
+        if(res.code === 21010){           // 21010手机号未注册，21073代表借款人，21074代表出借人
           isRegister = false;
           cb()
         }
+        else if(res.code === 21073){
+          isRegister = true;
+          Storage.set(ENV.storageLastTel, mobile);      //已注册过的手机号，保存到本地存储
+          cb('您当前的身份为借款人');
+        }
+        else if(res.code === 21074){
+          isRegister = true;
+          Storage.set(ENV.storageLastTel, mobile);      //已注册过的手机号，保存到本地存储
+          cb('您当前的身份为出借人');
+        }
+        else{
+          isRegister = true;
+          Storage.set(ENV.storageLastTel, mobile);      //已注册过的手机号，保存到本地存储
+          cb('此手机号已注册，请直接登录');
+        }
         this.setState({
           isRegister
-        })
+        });
+
       }
-    })
+    });
+
+    setTimeout(() => { this.phoneFlag = true }, 500);
+
   }
 
   //已注册自动跳转到登录
@@ -127,21 +171,37 @@ export default class Register extends React.Component {
     });
   };
 
-  //切换密码框显示
-  changePsdType = (value) => {
+  //切换密码强度显示
+  changePsdLevel = () => {
     let psdLevelVisible = !this.state.psdLevelVisible;
     this.setState({
-      psdType: value,
       psdLevelVisible
+    })
+  };
+
+  //切换密码框显示
+  changePsdType = () => {
+    let {psdType} = this.state;
+    this.setState({
+      psdType: psdType === 'password' ? 'text' : 'password',
     })
   };
 
   //获得短信验证码
   getSmscode = (value) => {
-    this.props.form.setFieldsValue({'smscode': value});
-    this.props.form.validateFields(['smscode'], (err, values) => {
-
-    });
+    //清空错误提示
+    if(value === 'clearError'){
+      this.props.form.setFields({
+        'smscode': {
+          value: '',
+          errors: ''
+        }
+      });
+      this.setState({smscodeSended: true});
+    }else{
+      this.props.form.setFieldsValue({'smscode': value});
+      this.props.form.validateFields(['smscode'], (err, values) => {});
+    }
   };
 
   //邀请切换
@@ -153,14 +213,30 @@ export default class Register extends React.Component {
   };
 
   checkYaoqing = (rule, value, callback) => {
-    if(value) {
+    if(value && !this.state.urlInviCode) {
+      value = value.replace(/\D/g,'');
+      this.props.form.setFieldsValue({'invitationCode': value});
       if(checkPhone(value)){
         callback()
       }else{
-        callback('邀请码无效！')
+        callback('请输入正确的邀请人手机号码')
       }
     }else{
       callback()
+    }
+  };
+
+  //邀请码失焦检测
+  yaoqingOnBlur = (e) => {
+    let value = e.target.value;
+    if(!value) return;
+    if(!isPhone(value)){
+      this.props.form.setFields({
+        'invitationCode': {
+          value: value,
+          errors: [new Error('请输入正确的邀请人手机号码')]
+        }
+      })
     }
   };
 
@@ -194,6 +270,7 @@ export default class Register extends React.Component {
 
   //注册提交
   register = (values) => {
+    let {urlInviCode} = this.state;
     this.props.dispatch({
       type: 'global/register',
       payload:{
@@ -201,64 +278,25 @@ export default class Register extends React.Component {
         password: Encrypt(values.mobile, values.password),
         smsCheckCode: values.smscode,
         userType: 1,
-        invitationCode: values.invitationCode || '',
+        invitationCode: urlInviCode || values.invitationCode,
         channel: '',                                      //注册渠道
       },
       callback: (res) => {
         if(res.code === 0){
-          ResultAlert({
-            title: `恭喜，${res.data.mobile} 已注册成功！`,
-            img: require('~/assets/com/my_login_right@2x.png'),
-            msg: 's后自动登录至首页',
-            time: 5,
-            btns: ['立即开通银行存管'],
-            callback: (r) => {
-              if(r === 1){
-                this.props.dispatch(routerRedux.push('/user/register-result'))
-              }else{
-                this.direct(res.data.cusType);
-              }
-            }
-          })
+          this.props.dispatch(routerRedux.push('/user/register-result'))
         }else{
-          ResultAlert({
-            title: '抱歉，注册失败！',
-            img: require('~/assets/com/my_login_wrong@2x.png'),
-            msg: res.message,
-            btns: ['继续注册'],
-            callback: (r) => {}
-          })
+          Toast.info(res.message, 2);
         }
       }
     })
-  };
-
-  //注册成功后跳转，借款端注册后跳转至账户总览
-  direct = (cusType) => {
-    //借款端登录后跳转至账户总览
-    if(cusType === '2'){
-      this.props.dispatch(routerRedux.push('/account/total'))
-    }else{
-      this.back();
-    }
-  };
-
-  back = () => {
-    let routerHistory = Storage.get(ENV.storageHistory);
-    if(routerHistory){
-      this.props.dispatch(routerRedux.push(routerHistory[routerHistory.length - 1]));
-    }else{
-      this.props.dispatch(routerRedux.push('/'));
-    }
   };
 
   render(){
 
     const {
       userType, psdType, psdLevelVisible, psdLevel, psdLevelStyle,
-      xieyiChecked, showYaoqing
+      xieyiChecked, showYaoqing, loading, smscodeSended, urlInviCode
     } = this.state;
-    const { loading } = this.props;
     const { getFieldDecorator, getFieldValue, getFieldsError } = this.props.form;
 
     const winWidth = window.innerWidth - 30;
@@ -266,10 +304,14 @@ export default class Register extends React.Component {
     return(
       <div className={styles.container}>
 
-        <div className={styles.header}>
-          <img src={logo} alt="logo"/>
-          <h1>注册去投网</h1>
-        </div>
+        {/*<div className={styles.header}>*/}
+          {/*<img src={logo} alt="logo"/>*/}
+          {/*<h1>注册去投网</h1>*/}
+        {/*</div>*/}
+
+        <Link to="/" className={styles.banner}>
+          <img src={sign_banner} alt=""/>
+        </Link>
 
         <div className={styles.formBox + " " + styles.register}>
 
@@ -291,17 +333,18 @@ export default class Register extends React.Component {
               {getFieldDecorator('mobile', {
                 validateFirst: true,
                 rules: [
-                  { required: true, message: '请输入手机号！' },
-                  // { pattern: /^1[0-9]{10}$/, message: '请输入正确的手机号！' },
+                  { required: true, message: '请输入手机号码' },
                   { validator: this.onChangeMobile },
+                  //{ pattern: /^1[0-9]{10}$/, message: '请输入正确的手机号' },
                 ],
               })(
                 <Input
                   autoFocus
                   size="large"
-                  type="number"
-                  placeholder="请输入手机号"
-                  onBlur={this.mobileInoutOnBlur}
+                  maxLength="11"
+                  autoComplete="off"
+                  placeholder="请输入手机号码"
+                  onBlur={this.mobileOnBlur}
                   suffix={
                     getFieldValue('mobile') ?
                       <Icon
@@ -320,31 +363,44 @@ export default class Register extends React.Component {
               {getFieldDecorator('password', {
                 validateFirst: true,
                 rules: [
-                  { required: true, message: '请输入密码！' },
-                  { pattern: /^[A-Za-z0-9_]+$/, message: '不能输入敏感字符，只能输入下划线！' },
-                  { min: 8, message: '密码长度只能在8-16位字符之间！' },
-                  { max: 16, message: '密码长度只能在8-16位字符之间！' },
-                  { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[A-Za-z0-9_]{8,16}$/, message: '密码不能全都是数字、字母（包括大写）、符号！' },
+                  { required: true, message: '请输入登录密码' },
+                  { min: 8, message: '请输入8-16位字母、数字或符号的组合' },
+                  { max: 16, message: '请输入8-16位字母、数字或符号的组合' },
+                  // { pattern: /^[A-Za-z0-9_]+$/, message: '不能输入敏感字符，只能输入下划线' },
+                  // { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[A-Za-z0-9_]{8,16}$/, message: '请输入8-16位字母、数字或符号的组合' },
                 ],
               })(
                 <Input
                   type={psdType}
-                  onFocus={() => this.changePsdType('text')}
-                  onBlur={() => this.changePsdType('password')}
+                  autoComplete="off"
+                  maxLength="16"
+                  onFocus={this.changePsdLevel}
+                  onBlur={this.changePsdLevel}
                   onChange={this.checkPsd}
-                  placeholder="设置密码（长度8-16字符和数字）"
+                  placeholder="8-16位字母、数字或字符的组合"
                   suffix={
                     <span className={styles.suffix}>
-                        {
-                          getFieldValue('password') ?
-                            <Icon
-                              type="close-circle"
-                              className={styles.clearInput}
-                              onClick={() => this.emitEmpty('password')}
-                            />
-                            :
-                            null
-                        }
+                      {
+                        getFieldValue('password') ?
+                          <Icon
+                            type="close-circle"
+                            className={styles.clearInput}
+                            onClick={() => this.emitEmpty('password')}
+                          />
+                          :
+                          null
+                      }
+                      <em className={styles.inputEye}>
+                        <i
+                          className={psdType === 'password' ? styles.close : styles.open}
+                          onClick={this.changePsdType}
+                        />
+                      </em>
+                      {/*<Icon*/}
+                        {/*type={psdType === 'password' ? 'eye-invisible' : 'eye'}*/}
+                        {/*className={styles.inputEye}*/}
+                        {/*onClick={this.changePsdType}*/}
+                      {/*/>*/}
                       {
                         psdLevelVisible && getFieldValue('password') ?
                           <div className={styles.psdStatus + " " + psdLevelStyle} style={{width: winWidth}}>
@@ -364,36 +420,46 @@ export default class Register extends React.Component {
               )}
             </FormItem>
 
-            {
-              userType === 1 ?
-                <div className={showYaoqing ? styles.showYaoqing : styles.hideYaoqing}>
-                  <p className={styles.toggleBtn} onClick={this.toggleYaoqing}>
-                    <i className={showYaoqing ? styles.rotate : null}/>
-                    <span>填写邀请码（选填）</span>
-                  </p>
-                  <FormItem>
-                    {getFieldDecorator('invitationCode', {
-                      rules: [
-                        { validator: this.checkYaoqing },
-                      ],
-                    })(
-                      <Input
-                        type="number"
-                        placeholder="请输入邀请码"
-                      />
-                    )}
-                  </FormItem>
-                </div>
-                :
-                null
-            }
+            <div className={showYaoqing ? styles.showYaoqing : styles.hideYaoqing}>
+              <p className={styles.toggleBtn} onClick={this.toggleYaoqing}>
+                <i className={showYaoqing ? styles.rotate : null}/>
+                <span>填写邀请码（选填）</span>
+              </p>
+              <FormItem>
+                {getFieldDecorator('invitationCode', {
+                  initialValue: urlInviCode ? filterTel(urlInviCode) : '',
+                  rules: [
+                    { validator: this.checkYaoqing },
+                    //{ pattern: /^1[0-9]{10}$/, message: '请输入正确的邀请人手机号' },
+                  ],
+                })(
+                  <Input
+                    maxLength="11"
+                    autoComplete="off"
+                    placeholder="请输入邀请人手机号码"
+                    onBlur={this.yaoqingOnBlur}
+                    disabled={!!urlInviCode}
+                    suffix={
+                      getFieldValue('invitationCode') && !urlInviCode ?
+                        <Icon
+                          type="close-circle"
+                          className={styles.clearInput}
+                          onClick={() => this.emitEmpty('invitationCode')}
+                        />
+                        :
+                        null
+                    }
+                  />
+                )}
+              </FormItem>
+            </div>
 
             <FormItem>
               {getFieldDecorator('smscode', {
                 validateFirst: true,
                 rules: [
-                  { required: true, message: '验证码不能为空！' },
-                  { pattern: /^[0-9]{6}$/, message: '只能输入6位数值！' },
+                  { required: true, message: '请输入短信验证码' },
+                  { pattern: /^[0-9]{6}$/, message: '短信验证码错误' },
                 ],
               })(
                 <SmsValidate
@@ -403,51 +469,80 @@ export default class Register extends React.Component {
                   action="register"
                   mobile={hasErrors(getFieldsError(['mobile'])) ? '' : getFieldValue('mobile')}
                   api='/api/userRegister/sendMobileCode'
-                  pintu={true}
                   callback={this.getSmscode}
                 />
               )}
             </FormItem>
 
-            <FormItem style={{border: 'none'}}>
-              {getFieldDecorator('xieyi', {
-                valuePropName: 'checked',
-                initialValue: xieyiChecked,
-              })(
-                <span>
-                    <Checkbox
-                      checked={xieyiChecked}
-                      onChange={this.xieyiChecked}
-                      className={styles.checked}
-                    >
-                      已阅读并同意
-                    </Checkbox>
-                    <Link to="/xieyi/49">《去投网用户注册协议》</Link>
-                  </span>
-              )}
-              <Button
-                loading={loading}
-                type="primary"
-                htmlType="submit"
-                className={styles.btn}
-                style={{width: '100%', height: '50px', lineHeight: '48px'}}
-                disabled={
-                  hasErrors(getFieldsError()) ||
-                  !getFieldValue('mobile') ||
-                  !getFieldValue('password') ||
-                  !getFieldValue('smscode') ||
-                  !getFieldValue('xieyi')
-                }
-              >
-                注册
-              </Button>
+            <FormItem style={{marginTop: '-30px', border: 'none'}}>
+              {/*{getFieldDecorator('xieyi', {*/}
+                {/*valuePropName: 'checked',*/}
+                {/*initialValue: xieyiChecked,*/}
+              {/*})(*/}
+                {/**/}
+              {/*)}*/}
+              <div>
+                <p className={styles.xieyi}>
+                  <span>注册即表示已阅读并同意</span>
+                  <Link to="/xieyi/49">《去投网用户注册协议》</Link>
+                </p>
+                <Button
+                  loading={loading}
+                  type="primary"
+                  htmlType="submit"
+                  className={styles.btn}
+                  style={{width: '100%', height: '50px', lineHeight: '48px'}}
+                  disabled={
+                    hasErrors(getFieldsError()) ||
+                    !getFieldValue('mobile') ||
+                    !getFieldValue('password') ||
+                    !getFieldValue('smscode') ||
+                    !getFieldValue('xieyi') ||
+                    smscodeSended === false
+                  }
+                >
+                  注册
+                </Button>
+              </div>
             </FormItem>
 
           </Form>
         </div>
 
+        <dl className={styles.signDesc}>
+          <dt>为什么选择去投网</dt>
+          <dd>
+            <ul>
+              <li>
+                <p>
+                  <img src={require('~/assets/sign/home_icon1@2x.png')} alt=""/>
+                  <span>廊坊银行资金存管</span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <img src={require('~/assets/sign/home_icon2@2x.png')} alt=""/>
+                  <span>合规运营 真实透明</span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <img src={require('~/assets/sign/home_icon3@2x.png')} alt=""/>
+                  <span>多重审核 风控闭环</span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <img src={require('~/assets/sign/home_icon4@2x.png')} alt=""/>
+                  <span>三级备案 数据加密</span>
+                </p>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
         <div className={styles.download}>
-          <a className={styles.link}>下载去投网APP</a>
+          {/*<Link to="/download" className={styles.link}>下载去投网APP</Link>*/}
           <p>
             <span>{ENV.icp}</span>
             <span>|</span>
