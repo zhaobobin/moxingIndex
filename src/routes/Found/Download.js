@@ -1,7 +1,7 @@
-/***扫码下载过渡页面
-	**********/
+
 import React from 'react';
 import { connect } from 'dva';
+import top from '~/theme/top.less';
 import styles from './Download.less';
 
 @connect(state => ({
@@ -11,12 +11,19 @@ export default class Download extends React.Component {
 
   render(){
     return(
-      <div align="center" className={styles.downloadtip}>      
-          <div className={styles.downimg1}><img src={require('../../assets/down/download_word.png')} /></div>
-          <div className={styles.downimg2}><img src={require('../../assets/down/download_logo.png')} /></div>
-          <div className={styles.downimg3}><img src={require('../../assets/down/download_downword.png')} /></div>
+      <div>
+       {/*<div align="center" className={top.header}><img src={require('../../assets/top.png')} /><span>扫码下载</span></div>*/}
+        {/*以上标题可以忽略*/}
+        <div className={styles.download}>
+          <img src={require('../../assets/down/down_02_01.jpg')} />
+          <div className={styles.downloadImg}>
+          <img src={require('../../assets/down/down_02_02.jpg')} />
+            <div className={styles.downloadImg1}><img src={require('../../assets/down/rwm.png')} /></div>
+          </div>
+        </div>
       </div>
     )
   }
 
 }
+
