@@ -23,6 +23,9 @@ export default class PlatformOne extends React.Component {
       <p className={styles.QutouwangBox}>
         <img src={require("~/assets/platform/found_platform_logo@2x.png")} alt="" className={styles.Qutouwang }/>
       </p>
+      <p  className={styles.CoinP}>
+        <img src={require("~/assets/platform/found_platform_icon2@2x.png")} alt="" className={styles.Coin}/>
+      </p>
       <div className={styles.ContBox}>
         <img src={require("~/assets/platform/found_platform_lt@2x.png")} alt="" className={styles.CornerLt }/>
         <img src={require("~/assets/platform/found_platform_rt@2x.png")} alt="" className={styles.CornerRt }/>
@@ -34,7 +37,7 @@ export default class PlatformOne extends React.Component {
           的服务。
         </div>
       </div>
-      <img src={require("~/assets/platform/found_platform_icon2@2x.png")} alt="" className={styles.Coin}/>
+
     </div>
     )
   }
