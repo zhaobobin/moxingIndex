@@ -10,8 +10,9 @@ import {
 } from "~/utils/utils";
 import styles from './Register.less';
 
-import logo from '~/assets/com/logo.png'
-import sign_banner from '~/assets/sign/fast_login_banner2@2x.png'
+//import logo from '~/assets/com/logo.png'
+import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.png'
+import sign_banner2 from '~/assets/sign/fast_login_banner2@2x.png'
 import SmsValidate from '~/components/Form/SmsValidate'
 
 const FormItem = Form.Item;
@@ -309,9 +310,9 @@ export default class Register extends React.Component {
           {/*<h1>注册去投网</h1>*/}
         {/*</div>*/}
 
-        <Link to="/" className={styles.banner}>
-          <img src={sign_banner} alt=""/>
-        </Link>
+        <div className={styles.banner}>
+          <img src={sign_banner2} alt=""/>
+        </div>
 
         <div className={styles.formBox + " " + styles.register}>
 
