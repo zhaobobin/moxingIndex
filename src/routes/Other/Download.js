@@ -65,7 +65,7 @@ export default class Download extends React.Component {
       type: 'global/post',
       url: '/api/home/app/version',
       payload: {
-        appName: '1',
+        appName: deviceType === 'ios' ? '1' : '2',
         deviceType,
         version: 1,
       },
