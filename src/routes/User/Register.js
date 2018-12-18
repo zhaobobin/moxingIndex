@@ -421,6 +421,26 @@ export default class Register extends React.Component {
               )}
             </FormItem>
 
+            <FormItem>
+              {getFieldDecorator('smscode', {
+                validateFirst: true,
+                rules: [
+                  { required: true, message: '请输入短信验证码' },
+                  { pattern: /^[0-9]{6}$/, message: '短信验证码错误' },
+                ],
+              })(
+                <SmsValidate
+                  boxStyle={{height: '50px'}}
+                  inputStyle={{width: '100%'}}
+                  bottonStyle={{width: '120px', minWidth: 'auto', height: '48px', lingHeight: '48px', background: 'none', borderColor: '#fff'}}
+                  action="register"
+                  mobile={hasErrors(getFieldsError(['mobile'])) ? '' : getFieldValue('mobile')}
+                  api='/api/userRegister/sendMobileCode'
+                  callback={this.getSmscode}
+                />
+              )}
+            </FormItem>
+
             <div className={showYaoqing ? styles.showYaoqing : styles.hideYaoqing}>
               <p className={styles.toggleBtn} onClick={this.toggleYaoqing}>
                 <i className={showYaoqing ? styles.rotate : null}/>
@@ -455,27 +475,7 @@ export default class Register extends React.Component {
               </FormItem>
             </div>
 
-            <FormItem>
-              {getFieldDecorator('smscode', {
-                validateFirst: true,
-                rules: [
-                  { required: true, message: '请输入短信验证码' },
-                  { pattern: /^[0-9]{6}$/, message: '短信验证码错误' },
-                ],
-              })(
-                <SmsValidate
-                  boxStyle={{height: '50px'}}
-                  inputStyle={{width: '100%'}}
-                  bottonStyle={{width: '120px', minWidth: 'auto', height: '48px', lingHeight: '48px', background: 'none', borderColor: '#fff'}}
-                  action="register"
-                  mobile={hasErrors(getFieldsError(['mobile'])) ? '' : getFieldValue('mobile')}
-                  api='/api/userRegister/sendMobileCode'
-                  callback={this.getSmscode}
-                />
-              )}
-            </FormItem>
-
-            <FormItem style={{marginTop: '-30px', border: 'none'}}>
+            <FormItem style={{border: 'none'}}>
               {/*{getFieldDecorator('xieyi', {*/}
                 {/*valuePropName: 'checked',*/}
                 {/*initialValue: xieyiChecked,*/}
