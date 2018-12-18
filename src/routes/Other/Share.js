@@ -20,23 +20,23 @@ componentDidMount(){
  }
 
   getshareData=()=>{
- 	let {userId, accessToken} = this.props.global.currentUser.userInfo;  
+ 	let {userId, accessToken} = this.props.global.currentUser.userInfo;
   	console.log(this.props.global.currentUser.userInfo)
     this.props.dispatch({
       type: 'global/post',
       url: '/api/accountNotice/sharingNotification?productType=1',
-      payload:{      	
-        userId,       
+      payload:{
+        userId,
         accessToken
       },
-      
+
       callback: (res) => {
         this.loading = false;
-        if(res.code === 0){  
+        if(res.code === 0){
         	console.log(res.data)
-          this.setState({          	
-          	data:res.data          	
-          })          
+          this.setState({
+          	data:res.data
+          })
         }
       }
     })
@@ -49,8 +49,8 @@ componentDidMount(){
   };
 
   render(){
-  	const {data} = this.state;  	
-  	const bidShare = getUrlParams().bidShare;  
+  	const {data} = this.state;
+  	const bidShare = getUrlParams().bidShare;
     return(
       <div className={styles.share}>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>
@@ -63,7 +63,7 @@ componentDidMount(){
         <div className={styles.sharebottom}>
         <img src={require('../../assets/share/bask_bg_03.jpg')}  className={styles.shareimg} />
         {
-               bidShare === '1' ?               
+               bidShare === '1' ?
            <div className={styles.sharecon} align="center" >
 	        <div className={styles.shareBut_1}>
 	           <div className={styles.shareButimg}><img src={require('../../assets/share/bask_share.png')}  /><span>分享到</span><img src={require('../../assets/share/bask_share.png')}  /></div>
@@ -74,14 +74,14 @@ componentDidMount(){
 	          </ul>
 	       </div>
 	       </div>
-                : 
+                :
                 <div className={styles.sharecon} align="center">
 	        <div className={styles.shareBut} onClick={() => this.redirect(ResultJson.share_shouyi.action)}><span>下载去投网App</span></div>
 	        <p>京ICP证 京B2-20160180 | 京ICP备14014223</p>
 	        <p>北京恒远鑫达投资管理有限公司</p>
 	        </div>
             }
-        
+
         </div>
       </div>
     )
