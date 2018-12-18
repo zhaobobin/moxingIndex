@@ -20,9 +20,9 @@ export default class BaseLayout extends React.Component {
     const { isAuth } = this.props.global;
 
     //处理app调用h5
-    if(paramsObj.platform === 'app' && paramsObj.accessToken){
-      Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
-      Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
+    if(paramsObj.platform === 'app'){
+      if(paramsObj.accessToken) Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
+      if(paramsObj.userId) Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
       this.saveUserinfo(paramsObj)
     }else{
       if(!isAuth && Storage.get(ENV.storageRefreshToken)) {

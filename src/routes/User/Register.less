@@ -2,6 +2,15 @@
 
 .container{
 
+  .banner{
+    display:block;
+    margin-bottom:5px;
+    img{
+      width:100%;
+      height:auto;
+    }
+  }
+
   .header{
     margin-bottom: 10px;
     padding: 12px 15px;
@@ -28,7 +37,7 @@
   }
 
   .result{
-    padding:10px 30px;
+    padding: 15% 30px 10px;
     text-align: center;
     img{
       width:100%;
@@ -62,6 +71,33 @@
     }
   }
 
+  .signDesc{
+    dt{
+      margin-bottom:20px;
+      text-align:center;
+      font-size:15px;
+    }
+    ul{
+      overflow:hidden;
+      li{
+        float:left;
+        width:50%;
+        margin-bottom:10px;
+        text-align:center;
+
+        img{
+          width:34px;
+          height:auto;
+        }
+        span{
+          display:block;
+          font-size:12px;
+          color:@color_888;
+        }
+      }
+    }
+  }
+
 }
 
 .formBox{
@@ -82,6 +118,10 @@
       border: none;
       box-shadow: none;
     }
+    .ant-input-disabled{
+      color: @color_333;
+      background: none;
+    }
     .ant-input-affix-wrapper{
       border: none;
     }
@@ -90,6 +130,24 @@
     }
     .has-error .ant-input{
       box-shadow: none;
+    }
+
+    .ant-btn-primary{
+      background-color: @color_blue;
+      border-color: @color_blue;
+    }
+    .ant-btn-primary[disabled]{
+      background-color: #9EACBB;
+      border-color: #9EACBB;
+    }
+    .ant-checkbox-checked .ant-checkbox-inner{
+      background-color: @color_blue;
+      border-color: @color_blue;
+    }
+    .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+    .ant-checkbox:hover .ant-checkbox-inner,
+    .ant-checkbox-input:focus + .ant-checkbox-inner{
+      border-color: @color_blue;
     }
   }
 
@@ -102,7 +160,29 @@
   }
 
   .btn{
-    margin-top:40px;
+    margin-top:20px;
+  }
+
+  .inputEye{
+    display:inline-block;
+    margin-left:10px;
+    cursor: pointer;
+    i{
+      display:block;
+      width:18px;
+      height:18px;
+      position:relative;
+      top:5px;
+      &.open{
+        background:url(../../assets/sign/signremind_open@2x.png) no-repeat center center;
+        background-size: 18px auto;
+      }
+      &.close{
+        background:url(../../assets/sign/invisible@2x.png) no-repeat center center;
+        background-size: 18px auto;
+      }
+    }
+
   }
 
   .clearInput {
@@ -117,11 +197,20 @@
       color: #666;
     }
   }
+
+  .xieyi{
+    color:@color_888;
+    a{
+      color: @color_blue
+    }
+  }
+
 }
 
 
 //注册
 .register{
+
   .radioGroup{
     width:100%;
     overflow:hidden;
@@ -239,4 +328,5 @@
     height: 114px;
     transition: all .2s;
   }
+
 }

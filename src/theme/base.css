@@ -29,14 +29,9 @@ input[type="number"]{
 
 :global(#qtw .ant-btn-primary[disabled]){
   color: #FFF;
-  background-color: #9EACBB;
-  border-color: #9EACBB;
 }
 
 :global(#qtw .ant-btn){
-  min-width:160px;
-  height:40px;
-  line-height:38px;
   border-radius: 4px;
   font-size:16px;
 }

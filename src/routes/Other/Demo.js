@@ -36,7 +36,8 @@ export default class Demo extends React.Component {
           <dt><strong>发现板块</strong></dt>
           <dd>
             <p><Link to="/found?platform=app">发现首页</Link></p>
-            <p><Link to="/download">H5下载</Link></p>
+            <p><Link to="/download">H5分享下载</Link></p>
+            <p><Link to="/found/download">发现扫码下载</Link></p>
             <p><Link to="/news/notices-list?platform=app">公告列表</Link></p>
             <p><Link to="/news/notices-list/detail/68?platform=app">公告详情</Link></p>
             <p><Link to="/found/help-list?platform=app">帮助中心</Link></p>
@@ -53,7 +54,7 @@ export default class Demo extends React.Component {
             <p><Link to="/found/education?platform=app">出借人教育</Link></p>
             <p><Link to="/found/operate?platform=app">运营报告</Link></p>
             <p><Link to="/found/operate-detail/123?platform=app">运营报告详情</Link></p>
-            <p><Link to="/found/invitation?platform=app">邀请好友</Link></p>
+            <p><Link to="/found/invitation?platform=app&userId=18121276596049">邀请好友</Link></p>
             <p><Link to="/found/invitation-list?platform=app">邀请好友列表</Link></p>
             <p><Link to="/found/platform?platform=app">平台优势</Link></p>
           </dd>
@@ -64,8 +65,8 @@ export default class Demo extends React.Component {
           <dd>
             <p><Link to="/account/info-manage/risk-manage?platform=app&accessToken=f7c71382245845aea9e05f7727bc1235&userId=18122128277409">风险测评</Link></p>
             <p><Link to="/account/info-manage/risk-result?platform=app&accessToken=f7c71382245845aea9e05f7727bc1235&userId=18122128277409">风险测评-结果页</Link></p>
-            <p><Link to="/share-shouyi?platform=app&amount=1000">分享页面-晒一晒</Link></p>
-            <p><Link to="/user/register?platform=app">用户注册</Link></p>
+            <p><Link to="/share-shouyi?platform=app&bidShare=1&userId=18121276596049">分享页面-晒一晒</Link></p>
+            <p><Link to="/user/register?invitationCode=A78CBF4AB81A5340E96DC8BE73AF10F0">用户注册</Link></p>
             <p><Link to="/user/register-result?platform=app">用户注册-结果页</Link></p>
             <p><Link to="/xieyi/49?platform=app">协议查询</Link></p>
             <p><Link to="/lend/zxfwxq/xsb20181130001?platform=app">智享详情</Link></p>

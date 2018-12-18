@@ -18,19 +18,19 @@ export default class RegisterResult extends React.Component {
     return(
       <div className={styles.container}>
 
-        <div className={styles.header}>
-          <img src={logo} alt="logo"/>
-          <h1>注册去投网</h1>
-        </div>
+        {/*<div className={styles.header}>*/}
+          {/*<img src={logo} alt="logo"/>*/}
+          {/*<h1>注册去投网</h1>*/}
+        {/*</div>*/}
 
         <div className={styles.result}>
           <img src={img_success} alt="result"/>
-          <h2>恭喜，{userInfo.mobile}已注册成功！</h2>
-          <p>下载去投网APP <br/> 手机开户更便捷</p>
+          <h2>恭喜您，注册成功</h2>
+          <p>580元红包已发放至您的账户</p>
         </div>
 
         <div className={styles.download}>
-          <a className={styles.link} style={{marginBottom: '120px'}}>下载去投网APP</a>
+          <a className={styles.link} style={{marginBottom: '120px'}}>立即下载APP</a>
           <p>
             <span>{ENV.icp}</span>
             <span>|</span>
