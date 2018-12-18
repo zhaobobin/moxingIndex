@@ -16,7 +16,7 @@ import SmsValidate from '~/components/Form/SmsValidate'
 
 const FormItem = Form.Item;
 
-const keys = ['mobile', 'password', 'smscode', 'invitationCode', 'xieyi'];
+const keys = ['mobile', 'password', 'smscode', 'invitationCode'];
 
 const urlInviCode = getUrlParams().invitationCode || '';
 
@@ -497,7 +497,6 @@ export default class Register extends React.Component {
                     !getFieldValue('mobile') ||
                     !getFieldValue('password') ||
                     !getFieldValue('smscode') ||
-                    !getFieldValue('xieyi') ||
                     smscodeSended === false
                   }
                 >

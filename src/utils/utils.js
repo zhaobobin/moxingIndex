@@ -42,7 +42,7 @@ export const ENV = {
   web: 'www.qutouwang.com',
   slogan: '爱投，就去投',
   weixin: '去投网（QTW-DYH）',
-  icp: 'ICP经营许可证 京B2-20160180',
+  icp: '京ICP证 京B2-20160180',
   beian: '京ICP备14014223号-2',
   copyright: '©2015-2018 去投网 All rights reserved',
 
