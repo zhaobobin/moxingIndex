@@ -53,7 +53,7 @@ export default class Demo extends React.Component {
             <p><Link to="/found/education?platform=app">出借人教育</Link></p>
             <p><Link to="/found/operate?platform=app">运营报告</Link></p>
             <p><Link to="/found/operate-detail/123?platform=app">运营报告详情</Link></p>
-            <p><Link to="/found/invitation?platform=app">邀请好友</Link></p>
+            <p><Link to="/found/invitation?platform=app&userId=18121276596049">邀请好友</Link></p>
             <p><Link to="/found/invitation-list?platform=app">邀请好友列表</Link></p>
             <p><Link to="/found/platform?platform=app">平台优势</Link></p>
           </dd>
