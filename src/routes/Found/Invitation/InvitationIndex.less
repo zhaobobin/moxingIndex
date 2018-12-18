@@ -24,8 +24,8 @@
 }
 .codeBox{
   width: 85%;
-  height: 295px;
-  padding-top: 20px;
+  height: auto;
+  padding-top: 20px;padding-bottom: 12px;
   margin:20px auto;
   background:linear-gradient(180deg,rgba(255,104,57,1) 0%,rgba(255,149,63,1) 100%);
   border-radius:3px;
@@ -34,29 +34,32 @@ p{
   color: @color_fff;
 }
   .code{
-    width: 70%;
-    height: 70%;
-    margin: auto;
-    background-color:@color_fff ;
+    width: 65%;
+    height: 65%;
+    margin: auto;   
     img{width: 100%;}
   }
 }
 .shareBox{
   width: 85%;
-  height: 153px;
+  height: auto;
   margin: auto;
   background:linear-gradient(180deg,rgba(255,104,57,1) 0%,rgba(255,149,63,1) 100%);
   border-radius:3px;
   padding-top: 20px;
   text-align: center;
+  h3{}
   p{
     text-align: center;
     color: @color_fff;
   }
-  h3{
-    text-align: center;
+  h3{    
     color: @color_fff;
-    margin: 15px 0;
+    margin: 15px 0;width: 100%;
+    display: block;
+    word-break: break-all;
+    text-align: center;
+    padding: 0 15%;
   }
   .Img{
     width: 60%;
