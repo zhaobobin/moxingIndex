@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './InvitationIndex.less';
+import QRCode from 'qrcode.react';
 import ResultJson from '~/routes/Result/ResultJson'
 @connect(state => ({
   global: state.global,
@@ -37,11 +38,16 @@ export default class InvitationIndex extends React.Component {
       },
       callback: (res)=>{
         setTimeout(() => { this.ajaxFlag = true }, 500);
+        
         if(res.code === 0){
           this.setState({
+          	
             invitationCode: res.data.invitationCode,
+            
             webUrl: res.data.webUrl
+           
           })
+          
         }
       }
     })
@@ -53,7 +59,7 @@ export default class InvitationIndex extends React.Component {
     }, 500)
   };
   render(){
-  	 const {invitationCode} = this.state;
+  	 const {invitationCode, webUrl} = this.state;  	 
     return(
       <div className={styles.Box}>
         <img src={require("~/assets/Invitation/invite_friends_head@2x.png")} alt="" className={styles.InvitationImg}/>
@@ -65,7 +71,8 @@ export default class InvitationIndex extends React.Component {
         <div className={styles.codeBox}>
               <p>方法一:扫描二维码立即邀请</p>
           <div className={styles.code}>
-          <img src={require("~/assets/Invitation/rwm.png")} alt="" />
+          {/*<img src={require("~/assets/Invitation/rwm.png")} alt="" />*/}
+          <div style={{width:'100%'}}><QRCode value={webUrl} style={{width:'100%',height:'auto'}}/></div>
           </div>
         </div>
         <div className={styles.shareBox}>
