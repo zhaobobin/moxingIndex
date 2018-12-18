@@ -5,6 +5,8 @@ import { connect } from 'dva';
 import { Toast } from 'antd-mobile'
 import styles from './Download.less';
 
+const iosUrl = 'https://itunes.apple.com/cn/app/xin-ban-qu-tou-bao/id1243378381?mt=8';
+
 @connect(state => ({
   global: state.global,
 }))
@@ -50,8 +52,11 @@ export default class Download extends React.Component {
     });
 
     //不是微信时，查询下载链接
-    if(!isWeixin){
+    if(!isWeixin && deviceType === 'android'){
       this.initDownload({deviceType})
+    }
+    if(!isWeixin && deviceType === 'ios'){
+      window.location.href = iosUrl;
     }
 
   };
