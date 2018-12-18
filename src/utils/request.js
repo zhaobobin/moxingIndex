@@ -24,7 +24,7 @@ export default function request(url, options) {
   //打包正式接口
   let api = url;
   if(process.env.NODE_ENV === 'production'){
-    api = ENV.api.pro + url;
+    api = ENV.api.test + url;
   }
 
   let newOptions = {
