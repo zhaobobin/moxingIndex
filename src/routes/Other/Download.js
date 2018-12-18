@@ -49,14 +49,15 @@ export default class Download extends React.Component {
       isWeixin
     });
 
-    if(isWeixin){
-      //this.initDownload({isWeixin, deviceType})
+    //不是微信时，查询下载链接
+    if(!isWeixin){
+      this.initDownload({deviceType})
     }
 
   };
 
   //自动下载
-  initDownload = ({isWeixin, deviceType}) => {
+  initDownload = ({deviceType}) => {
 
     this.loading = true;
 
@@ -88,7 +89,7 @@ export default class Download extends React.Component {
     return(
       <div align="center" className={styles.downloadtip}>
         {
-          !isWeixin ?
+          isWeixin ?
             <div className={styles.downimg1}><img src={require('../../assets/down/download_word.png')} /></div>
             :
             null
