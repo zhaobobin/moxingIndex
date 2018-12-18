@@ -3,6 +3,23 @@ import { connect } from 'dva';
 import styles from './Share.less';
 import { ENV, getUrlParams } from '~/utils/utils';
 import ResultJson from '~/routes/Result/ResultJson';
+
+function changeURLArg(url,arg,arg_val){
+  let pattern=arg+'=([^&]*)';
+  let replaceText=arg+'='+arg_val;
+  if(url.match(pattern)){
+    let tmp='/('+ arg+'=)([^&]*)/gi';
+    tmp=url.replace(eval(tmp),replaceText);
+    return tmp;
+  }else{
+    if(url.match('[\?]')){
+      return url+'&'+replaceText;
+    }else{
+      return url+'?'+replaceText;
+    }
+  }
+}
+
 @connect(state => ({
   global: state.global,
 }))
@@ -33,7 +50,6 @@ componentDidMount(){
       callback: (res) => {
         this.loading = false;
         if(res.code === 0){
-        	console.log(res.data)
           this.setState({
           	data:res.data
           })
@@ -42,7 +58,7 @@ componentDidMount(){
     })
   };
   redirect = (action) => {
-    window.location.href = window.location.href + '&action=' + action;
+    window.location.href = changeURLArg(window.location.href, 'action', action);
     setTimeout(() => {
       window.location.reload();
     }, 500)
