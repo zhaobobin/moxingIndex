@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import styles from './Beian.less';
 import Information from "~/components/Information/Information";
 import Signature from "~/components/Information/signature";
+import BeianXieyi from '~/components/Information/BeianXieyi'
 @connect(state => ({
   global: state.global,
 }))
@@ -12,6 +13,12 @@ export default class Beian extends React.Component {
     this.state = {
 
     }
+  }
+  onRef = (ref) => {
+    this.BeianXieyi = ref
+  }
+  xieyiClick=(e)=>{
+    this.BeianXieyi.showModal()
   }
   render(){
     return(
@@ -30,8 +37,14 @@ export default class Beian extends React.Component {
         <h4 className={styles.Beian}> <span className={styles.content}>资金存管信息 <span></span></span></h4>
           <div className={styles.deposit}>
             <p>资金存管银行全称：<span>恒丰银行股份有限公司</span></p>
-            <p>三方存管协议：<span className={styles.agreement}> <a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> </span></p>
+            <p>三方存管协议：
+              <span className={styles.agreement}>
+              {/*<a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> */}
+                <a href="javascript:void(0);"  onClick={this.xieyiClick}>存管协议</a>
+              </span>
+            </p>
             <p>资金存管上线时间：<span>2017-07-01</span></p>
+            <BeianXieyi  onRef={this.onRef}/>
           </div>
         <h4 className={styles.Beian}> <span className={styles.content}>公安机关核发的网站备案图标和编号 <span></span></span></h4>
           <p>京公网安备11010502036682号</p>

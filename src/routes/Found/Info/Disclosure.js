@@ -145,7 +145,6 @@ componentDidMount(){
                 <p className={styles.disclosureP}>年化利率：{disclosureArray.rateDesc}</p>
                 <p className={styles.norm}>{disclosureArray.overdueFeeDesc}</p>
                 <p className={styles.norm}>{disclosureArray.prepaymentDesc}</p>
-                <p className={styles.norm}>{disclosureArray.withdrawDesc}</p>
                 </div>
               </div>
               <Signature/>
