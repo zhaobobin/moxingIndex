@@ -1,5 +1,4 @@
 @import '../../../theme/index.less';
-
 .OrganizationBox{
 .Organization{
     margin:  auto;
@@ -41,12 +40,29 @@
   .cont{
       display: block;
       text-align:justify;
+      font-size:12px;
       font-weight:400;
       color:rgba(51,51,51,1);
   }
+  .titleF{
+    display: inline-block;
+    float: left;
+    word-break:keep-all;
+    color: #888888;
+  }
+  .contF{
+    display: block;
+    float: left;
+    text-align: justify;
+    font-size:12px;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+  }
 }
 .title{
-    color: rgba(136,136,136,1);
+    font-size:12px;
+    font-weight:400;
+    color:rgba(136,136,136,1);
     display: inline-block;
     white-space:nowrap;
 }
@@ -55,30 +71,40 @@
     width: 100%;
     font-size: 11px;
   td:nth-child(1){
+    font-size:11px;
+    font-weight:400;
     color:rgba(136,136,136,1);
   }
   td{
       width: 50%;
       border: 1px solid #e5e5e5;
       padding: 11px 11px 11px 12px;
+      font-size:11px;
+      font-weight:400;
+      color:rgba(51,51,51,1);
     span{
       text-align: left;
     }
   }
+}
+.zuzhi{
+    font-size:11px;
+    font-weight:400;
+    color:rgba(51,51,51,1);
 }
 .organizationImg{
     width: 100%;
 }
 .congye{
     width: 100%;
-  td{
-    width: 30%;
-    border: 1px solid #e5e5e5;
-    padding: 11px 0 11px 12px;
-  }
-.congyeTd2{
-    color:rgba(136,136,136,1);
-  }
+    td{
+      width: 30%;
+      border: 1px solid #e5e5e5;
+      padding: 11px 0 11px 12px;
+    }
+    .congyeTd2{
+        color:rgba(136,136,136,1);
+      }
 }
 .zongshu{
     span{
@@ -95,6 +121,19 @@
   margin: 0;
 }
 .official{
-font-size: 12px;
+  font-size: 12px;
+  .weibo{
+    margin-bottom: 0;
+    .weibotitle{
+      font-size:12px;
+      font-weight:400;
+      color:rgba(136,136,136,1);
+    }
+    .weibocont{
+      font-size:12px;
+      font-weight:400;
+      color:rgba(51,51,51,1);
+    }
+  }
 }
 }

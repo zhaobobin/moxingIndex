@@ -1,18 +1,134 @@
 @import '../../../theme/index.less';
-.PagesBox{
+@media (min-width: 320px) and (max-width:360px){
+  .PagesBox{
   width: 100vw;
   height: 100vh;
   background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
   background-size: 100% 100%;
   position: relative;
-  padding-top: 10px;
 }
 .Pages{
   width: 100%;
   text-align: center;
 }
 .Page{
-  padding: 15px 30px;
+  padding: 3px 30px 10px;
+  color: @color_white;
+  background-image: url("../../../assets/platform/found_platform_title@2x.png");
+  background-size: 100% 100%;
+}
+.multipleTitle{
+  text-align: center;
+  color:@color_white ;
+  font-size: 18px;
+  letter-spacing:3px;
+  margin-bottom: 0px;
+}
+.multipleBox{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  justify-content:space-around;
+ padding-bottom:10px;
+  div{
+    width: 34%;
+    p{
+      text-align: center;
+      color: @color_white;
+      margin-top: 63%;
+    }
+  }
+  .multipleImgBox1{
+    background-image: url("../../../assets/platform/found_platform_pg41@2x.png");
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    p{
+      font-size: 12px;
+    }
+  }
+  .multipleImgBox2{
+    background-image: url("../../../assets/platform/found_platform_pg42@2x.png");
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    p{
+      font-size: 12px;
+    }
+  }
+  .multipleImgBox3{
+    background-image: url("../../../assets/platform/found_platform_pg43@2x.png");
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    p{
+      font-size: 12px;
+    }
+  }
+  .multipleImgBox4{
+    background-image: url("../../../assets/platform/found_platform_pg44@2x.png");
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    p{
+      font-size: 12px;
+    }
+  }
+}
+.multipleContentBox{
+  width: 90%;
+  margin: auto;
+  background:rgba(14,60,105,0.5);
+  box-shadow:0 0 13px 0 rgba(83,195,249,1);
+  border-radius:7px;
+  position: relative;
+  color: @color_white;
+  padding: 15px 33px;
+  .multipleLt{
+    width: 10%;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+  }
+  .multipleRt{
+    width: 10%;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+  .multipleLb{
+    width: 10%;
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+  }
+  .multipleRb{
+    width: 10%;
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+  }
+  p{
+    margin: 0;
+    font-size: 12px;
+  }
+}
+}
+@media (min-width: 360px){
+  .PagesBox{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
+  background-size: 100% 100%;
+  position: relative;
+}
+.Pages{
+  width: 100%;
+  text-align: center;
+}
+.Page{
+  padding: 3px 30px 10px;
   color: @color_white;
   background-image: url("../../../assets/platform/found_platform_title@2x.png");
   background-size: 100% 100%;
@@ -30,11 +146,10 @@
   align-items: center;
   flex-flow: wrap;
   justify-content:space-around;
-  margin-top: 20px;
   div{
     width: 35%;
     height: 113px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     p{
       text-align: center;
       color: @color_white;
@@ -92,8 +207,10 @@
     right: 17px;
   }
   p{
-    margin: 0;
+    margin-bottom: 10px;
     font-size: 12px;
   }
 }
+}
+
 

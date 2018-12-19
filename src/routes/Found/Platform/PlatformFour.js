@@ -34,9 +34,9 @@ export default class PlatformFour extends React.Component {
           <img src={require("~/assets/platform/found_platform_lb@2x.png")} alt="" className={styles.multipleLb }/>
           <img src={require("~/assets/platform/found_platform_rb@2x.png")} alt="" className={styles.multipleRb }/>
           <div>
-            <p>1.去投网是国内领先的P2P平台，拥有专业风控经验。</p>
-            <p>2.专注优质借款</p>
-            <p>3.专人负责监督借款人借款后其资金流向。如发现借款人出现资金异常或产生逾期，专业团队通过资产清收、资产重组、法务诉讼等合规的方式，第时 间内保护资金安全。</p>
+            <p>1.去投网作为中国创新型P2P网络借贷信息中介机构，拥有专业风控经验。</p>
+            <p>2.专注优质借款。</p>
+            <p>3. 专人负责监督借款人借款后其资金流向。如发现借款人出现资金异常或产生逾期，专业团队通过资产清收、资产重组、法务诉讼等合法合规的方式，有效地防范了信用风险。</p>
           </div>
         </div>
       </div>
