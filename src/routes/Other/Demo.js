@@ -71,7 +71,7 @@ export default class Demo extends React.Component {
             <p><Link to="/xieyi/49?platform=app">协议查询</Link></p>
             <p><Link to="/lend/zxfwxq/xsb20181130001?platform=app">智享详情</Link></p>
             <p><Link to="/lend/sbxq/bd18120100005?platform=app">散标详情</Link></p>
-            <p><Link to="/lend/zqxq/18111056560681?platform=app">变现详情</Link></p>
+            <p><Link to="/lend/zqxq/18111056560681?platform=app">债权详情</Link></p>
             <p><Link to="/question?platform=app">常见问题</Link></p>
           </dd>
         </dl>

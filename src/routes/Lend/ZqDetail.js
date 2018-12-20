@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './Detail.less';
 import ToastLoading from '~/components/Common/ToastLoading';
-import logo from '~/assets/com/logo.png';
+
 import { Progress } from 'antd';
 @connect(state => ({
   global: state.global,
 }))
-export default class BxDetail extends React.Component {
+export default class ZqDetail extends React.Component {
 
   constructor(props){
     super(props);

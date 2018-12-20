@@ -39,14 +39,15 @@ componentDidMount(){
  }
 
   getshareData=()=>{
- 	let {userId, accessToken} = this.props.global.currentUser.userInfo;
-  	console.log(this.props.global.currentUser.userInfo)
+    
+ 	  let {userId, accessToken} = this.props.global.currentUser.userInfo;
+  	
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/accountNotice/sharingNotification?productType=1',
+      url: '/api/accountNotice/sharingNotification',
       payload:{
         userId,
-        accessToken
+        productType: '1'
       },
 
       callback: (res) => {

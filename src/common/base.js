@@ -108,10 +108,10 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Lend/SbDetail')),
           },
           {
-            name: '变现详情',
+            name: '债权详情',
             key: 'zqxq',
             path: 'zqxq/:id',
-            component: dynamicWrapper(app, [], () => import('../routes/Lend/BxDetail')),
+            component: dynamicWrapper(app, [], () => import('../routes/Lend/ZqDetail')),
           },
         ]
       },
@@ -378,7 +378,7 @@ const BaseRoutes = app => [
         path: 'hdzq',
         isHide: true,
         exact: true,
-        children: [         
+        children: [
           {
             name: '邀请好友-双旦迎新',
             key: 'yaoqing-201812',
@@ -444,7 +444,7 @@ const BaseRoutes = app => [
         path: 'demo',
         isHide: true,
         component: dynamicWrapper(app, [], () => import('../routes/Other/Demo')),
-      },     
+      },
     ]
   },
 ];
