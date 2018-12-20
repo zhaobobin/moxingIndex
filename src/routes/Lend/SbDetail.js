@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import styles from './Detail.less';
 import ToastLoading from '~/components/Common/ToastLoading';
 import logo from '~/assets/com/logo.png';
+import { Link } from 'dva/router';
 import { Progress } from 'antd';
 @connect(state => ({
   global: state.global,
@@ -11,7 +12,7 @@ export default class SbDetail extends React.Component {
 
   constructor(props){
     super(props);
-    //this.loading = true;
+    this.loading = true;
     this.state = {
       detail: {},
     }
@@ -30,11 +31,12 @@ export default class SbDetail extends React.Component {
   }
 
   queryDetail(pactissueNo){
+  	const {  match: { params } } = this.props;
     this.props.dispatch({
       type: 'global/post',
       url: '/api/scatteredProduct/findP2pPactIssueDetail',
       payload: {
-        pactissueNo
+        pactissueNo: params.id
       },
       callback: (res) => {
         this.loading = false;
@@ -80,12 +82,12 @@ export default class SbDetail extends React.Component {
                      <li><span>起投金额</span>{detail.bidCash}元</li>
                      <li><span>还款方式</span>{detail.returnMethod}</li>
                      <li><span>起息日</span>{detail.beginDate}</li>
-                     <li className={styles.iconA}><span>信用等级</span><i>{detail.xyLevel}</i><em>&nbsp;</em></li>
+                     <li className={styles.iconA}><span>信用等级</span><i>A</i><em>&nbsp;</em></li>
                    </ul>
                    </div>
               </div>
               <div className={styles.sharebottom}>京ICP证 京B2-20160180 | 京ICP备14014223号-2<span>北京恒远鑫达投资管理有限公司</span></div>
-              <div className={styles.sbDownBut}><span>下载去投网</span></div>
+              <Link to="/download"><div className={styles.sbDownBut}><span>下载去投网</span></div></Link>
             </div>
         }
 

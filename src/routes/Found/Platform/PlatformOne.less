@@ -1,18 +1,18 @@
 @import '../../../theme/index.less';
+@media (min-width: 320px) and (max-width: 360px) {
 .PagesBox{
   width: 100vw;
   height: 100vh;
   background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
   background-size: 100% 100%;
   position: relative;
-  padding-top: 10px;
-
+  //padding-top: 10px;
 .Pages{
   width: 100%;
   text-align: center;
 }
 .Page{
-  padding: 15px 30px;
+  padding: 3px 30px 10px;
   color: @color_white;
   background-image: url("../../../assets/platform/found_platform_title@2x.png");
   background-size: 100% 100%;
@@ -20,13 +20,108 @@
 .TitleBox{
   width: 100%;
   position: relative;
-  margin-top: 20px;
+  overflow: hidden;
+  text-align: center;
+ .cont{
+   width: 61%;
+ }
+  .ICP{
+    height:48px;
+    position: absolute;
+    left: 11px;
+    top: 61px;
+  }
+  .Spaceman{
+    position: absolute;
+    right: -42px;
+    top: 8px;
+    height: 110px;
+
+  }
+}
+.QutouwangBox{
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  //margin: 20px 0 6px 0;
+  .Qutouwang{
+    width: 51%;
+  }
+}
+.ContBox{
+  width: 90%;
+  margin:auto;
+
+  background:rgba(14,60,105,0.5);
+  box-shadow:0px 0px 13px 0px rgba(83,195,249,1);
+  border-radius:7px;
+  position: relative;
+  padding: 30px 33px;
+  font-size:12px;
+  font-weight:normal;
+  color:rgba(255,255,255,1);
+  text-indent: 1rem;
+  .CornerLt{
+    width: 10%;
+    position: absolute;
+    top: 17px;
+    left: 17px;
+  }
+  .CornerRt{
+    width: 10%;
+    position: absolute;
+    top: 17px;
+    right: 17px;
+  }
+  .CornerLb{
+    width: 10%;
+    position: absolute;
+    bottom: 17px;
+    left: 17px;
+  }
+  .CornerRb{
+    width: 10%;
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
+  }
+}
+  .CoinP{
+    margin: 0;
+    padding-left: 25px;
+    .Coin{
+      width: 34px;
+
+    }
+  }
+}
+}
+@media (min-width: 360px){
+.PagesBox{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
+  background-size: 100% 100%;
+  position: relative;
+.Pages{
+  width: 100%;
+  text-align: center;
+}
+.Page{
+  padding: 3px 30px 10px;
+  color: @color_white;
+  background-image: url("../../../assets/platform/found_platform_title@2x.png");
+  background-size: 100% 100%;
+}
+.TitleBox{
+  width: 100%;
+  position: relative;
+
   padding-top: 20px;
   overflow: hidden;
   text-align: center;
  .cont{
    width: 76%;
-
  }
   .ICP{
     height: 53px;
@@ -45,7 +140,7 @@
 .QutouwangBox{
   width: 100%;
   text-align: center;
-  margin: 26px 0 40px 0;
+  //margin: 26px 0 40px 0;
   .Qutouwang{
     width: 51%;
   }
@@ -96,5 +191,6 @@
 
     }
   }
+}
 }
 

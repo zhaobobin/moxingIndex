@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './InvitationIndex.less';
 import QRCode from 'qrcode.react';
-import ResultJson from '~/routes/Result/ResultJson'
+import ResultJson from '~/routes/Result/ResultJson';
+import ToastLoading from '~/components/Common/ToastLoading'
 @connect(state => ({
   global: state.global,
 }))
@@ -62,6 +63,11 @@ export default class InvitationIndex extends React.Component {
   	 const {invitationCode, webUrl} = this.state;  	 
     return(
       <div className={styles.Box}>
+        {
+          this.loading ?
+            <ToastLoading/>
+            :
+            <div>
         <img src={require("~/assets/Invitation/invite_friends_head@2x.png")} alt="" className={styles.InvitationImg}/>
         <div className={styles.titleBox}>
           <img src={require("~/assets/Invitation/invite_title_icon1@2x.png")} alt="" className={styles.Img}/>
@@ -80,6 +86,8 @@ export default class InvitationIndex extends React.Component {
           <h3>{invitationCode}</h3>
           <img src={require("~/assets/Invitation/invite_bottom_btn@2x.png")} alt="" className={styles.Img}  onClick={() => this.redirect(ResultJson.share_yaoqing.action)}/>
         </div>
+        </div>
+       }
       </div>
     )
   }

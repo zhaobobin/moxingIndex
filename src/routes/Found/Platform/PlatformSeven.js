@@ -32,23 +32,22 @@ export default class PlatformSeven extends React.Component {
           </div>
           <p className={styles.SevenContP}>
             <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
-            <span>实地尽职调查</span>
+            <span>多重信用审核</span>
           </p>
           <div className={styles.SevenContDiv}>
-            <p>1.实地考察</p>
-            <p>2.财务状况评估</p>
-            <p>3.社保信息对照</p>
-            <p>4.纳税记录</p>
+            <p>1.资料审核</p>
+            <p>2.黑名单查询</p>
+            <p>3.征信报告审查</p>
           </div>
           <p className={styles.SevenContP}>
             <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>
-            <span>实地尽职调查</span>
+            <span>贷中贷后管理</span>
           </p>
           <div className={styles.SevenContDiv}>
-            <p>1.实地考察</p>
-            <p>2.财务状况评估</p>
-            <p>3.社保信息对照</p>
-            <p>4.纳税记录</p>
+            <p>1.缴纳保证金</p>
+            <p>2.定期贷后回访</p>
+            <p>3.还款来源追踪</p>
+            <p>4.还款提醒/催收</p>
           </div>
           <p className={styles.SevenContP}>
             <img src={require("~/assets/platform/found_platform_pg51@2x.png")} alt="" className={styles.dotImg}/>

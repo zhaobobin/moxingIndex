@@ -3,6 +3,8 @@ import { connect } from 'dva';
 import styles from './Share.less';
 import { ENV, getUrlParams } from '~/utils/utils';
 import ResultJson from '~/routes/Result/ResultJson';
+import ToastLoading from '~/components/Common/ToastLoading';
+import { Link } from 'dva/router';
 
 function changeURLArg(url,arg,arg_val){
   let pattern=arg+'=([^&]*)';
@@ -69,6 +71,11 @@ componentDidMount(){
   	const bidShare = getUrlParams().bidShare;
     return(
       <div className={styles.share}>
+      {
+          this.loading ?
+            <ToastLoading/>
+            :
+            <div>
       <img src={require('../../assets/share/bask_bg_01.jpg')}  className={styles.shareimg}/>
       <div className={styles.sharemiddle}>
         <div className={styles.shareicon}><img src={data.headImg || require("~/assets/share/my_shai_interal@2x.png")} alt="" /><span>{data.userName}</span></div>
@@ -92,13 +99,15 @@ componentDidMount(){
 	       </div>
                 :
                 <div className={styles.sharecon} align="center">
-	        <div className={styles.shareBut} onClick={() => this.redirect(ResultJson.share_shouyi.action)}><span>下载去投网App</span></div>
+	        <Link to="download"><div className={styles.shareBut}><span>下载去投网App</span></div></Link>
 	        <p>京ICP证 京B2-20160180 | 京ICP备14014223</p>
 	        <p>北京恒远鑫达投资管理有限公司</p>
 	        </div>
+	       
             }
 
-        </div>
+        </div> </div>
+       }
       </div>
     )
   }

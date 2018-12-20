@@ -1,68 +1,67 @@
 @import '../../../theme/index.less';
-.PagesBox{
+@media (min-width: 320px) and (max-width:360px){
+  .PagesBox{
   width: 100vw;
   height: 100vh;
   background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
   background-size: 100% 100%;
   position: relative;
-  padding-top: 10px;
+
 }
 .Pages{
   width: 100%;
   text-align: center;
 }
 .Page{
-  padding: 15px 30px;
+  padding: 3px 30px 10px;
   color: @color_white;
   background-image: url("../../../assets/platform/found_platform_title@2x.png");
   background-size: 100% 100%;
 }
 .SevenTitle{
   text-align: center;
-  font-size:23px;
+  font-size:18px;
   font-weight:400;
   letter-spacing:3px;
   color: @color_white;
-  margin-top: 22px;
 }
 .SevenBox{
   width: 90%;
   margin: auto;
   background:rgba(14,60,105,0.5);
-  box-shadow:0px 0px 13px 0px rgba(83,195,249,1);
+  box-shadow:0 0 13px 0 rgba(83,195,249,1);
   border-radius:7px;
   position: relative;
   color: @color_white;
-  padding: 30px 33px;
+  padding: 18px 33px;
   .SevenLt{
     width: 10%;
     position: absolute;
-    top: 17px;
-    left: 17px;
+    top: 14px;
+    left: 14px;
   }
   .SevenRt{
     width: 10%;
     position: absolute;
-    top: 17px;
-    right: 17px;
+    top: 14px;
+    right: 14px;
   }
   .SevenLb{
     width: 10%;
     position: absolute;
-    bottom: 17px;
-    left: 17px;
+    bottom: 14px;
+    left: 14px;
   }
   .SevenRb{
     width: 10%;
     position: absolute;
-    bottom: 17px;
-    right: 17px;
+    bottom: 14px;
+    right: 14px;
   }
   p{
     margin-bottom: 0;
   }
 }
-
 .SevenContP{
   height: 19px;
   display: flex;
@@ -77,7 +76,93 @@
 .SevenContDiv{
   margin-left: 8px;
   border-left: 4px solid #4670FA;
- padding: 10px 0 10px 18px;
+ padding: 5px 0 10px 18px;
   font-size: 11px;
 
+}
+}
+@media (min-width: 360px){
+  .PagesBox{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
+    background-size: 100% 100%;
+    position: relative;
+  }
+  .Pages{
+    width: 100%;
+    text-align: center;
+  }
+  .Page{
+    padding: 3px 30px 10px;
+    color: @color_white;
+    background-image: url("../../../assets/platform/found_platform_title@2x.png");
+    background-size: 100% 100%;
+  }
+  .SevenTitle{
+    text-align: center;
+    font-size:23px;
+    font-weight:400;
+    letter-spacing:3px;
+    color: @color_white;
+  }
+  .SevenBox{
+    width: 90%;
+    margin: auto;
+    background:rgba(14,60,105,0.5);
+    box-shadow:0px 0px 13px 0px rgba(83,195,249,1);
+    border-radius:7px;
+    position: relative;
+    color: @color_white;
+    padding: 30px 33px;
+    .SevenLt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      left: 17px;
+    }
+    .SevenRt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      right: 17px;
+    }
+    .SevenLb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      left: 17px;
+    }
+    .SevenRb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      right: 17px;
+    }
+    p{
+      margin-bottom: 0;
+    }
+  }
+
+  .SevenContP{
+    height: 19px;
+    display: flex;
+    align-items: center;
+    font-size:15px;
+    font-weight:600;
+    .dotImg{
+      height: 20px;
+      margin-right: 10px;
+    }
+  }
+  .SevenContDiv{
+    margin-left: 8px;
+    border-left: 4px solid #4670FA;
+    padding: 20px 0 20px 18px;
+    font-size: 11px;
+    p{
+      color: #FFFFFF;
+    }
+
+  }
 }

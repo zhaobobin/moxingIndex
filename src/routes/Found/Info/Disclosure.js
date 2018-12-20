@@ -134,11 +134,12 @@ componentDidMount(){
                 </tr>
                 </tbody>
               </table>
-
               <div className={styles.chargeBox}>
                 <h4 className={styles.Manage}> <span className={styles.content}>收费标准 <span></span></span></h4>
-                <p className={styles.disclosureP}><span className={styles.title}>充值手续费：</span><span className={styles.cont}>{disclosureArray.rechargeDesc}</span></p>
-                <p className={styles.disclosureP}><span className={styles.title}>提现手续费：</span><span className={styles.cont}>{disclosureArray.withdrawDesc}</span></p>
+                <p className={styles.title}>充值手续费：</p>
+                <p className={styles.cont}>{disclosureArray.rechargeDesc}</p>
+                <p className={styles.title}>提现手续费：</p>
+                <p className={styles.cont}>{disclosureArray.withdrawDesc}</p>
                 <p className={styles.shoufeititle}>借款收费标准:</p>
                 <div className={styles.shoufeiBox}>
                 <p className={styles.disclosureP}>居间服务费比例（年化）：{disclosureArray.feeDesc}</p>

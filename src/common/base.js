@@ -386,6 +386,27 @@ const BaseRoutes = app => [
             exact: true,
             component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201812')),
           },
+          {
+            name: 'banner-银行存管',
+            key: 'bankdepositor',
+            path: 'bankdepositor',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Bankdepositor')),
+          },
+          {
+            name: 'banner-安心签',
+            key: 'electronic',
+            path: 'electronic',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Electronic')),
+          },
+          {
+            name: 'banner-等级保护',
+            key: 'safeguard',
+            path: 'safeguard',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Safeguard')),
+          },
         ]
       },
       //其它
