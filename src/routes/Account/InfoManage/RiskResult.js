@@ -70,25 +70,17 @@ export default class RiskResult extends React.Component {
           enabled:false
         },
         chart: {
-          spacing : [50, 0 , 110, 0],
-          height:420,
+           spacing : [0, 0 , 40, 0],
+           height:340,
         },
         title: {
           text: '',
-          floating:true,
-          x: -50,
-          y: 150,
-          style: {
-            color: '#888',
-            fontSize: '12px',
-            fontFamily: fontFamily
-          },
         },
         subtitle: {
           text: '根据系统分级，建议不同级别出借人可出借资金额度为：',
           floating:true,
-          x: 0,
-          y: 260,
+          x: -10,
+          y: 320,
           style: {
             color: '#333',
             fontSize: '12px',
@@ -97,33 +89,24 @@ export default class RiskResult extends React.Component {
           },
         },
         tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+          enabled: false
+          // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
         },
         legend: {
           labelFormatter: function () {
             return  this.name + this.y+'万'
           },
-          layout: 'horizontal',
-          align: 'left',           //水平方向位置
-          verticalAlign: 'bottom', //垂直方向位置
-          symbolRadius: 0,
-          // itemMarginTop: 5,
-          // itemMarginBottom: 0,
-          x:0,
-          y:80,
         },
         plotOptions: {
           pie: {
-            showInLegend: true,
-            allowPointSelect: true,
-            cursor: 'pointer',
             dataLabels: {
-              enabled: true,
-              connectorWidth: 0,          //线长度
+              connectorWidth: 0,
+              connectorPadding: -20,
               style: {
-                fontSize:12
+                fontWeight: 400,
+                fontSize:11
               }
-            },
+            }
           }
         },
         colors: [
@@ -167,6 +150,7 @@ export default class RiskResult extends React.Component {
           type: 'pie',
           allowPointSelect: false,    //动画效果
           innerSize: '60%',                                   //圆环内填充比例
+          size:'60%',
           name: '出借资金额度占比',
           data: chart
         }]
@@ -177,8 +161,8 @@ export default class RiskResult extends React.Component {
           enabled:false
         },
         chart: {
-          spacing : [50, 0 , 110, 0],
-          height:500,
+          spacing : [0, 0 , 20, 0],
+          height:340,
         },
         title: {
           text: '',
@@ -234,27 +218,7 @@ export default class RiskResult extends React.Component {
           }
         },
         colors: [
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
-            stops: [
-              [0, '#F18925'],
-              [1, '#FFDCB7']
-            ]
-          },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#051D37'],
-              [1, '#113858']
-            ]
-          },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#2E5F94'],
-              [1, '#2E5F94']
-            ]
-          },
+
           {
             linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
             stops: [
@@ -262,20 +226,14 @@ export default class RiskResult extends React.Component {
               [1, '#FFFAF5']
             ]
           },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#FFE9D4'],
-              [1, '#FFE9D4']
-            ]
-          },
+
         ],
         series: [{
           type: 'pie',
           innerSize: '60%',                                   //圆环内填充比例
           name: '出借资金额度占比',
           data: [
-            ['保守型', 100],
+            ['', 100],
 
           ]
         }]
@@ -293,23 +251,41 @@ export default class RiskResult extends React.Component {
               <div className={styles.ImgBox}>
                 <img src={require("~/assets/account/my_risk@2x.png")} alt="" className={styles.img}/>
               </div>
-              <p className={styles.stability}>{resultObj.capacity}</p>
+              <p className={styles.stability}><span>{resultObj.capacity}</span></p>
               <div className={styles.stabilityContent}>
-                <p>根据您所提供的回答，您的总分是：<strong>{resultObj.totalScore}分</strong> </p>
-                <p> 风险承受能力为：<strong>{resultObj.capacity}</strong></p>
+                <p className={styles.totalScore}>根据您所提供的回答，您的总分是：<strong>{resultObj.totalScore}分</strong> </p>
+                <p className={styles.capacity}> 风险承受能力为：<strong>{resultObj.capacity}</strong></p>
                 <p> <strong>{resultObj.capacity}:</strong></p>
                 <p>{resultObj.gradeDesc}</p>
                 {/*图表*/}
                 <div className={styles.container}>
                   <ReactHighcharts config={config} ref="chart"/>
+                  <div className={styles.HighchartsBox}>
+                      <div>
+                        <span className={styles.LegendColor1}></span>
+                        <span>保守型<br/>500万</span>
+                      </div>
+                      <div>
+                        <span className={styles.LegendColor2}></span>
+                        <span>保守型<br/>500万</span>
+                      </div>
+                      <div>
+                        <span className={styles.LegendColor3}></span>
+                        <span>保守型<br/>500万</span>
+                      </div>
+                      <div>
+                        <span className={styles.LegendColor4}></span>
+                        <span>保守型<br/>500万</span>
+                      </div>
+                      <div>
+                        <span className={styles.LegendColor5}></span>
+                        <span>保守型<br/>500万</span>
+                      </div>
+                  </div>
                 </div>
-                <p className={styles.statement}>重要声明: </p>
-                <p>
-                  本风险承受能力评估问卷结果系根据您填写问卷当时所提供的个人资料而推论得知，
-                  且其结果将作为您未来在去投网中介平台出借参考所用。此问卷内容及其结果不构成与您进行交易之要约或要约之引诱。
-                  去投网中介平台不对此份问卷之准确性及咨询是否完整负责。您在此问卷上所填的个人资料本公司将予以保密。
-                </p>
-                <p> 出借人可在每个年度重新进行出借人风险承受能力评估及分级。</p>
+                <p className={styles.statement}>客户声明: </p>
+                <p className={styles.cont}>1、本人愿意接受此问卷的调查方法，并已如实回答，了解了自己的风险承受能力和适合购买的产品类型；</p>
+                <p className={styles.cont}>2、如本人所选择的产品风险等级超过本人的风险承受等级时，本人确认此出借行为为本人意愿行为，自愿承担此出借的风险。</p>
                 <p className={styles.btnP}>
                   {/*<Link to="/account/info-manage/risk-manage" className={styles.fiskNewBtn}>重新测评</Link>*/}
                   <button onClick={() => this.redirect(ResultJson.risk.action)} className={styles.fiskNewBtn}>重新测评</button>

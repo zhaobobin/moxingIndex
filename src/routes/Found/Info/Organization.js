@@ -74,11 +74,11 @@ export default class Organization extends React.Component {
           </tr>
           <tr>
             <td className={styles.congyeTd2}>25岁及以下</td>
-            <td className={styles.renshu}> 4</td>
+            <td className={styles.renshu}> 5</td>
           </tr>
           <tr>
             <td className={styles.congyeTd2}>26-30岁</td>
-            <td className={styles.renshu}>13</td>
+            <td className={styles.renshu}>15</td>
           </tr>
           <tr>
             <td className={styles.congyeTd2}>31-35岁</td>
@@ -91,11 +91,11 @@ export default class Organization extends React.Component {
           <tr>
             <td className={styles.congyeTd} rowSpan="3">学历构成</td>
             <td className={styles.congyeTd2}>专科及以下</td>
-            <td className={styles.renshu}>11</td>
+            <td className={styles.renshu}>12</td>
           </tr>
           <tr>
             <td className={styles.congyeTd2}>本科</td>
-            <td className={styles.renshu}>18</td>
+            <td className={styles.renshu}>20</td>
           </tr>
           <tr>
             <td className={styles.congyeTd2}>研究生及以上</td>

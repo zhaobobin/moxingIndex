@@ -11,7 +11,7 @@ export default class Examine extends React.Component {
 
   render(){
     return(
-      <div >
+      <div className={styles.Examine}>
           <div className={styles.contentBox}>
             <a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/financial_report_2017.pdf">
             <img src={require("~/assets/account/find_audit_img1@2x.png")} alt="" className={styles.auditImg}/>

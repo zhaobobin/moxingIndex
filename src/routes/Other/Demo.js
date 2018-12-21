@@ -59,7 +59,6 @@ export default class Demo extends React.Component {
             <p><Link to="/found/platform?platform=app">平台优势</Link></p>
           </dd>
         </dl>
-
         <dl>
           <dt><strong>其他</strong></dt>
           <dd>

@@ -22,7 +22,7 @@ export default class Event extends React.Component {
   }
   render(){
     return(
-      <div >
+      <div className={styles.Event}>
         <Information>
             <div className={styles.headContent}>
               根据《网络借贷信息中介机构业务活动管理暂行办法》关于建立网络借贷信息中介机构信息披露制度的工作部署和要求，《网络借贷信息中介机构业务活动信息披露指引》第十条 网络借贷信息中介机构或其分支机构发生下列情况之一的，网络借贷信息中介机构应当于发生之日起48小时内将事件的起因、目前的状态、可能产生的影响和采取的措施向公众进行披露。

@@ -5,6 +5,7 @@ import Information from "~/components/Information/Information";
 import Signature from "~/components/Information/signature";
 import { numberFormat, isEmptyObject, getTargetReturn } from '~/utils/utils';
 import Loading from '~/components/Common/Loading';
+import moment from 'moment';
 @connect(state => ({
   global: state.global,
 }))
@@ -50,6 +51,7 @@ componentDidMount(){
             <Information>
               <div className={styles.Disclosure}>
               <h4 className={styles.Manage}> <span className={styles.content}>工商信息 <span></span></span></h4>
+                <p className={styles.DisclosureTime}>（数据截止至：{moment(disclosureArray.showDataTime).format("YYYY-MM-DD HH:mm:ss")}）</p>
               {/*信息列表*/}
               <table  className={styles.ManageTable} >
                 <tbody>
@@ -123,7 +125,7 @@ componentDidMount(){
                 </tr>
                 <tr>
                   <td>累计代偿笔数：</td>
-                  <td>{numberFormat(disclosureArray.insteadTotalCount)}笔</td>
+                  <td>{disclosureArray.insteadTotalCount}笔</td>
                 </tr>
                 <tr>
                   <td>项目逾期率：</td>

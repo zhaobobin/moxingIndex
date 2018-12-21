@@ -29,7 +29,7 @@ export default class InfoIndex extends React.Component {
     const arr=this.state.arr
 
     return(
-      <div >
+      <div className={styles.InfoIndex}>
         <Information>
         <div className={styles.contentBox}>
           《网络借贷信息中介机构业务活动管理暂行办法》第四条、第九条、第三十条、第三十一条均对于网络借贷信息中介机构的信息披露义务进行了规定。
