@@ -38,6 +38,7 @@ export default class QucikRegister extends React.Component {
       userType: 1,
       mobile: '',
       isRegister: false,    //手机号已注册
+      prevMobile: '',      //上一次校验的手机号
       psdType: 'password',
       psdLevelVisible: false,
       psdLevel: '',
@@ -54,7 +55,15 @@ export default class QucikRegister extends React.Component {
     value = value.replace(/\D/g,'');
     this.props.form.setFieldsValue({'mobile': value});
     if(checkPhone(value)){
-      callback()
+      //是手机号，并且不等于上次校验的手机号时，才执行接口校验
+      if(isPhone(value) && value !== this.state.prevMobile){
+        this.checkPhone(value, (res) => {
+          if(!res) return;
+          callback(res);
+        })
+      }else{
+        callback();
+      }
     }else{
       callback('请输入正确的手机号码')
     }
@@ -63,21 +72,20 @@ export default class QucikRegister extends React.Component {
   //手机失焦检测
   mobileOnBlur = (e) => {
     let value = e.target.value;
-    if(isPhone(value)){
-      this.checkPhone(value, (res) => {
-        if(!res) return;
+    if(value){
+      if(!isPhone(value)){
         this.props.form.setFields({
           'mobile': {
             value: value,
-            errors: [new Error(res)]
+            errors: [new Error('请输入正确的手机号码')]
           }
         })
-      })
+      }
     }else{
       this.props.form.setFields({
         'mobile': {
           value: value,
-          errors: [new Error('请输入正确的手机号')]
+          errors: [new Error('请输入手机号码')]
         }
       })
     }
@@ -121,7 +129,8 @@ export default class QucikRegister extends React.Component {
           cb('此手机号已注册，请直接登录');
         }
         this.setState({
-          isRegister
+          isRegister,
+          prevMobile: mobile
         });
 
       }
@@ -284,6 +293,7 @@ export default class QucikRegister extends React.Component {
       },
       callback: (res) => {
         if(res.code === 0){
+          Storage.set(ENV.storageLastTel, values.mobile);      //手机号保存到本地存储;
           this.props.dispatch(routerRedux.push('/user/register-result'))
         }else{
           Toast.info(res.message, 2);

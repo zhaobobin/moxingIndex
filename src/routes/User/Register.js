@@ -8,7 +8,7 @@ import {
   checkPhone, isPhone, checkPsdLevel,
   Encrypt, getUrlParams, yaoqingDecrypt, filterTel
 } from "~/utils/utils";
-import styles from './Register.less';
+import styles from './QucikRegister.less';
 
 //import logo from '~/assets/com/logo.png'
 import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.png'
@@ -25,7 +25,7 @@ const urlInviCode = getUrlParams().invitationCode || '';
   global: state.global,
 }))
 @Form.create()
-export default class Register extends React.Component {
+export default class QucikRegister extends React.Component {
 
   constructor(props){
     super(props);
@@ -38,6 +38,7 @@ export default class Register extends React.Component {
       userType: 1,
       mobile: '',
       isRegister: false,    //手机号已注册
+      prevMobile: '',      //上一次校验的手机号
       psdType: 'password',
       psdLevelVisible: false,
       psdLevel: '',
@@ -54,7 +55,15 @@ export default class Register extends React.Component {
     value = value.replace(/\D/g,'');
     this.props.form.setFieldsValue({'mobile': value});
     if(checkPhone(value)){
-      callback()
+      //是手机号，并且不等于上次校验的手机号时，才执行接口校验
+      if(isPhone(value) && value !== this.state.prevMobile){
+        this.checkPhone(value, (res) => {
+          if(!res) return;
+          callback(res);
+        })
+      }else{
+        callback();
+      }
     }else{
       callback('请输入正确的手机号码')
     }
@@ -63,21 +72,20 @@ export default class Register extends React.Component {
   //手机失焦检测
   mobileOnBlur = (e) => {
     let value = e.target.value;
-    if(isPhone(value)){
-      this.checkPhone(value, (res) => {
-        if(!res) return;
+    if(value){
+      if(!isPhone(value)){
         this.props.form.setFields({
           'mobile': {
             value: value,
-            errors: [new Error(res)]
+            errors: [new Error('请输入正确的手机号码')]
           }
         })
-      })
+      }
     }else{
       this.props.form.setFields({
         'mobile': {
           value: value,
-          errors: [new Error('请输入正确的手机号')]
+          errors: [new Error('请输入手机号码')]
         }
       })
     }
@@ -121,7 +129,8 @@ export default class Register extends React.Component {
           cb('此手机号已注册，请直接登录');
         }
         this.setState({
-          isRegister
+          isRegister,
+          prevMobile: mobile
         });
 
       }
@@ -284,6 +293,7 @@ export default class Register extends React.Component {
       },
       callback: (res) => {
         if(res.code === 0){
+          Storage.set(ENV.storageLastTel, values.mobile);      //手机号保存到本地存储;
           this.props.dispatch(routerRedux.push('/user/register-result'))
         }else{
           Toast.info(res.message, 2);
@@ -303,11 +313,11 @@ export default class Register extends React.Component {
     const winWidth = window.innerWidth - 30;
 
     return(
-      <div className={styles.container}>
+      <div className={styles.QucikRegister}>
 
         {/*<div className={styles.header}>*/}
-          {/*<img src={logo} alt="logo"/>*/}
-          {/*<h1>注册去投网</h1>*/}
+        {/*<img src={logo} alt="logo"/>*/}
+        {/*<h1>注册去投网</h1>*/}
         {/*</div>*/}
 
         <div className={styles.banner}>
@@ -320,14 +330,14 @@ export default class Register extends React.Component {
             onSubmit={this.handleFormSubmit}
           >
             {/*<FormItem style={{margin: 0}}>*/}
-              {/*{getFieldDecorator('userType', {*/}
-                {/*initialValue: userType,*/}
-              {/*})(*/}
-                {/*<RadioGroup className={styles.radioGroup} onChange={this.changeUserType}>*/}
-                  {/*<Radio className={styles.radio} value={1}>我要出借</Radio>*/}
-                  {/*<Radio className={styles.radio} value={2}>我要借款</Radio>*/}
-                {/*</RadioGroup>*/}
-              {/*)}*/}
+            {/*{getFieldDecorator('userType', {*/}
+            {/*initialValue: userType,*/}
+            {/*})(*/}
+            {/*<RadioGroup className={styles.radioGroup} onChange={this.changeUserType}>*/}
+            {/*<Radio className={styles.radio} value={1}>我要出借</Radio>*/}
+            {/*<Radio className={styles.radio} value={2}>我要借款</Radio>*/}
+            {/*</RadioGroup>*/}
+            {/*)}*/}
             {/*</FormItem>*/}
 
             <FormItem>
@@ -398,9 +408,9 @@ export default class Register extends React.Component {
                         />
                       </em>
                       {/*<Icon*/}
-                        {/*type={psdType === 'password' ? 'eye-invisible' : 'eye'}*/}
-                        {/*className={styles.inputEye}*/}
-                        {/*onClick={this.changePsdType}*/}
+                      {/*type={psdType === 'password' ? 'eye-invisible' : 'eye'}*/}
+                      {/*className={styles.inputEye}*/}
+                      {/*onClick={this.changePsdType}*/}
                       {/*/>*/}
                       {
                         psdLevelVisible && getFieldValue('password') ?
@@ -477,10 +487,10 @@ export default class Register extends React.Component {
 
             <FormItem style={{border: 'none'}}>
               {/*{getFieldDecorator('xieyi', {*/}
-                {/*valuePropName: 'checked',*/}
-                {/*initialValue: xieyiChecked,*/}
+              {/*valuePropName: 'checked',*/}
+              {/*initialValue: xieyiChecked,*/}
               {/*})(*/}
-                {/**/}
+              {/**/}
               {/*)}*/}
               <div>
                 <p className={styles.xieyi}>
@@ -497,8 +507,7 @@ export default class Register extends React.Component {
                     hasErrors(getFieldsError()) ||
                     !getFieldValue('mobile') ||
                     !getFieldValue('password') ||
-                    !getFieldValue('smscode') ||
-                    smscodeSended === false
+                    !getFieldValue('smscode')
                   }
                 >
                   注册
