@@ -97,7 +97,10 @@ export default class SmsValidate extends React.Component {
 
         }
       }
-    })
+    });
+
+    setTimeout(() => { this.ajaxFlag = true }, 1000);
+
   };
 
   //发送短信验证码
@@ -123,7 +126,7 @@ export default class SmsValidate extends React.Component {
       url: api,
       payload: params,
       callback: (res) => {
-        setTimeout(() => { this.ajaxFlag = true }, 500);
+
         if(res.code === 0){
           this.setState({
             value: '',
@@ -160,7 +163,7 @@ export default class SmsValidate extends React.Component {
         smsCheckCode: Encrypt(mobile, mobile)
       },
       callback: (res) => {
-        setTimeout(() => { this.ajaxFlag = true }, 500);
+
         if(res.code === 0){
           this.setState({
             value: '',

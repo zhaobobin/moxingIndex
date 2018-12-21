@@ -4,6 +4,7 @@ import styles from './Detail.less';
 import ToastLoading from '~/components/Common/ToastLoading';
 import logo from '~/assets/com/logo.png';
 import { Progress } from 'antd';
+import { Link } from 'dva/router';
 @connect(state => ({
   global: state.global,
 }))
@@ -11,7 +12,7 @@ export default class ZxDetail extends React.Component {
 
   constructor(props){
     super(props);
-    //this.loading = true;
+    this.loading = true;
     this.state = {
       detail: {},
     }
@@ -90,7 +91,7 @@ export default class ZxDetail extends React.Component {
                    </div>
               </div>
               <div className={styles.sharebottom}>京ICP证 京B2-20160180 | 京ICP备14014223号-2<span>北京恒远鑫达投资管理有限公司</span></div>
-              <div className={styles.sbDownBut}><span>下载去投网</span></div>
+              <div className={styles.sbDownBut}><Link to="/download"><span>下载去投网</span></Link></div>
             </div>
         }
 

@@ -4,6 +4,7 @@ import styles from './Share.less';
 import { ENV, getUrlParams } from '~/utils/utils';
 import ResultJson from '~/routes/Result/ResultJson';
 import ToastLoading from '~/components/Common/ToastLoading';
+import { Link } from 'dva/router';
 
 function changeURLArg(url,arg,arg_val){
   let pattern=arg+'=([^&]*)';
@@ -38,14 +39,15 @@ componentDidMount(){
  }
 
   getshareData=()=>{
- 	let {userId, accessToken} = this.props.global.currentUser.userInfo;
-  	console.log(this.props.global.currentUser.userInfo)
+    
+ 	  let {userId, accessToken} = this.props.global.currentUser.userInfo;
+  	
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/accountNotice/sharingNotification?productType=1',
+      url: '/api/accountNotice/sharingNotification',
       payload:{
         userId,
-        accessToken
+        productType: '1'
       },
 
       callback: (res) => {
@@ -98,7 +100,7 @@ componentDidMount(){
 	       </div>
                 :
                 <div className={styles.sharecon} align="center">
-	        <div className={styles.shareBut} onClick={() => this.redirect(ResultJson.share_shouyi.action)}><span>下载去投网App</span></div>
+	        <Link to="download"><div className={styles.shareBut}><span>下载去投网App</span></div></Link>
 	        <p>京ICP证 京B2-20160180 | 京ICP备14014223</p>
 	        <p>北京恒远鑫达投资管理有限公司</p>
 	        </div>
