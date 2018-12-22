@@ -1,31 +1,20 @@
 p{margin-bottom: 0;}    
-/* .signature .hb .navheader>ul>li>a{color:#cda167;text-shadow:2px 2px 10px #000;} */
-/* .signature .hb .navheader>ul>li:hover >a{color:#fff;background:#cda167;border-radius:4px;text-shadow:none} */
-.signature .navheader>ul>li.goback{padding-left:20px;font-size:18px;background: no-repeat 10px bottom;}
-.signature .navheader>ul>li.goback:hover >a{color:#cda167 !important;background:none}
-.signature .hb .navheader>ul>li>a .boder_arrow_bottom{border-color: #cda167 transparent transparent transparent;}
-.signature .hb .navheader>ul>li:hover >a .boder_arrow_bottom{border-color: #fff transparent transparent transparent;}
-.signature .hb .navheader>ul>li .dd{border:1px solid #cda167}
-.signature #touzi_li ul li{background:#cda167}
-.signature #touzi_li ul li a{color:#fff}
-.signature #touzi_li ul li a:hover{background:#b2834d;}
-    
+.signature .w{width:100%}
 .signature .section{position:relative;overflow:hidden}
-.signature .section .w{height:100%;padding: 0 10px;text-align: justify;}
-.signature .section .title{padding-top:35px;padding-bottom:15px;text-align:center;position:relative;z-index:9;}
-.signature .section .title h2{display:inline-block;height:50px;line-height:50px;color:#fff;font-size:18px;font-weight:bolder;position:relative;}
-.signature .section .title h2 i{display:block;width:40px;height:1px;background:#fff;position:absolute;top:50%}
+.signature .section .w{height:100%;position:relative;}
+.signature .section .title{width:100%;padding-top:25px;padding-bottom:20px;text-align:center;position:absolute;left:0;top:0;z-index:9;}
+.signature .section .title h2{display:inline-block;height:50px;line-height:50px;*width:250px;color:#fff;font-size:18px;font-weight:bolder;position:relative;}
+.signature .section .title h2 i{display:block;width:30px;height:1px;background:#fff;position:absolute;top:50%}
 .signature .section .title h2 i.l{left:-50px}
 .signature .section .title h2 i.r{right:-50px}
-.signature .section p{color:#fff;font-size:13px;}
+.signature .section p{margin:0 20px;color:#fff;font-size:14px;}
 
-.signature .section1{position: relative;
-img{width: 100%;}
-}
+.signature .section1{background:#1c1d4c;}
     .signature .section1 .con{width:100%;height:100%;position:absolute;left:0;top:0;z-index:1;}
     .signature .section1 .con i{display:block;*display:none;position:absolute;background:#e2bb70;border-radius:50%;}
     .signature .section1 .con em{display:block;width:133px;height:216px;position:absolute;background:url(../../assets/electronic/line.png) no-repeat 0 0;}
-    .signature .section1 .w{position:relative;z-index:0;}
+    .signature .section1 .w{text-align:center;position:relative;z-index:0;}
+    .signature .section1 .w img{width:90%;height:auto;}
     
     @keyframes ripple {
         0% {
@@ -42,73 +31,74 @@ img{width: 100%;}
         }
     }
     
-    .signature .section1 .con .line{width:60px;height:97px;background-image:url(../../assets/electronic/line.png);background-repeat:no-repeat;background-position:0 0;position:absolute;top:0px;right:0px;}
+    .signature .section1 .con .line{width:30px;height:48px;background-image:url(../../assets/electronic/line.png);background-repeat:no-repeat;background-position:0 0;background-size:100% 100%;position:absolute;top:0px;right:0px;}
 
-.signature .section2{height:519px;background:url(../../assets/electronic/section2_bg.jpg) no-repeat center 360px #353f7e;background-size: 223%}
+.signature .section2{background:#353f7e;}
+    .signature .section2 .title{position:relative;}
     .signature .section2 p{line-height:2em;text-indent:2em}
-    .signature .section2 .dun{display:block;width: 126px;
-    height: 142px;background:url(../../assets/electronic/section2-icon.png) no-repeat 0 0;
-        position:absolute;left:50%;top:260px;margin-left:-63px;transition: all 1.5s ease;background-size:100% 100%; ;}
-    .signature .section2 .w:hover .dun{transform: rotateY(360deg)}
+    .signature .section2 .w:hover .dun{}
+    .signature .section2 .w .img{margin:30px 0 10px;text-align:center;position:relative;}
+    .signature .section2 .w .img img{width:90%;height:auto;}
+    .signature .section2 .w .img i{display:block;width:44px;height:55px;background:url(../../assets/electronic/section2-icon.png) no-repeat ;position:absolute;left:50%;top:-15px;
+        margin-left:-22px;background-size:100% 100%;}
     
-.signature .section3{height:640px;background:url(../../assets/electronic/section3_bg.jpg) no-repeat center center #1c1d4c;}
-    .signature .section3 .w{background:url(../../assets/electronic/section3_bg2.png) no-repeat center 230px;    background-size: 100%;}
-    .signature .section3  .w ul{width:100%;height:100%;position:absolute;left:0;top:0;}
-    .signature .section3  .w ul li{padding-left:68px;position:absolute;}
-    .signature .section3  .w ul li i{display:block;width:58px;height:58px;position:absolute;left:2px;top:50%;margin-top:-29px;transition: all .5s ease;}
+.signature .section3{background:#1c1d4c;}
+    .signature .section3 .w{position:relative;}
+    .signature .section3 .w .img{width:100%;height:100%;text-align:center;}
+    .signature .section3 .w .img img{width:100%;height:100%;}
+    .signature .section3  .w ul{width:100%;height:100%;position:absolute;left:0;top:0;background:url(../../assets/electronic/section3_bg2.png) no-repeat center 70%;background-size:90% auto;}
+    .signature .section3  .w ul li{padding-left:15px;position:absolute;}
+    .signature .section3  .w ul li i{display:block;width:14px;height:14px;position:absolute;left:2px;top:50%;margin-top:-7px;transition: all .5s ease;background-repeat:no-repeat;
+        background-position:0 0;background-size:100% 100%;}
     .signature .section3  .w ul li:hover i{transform:scale(1.2,1.2)}
-    .signature .section3  .w ul li span{font-size:15px;color:#fff;font-weight:bold}
+    .signature .section3  .w ul li span{font-size:12px;color:#fff;font-weight:bold}
     
-    .signature .section3  .w ul li.li1{left: 20%;top:163px;}
-    .signature .section3  .w ul li.li1 i{background:url(../../assets/electronic/section3_icon1.png) no-repeat 0 0;}
-    .signature .section3  .w ul li.li2{left: 20%; top:244px;}
-    .signature .section3  .w ul li.li2 i{background:url(../../assets/electronic/section3_icon2.png) no-repeat 0 0;}
-    .signature .section3  .w ul li.li3{left: 20%; top:320px;}
-    .signature .section3  .w ul li.li3 i{background:url(../../assets/electronic/section3_icon3.png) no-repeat 0 0;}
-    .signature .section3  .w ul li.li4{left: 20%; top:400px;}
-    .signature .section3  .w ul li.li4 i{background:url(../../assets/electronic/section3_icon4.png) no-repeat 0 0;}
-    .signature .section3  .w ul li.li5{left: 20%; top: 480px;}
-    .signature .section3  .w ul li.li5 i{background:url(../../assets/electronic/section3_icon5.png) no-repeat 0 0;}
+    .signature .section3  .w ul li.li1{left:5%; top:55%;}
+    .signature .section3  .w ul li.li1 i{background-image:url(../../assets/electronic/section3_icon1.png);}
+    .signature .section3  .w ul li.li2{left:20%; top:46%;}
+    .signature .section3  .w ul li.li2 i{background-image:url(../../assets/electronic/section3_icon2.png);}
+    .signature .section3  .w ul li.li3{left:45%; top:40%;}
+    .signature .section3  .w ul li.li3 i{background-image:url(../../assets/electronic/section3_icon3.png);}
+    .signature .section3  .w ul li.li4{right:5%; top:51%;}
+    .signature .section3  .w ul li.li4 i{background-image:url(../../assets/electronic/section3_icon4.png);}
+    .signature .section3  .w ul li.li5{right:3%; top:62%;}
+    .signature .section3  .w ul li.li5 i{background-image:url(../../assets/electronic/section3_icon5.png);}
     
-.signature .section4{background:url(../../assets/electronic/section4_bg.jpg) no-repeat center center #353f7e;}
-    .signature .section4 ul{margin-top:10px;overflow:hidden}
-    .signature .section4 ul li{width:290px;margin: 0 auto; margin-bottom: 20px;}
-    .signature .section4 ul li i{display:block;width:150px;height:152px;margin:0 auto;transition: all 1.5s ease;}
+.signature .section4{background:#353f7e;}
+    .signature .section4 .w .img{width:100%;height:100%;text-align:center;}
+    .signature .section4 .w .img img{width:100%;height:100%;margin:80px 0 120px;}
+    .signature .section4 ul{width:96%;margin:10px 2% 0;overflow:hidden;position:absolute;left:0;top:70px}
+    .signature .section4 ul li{float:left;width:33.33%;}
+    .signature .section4 ul li a{display:block;margin:0 10px;}
+    .signature .section4 ul li i{display:block;width:40px;height:42px;margin:0 auto;transition: all 1.5s ease;background-repeat:no-repeat;background-position:0 0;background-size:100% 100%;}
     .signature .section4 ul li:hover i{transform: rotateY(360deg)}
-    .signature .section4 ul li p{padding:30px 25px;margin-top:15px;border:4px solid #19a6a0;border-radius:4px;background:rgba(28,29,76,.6)}
-    .signature .section4 ul li p strong{display:block;margin-bottom:15px;text-align:center;font-size:24px;color:#d4a96c;text-shadow:2px 4px 3px #4e3e3c}
-    .signature .section4 ul li p span{color:#19a6a0;font-size:16px;}
+    .signature .section4 ul li p{height:190px;padding:15px 5px 15px 10px;margin:5px 0 0;border:4px solid #19a6a0;border-radius:4px;background:rgba(28,29,76,.6)}
+    .signature .section4 ul li p strong{display:block;margin-bottom:15px;text-align:center;font-size:16px;color:#d4a96c;text-shadow:2px 4px 3px #4e3e3c}
+    .signature .section4 ul li p span{color:#19a6a0;font-size:12px;}
     
-    .signature .section4 ul li.li1 i{background:url(../../assets/electronic/section4_icon1.png) no-repeat 0 0}
-    .signature .section4 ul li.li2 i{background:url(../../assets/electronic/section4_icon2.png) no-repeat 0 0}
-    .signature .section4 ul li.li3 i{background:url(../../assets/electronic/section4_icon3.png) no-repeat 0 0}
+    .signature .section4 ul li.li1 i{background-image:url(../../assets/electronic/section4_icon1.png);}
+    .signature .section4 ul li.li2 i{background-image:url(../../assets/electronic/section4_icon2.png);}
+    .signature .section4 ul li.li3 i{background-image:url(../../assets/electronic/section4_icon3.png);}
     
-.signature .section5{background:url(../../assets/electronic/section5_bg.jpg) no-repeat center center #1c1d4c;}
-    .signature .section5 ul{margin-top:50px;overflow:hidden}
-    .signature .section5 ul li{width:160px;margin:0 auto; margin-bottom: 20px;}
-    .signature .section5 ul li .p1{height:152px;margin-bottom:6px;border:4px solid #1a6f7e;border-radius:4px;background:url(../../assets/electronic/section5_libg.png) no-repeat center center rgba(52,62,141,.2);position:relative;}
-    .signature .section5 ul li .p2{display: table-cell;vertical-align: middle;height:76px;padding:0 25px;border:4px solid #19a6a0;border-radius:4px;font-size:16px;background:#384499}
-    .signature .section5 ul li .p1 i.i1{display:block;position:absolute;left:50%;top:50%;transition: all 1.5s ease;}
+.signature .section5{background:#1c1d4c;}
+    .signature .section5 .w .img{width:100%;height:100%;text-align:center;}
+    .signature .section5 .w .img img{width:100%;height:100%;margin:50px 0 80px;}
+    .signature .section5 ul{width:100%;overflow:hidden;position:absolute;left:0;top:90px;}
+    .signature .section5 ul li{float:left;width:20%;}
+    .signature .section5 ul li a{display:block;margin:0 10px}
+    .signature .section5 ul li.li5{margin-right:0}
+    .signature .section5 ul li .p1{height:55px;margin:0 0 6px;border:4px solid #1a6f7e;border-radius:4px;background:url(../../assets/electronic/section5_libg.png) no-repeat center center rgba(52,62,141,.2);position:relative;}
+    .signature .section5 ul li .p2{display: table-cell;vertical-align: middle;height:150px;padding:0 5px 0 10px;border:4px solid #19a6a0;border-radius:4px;font-size:12px;background:#384499}
+    .signature .section5 ul li .p1 i.i1{display:block;position:absolute;left:50%;top:50%;transition: all 1.5s ease;background-repeat:no-repeat;background-position:0 0;background-size:100% 100%;}
         .signature .section5 ul li:hover .p1 i.i1{transform: rotateY(360deg)}
-        .signature .section5 ul li.li1 .p1 i.i1{width:60px;height:59px;margin-left:-30px;margin-top:-28px;background:url(../../assets/electronic/section5_icon11.png) no-repeat 0 0;}
-        .signature .section5 ul li.li2 .p1 i.i1{width:60px;height:67px;margin-left:-30px;margin-top:-30px;background:url(../../assets/electronic/section5_icon21.png) no-repeat 0 0;}
-        .signature .section5 ul li.li3 .p1 i.i1{width:49px;height:62px;margin-left:-26px;margin-top:-28px;background:url(../../assets/electronic/section5_icon31.png) no-repeat 0 0;}
-        .signature .section5 ul li.li4 .p1 i.i1{width:62px;height:59px;margin-left:-32px;margin-top:-28px;background:url(../../assets/electronic/section5_icon41.png) no-repeat 0 0;}
-        .signature .section5 ul li.li5 .p1 i.i1{width:54px;height:61px;margin-left:-28px;margin-top:-28px;background:url(../../assets/electronic/section5_icon51.png) no-repeat 0 0;}
-    .signature .section5 ul li .p1 i.i2{display:block;position:absolute;top:12px;right:10px;}
-        .signature .section5 ul li.li1 .p1 i.i2{width:25px;height:35px;background:url(../../assets/electronic/section5_icon12.png) no-repeat 0 0;}
-        .signature .section5 ul li.li2 .p1 i.i2{width:25px;height:35px;background:url(../../assets/electronic/section5_icon22.png) no-repeat 0 0;}
-        .signature .section5 ul li.li3 .p1 i.i2{width:25px;height:35px;background:url(../../assets/electronic/section5_icon32.png) no-repeat 0 0;}
-        .signature .section5 ul li.li4 .p1 i.i2{width:25px;height:35px;background:url(../../assets/electronic/section5_icon42.png) no-repeat 0 0;}
-        .signature .section5 ul li.li5 .p1 i.i2{width:25px;height:35px;background:url(../../assets/electronic/section5_icon52.png) no-repeat 0 0;}
-    .navheader ul li a:hover {
-    display: block;
-    background: none;
-    border-radius: 5px;
-    padding: 0px 5px !important;
-    color: #cda167 !important;
-}
-.hb .navheader>ul>li:hover>a {
-    color: #cda167;
-    background: none;
-}
+        .signature .section5 ul li.li1 .p1 i.i1{width:30px;height:33px;margin-left:-15px;margin-top:-15px;background-image:url(../../assets/electronic/section5_icon11.png);}
+        .signature .section5 ul li.li2 .p1 i.i1{width:30px;height:33px;margin-left:-15px;margin-top:-15px;background-image:url(../../assets/electronic/section5_icon21.png);}
+        .signature .section5 ul li.li3 .p1 i.i1{width:25px;height:31px;margin-left:-13px;margin-top:-14px;background-image:url(../../assets/electronic/section5_icon31.png);}
+        .signature .section5 ul li.li4 .p1 i.i1{width:31px;height:30px;margin-left:-16px;margin-top:-14px;background-image:url(../../assets/electronic/section5_icon41.png);}
+        .signature .section5 ul li.li5 .p1 i.i1{width:27px;height:30px;margin-left:-14px;margin-top:-14px;background-image:url(../../assets/electronic/section5_icon51.png);}
+    .signature .section5 ul li .p1 i.i2{display:block;position:absolute;top:5px;right:3px;background-repeat:no-repeat;background-position:0 0;background-size:100% 100%;}
+        .signature .section5 ul li.li1 .p1 i.i2{width:12px;height:17px;background-image:url(../../assets/electronic/section5_icon12.png);}
+        .signature .section5 ul li.li2 .p1 i.i2{width:10px;height:10px;background-image:url(../../assets/electronic/section5_icon22.png);}
+        .signature .section5 ul li.li3 .p1 i.i2{width:12px;height:12px;background-image:url(../../assets/electronic/section5_icon32.png);}
+        .signature .section5 ul li.li4 .p1 i.i2{width:12px;height:15px;background-image:url(../../assets/electronic/section5_icon42.png);}
+        .signature .section5 ul li.li5 .p1 i.i2{width:12px;height:13px;background-image:url(../../assets/electronic/section5_icon52.png);}
