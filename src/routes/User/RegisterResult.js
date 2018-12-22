@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 import {ENV, Storage} from "~/utils/utils";
 import styles from './Register.less';
 
@@ -30,7 +31,13 @@ export default class RegisterResult extends React.Component {
         </div>
 
         <div className={styles.download}>
-          <a className={styles.link} style={{marginBottom: '120px'}}>立即下载APP</a>
+          <Link
+            to="/download"
+            className={styles.link}
+            style={{marginBottom: '120px'}}
+          >
+            立即下载APP
+          </Link>
           <p>
             <span>{ENV.icp}</span>
             <span>|</span>
