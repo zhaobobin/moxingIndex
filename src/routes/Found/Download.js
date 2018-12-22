@@ -11,10 +11,8 @@ export default class Download extends React.Component {
 
   render(){
     return(
-      <div>
-       {/*<div align="center" className={top.header}><img src={require('../../assets/top.png')} /><span>扫码下载</span></div>*/}
-        {/*以上标题可以忽略*/}
-        <div className={styles.download}>
+      <div className={styles.download}>
+        <div style={{fontSize:'0'}}>
           <img src={require('../../assets/down/down_02_01.jpg')} />
           <div className={styles.downloadImg}>
           <img src={require('../../assets/down/down_02_02.jpg')} />

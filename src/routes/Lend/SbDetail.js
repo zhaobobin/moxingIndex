@@ -12,7 +12,7 @@ export default class SbDetail extends React.Component {
 
   constructor(props){
     super(props);
-    this.loading = true;
+    //this.loading = true;
     this.state = {
       detail: {},
     }
@@ -63,25 +63,24 @@ export default class SbDetail extends React.Component {
             <div className={styles.content}>
               {/*<div className={styles.head}>
                 <img src={logo} alt="logo"/>
-                <h1>{detail.applyTitle}</h1>
+                <h1>{detail.applyTitle===''?'0':detail.applyTitle}</h1>
               </div>*/}
               <div className={styles.body}>
                    <div className={styles.sb_top}>
-                   <div className={styles.sb_border}><span></span></div>
-                   
-                   <div align="center"><Progress type="dashboard" percent={detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF"/><span className={styles.sb_cirel}></span></div>
-                   <span className={styles.sb_top1}>已有{detail.bidPeopleNum}人出借</span><strong className={styles.sb_top2}><i>{detail.businessRate}%</i>年化利率</strong></div>
-                   <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth}个月</i>借款期限</span><span><i>{detail.bidAmt}元</i>剩余金额</span></div></div>
+                   <div className={styles.sb_border}><span></span></div>                   
+                   <div align="center"><Progress type="dashboard" percent={detail.bidProgress==='' ? '0': detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF"/><span className={styles.sb_cirel}></span></div>
+                   <span className={styles.sb_top1}>已有{detail.bidPeopleNum===''?'0':detail.bidPeopleNum}人出借</span><strong className={styles.sb_top2}><i>{detail.businessRate===''?'0':detail.businessRate}%</i>年化利率</strong></div>
+                   <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth===''?'0':detail.termMonth}个月</i>借款期限</span><span><i>{detail.bidAmt===''?'0':detail.bidAmt}元</i>剩余金额</span></div></div>
                    <div className={styles.sb_contect}>
                    <h1>项目简介</h1>
                    <ul className={styles.sb_contectUl}>
-                     <li><span>项目名称</span>{detail.applyTitle}</li>
-                     <li><span>借款金额</span>{detail.applyAmt}</li>
-                     <li><span>发标时间</span>{detail.issueTime}</li>
-                     <li><span>封闭期</span>{detail.closedDay}天</li>
-                     <li><span>起投金额</span>{detail.bidCash}元</li>
-                     <li><span>还款方式</span>{detail.returnMethod}</li>
-                     <li><span>起息日</span>{detail.beginDate}</li>
+                     <li><span>项目名称</span>{detail.applyTitle===''?'0':detail.applyTitle}</li>
+                     <li><span>借款金额</span>{detail.applyAmt===''?'0':detail.applyAmt}</li>
+                     <li><span>发标时间</span>{detail.issueTime===''?'0':detail.issueTime}</li>
+                     <li><span>封闭期</span>{detail.closedDay===''?'0':detail.closedDay}天</li>
+                     <li><span>起投金额</span>{detail.bidCash===''?'0':detail.bidCash}元</li>
+                     <li><span>还款方式</span>{detail.returnMethod===''?'0':detail.returnMethod}</li>
+                     <li><span>起息日</span>{detail.beginDate===''?'0':detail.beginDate}</li>
                      <li className={styles.iconA}><span>信用等级</span><i>A</i><em>&nbsp;</em></li>
                    </ul>
                    </div>
