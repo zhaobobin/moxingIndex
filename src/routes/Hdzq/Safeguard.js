@@ -84,26 +84,26 @@ export default class Safeguard extends React.Component {
                     </div>
                 </div>
                 <div className={styles.page3}>
-                	{/* 
+                	
                     <div className={styles.IntroLeft}>
                         <div className={styles.intro}>
-                            <h5>严谨高效保障措施</h5>
-                            <p>公安部信息系统安全等级保护共分为五级，级别越高越安全。</p>
-                            <p>一般来说，四大国有银行(总行)是一二级，分行(省行、市行等重要金融机构一般是第三级认证。</p>
+                            <h5>助力行业和谐发展</h5>
+                            <p>安全是互联网金融平台健康发展的基石</p>
                         </div>
                     </div>
-                    */}
-                    <div className={styles.pyramid}>
-                        <div className={styles.Tpyramid}>
-                            <img src={require('../../assets/safeguard/pyramid.png')} />
+                  
+                    <div  className={styles.pyramid}>
+                        <div  className={styles.Tpyramid}>
+                            <img src={require('../../assets/safeguard/pyramid.png' )} />
                         </div>
-                        <div className={styles.TpyramidInt}>
-                            <div className={styles.one}>四大国有银行(总行)是一二级</div>
-                            <div className={styles.two}>
+                        <div  className={styles.TpyramidInt }>
+                            <div  className={styles.one }><p>四大国有银行(总行)</p>
+                                <p>是一二级</p></div>
+                            <div  className={styles.two}>
                                 <span>分行(省行、市行)等重要金融机构一般是第三级认证</span>
                                 <i><em></em></i>
                             </div>
-                            <div className={styles.three}>
+                            <div  className={styles.three}>
                                 <span></span>
                                 <p>去投网达到安全管控水平</p>
                             </div>
@@ -115,13 +115,7 @@ export default class Safeguard extends React.Component {
                     <div className={styles.buttonLiner}>
                     </div>
                 </div>
-                <div className={styles.page4}>
-                    <div className={styles.IntroLeft}>
-                        <div className={styles.intro}>
-                            <h5>助力行业和谐发展</h5>
-                            <p>安全是互联网金融平台健康发展的基石</p>
-                        </div>
-                    </div>
+                <div className={styles.page4}>                    
                     <div className={styles.development}>
                         <div className={styles.api}></div>
                         <div className={styles.item +' '+styles.item1}>
