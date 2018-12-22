@@ -60,7 +60,7 @@ export default class PlatformIndex extends React.Component {
                   }
           >
             <PlatformOne />
-            <PlatformTwo/>
+          {/*  <PlatformTwo/>*/}
             <PlatformThree/>
             <PlatformFour/>
             <PlatformFive/>

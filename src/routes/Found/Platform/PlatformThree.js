@@ -9,10 +9,10 @@ export default class PlatformThree extends React.Component {
   render(){
     return(
       <div className={styles.PagesBox}>
-        {/*第三页*/}
+        {/*第三页
         <p className={styles.Pages}>
-          <span className={styles.Page}>第三页</span>
-        </p>
+          <span className={styles.Page}>第二页</span>
+        </p>*/}
           <p className={styles.DepositTitle}>银行资金存管</p>
         <div className={styles.DepositImgBox}>
           <img src={require("~/assets/platform/found_platform_page2@2x.png")} alt="" className={styles.DepositImg}/>

@@ -9,10 +9,10 @@ export default class PlatformSix extends React.Component {
   render(){
     return(
       <div className={styles.PagesBox}>
-        {/*第六页*/}
+        {/*第六页
         <p className={styles.Pages}>
-          <span className={styles.Page}>第六页</span>
-        </p>
+          <span className={styles.Page}>第五页</span>
+        </p>*/}
         <p className={styles.SixTitle}>智能分散 降低出借风险</p>
         <div className={styles.SixBox}>
           <img src={require("~/assets/platform/found_platform_lt@2x.png")} alt="" className={styles.SixLt }/>
@@ -21,7 +21,7 @@ export default class PlatformSix extends React.Component {
           <img src={require("~/assets/platform/found_platform_rb@2x.png")} alt="" className={styles.SixRb }/>
           {/*<img src={require("~/assets/platform/found_platform_pg61@2x.png")} alt="" className={styles.SixContImg }/>*/}
           <div className={styles.SixContImgBox}>
-            <p className={styles.investor}>投资人</p>
+            <p className={styles.investor}>出借人</p>
           </div>
 
           <p>1.在优质项目的基础上，出借风险随着出借项目数量的增多而减少。</p>

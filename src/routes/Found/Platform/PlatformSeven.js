@@ -9,10 +9,10 @@ export default class PlatformSeven extends React.Component {
   render(){
     return(
       <div className={styles.PagesBox}>
-        {/*第七页*/}
+        {/*第七页
         <p className={styles.Pages}>
-          <span className={styles.Page}>第七页</span>
-        </p>
+          <span className={styles.Page}>第六页</span>
+        </p>*/}
         <p className={styles.SevenTitle}>完善的风控管理体系</p>
         <div className={styles.SevenBox}>
           <img src={require("~/assets/platform/found_platform_lt@2x.png")} alt="" className={styles.SevenLt }/>

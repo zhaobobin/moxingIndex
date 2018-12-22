@@ -9,10 +9,10 @@ export default class PlatformEight extends React.Component {
   render(){
     return(
       <div className={styles.PagesBox}>
-        {/*第八页*/}
+        {/*第八页
         <p className={styles.Pages}>
-          <span className={styles.Page}>第八页</span>
-        </p>
+          <span className={styles.Page}>第七页</span>
+        </p>*/}
           <p className={styles.EightTitle}>合法合规 有效法律保障</p>
         <div className={styles.EightBox}>
           <img src={require("~/assets/platform/found_platform_lt@2x.png")} alt="" className={styles.EightLt }/>

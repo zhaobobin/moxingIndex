@@ -9,10 +9,10 @@ export default class PlatformFour extends React.Component {
   render(){
     return(
       <div className={styles.PagesBox}>
-        {/*第四页*/}
+        {/*第四页
         <p className={styles.Pages}>
-          <span className={styles.Page}>第四页</span>
-        </p>
+          <span className={styles.Page}>第三页</span>
+        </p>*/}
         <p className={styles.multipleTitle}>多重风控</p>
         <div className={styles.multipleBox}>
           <div className={styles.multipleImgBox1}>

@@ -79,8 +79,8 @@ export default class Electronic extends React.Component {
 					<a>
 						<i></i>
 						<p>
-							<strong>保障投资人的权益</strong>
-							<span>提供的签章服务具有可靠性、保密性、不可抵赖性、可防篡改、可校验的特征，可以更好地保障投资人的权益。</span>
+							<strong>保障出借人的权益</strong>
+							<span>提供的签章服务具有可靠性、保密性、不可抵赖性、可防篡改、可校验的特征，可以更好地保障出借人的权益。</span>
 						</p>
 					</a>
 				</li>
@@ -138,7 +138,7 @@ export default class Electronic extends React.Component {
 							<i className={styles.i1}></i>
 							<i className={styles.i2}></i>
 						</p>
-						<p className={styles.p2}>真正做到保障投资人合法权益的理念。</p>
+						<p className={styles.p2}>真正做到保障出借人合法权益的理念。</p>
 					</a>
 				</li>
 			</ul>
