@@ -24,7 +24,7 @@ export default class Beian extends React.Component {
     return(
       <div  >
         <Information>
-          <div className={styles.Box}>
+          <div className={styles.BeianBox}>
         <h4 className={styles.Beian}> <span className={styles.content}>备案信息 <span></span></span></h4>
           <div className={styles.BeianContent}>
             <p>地方金融监管部门的备案登记信息：<span>无</span> </p>

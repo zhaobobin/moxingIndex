@@ -15,7 +15,7 @@ export default class Other extends React.Component {
   render(){
     const position = { longitude: 116.474466, latitude: 39.950875};
     return(
-      <div >
+      <div className={styles.Other}>
 
        <Information>
         <div className={styles.Map}>
