@@ -16,7 +16,6 @@ export default class AboutUs extends React.Component {
   	const tabs = [
 { title: '去投网简介' },
 { title: '业务模式' },
-//{ title: '品牌优势' },
 { title: '联系我们' },
 { title: '微信微博' },
 ];   
@@ -28,9 +27,6 @@ export default class AboutUs extends React.Component {
 </div>
 <div>
 <p><AboutBusiness /></p>
-</div>
-<div>
-<p><AboutBrand /></p>
 </div>
 <div>
 <p><AboutContact /></p>
