@@ -50,7 +50,7 @@ componentDidMount(){
             :
             <Information>
               <div className={styles.Disclosure}>
-              <h4 className={styles.Manage}> <span className={styles.content}>工商信息 <span></span></span></h4>
+              <h4 className={styles.Manage}> <span className={styles.content}>经营信息<span></span></span></h4>
                 <p className={styles.DisclosureTime}>（数据截止至：{moment(disclosureArray.showDataTime).format("YYYY-MM-DD HH:mm:ss")}）</p>
               {/*信息列表*/}
               <table  className={styles.ManageTable} >

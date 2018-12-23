@@ -105,9 +105,8 @@ export default class Organization extends React.Component {
             <td>员工总数</td>
             <td  colSpan='2' className={styles.zongshu}>
             <span>
-              45
+              35
             </span>
-
             </td>
           </tr>
           </tbody>
