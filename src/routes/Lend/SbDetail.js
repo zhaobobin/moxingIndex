@@ -86,10 +86,10 @@ export default class SbDetail extends React.Component {
                    </div>
               </div>
               <div className={styles.sharebottom}>京ICP证 京B2-20160180 | 京ICP备14014223号-2<span>北京恒远鑫达投资管理有限公司</span></div>
-              <Link to="/download"><div className={styles.sbDownBut}><span>下载去投网</span></div></Link>
+              
             </div>
         }
-
+<Link to="/download"><div className={styles.sbDownBut}><span>下载去投网</span></div></Link>
       </div>
     )
   }
