@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'dva';
 import top from '~/theme/top.less';
 import styles from './Download.less';
-
 @connect(state => ({
   global: state.global,
 }))
