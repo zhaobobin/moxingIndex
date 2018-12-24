@@ -32,7 +32,8 @@ export const ENV = {
   author: '去投网(www.qutouwang.com)',
   verification: 'dXQb0UUYe3',
 
-  address: '北京市通州区台湖镇经海五路3号院10号楼',
+  oldUrl: 'https://hyxd.qutouwang.com/',
+  address: '北京市朝阳区亮马桥路甲40号1幢4层401内B02A室',
   youbian: '100105',
   hotline: '400-181-0588',
   email: 'qtwinfo@chinacfsc.com',
