@@ -267,19 +267,19 @@ export default class RiskResult extends React.Component {
                       </div>
                       <div>
                         <span className={styles.LegendColor2}></span>
-                        <span>保守型<br/>500万</span>
+                        <span>相对保守型<br/>600万</span>
                       </div>
                       <div>
                         <span className={styles.LegendColor3}></span>
-                        <span>保守型<br/>500万</span>
+                        <span>稳健型<br/>700万</span>
                       </div>
                       <div>
                         <span className={styles.LegendColor4}></span>
-                        <span>保守型<br/>500万</span>
+                        <span>相对积极型<br/>800万</span>
                       </div>
                       <div>
                         <span className={styles.LegendColor5}></span>
-                        <span>保守型<br/>500万</span>
+                        <span>积极型<br/>900万</span>
                       </div>
                   </div>
                 </div>

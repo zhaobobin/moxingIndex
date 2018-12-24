@@ -8,7 +8,6 @@ import Information from "~/components/Information/Information";
   global: state.global,
 }))
 export default class Examine extends React.Component {
-
   render(){
     return(
       <div className={styles.Examine}>
