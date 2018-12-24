@@ -89,22 +89,28 @@ export default class SmsValidate extends React.Component {
       callback: (res) => {
         if(res.code === 0){
 
-          if(type === 'sms'){
-            this.querySmscode(res.data.num)
-          }else{
-            this.queryYuyinSmscode(res.data.num)
-          }
+          this.setState({
+            sendNum: res.data.num
+          });
 
         }
       }
     });
+
+    setTimeout(() => {
+      if(type === 'sms'){
+        this.querySmscode()
+      }else{
+        this.queryYuyinSmscode()
+      }
+    }, 200);
 
     setTimeout(() => { this.ajaxFlag = true }, 1000);
 
   };
 
   //发送短信验证码
-  querySmscode = (sendNum) => {
+  querySmscode = () => {
 
     let params = {},
       {action, mobile, api} = this.props;
@@ -130,7 +136,6 @@ export default class SmsValidate extends React.Component {
         if(res.code === 0){
           this.setState({
             value: '',
-            sendNum,
           });
           this.interval();                                //发送成功后，执行倒计时
           this.props.callback('clearError');              //通知父组件清空错误提示
@@ -149,7 +154,7 @@ export default class SmsValidate extends React.Component {
   };
 
   //发送语音短信验证码
-  queryYuyinSmscode = (sendNum) => {
+  queryYuyinSmscode = () => {
 
     let {mobile} = this.props;
 
@@ -167,7 +172,6 @@ export default class SmsValidate extends React.Component {
         if(res.code === 0){
           this.setState({
             value: '',
-            sendNum,
           });
           this.interval();                    //发送成功后，执行倒计时
           notification.success({

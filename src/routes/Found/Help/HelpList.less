@@ -7,23 +7,37 @@
      .HelpCenter__helplogin___2ue9S{padding: 10px 15px 15px 15px;}
      .am-tabs-tab-bar-wrap{border-bottom: 1px solid #F4F4F4;}
     .am-tabs-default-bar-underline{display: none;position: static;}
-    .am-tabs-default-bar-tab{color: #888;float: left;display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
-display: -moz-box; /* Firefox 17- */
-display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
-display: -moz-flex; /* Firefox 18+ */
-display: -ms-flexbox; /* IE 10 */
-display: flex;}
+.am-tabs-default-bar-tab{color: #888;float: left;display: -webkit-box; 
+display: -moz-box;
+display: -ms-flexbox; 
+display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;    
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    -ms-transition-property: -ms-transform;
+     transition-property: transform;
+     -webkit-box-sizing: content-box; 
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;padding:2px 0; }
     
 
     .am-tabs-default-bar-top .am-tabs-default-bar-tab.am-tabs-default-bar-tab-active::after{background-color: #0D2F55; height: 4px;    width: 17%;
     text-align: center;
     left: 41.1%;}
-    .am-tabs-default-bar-top .am-tabs-default-bar-content, .am-tabs-default-bar-bottom .am-tabs-default-bar-content{float: left;display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
-display: -moz-box; /* Firefox 17- */
-display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
-display: -moz-flex; /* Firefox 18+ */
-display: -ms-flexbox; /* IE 10 */
-display: flex;}
+.am-tabs-default-bar-content{float: left;display: -webkit-box; 
+display: -moz-box;
+display: -webkit-flex; 
+display: -moz-flex;
+display: -ms-flexbox; 
+display: flex;    -webkit-flex-shrink: 0;
+    -ms-flex: 0 0 auto;
+    flex-shrink: 0; 
+    width: 100%;
+    height: 100%;
+    position: relative;}
   }
 }
 
