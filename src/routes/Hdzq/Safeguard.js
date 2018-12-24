@@ -54,9 +54,9 @@ export default class Safeguard extends React.Component {
                     <div className={styles.IntroRight}>
                         <div className={styles.intro}>
                             <h5>高度重视系统安全</h5>
-                            <p>《网络信息中介机构业务活动管理办法》明确要求：
+                            <p>《网络信息中介机构业务活动管理办法》明确要求：P2P平台应当按照国家网络安全相关规定和国家信息安全等级保护制度的要求进行备案
                             </p>
-                            <p>P2P平台应当按照国家网络安全相关规定和国家信息安全等级保护制度的要求进行备案</p>
+                            <p></p>
                         </div>
                     </div>
                     <ul>

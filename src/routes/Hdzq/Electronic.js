@@ -138,7 +138,7 @@ export default class Electronic extends React.Component {
 							<i className={styles.i1}></i>
 							<i className={styles.i2}></i>
 						</p>
-						<p className={styles.p2}>真正做到保障投资人的合法权益。</p>
+						<p className={styles.p2}>真正做到保障投资人的合法权益</p>
 					</a>
 				</li>
 			</ul>
