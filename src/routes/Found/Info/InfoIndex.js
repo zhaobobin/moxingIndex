@@ -39,7 +39,7 @@ export default class InfoIndex extends React.Component {
           项目信息（请见具体借款标的页面）、出借人教育等方面进行信息披露，供用户查看监督。
         </div>
           <p className={styles.system}>
-            <a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/information_disclosure.pdf">
+            <a target="_blank" href="https://www.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/information_disclosure.pdf">
               北京恒远鑫达投资管理有限公司-信息披露制度>>
             </a>
            </p>
