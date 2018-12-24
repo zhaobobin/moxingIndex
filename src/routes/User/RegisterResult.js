@@ -27,7 +27,7 @@ export default class RegisterResult extends React.Component {
         <div className={styles.result}>
           <img src={img_success} alt="result"/>
           <h2>恭喜您，注册成功</h2>
-          <p>580元红包已发放至您的账户</p>
+          {/*<p>580元红包已发放至您的账户</p>*/}
         </div>
 
         <div className={styles.download}>
