@@ -68,7 +68,7 @@ export default class SbDetail extends React.Component {
               <div className={styles.body}>
                    <div className={styles.sb_top}>
                    <div className={styles.sb_border}><span></span></div>                   
-                   <div align="center"><Progress type="dashboard" percent={detail.bidProgress==='' ? '0': detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF"/><span className={styles.sb_cirel}></span></div>
+                   <div align="center"><Progress type="dashboard" percent={detail.bidProgress==='' ? '0': detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF" format={percent => percent + '%'}/><span className={styles.sb_cirel}></span></div>
                    <span className={styles.sb_top1}>已有{detail.bidPeopleNum===''?'0':detail.bidPeopleNum}人出借</span><strong className={styles.sb_top2}><i>{detail.businessRate===''?'0':detail.businessRate}%</i>年化利率</strong></div>
                    <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth===''?'0':detail.termMonth}个月</i>借款期限</span><span><i>{detail.bidAmt===''?'0':detail.bidAmt}元</i>剩余金额</span></div></div>
                    <div className={styles.sb_contect}>
@@ -86,10 +86,10 @@ export default class SbDetail extends React.Component {
                    </div>
               </div>
               <div className={styles.sharebottom}>京ICP证 京B2-20160180 | 京ICP备14014223号-2<span>北京恒远鑫达投资管理有限公司</span></div>
-              <Link to="/download"><div className={styles.sbDownBut}><span>下载去投网</span></div></Link>
+              
             </div>
         }
-
+<Link to="/download"><div className={styles.sbDownBut}><span>下载去投网</span></div></Link>
       </div>
     )
   }

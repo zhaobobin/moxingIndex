@@ -91,10 +91,10 @@ export default class ZxDetail extends React.Component {
                    </div>
               </div>
               <div className={styles.sharebottom}>京ICP证 京B2-20160180 | 京ICP备14014223号-2<span>北京恒远鑫达投资管理有限公司</span></div>
-              <div className={styles.sbDownBut}><Link to="/download"><span>下载去投网</span></Link></div>
+              
             </div>
         }
-
+<div className={styles.sbDownBut}><Link to="/download"><span>下载去投网</span></Link></div>
       </div>
     )
   }
