@@ -45,7 +45,7 @@ export default class PlatformIndex extends React.Component {
                     beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
                     afterChange={index => {
                       console.log(index)
-                      if(index>6){
+                      if(index>5){
                         this.setState({
                           slide:false,
                           slideIndex:index
