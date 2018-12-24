@@ -7,14 +7,10 @@ import styles from './Demo.less'
   global: state.global,
 }))
 export default class Demo extends React.Component {
-
-
   render(){
     return(
       <div className={styles.demo}>
-
         <h1>网站地图</h1>
-
         <dl>
           <dt><strong>结果页</strong></dt>
           <dd>
