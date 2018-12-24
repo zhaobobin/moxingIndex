@@ -8,7 +8,7 @@ export default class PlatformThree extends React.Component {
 
   render(){
     return(
-      <div className={styles.PagesBox}>
+      <div className={styles.PagesBoxThree}>
         {/*第三页
         <p className={styles.Pages}>
           <span className={styles.Page}>第二页</span>

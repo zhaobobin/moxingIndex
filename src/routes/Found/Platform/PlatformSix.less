@@ -1,12 +1,12 @@
 @import '../../../theme/index.less';
-@media (min-width: 320px) and (max-width:360px){
-.PagesBox{
+@media (min-width: 320px) and (max-width:359px){
+.PagesBoxSix{
   width: 100vw;
   height: 100vh;
   background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
   background-size: 100% 100%;
   position: relative;
-  padding-top:20px;
+  padding-top:50px;
 }
 .Pages{
   width: 100%;
@@ -70,7 +70,7 @@
     padding-top: 30%;
     margin-bottom: 10px;
     background-image: url("../../../assets/platform/found_platform_pg61@2x.png");
-    background-size: 100% 100%;
+    background-size: 100% ;
     .investor{
       text-align: center;
       font-size: 16px;
@@ -82,14 +82,14 @@
   margin-bottom: 8px;
 }*/
 }
-@media (min-width: 360px){
-.PagesBox{
+@media (min-width: 360px) and (max-width: 374px){
+.PagesBoxSix{
  width: 100vw;
  height: 100vh;
  background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
  background-size: 100% 100%;
  position: relative;
-  padding-top:20px;
+  padding-top:50px;
 }
 .Pages{
  width: 100%;
@@ -165,4 +165,85 @@
 // margin-bottom: 28px;
 //}
 }
+@media (min-width: 375px){
+  .PagesBoxSix{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
+    background-size: 100% 100%;
+    position: relative;
+    padding-top:50px;
+  }
+  .Pages{
+    width: 100%;
+    text-align: center;
+  }
+  .Page{
+    padding: 3px 30px 10px;
+    color: @color_white;
+    background-image: url("../../../assets/platform/found_platform_title@2x.png");
+    background-size: 100% 100%;
+  }
+  .SixTitle{
+    text-align: center;
+    letter-spacing:3px;
+    font-size:23px;
+    font-weight:400;
+    color:@color_white ;
+    margin-bottom: 0;
+    padding-bottom: 35px;
+  }
+  .SixBox{
+    width: 90%;
+    margin: auto;
+    background:rgba(14,60,105,0.5);
+    box-shadow:0px 0px 13px 0px rgba(83,195,249,1) inset;
+    border-radius:7px;
+    position: relative;
+    color: @color_white;
+    padding: 30px 33px;
+    text-align: center;
+    .SixLt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      left: 17px;
+    }
+    .SixRt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      right: 17px;
+    }
+    .SixLb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      left: 17px;
+    }
+    .SixRb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      right: 17px;
+    }
 
+    p{
+      text-align: left;
+      margin-bottom: 7px;
+    }
+    .SixContImgBox{
+      width: 100%;
+      height: 37vh;
+      padding-top: 41.5%;
+      background-image: url("../../../assets/platform/found_platform_pg61@2x.png");
+      background-size: 100% ;
+      background-position: center;
+      background-repeat: no-repeat;
+      .investor{
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+  }
+}

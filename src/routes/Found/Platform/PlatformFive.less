@@ -1,13 +1,12 @@
 @import '../../../theme/index.less';
-@media (min-width: 320px) and (max-width:360px){
-  .PagesBox{
+@media (min-width: 320px) and (max-width:359px){
+  .PagesBoxFive{
     width: 100vw;
     height: 100vh;
     background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
     background-size: 100% 100%;
     position: relative;
-    padding-top:20px;
-
+    padding-top:50px;
   }
   .Pages{
     width: 100%;
@@ -24,7 +23,8 @@
     font-size: 18px;
     text-align: center;
     letter-spacing:3px;
-
+    margin-bottom: 0;
+    padding-bottom:35px;
     span{
       display: inline-block;
     }
@@ -95,15 +95,14 @@
     }
   }
 }
-
-@media (min-width: 360px){
-.PagesBox{
+@media (min-width: 360px) and (max-width: 374px){
+.PagesBoxFive{
   width: 100vw;
   height: 100vh;
   background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
   background-size: 100% 100%;
   position: relative;
-  padding-top:20px;
+  padding-top:50px;
 
 }
 .Pages{
@@ -121,6 +120,8 @@
   font-size: 23px;
   text-align: center;
   letter-spacing:3px;
+  margin-bottom: 0;
+  padding-bottom: 20px;
 
   span{
     display: inline-block;
@@ -193,4 +194,99 @@
 }
 
 }
+@media (min-width: 375px){
+  .PagesBoxFive{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
+    background-size: 100% 100%;
+    position: relative;
+    padding-top:50px;
+  }
+  .Pages{
+    width: 100%;
+    text-align: center;
+  }
+  .Page{
+    padding: 3px 30px 10px;
+    color: @color_white;
+    background-image: url("../../../assets/platform/found_platform_title@2x.png");
+    background-size: 100% 100%;
+  }
+  .FiveTitle{
+    color:@color_white ;
+    font-size: 23px;
+    text-align: center;
+    letter-spacing:3px;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    span{
+      display: inline-block;
+    }
+    span:nth-child(1){
+      margin-right: 10px;
+    }
+  }
+  .FiveBox{
+    width: 90%;
+    margin: auto;
+    background:rgba(14,60,105,0.5);
+    box-shadow:0px 0px 13px 0px rgba(83,195,249,1) inset;
+    border-radius:7px;
+    position: relative;
+    color: @color_white;
+    padding: 45px 33px;
+    p{
+      margin-bottom: 0;
+    }
+    .FiveLt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      left: 17px;
+    }
+    .FiveRt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      right: 17px;
+    }
+    .FiveLb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      left: 17px;
+    }
+    .FiveRb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      right: 17px;
+    }
 
+  }
+  .FiveDotP{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    span{
+      display: inline-block;
+      width:40%;
+    }
+    .dotImg{
+      height: 20px;
+    }
+    .FiveSp2{
+      text-align: right;
+    }
+  }
+  .shuxian{
+    text-align: center;
+    height: 36px;
+    span{
+      display: inline-block;
+      height: 44px;
+      border: 2px solid #4670FA;
+    }
+  }
+}

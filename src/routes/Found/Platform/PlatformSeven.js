@@ -8,7 +8,7 @@ export default class PlatformSeven extends React.Component {
 
   render(){
     return(
-      <div className={styles.PagesBox}>
+      <div className={styles.PagesBoxSeven}>
         {/*第七页
         <p className={styles.Pages}>
           <span className={styles.Page}>第六页</span>

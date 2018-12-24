@@ -111,7 +111,7 @@ export default class Organization extends React.Component {
           </tr>
           </tbody>
         </table>
-        <h4 className={styles.Organization}> <span className={styles.content}>信息安全测评认证信息 <span></span></span></h4>
+        <h4 className={styles.Organization}> <span className={styles.content}>分支机构信息<span></span></span></h4>
           {/*<img src={require("~/assets/account/find_record_img2@2x.png")} alt="" className={styles.organizationImg}/>*/}
           <p className={styles.fenzhi}>暂无分支机构</p>
         <h4 className={styles.Organization}> <span className={styles.content}>官方网站、官方手机应用及其他官方互联网渠道信息 <span></span></span></h4>
