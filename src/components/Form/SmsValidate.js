@@ -112,15 +112,18 @@ export default class SmsValidate extends React.Component {
   //发送短信验证码
   querySmscode = () => {
 
-    let params = {},
-      {action, mobile, api} = this.props;
+    let api = '',
+      params = {},
+      {action, mobile} = this.props;
 
     if(action === 'register'){
+      api = '/api/userRegister/sendMobileCode',
       params = {
         mobile,
         smsCheckCode: Encrypt(mobile, mobile)
       }
     }else{
+      api = '/api/userAuth/sendMobileCode',
       params = {
         mobile,
         checkCode: Encrypt(mobile, mobile)

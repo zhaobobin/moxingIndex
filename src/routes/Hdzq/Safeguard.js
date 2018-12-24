@@ -24,7 +24,7 @@ export default class Safeguard extends React.Component {
                     <div className={styles.startN +' '+styles.start7}></div>
                 </div>              	
                 <div className={styles.bannerWrap}>
-                    <div className={styles.bannerContent}></div>
+                    <div className={styles.bannerContent}><img src={require('../../assets/safeguard/banner-content.png')} /></div>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@ export default class Safeguard extends React.Component {
                 <div className={styles.page1}>
                     <div className={styles.IntroLeft}>
                         <div className={styles.intro}>
-                            <h5>信息安全最高等级</h5>
+                            <h5>非银行业信息安全最高标准</h5>
                             <p className={styles.first}>去投网获得了由国家公安部门颁发认证的</p>
                             <p className={styles.first}>“信息系统安全等级保护”三级备案证明。</p>
                             <p>成为业内首批完成网络信息安全第三级认证的互联网金融平台之一。</p>
@@ -54,9 +54,9 @@ export default class Safeguard extends React.Component {
                     <div className={styles.IntroRight}>
                         <div className={styles.intro}>
                             <h5>高度重视系统安全</h5>
-                            <p>《网络信息中介机构业务活动管理办法》明确要求：
+                            <p>《网络信息中介机构业务活动管理办法》明确要求：P2P平台应当按照国家网络安全相关规定和国家信息安全等级保护制度的要求进行备案
                             </p>
-                            <p>P2P平台应当按照国家网络安全相关规定和国家信息安全等级保护制度的要求</p>
+                            <p></p>
                         </div>
                     </div>
                     <ul>
@@ -90,30 +90,8 @@ export default class Safeguard extends React.Component {
                             <h5>助力行业和谐发展</h5>
                             <p>安全是互联网金融平台健康发展的基石</p>
                         </div>
-                    </div>
-                  
-                    <div  className={styles.pyramid}>
-                        <div  className={styles.Tpyramid}>
-                            <img src={require('../../assets/safeguard/pyramid.png' )} />
-                        </div>
-                        <div  className={styles.TpyramidInt }>
-                            <div  className={styles.one }><p>四大国有银行(总行)</p>
-                                <p>是一二级</p></div>
-                            <div  className={styles.two}>
-                                <span>分行(省行、市行)等重要金融机构一般是第三级认证</span>
-                                <i><em></em></i>
-                            </div>
-                            <div  className={styles.three}>
-                                <span></span>
-                                <p>去投网达到安全管控水平</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.btnInt}>
-                        <p>去投网的信息系统安全等级达到了与上述金融机构业务系统相当的安全管控水平。</p>
-                    </div>
-                    <div className={styles.buttonLiner}>
-                    </div>
+                    </div>                
+                    
                 </div>
                 <div className={styles.page4}>                    
                     <div className={styles.development}>

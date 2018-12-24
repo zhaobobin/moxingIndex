@@ -62,7 +62,7 @@ export default class Electronic extends React.Component {
 						<i></i>
 						<p>
 							<strong>CFCA电子签章</strong>
-							<span>CFCA电子签章是合法的数字化印章与数字证书绑定的用其私钥进行了数字签名；</span>
+							<span>CFCA电子签章是传统印章的印迹和数字证书相结合的产物。</span>
 						</p>
 					</a>
 				</li>
@@ -71,7 +71,7 @@ export default class Electronic extends React.Component {
 						<i></i>
 						<p>
 							<strong>CFCA具有权威性</strong>
-							<span>CFCA电子签章数字签名包含用户身份、印章信息、公钥、有效期等许多相关信息的权威性的电子文件;</span>
+							<span>CFCA电子签章是包含用户身份、印章信息、公钥、有效期等许多相关信息的权威电子文件。</span>
 						</p>
 					</a>
 				</li>
@@ -111,7 +111,7 @@ export default class Electronic extends React.Component {
 							<i className={styles.i1}></i>
 							<i className={styles.i2}></i>
 						</p>
-						<p className={styles.p2}>通过全方位立体化的IT信息安全措施保护</p>
+						<p className={styles.p2}>提供全方位立体化的IT信息安全措施保护</p>
 					</a>
 				</li>
 				<li className={styles.li3}>
@@ -120,7 +120,7 @@ export default class Electronic extends React.Component {
 							<i className={styles.i1}></i>
 							<i className={styles.i2}></i>
 						</p>
-						<p className={styles.p2}>和国家权威机构的安全认证 保护</p>
+						<p className={styles.p2}>国家权威机构的安全认证保护</p>
 					</a>
 				</li>
 				<li className={styles.li4}>
@@ -138,7 +138,7 @@ export default class Electronic extends React.Component {
 							<i className={styles.i1}></i>
 							<i className={styles.i2}></i>
 						</p>
-						<p className={styles.p2}>真正做到保障出借人合法权益的理念。</p>
+						<p className={styles.p2}>真正做到保障投资人的合法权益</p>
 					</a>
 				</li>
 			</ul>
