@@ -417,7 +417,7 @@ const BaseRoutes = app => [
         component: dynamicWrapper(app, [], () => import('../routes/Other/Download')),
       },
       {
-        name: '分享详情',
+        name: '晒回报',
         key: 'share-shouyi',
         path: 'share-shouyi',
         isHide: true,
