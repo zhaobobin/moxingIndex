@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './InvitationIndex.less';
 import QRCode from 'qrcode.react';
+import { yaoqingDecrypt } from '~/utils/utils'
 import ResultJson from '~/routes/Result/ResultJson';
 import ToastLoading from '~/components/Common/ToastLoading'
 @connect(state => ({
@@ -83,7 +84,7 @@ export default class InvitationIndex extends React.Component {
         </div>
         <div className={styles.shareBox}>
           <p>方法二:将邀请码分享至好友</p>
-          <h3>{invitationCode}</h3>
+          <h3>{invitationCode ? yaoqingDecrypt(invitationCode) : null}</h3>
           <img src={require("~/assets/Invitation/invite_bottom_btn@2x.png")} alt="" className={styles.Img}  onClick={() => this.redirect(ResultJson.share_yaoqing.action)}/>
         </div>
         </div>
