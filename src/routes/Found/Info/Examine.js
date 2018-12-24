@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './Examine.less';
 import Information from "~/components/Information/Information";
-
 @connect(state => ({
   global: state.global,
 }))
