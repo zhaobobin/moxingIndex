@@ -12,7 +12,7 @@ export default class PlatformTwo extends React.Component {
   }
   render(){
     return(
-      <div className={styles.PagesBox}>
+      <div className={styles.PagesBoxTwo}>
         {/*第二页
         <p className={styles.Pages}>
           <span className={styles.Page}>第二页</span>

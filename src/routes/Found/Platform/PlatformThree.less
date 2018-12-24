@@ -1,11 +1,12 @@
 @import '../../../theme/index.less';
-@media (min-width: 320px) and (max-width:360px){
-.PagesBox{
+@media (min-width: 320px) and (max-width:359px){
+.PagesBoxThree{
   width: 100vw;
   height: 100vh;
   background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
   background-size: 100% 100%;
-  position: relative;    padding-top: 15px;
+  position: relative;
+  padding-top:50px;
 }
 .Pages{
   width: 100%;
@@ -20,14 +21,13 @@
 .DepositTitle{
   text-align: center;
   color: @color_white;
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing:3px;
-
 }
 .DepositImgBox{
   width: 100%;
   padding: 0 10%;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 .DepositImg{
     width: 100%;
@@ -76,13 +76,14 @@
 }
 
 }
-@media (min-width: 360px){
-.PagesBox{
+@media (min-width: 360px) and (max-width: 374px){
+.PagesBoxThree{
  width: 100vw;
  height: 100vh;
  background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
  background-size: 100% 100%;
  position: relative;
+  padding-top:50px;
 }
 .Pages{
  width: 100%;
@@ -151,4 +152,80 @@
  }
 }
 
+}
+@media (min-width: 375px){
+  .PagesBoxThree{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../assets/platform/found_platform_bg@2x.jpg");
+    background-size: 100% 100%;
+    position: relative;
+    padding-top:50px;
+  }
+  .Pages{
+    width: 100%;
+    text-align: center;
+  }
+  .Page{
+    padding: 3px 30px 10px;
+    color: @color_white;
+    background-image: url("../../../assets/platform/found_platform_title@2x.png");
+    background-size: 100% 100%;
+  }
+  .DepositTitle{
+    text-align: center;
+    color: @color_white;
+    font-size: 23px;
+    letter-spacing:3px;
+  }
+  .DepositImgBox{
+    width: 100%;
+    padding: 0 5%;
+    margin: 35px 0 40px 0;
+
+  }
+  .DepositImg{
+    width: 100%;
+
+  }
+  .DepositBox{
+    width: 90%;
+    margin: auto;
+    background:rgba(14,60,105,0.5);
+    box-shadow:0px 0px 13px 0px rgba(83,195,249,1) inset;
+    border-radius:7px;
+    position: relative;
+    color: @color_white;
+    padding: 30px 33px;
+    .DepositLt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      left: 17px;
+    }
+    .DepositRt{
+      width: 10%;
+      position: absolute;
+      top: 17px;
+      right: 17px;
+    }
+    .DepositLb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      left: 17px;
+    }
+    .DepositRb{
+      width: 10%;
+      position: absolute;
+      bottom: 17px;
+      right: 17px;
+    }
+    h3{
+      color: @color_white;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
 }

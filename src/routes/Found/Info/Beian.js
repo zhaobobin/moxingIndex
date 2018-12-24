@@ -25,18 +25,17 @@ export default class Beian extends React.Component {
       <div  >
         <Information>
           <div className={styles.BeianBox}>
-        <h4 className={styles.Beian}> <span className={styles.content}>备案信息 <span></span></span></h4>
+        <h4 className={styles.Beian}> <span className={styles.content}>地方金融监管部门的备案登记信息 <span></span></span></h4>
           <div className={styles.BeianContent}>
-            <p>地方金融监管部门的备案登记信息：<span>无</span> </p>
-            <p>备案登记地方金融监管部门：<span>无</span> </p>
-            <p>备案登记时间：<span>无</span> </p>
-            <p>备案登记编号：<span>无</span> </p>
+            <p>备案登记地方金融监管部门：<span>-</span> </p>
+            <p>备案登记时间：<span>-</span> </p>
+            <p>备案登记编号：<span>-</span> </p>
           </div>
         <h4 className={styles.Beian}> <span className={styles.content}>电信业务经营许可信息 <span></span></span> </h4>
           <img src={require("~/assets/account/find_record_img1@2x.png")} alt="" className={styles.permission}/>
         <h4 className={styles.Beian}> <span className={styles.content}>资金存管信息 <span></span></span></h4>
           <div className={styles.deposit}>
-            <p>资金存管银行全称：<span>恒丰银行股份有限公司</span></p>
+            <p>资金存管银行全称：<span>廊坊银行股份有限公司</span></p>
             <p>三方存管协议：
               <span className={styles.agreement}>
               {/*<a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> */}

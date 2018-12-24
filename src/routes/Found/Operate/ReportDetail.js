@@ -91,7 +91,7 @@ export default class ReportDetail extends React.Component {
         enabled:false
       },
       chart: {
-        spacing : [50, 0 , 110, 0],
+        spacing : [0, 0 , 20, 0],
       },
       title: {
         text: '',
@@ -105,34 +105,36 @@ export default class ReportDetail extends React.Component {
         },
       },
       subtitle: {
-        text: '',
+        text:dataAll.title+'项目发布数量共'+dataAll.countPeriod+'个' ,
         floating:true,
-        x: 10,
-        y: 0,
+        x: 0,
+        y: 350,
         style: {
-          color: '#333',
-          fontSize: '11px',
-          fontWeight:400,
+          color: '#002F58',
+          fontSize: '13px',
+          fontWeight:500,
           fontFamily: fontFamily
         },
       },
       tooltip: {
-
         // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
       legend: {
         labelFormatter: function () {
           return  this.name
         },
-
         layout: 'horizontal',
         align: 'center',           //水平方向位置
         verticalAlign: 'bottom', //垂直方向位置
         symbolRadius: 0,
+        itemDistance: 5,
         // itemMarginTop: 5,
         // itemMarginBottom: 0,
+        itemStyle: {
+          fontSize:11
+        },
         x:-14,
-        y:60,
+        y:20,
       },
       plotOptions: {
         pie: {
@@ -142,9 +144,9 @@ export default class ReportDetail extends React.Component {
           dataLabels: {
             enabled: true,
             connectorWidth: 0,          //线长度
-            connectorPadding: 20,
+            connectorPadding: -20,
             style: {
-              fontSize:16
+              fontSize:11
             }
           },
         }
@@ -153,15 +155,15 @@ export default class ReportDetail extends React.Component {
         {
           linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
           stops: [
-            [0, '#FFDCB7'],
-            [1, '#F18925']
+            [0, '#057CA9'],
+            [1, '#0D2F55']
           ]
         },
         {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
           stops: [
-            [0, '#FFC263'],
-            [1, '#FFE7D5']
+            [0, '#FFDCB7'],
+            [1, '#F18925']
           ]
         },
         {
@@ -172,18 +174,20 @@ export default class ReportDetail extends React.Component {
           ]
         },
         {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
           stops: [
-            [0, '#057CA9'],
-            [1, '#0D2F55']
+            [0, '#FFC263'],
+            [1, '#FFE7D5']
           ]
-        }
+        },
+
+
       ],
       series: [{
         type: 'pie',
         allowPointSelect: false,
         innerSize: '65%',//圆环内填充比例
-        size: '70%',
+        size: '65%',
         name: '账户资产',
         data: periodInfoArrOr
       }]
@@ -193,7 +197,7 @@ export default class ReportDetail extends React.Component {
         enabled:false
       },
       chart: {
-        spacing : [50, 0 , 110, 0],
+        spacing : [0, 0 , 110, 0],
       },
       title: {
         text: '',
@@ -245,7 +249,7 @@ export default class ReportDetail extends React.Component {
             connectorWidth: 0,          //线长度
             connectorPadding: -20,
             style: {
-              fontSize:16
+              fontSize:11
             }
           },
         }
@@ -281,7 +285,7 @@ export default class ReportDetail extends React.Component {
         enabled:false
       },
       chart: {
-        spacing : [50, 0 , 110, 0],
+        spacing : [0, 0 , 110, 0],
       },
       title: {
         text: '',
@@ -340,7 +344,7 @@ export default class ReportDetail extends React.Component {
             connectorWidth: 0,          //线长度
             connectorPadding: -20,
             style: {
-              fontSize:16
+              fontSize:11
             }
           },
         }
@@ -417,49 +421,25 @@ export default class ReportDetail extends React.Component {
               <h4 className={styles.ReportTitle}><span className={styles.content}>{dataAll.title}出借地域数据TOP5 <span></span></span></h4>
               <div className={styles.ChinaBox}>
                 <img src={require("~/assets/account/find_operdata_map@2x.png")} alt="" className={styles.ChinaImg}/>
+                <div className={styles.areaTop5Box}>
                 {
                   dataAll.areaTop5.map((item,index)=>{
                     return(
                       <p className={styles.Ranking} key={index}>
-                        <span>{index+1}</span>
+                        <span className={index<3?styles.areaTopNone:''}>{index+1}</span>
                         <span className={styles.province}>{item.areaName}</span>
                         <span>{item.showData}元</span>
                       </p>
                     )
                   })
                 }
-
-
-              {/*  <p className={styles.Ranking}>
-                  <span> <img src={require("~/assets/account/find_operdata_top1@2x.png")} alt=""
-                              className={styles.RankingImg}/></span>
-                  <span className={styles.province}>黑龙江省</span>
-                  <span>9321692.29元</span>
-                </p>
-                <p className={styles.Ranking}>
-                  <span> <img src={require("~/assets/account/find_operdata_top2@2x.png")} alt=""
-                              className={styles.RankingImg}/></span>
-                  <span className={styles.province}>湖北省</span>
-                  <span>9321692.29元</span>
-                </p>
-                <p className={styles.Ranking}>
-                  <span> <img src={require("~/assets/account/find_operdata_top3@2x.png")} alt=""
-                              className={styles.RankingImg}/></span>
-                  <span className={styles.province}>福建省</span>
-                  <span>9321692.29元</span>
-                </p>
-                <p className={styles.Ranking}>
-                  <span> 4</span>
-                  <span className={styles.province}>山东省</span>
-                  <span>9321692.29元</span>
-                </p>
-                <p className={styles.Ranking}>
-                  <span> 5</span>
-                  <span className={styles.province}>浙江省</span>
-                  <span>9321692.29元</span>
-                </p>*/}
+                  <img src={require("../../../assets/account/find_operdata_top1@2x.png")} className={styles.TopImgOne}/>
+                  <img src={require("../../../assets/account/find_operdata_top2@2x.png")} className={styles.TopImgTwo}/>
+                  <img src={require("../../../assets/account/find_operdata_top3@2x.png")} className={styles.TopImgThree}/>
+                </div>
               </div>
               <h4 className={styles.ReportTitle}><span className={styles.content}>5月份出借用户排名TOP5 <span></span></span></h4>
+              <div className={styles.lendRankingBox}>
               <table className={styles.lendRanking}>
                 <tbody>
                 <tr>
@@ -473,7 +453,7 @@ export default class ReportDetail extends React.Component {
                   dataAll.lenderTop5.map((item,index)=>{
                     return(
                       <tr key={index}>
-                        <td>{index+1}</td>
+                        <td className={index<3?styles.TableNone:''}>{index+1}</td>
                         <td>{item.phone}</td>
                         <td>{item.gender}</td>
                         <td>{item.areaName}</td>
@@ -482,46 +462,12 @@ export default class ReportDetail extends React.Component {
                     )
                   })
                 }
-               {/* <tr>
-                  <td><img src={require("~/assets/account/find_operdata_top1@2x.png")} alt=""
-                           className={styles.lendImg}/></td>
-                  <td>185******69</td>
-                  <td>女</td>
-                  <td>黑龙江</td>
-                  <td>69543423.21</td>
-                </tr>
-                <tr>
-                  <td><img src={require("~/assets/account/find_operdata_top1@2x.png")} alt=""
-                           className={styles.lendImg}/></td>
-                  <td>185******69</td>
-                  <td>男</td>
-                  <td>黑龙江</td>
-                  <td>69543423.21</td>
-                </tr>
-                <tr>
-                  <td><img src={require("~/assets/account/find_operdata_top1@2x.png")} alt=""
-                           className={styles.lendImg}/></td>
-                  <td>185******69</td>
-                  <td>男</td>
-                  <td>上海</td>
-                  <td>69543423.21</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>185******69</td>
-                  <td>女</td>
-                  <td>浙江</td>
-                  <td>69543423.21</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>185******69</td>
-                  <td>男</td>
-                  <td>福建</td>
-                  <td>69543423.21</td>
-                </tr>*/}
                 </tbody>
               </table>
+                <img src={require("../../../assets/account/find_operdata_top1@2x.png")} className={styles.TopImg1}/>
+                <img src={require("../../../assets/account/find_operdata_top2@2x.png")} className={styles.TopImg2}/>
+                <img src={require("../../../assets/account/find_operdata_top3@2x.png")} className={styles.TopImg3}/>
+              </div>
               {/*图表*/}
               <h4 className={styles.ReportTitle}><span className={styles.content}>5月份出借用户性别数据 <span></span></span></h4>
               <div className={styles.chartBox}>
