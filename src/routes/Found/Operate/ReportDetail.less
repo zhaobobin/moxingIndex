@@ -26,13 +26,13 @@
 }
 .pandectBox{
   width: 100%;
-  display: flex;
-  flex-wrap:wrap;
+ overflow: hidden;
   .pandect{
+    float: left;
     width: 50%;
-    display: flex;
-    align-items: center;
+    overflow: hidden;
     margin-bottom: 20px;
+    padding-left: 6%;
     p{
       margin: 0;
     }
@@ -43,9 +43,13 @@
       color: #ccc;
     }
     .pandectImg{
+      float: left;
       width: 40px;
-      height: 40px;
+      height: auto;
       margin: 0 10px;
+    }
+    .pandectCont{
+      float: left;
     }
   }
 }

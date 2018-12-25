@@ -33,7 +33,7 @@ export default class BeianXieyi extends React.Component {
     });
   }
   handleOk = (e) => {
-    console.log(e);
+
     this.setState({
       visible: false,
     });
@@ -45,7 +45,7 @@ export default class BeianXieyi extends React.Component {
     this.chooseIndex.prev()
   }
   onChange=(a,b,c)=>{
-    console.log(a)
+
   }
 
   render() {

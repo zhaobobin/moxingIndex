@@ -27,10 +27,9 @@ componentDidMount(){
     },
     callback:(res)=>{
       this.loading = false;
-      console.log(res)
       if(res.code=== 0){
             this.setState({
-              disclosureArray:res.data[0],
+              disclosureArray:res.data,
             })
       }
     }
@@ -40,7 +39,6 @@ componentDidMount(){
 
   render(){
     const {disclosureArray}=this.state
-    console.log(disclosureArray)
     return(
       <div >
         {
@@ -56,11 +54,11 @@ componentDidMount(){
               <table  className={styles.ManageTable} >
                 <tbody>
                 <tr>
-                  <td>自成立以来的累计 借贷金额：</td>
+                  <td>累计交易总额：</td>
                   <td>{numberFormat(disclosureArray.loanTotalAmt)}元</td>
                 </tr>
                 <tr>
-                  <td>自成立以来的累计 借贷笔数：</td>
+                  <td>累计交易笔数：</td>
                   <td>{disclosureArray.loanTotalCount}笔</td>
                 </tr>
                 <tr>
@@ -77,19 +75,19 @@ componentDidMount(){
                 </tr>
                 <tr>
                   <td>累计出借人数量：</td>
-                  <td>{disclosureArray.lenderTotalCount}</td>
+                  <td>{disclosureArray.lenderTotalCount}人</td>
                 </tr>
                 <tr>
                   <td>累计借款人数量：</td>
-                  <td>{disclosureArray.borrowerTotalCount}</td>
+                  <td>{disclosureArray.borrowerTotalCount}人</td>
                 </tr>
                 <tr>
                   <td>当前出借人数量：</td>
-                  <td>{disclosureArray.lenderCurrentCount}</td>
+                  <td>{disclosureArray.lenderCurrentCount}人</td>
                 </tr>
                 <tr>
                   <td>当前借款人数量：</td>
-                  <td>{disclosureArray.borrowerCurrentCount}</td>
+                  <td>{disclosureArray.borrowerCurrentCount}人</td>
                 </tr>
                 <tr>
                   <td>前十大借款人 待还金额占比：</td>
@@ -101,7 +99,7 @@ componentDidMount(){
                 </tr>
                 <tr>
                   <td>关联关系借款余额 及笔数：</td>
-                  <td>{disclosureArray.correlationLoanBalCount }</td>
+                  <td>{disclosureArray.correlationLoanBalCount }笔</td>
                 </tr>
                 <tr>
                   <td>逾期金额：</td>
@@ -146,8 +144,8 @@ componentDidMount(){
                 <div className={styles.shoufeiBox}>
                 <p className={styles.disclosureP}>居间服务费比例（年化）：{disclosureArray.feeDesc}</p>
                 <p className={styles.disclosureP}>年化利率：{disclosureArray.rateDesc}</p>
-                <p className={styles.norm}>{disclosureArray.overdueFeeDesc}</p>
-                <p className={styles.norm}>{disclosureArray.prepaymentDesc}</p>
+                <p className={styles.norm} dangerouslySetInnerHTML={{ __html: disclosureArray.overdueFeeDesc }}></p>
+                <p className={styles.norm} dangerouslySetInnerHTML={{ __html: disclosureArray.prepaymentDesc }}></p>
                 </div>
               </div>
               <Signature/>
