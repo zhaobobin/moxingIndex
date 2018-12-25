@@ -1,6 +1,7 @@
 /* 运营报告详情*/
 import React from 'react';
 import { connect } from 'dva';
+import {filterTel}from'~/utils/utils'
 import styles  from './ReportDetail.less';
 import Information from "~/components/Information/Information";
 import Signature from "~/components/Information/signature";
@@ -80,7 +81,7 @@ export default class ReportDetail extends React.Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.match.params.id !== this.props.match.params.id){
       let id = nextProps.match.params.id;
-      console.log(id)
+
     }
   }
 
@@ -521,7 +522,6 @@ export default class ReportDetail extends React.Component {
         }
       },
       colors: [
-
         {
           linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
           stops: [
@@ -564,7 +564,7 @@ export default class ReportDetail extends React.Component {
                   <img src={require("~/assets/account/find_operdata_money@2x.png")} alt=""
                        className={styles.pandectImg}/>
                   <div>
-                    <p>{dataAll.baseAmt===''?'0.00':dataAll.baseAmt}元</p>
+                    <p>{dataAll.baseAmt===''?'0.00':parseFloat(dataAll.baseAmt)}元</p>
                     <p>交易额</p>
                   </div>
                 </div>
@@ -572,7 +572,7 @@ export default class ReportDetail extends React.Component {
                   <img src={require("~/assets/account/find_operdata_profit@2x.png")} alt=""
                        className={styles.pandectImg}/>
                   <div>
-                    <p>{dataAll.baseIncome===''?'0.00':dataAll.baseIncome}元</p>
+                    <p>{dataAll.baseIncome===''?'0.00':parseFloat(dataAll.baseIncome)}元</p>
                     <p>用户收益</p>
                   </div>
                 </div>
@@ -599,7 +599,7 @@ export default class ReportDetail extends React.Component {
                       <p className={styles.Ranking} key={index}>
                         <span className={index<3?styles.areaTopNone:''}>{index+1}</span>
                         <span className={styles.province}>{item.areaName}</span>
-                        <span>{item.showData}元</span>
+                        <span>{parseFloat(item.showData)}元</span>
                       </p>
                     )
                   })
@@ -609,7 +609,7 @@ export default class ReportDetail extends React.Component {
                   <img src={require("../../../assets/account/find_operdata_top3@2x.png")} className={styles.TopImgThree}/>
                 </div>
               </div>
-              <h4 className={styles.ReportTitle}><span className={styles.content}>5月份出借用户排名TOP5 <span></span></span></h4>
+              <h4 className={styles.ReportTitle}><span className={styles.content}>{dataAll.title}出借用户排名TOP5 <span></span></span></h4>
               <div className={styles.lendRankingBox}>
               <table className={styles.lendRanking}>
                 <tbody>
@@ -625,10 +625,10 @@ export default class ReportDetail extends React.Component {
                     return(
                       <tr key={index}>
                         <td className={index<3?styles.TableNone:''}>{index+1}</td>
-                        <td>{item.phone}</td>
+                        <td>{filterTel(item.phone)}</td>
                         <td>{item.gender}</td>
                         <td>{item.areaName}</td>
-                        <td>{item.showData}</td>
+                        <td>{parseFloat(item.showData)}</td>
                       </tr>
                     )
                   })
@@ -640,15 +640,14 @@ export default class ReportDetail extends React.Component {
                 <img src={require("../../../assets/account/find_operdata_top3@2x.png")} className={styles.TopImg3}/>
               </div>
               {/*图表*/}
-              <h4 className={styles.ReportTitle}><span className={styles.content}>5月份出借用户性别数据 <span></span></span></h4>
+              <h4 className={styles.ReportTitle}><span className={styles.content}>{dataAll.title}出借用户性别数据 <span></span></span></h4>
               <div className={styles.chartBox}>
                 <ReactHighcharts config={configSex} ref="chart"/>
               </div>
-              <h4 className={styles.ReportTitle}><span className={styles.content}>5月份出借终端数据 <span></span></span></h4>
+              <h4 className={styles.ReportTitle}><span className={styles.content}>{dataAll.title}出借终端数据 <span></span></span></h4>
               <div className={styles.chartBox}>
                 <ReactHighcharts config={configTerminal} ref="chart"/>
               </div>
-
               <Signature/>
               </div>
             </Information>

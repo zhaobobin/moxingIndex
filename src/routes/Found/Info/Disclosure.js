@@ -27,7 +27,6 @@ componentDidMount(){
     },
     callback:(res)=>{
       this.loading = false;
-      console.log(res)
       if(res.code=== 0){
             this.setState({
               disclosureArray:res.data[0],
@@ -40,7 +39,6 @@ componentDidMount(){
 
   render(){
     const {disclosureArray}=this.state
-    console.log(disclosureArray)
     return(
       <div >
         {

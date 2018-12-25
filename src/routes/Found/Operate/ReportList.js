@@ -37,12 +37,11 @@ export default class ReportList extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.keywords !== this.props.match.params.keywords) {
       let keywords = nextProps.match.params.keywords;
-      console.log(keywords);
     }
   }
 
   activeKey = (key) =>{
-    console.log(key);
+
   }
 
   render(){
@@ -52,7 +51,6 @@ export default class ReportList extends React.Component {
     { title: '系统安全评估报告' },
 ];
     const {pageNum,list} = this.state;
-    console.log(list)
     return(
       <div >
         <div className={styles.PlatformReport}>
