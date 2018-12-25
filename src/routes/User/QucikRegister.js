@@ -11,8 +11,8 @@ import {
 import styles from './QucikRegister.less';
 
 //import logo from '~/assets/com/logo.png'
-import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.png'
-import sign_banner2 from '~/assets/sign/fast_login_banner2@2x.png'
+//import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.jpg'
+import sign_banner2 from '~/assets/sign/fast_login_banner2@2x.jpg'
 import SmsValidate from '~/components/Form/SmsValidate'
 
 const FormItem = Form.Item;
