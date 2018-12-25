@@ -108,7 +108,7 @@ export default class ReportDetail extends React.Component {
           },
         },
         subtitle: {
-          text:dataAll.title+'项目发布数量共'+dataAll.countPeriod+'个' ,
+          text:dataAll.periodName+'份项目发布数量共'+dataAll.countPeriod+'个' ,
           floating:true,
           x: 0,
           y: 350,
@@ -192,7 +192,7 @@ export default class ReportDetail extends React.Component {
           },
         },
         subtitle: {
-          text:dataAll.title+'项目发布数量共'+dataAll.countPeriod+'个' ,
+          text:dataAll.periodName+'份项目发布数量共'+dataAll.countPeriod+'个' ,
           floating:true,
           x: 0,
           y: 350,
@@ -267,8 +267,6 @@ export default class ReportDetail extends React.Component {
               [1, '#FFE7D5']
             ]
           },
-
-
         ],
         series: [{
           type: 'pie',
@@ -563,7 +561,7 @@ export default class ReportDetail extends React.Component {
                 <div className={styles.pandect}>
                   <img src={require("~/assets/account/find_operdata_money@2x.png")} alt=""
                        className={styles.pandectImg}/>
-                  <div>
+                  <div className={styles.pandectCont}>
                     <p>{dataAll.baseAmt===''?'0.00':parseFloat(dataAll.baseAmt)}元</p>
                     <p>交易额</p>
                   </div>
@@ -571,7 +569,7 @@ export default class ReportDetail extends React.Component {
                 <div className={styles.pandect}>
                   <img src={require("~/assets/account/find_operdata_profit@2x.png")} alt=""
                        className={styles.pandectImg}/>
-                  <div>
+                  <div className={styles.pandectCont}>
                     <p>{dataAll.baseIncome===''?'0.00':parseFloat(dataAll.baseIncome)}元</p>
                     <p>用户收益</p>
                   </div>
@@ -579,7 +577,7 @@ export default class ReportDetail extends React.Component {
                 <div className={styles.pandect}>
                   <img src={require("~/assets/account/find_operdata_people@2x.png")} alt=""
                        className={styles.pandectImg}/>
-                  <div>
+                  <div className={styles.pandectCont}>
                     <p>{dataAll.baseCount===''?'0':dataAll.baseCount}人</p>
                     <p>注册人数</p>
                   </div>
