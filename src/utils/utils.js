@@ -396,23 +396,32 @@ export function str2Number(str){
 /**
  * 金额数值格式化
  * @param number
- * @returns {string}
+ * @param intFlag     正整数
+ * @returns {*}
  */
-export function numberFormat(number) {
+export function numberFormat(number, intFlag) {
+
+  if (typeof number === 'string' && number.includes(',')) return number;             //已格式化的直接反复
+
   let result = '',
     float = '.00',
     num = number.toString();
 
-  if(parseInt(number, 10) !== number){                          //是否是整数
+  if (parseInt(number, 10) !== number) {                          //是否是整数
     let split = num.split('.');
     num = split[0];
-    float = '.' + split[1]
+    float = '.' + (split[1] && split[1].length===1 ? split[1]+'0' : split[1])
+  }
+  if(intFlag){
+    float = '';
   }
 
+  //加入分隔符
   while (num.length > 3) {
     result = ',' + num.slice(-3) + result;
     num = num.slice(0, num.length - 3);
   }
+
   return num + result + float;
 }
 
