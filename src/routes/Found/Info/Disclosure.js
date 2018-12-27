@@ -90,15 +90,15 @@ componentDidMount(){
                   <td>{disclosureArray.borrowerCurrentCount}人</td>
                 </tr>
                 <tr>
-                  <td>前十大借款人 待还金额占比：</td>
+                  <td>前十大借款人待还金额占比：</td>
                   <td>{numberFormat(disclosureArray.topTenLoanPercent)}%</td>
                 </tr>
                 <tr>
-                  <td>最大单一借款人 待还金额占比：</td>
+                  <td>最大单一借款人待还金额占比：</td>
                   <td>{numberFormat(disclosureArray.topOneLoanPercent)}%</td>
                 </tr>
                 <tr>
-                  <td>关联关系借款余额 及笔数：</td>
+                  <td>关联关系借款余额笔数：</td>
                   <td>{disclosureArray.correlationLoanBalCount }笔</td>
                 </tr>
                 <tr>
@@ -110,11 +110,11 @@ componentDidMount(){
                   <td>{disclosureArray.overdueCount}笔</td>
                 </tr>
                 <tr>
-                  <td>逾期90天（不含） 以上金额：</td>
+                  <td>逾期90天(不含)以上金额：</td>
                   <td>{numberFormat(disclosureArray.overdueMoreThreemouthAmt)}元</td>
                 </tr>
                 <tr>
-                  <td>逾期90天（不含） 以上笔数：</td>
+                  <td>逾期90天(不含)以上笔数：</td>
                   <td>{disclosureArray.overdueMoreThreemouthCount}笔</td>
                 </tr>
                 <tr>

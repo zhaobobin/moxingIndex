@@ -1,7 +1,7 @@
 /* 运营报告详情*/
 import React from 'react';
 import { connect } from 'dva';
-import {filterTel}from'~/utils/utils'
+import {filterTel,numberFormat}from'~/utils/utils'
 import styles  from './ReportDetail.less';
 import Information from "~/components/Information/Information";
 import Signature from "~/components/Information/signature";
@@ -49,10 +49,10 @@ export default class ReportDetail extends React.Component {
           let SexArr = [];
           for (let j = 0; j < data.genderInfo.length; j++) {
             if (data.genderInfo[j].investSubType === 'F') {
-              let SexF = {name: '女', y: parseInt(data.genderInfo[j].showData)}
+              let SexF = {name: '女', y: parseFloat(data.genderInfo[j].showData)}
               SexArr.push(SexF)
             } else if (data.genderInfo[j].investSubType === 'M') {
-              let SexM = {name: '男', y: parseInt(data.genderInfo[j].showData)}
+              let SexM = {name: '男', y: parseFloat(data.genderInfo[j].showData)}
               SexArr.push(SexM)
             }
           }
@@ -60,10 +60,10 @@ export default class ReportDetail extends React.Component {
           let terminalArr=[]
           for(let k=0;k<data.terminalInfo.length;k++){
             if(data.terminalInfo[k].investSubType==='PC'){
-              let terminalPC={name:data.terminalInfo[k].investSubType,y:parseInt(data.terminalInfo[k].showData)}
+              let terminalPC={name:data.terminalInfo[k].investSubType,y:parseFloat(data.terminalInfo[k].showData)}
               terminalArr.push(terminalPC)
             }else if(data.terminalInfo[k].investSubType==='APP'){
-              let terminalAPP={name:data.terminalInfo[k].investSubType,y:parseInt(data.terminalInfo[k].showData)}
+              let terminalAPP={name:data.terminalInfo[k].investSubType,y:parseFloat(data.terminalInfo[k].showData)}
               terminalArr.push(terminalAPP)
             }
           }
@@ -87,398 +87,207 @@ export default class ReportDetail extends React.Component {
 
   render(){
     const  {dataAll,periodInfoArrOr,configSexArr,configTerminalArr} =this.state;
-    let config;
-    if(periodInfoArrOr===''){
-        config = {
-        credits: {
-          enabled:false
+    /*项目发布数据*/
+    const  config = {
+      credits: {
+        enabled:false
+      },
+      chart: {
+        spacing : [0, 0 , 20, 0],
+      },
+      title: {
+        text: '',
+        floating:true,
+        x: 0,
+        y: 0,
+        style: {
+          color: '#002F58',
+          fontSize: '11px',
+          fontFamily: fontFamily
         },
-        chart: {
-          spacing : [0, 0 , 20, 0],
+      },
+      subtitle: {
+        text:dataAll.periodName+'份项目发布数量共'+dataAll.countPeriod+'个' ,
+        floating:true,
+        x: 0,
+        y: 350,
+        style: {
+          color: '#002F58',
+          fontSize: '13px',
+          fontWeight:500,
+          fontFamily: fontFamily
         },
-        title: {
-          text: '',
-          floating:true,
-          x: 0,
-          y: 0,
-          style: {
-            color: '#002F58',
-            fontSize: '11px',
-            fontFamily: fontFamily
+      },
+      tooltip: {
+        // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      legend: {
+        labelFormatter: function () {
+          return  this.name
+        },
+        layout: 'horizontal',
+        align: 'center',           //水平方向位置
+        verticalAlign: 'bottom', //垂直方向位置
+        symbolRadius: 0,
+        itemDistance: 5,
+        // itemMarginTop: 5,
+        // itemMarginBottom: 0,
+        itemStyle: {
+          fontSize:11
+        },
+        x:-14,
+        y:20,
+      },
+      plotOptions: {
+        pie: {
+          showInLegend: true,
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            connectorWidth: 1,          //线长度
+            connectorPadding: -25,
+            y:-20,
+            format: '{point.name}项目<br/>{point.y}个占{point.percentage:.1f} %',
+            style: {
+              fontSize:11,
+              color: '#0D2F55',
+              fontWeight:400,
+            }
           },
+        }
+      },
+      colors: [
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#057CA9'],
+            [1, '#0D2F55']
+          ]
         },
-        subtitle: {
-          text:dataAll.periodName+'份项目发布数量共'+dataAll.countPeriod+'个' ,
-          floating:true,
-          x: 0,
-          y: 350,
-          style: {
-            color: '#002F58',
-            fontSize: '13px',
-            fontWeight:500,
-            fontFamily: fontFamily
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#FFDCB7'],
+            [1, '#F18925']
+          ]
+        },
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#71829B'],
+            [1, '#B7CCE1']
+          ]
+        },
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
+          stops: [
+            [0, '#FFC263'],
+            [1, '#FFE7D5']
+          ]
+        },
+      ],
+      series: [{
+        type: 'pie',
+        allowPointSelect: false,    //动画效果
+        innerSize: '65%',//圆环内填充比例
+        size: '40%',
+        name: '账户资产',
+        data: periodInfoArrOr
+      }]
+    };
+    /*性别数据*/
+    const  configSex = {
+      credits: {
+        enabled:false
+      },
+      chart: {
+        spacing : [-100, 0 ,0, 0],
+        height:300,
+      },
+      title: {
+        text: '',
+      },
+      subtitle: {
+        text: '',
+      },
+      tooltip: {
+        animation:false,
+        // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      legend: {
+        labelFormatter: function () {
+          return  this.name
+        },
+        layout: 'horizontal',
+        align: 'center',           //水平方向位置
+        verticalAlign: 'bottom', //垂直方向位置
+        symbolRadius: 0,
+        floating:true,
+        // itemMarginTop: 5,
+        // itemMarginBottom: 0,
+        x:0,
+        y:-50,
+      },
+      plotOptions: {
+        pie: {
+          showInLegend: true,
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            connectorWidth: 1,          //线长度
+            connectorPadding: -20,
+            y:-20,
+            format: '{point.name}性{point.y}人<br/>占{point.percentage:.1f} %',
+            style: {
+              fontSize:11,
+              color: '#0D2F55',
+              fontWeight:400,
+            }
           },
+        }
+      },
+      colors: [
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+          stops: [
+            [0, '#057CA9'],
+            [1, '#0D2F55']
+          ]
         },
-        tooltip: {
-          // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        {
+          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
+          stops: [
+            [0, '#F18925'],
+            [1, '#FFDCB7']
+          ]
         },
-        legend: {
-          labelFormatter: function () {
-            return  this.name
-          },
-          layout: 'horizontal',
-          align: 'center',           //水平方向位置
-          verticalAlign: 'bottom', //垂直方向位置
-          symbolRadius: 0,
-          itemDistance: 5,
-          // itemMarginTop: 5,
-          // itemMarginBottom: 0,
-          itemStyle: {
-            fontSize:11
-          },
-          x:-14,
-          y:20,
-        },
-        plotOptions: {
-          pie: {
-            showInLegend: true,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              connectorWidth: 0,          //线长度
-              connectorPadding: -20,
-              style: {
-                fontSize:11
-              }
-            },
-          }
-        },
-        colors: [
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#71829B'],
-              [1, '#B7CCE1']
-            ]
-          },
-        ],
-        series: [{
-          type: 'pie',
-          allowPointSelect: false,
-          innerSize: '65%',//圆环内填充比例
-          size: '65%',
-          name: '账户资产',
-          data:['',100]
-        }]
-      };
-    }else {
-      config = {
-        credits: {
-          enabled:false
-        },
-        chart: {
-          spacing : [0, 0 , 20, 0],
-        },
-        title: {
-          text: '',
-          floating:true,
-          x: 0,
-          y: 0,
-          style: {
-            color: '#002F58',
-            fontSize: '11px',
-            fontFamily: fontFamily
-          },
-        },
-        subtitle: {
-          text:dataAll.periodName+'份项目发布数量共'+dataAll.countPeriod+'个' ,
-          floating:true,
-          x: 0,
-          y: 350,
-          style: {
-            color: '#002F58',
-            fontSize: '13px',
-            fontWeight:500,
-            fontFamily: fontFamily
-          },
-        },
-        tooltip: {
-          // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        legend: {
-          labelFormatter: function () {
-            return  this.name
-          },
-          layout: 'horizontal',
-          align: 'center',           //水平方向位置
-          verticalAlign: 'bottom', //垂直方向位置
-          symbolRadius: 0,
-          itemDistance: 5,
-          // itemMarginTop: 5,
-          // itemMarginBottom: 0,
-          itemStyle: {
-            fontSize:11
-          },
-          x:-14,
-          y:20,
-        },
-        plotOptions: {
-          pie: {
-            showInLegend: true,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              connectorWidth: 0,          //线长度
-              connectorPadding: -20,
-              style: {
-                fontSize:11
-              }
-            },
-          }
-        },
-        colors: [
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#057CA9'],
-              [1, '#0D2F55']
-            ]
-          },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#FFDCB7'],
-              [1, '#F18925']
-            ]
-          },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#71829B'],
-              [1, '#B7CCE1']
-            ]
-          },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
-            stops: [
-              [0, '#FFC263'],
-              [1, '#FFE7D5']
-            ]
-          },
-        ],
-        series: [{
-          type: 'pie',
-          allowPointSelect: false,
-          innerSize: '65%',//圆环内填充比例
-          size: '65%',
-          name: '账户资产',
-          data: periodInfoArrOr
-        }]
-      };
-    }
-    let configSex;
-    if(configSexArr===''){
-       configSex = {
-        credits: {
-          enabled:false
-        },
-        chart: {
-          spacing : [0, 0 , 110, 0],
-        },
-        title: {
-          text: '',
-          floating:true,
-          x: -50,
-          y: 140,
-          style: {
-            color: '#888',
-            fontSize: '20px',
-            fontFamily: fontFamily
-          },
-        },
-        subtitle: {
-          text: '',
-          floating:true,
-          x: -100,
-          y: 0,
-          style: {
-            color: '#333',
-            fontSize: '16px',
-            fontWeight:400,
-            fontFamily: fontFamily
-          },
-        },
-        tooltip: {
-          animation:false,
-          // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        legend: {
-          labelFormatter: function () {
-            return  this.name
-          },
-          layout: 'horizontal',
-          align: 'center',           //水平方向位置
-          verticalAlign: 'bottom', //垂直方向位置
-          symbolRadius: 0,
-          // itemMarginTop: 5,
-          // itemMarginBottom: 0,
-          x:0,
-          y:60,
-        },
-        plotOptions: {
-          pie: {
-            showInLegend: true,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              connectorWidth: 0,          //线长度
-              connectorPadding: -20,
-              style: {
-                fontSize:11
-              }
-            },
-          }
-        },
-         colors: [
-           {
-             linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-             stops: [
-               [0, '#71829B'],
-               [1, '#B7CCE1']
-             ]
-           },
-         ],
-        series: [{
-          type: 'pie',
-          allowPointSelect: false,
-          innerSize: '65%',//圆环内填充比例
-          size: '65%',
-          name: '账户资产',
-          data: ['',100]
-        }]
-      };
-    }else {
-      configSex = {
-        credits: {
-          enabled:false
-        },
-        chart: {
-          spacing : [0, 0 , 110, 0],
-        },
-        title: {
-          text: '',
-          floating:true,
-          x: -50,
-          y: 140,
-          style: {
-            color: '#888',
-            fontSize: '20px',
-            fontFamily: fontFamily
-          },
-        },
-        subtitle: {
-          text: '',
-          floating:true,
-          x: -100,
-          y: 0,
-          style: {
-            color: '#333',
-            fontSize: '16px',
-            fontWeight:400,
-            fontFamily: fontFamily
-          },
-        },
-        tooltip: {
-          animation:false,
-          // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        legend: {
-          labelFormatter: function () {
-            return  this.name
-          },
-          layout: 'horizontal',
-          align: 'center',           //水平方向位置
-          verticalAlign: 'bottom', //垂直方向位置
-          symbolRadius: 0,
-          // itemMarginTop: 5,
-          // itemMarginBottom: 0,
-          x:0,
-          y:60,
-        },
-        plotOptions: {
-          pie: {
-            showInLegend: true,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              connectorWidth: 0,          //线长度
-              connectorPadding: -20,
-              style: {
-                fontSize:11
-              }
-            },
-          }
-        },
-        colors: [
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-            stops: [
-              [0, '#057CA9'],
-              [1, '#0D2F55']
-            ]
-          },
-          {
-            linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
-            stops: [
-              [0, '#F18925'],
-              [1, '#FFDCB7']
-            ]
-          },
-
-        ],
-        series: [{
-          type: 'pie',
-          allowPointSelect: false,
-          innerSize: '65%',//圆环内填充比例
-          size: '65%',
-          name: '账户资产',
-          data: configSexArr
-        }]
-      };
-    }
+      ],
+      series: [{
+        type: 'pie',
+        allowPointSelect: false,    //动画效果
+        innerSize: '65%',//圆环内填充比例
+        size: '40%',
+        name: '账户资产',
+        data: configSexArr
+      }]
+    };
+    /*终端数据*/
     const  configTerminal = {
       credits: {
         enabled:false
       },
       chart: {
-        spacing : [0, 0 , 110, 0],
+        spacing : [0, 0 ,0, 0],
+        height:300,
       },
       title: {
         text: '',
         floating:true,
-        x: -50,
-        y: 150,
-        style: {
-          color: '#888',
-          fontSize: '20px',
-          fontFamily: fontFamily
-        },
       },
       subtitle: {
         text: '',
-        floating:true,
-        x: -100,
-        y: 0,
-        style: {
-          color: '#333',
-          fontSize: '16px',
-          fontWeight:400,
-          fontFamily: fontFamily
-        },
       },
       tooltip: {
         animation:false,
@@ -496,7 +305,7 @@ export default class ReportDetail extends React.Component {
         // itemMarginTop: 5,
         // itemMarginBottom: 0,
         x:0,
-        y:46,
+        y:-50,
       },
       yAxis: {
         title: {
@@ -511,10 +320,15 @@ export default class ReportDetail extends React.Component {
           cursor: 'pointer',
           dataLabels: {
             enabled: true,
-            connectorWidth: 0,          //线长度
-            connectorPadding: -20,
+            connectorWidth: 1,          //线长度
+            connectorPadding:-25,
+            x:10,
+            y:-20,
+            format: '{point.name}端出借{point.y}元<br/>占{point.percentage:.1f} %',
             style: {
-              fontSize:11
+              fontSize:11,
+              color: '#0D2F55',
+              fontWeight:400,
             }
           },
         }
@@ -538,9 +352,9 @@ export default class ReportDetail extends React.Component {
       ],
       series: [{
         type: 'pie',
-        allowPointSelect: false,
+        allowPointSelect: false,    //动画效果
         innerSize: '65%',//圆环内填充比例
-        size: '65%',
+        size: '70%',
         data:configTerminalArr
       },
 
@@ -562,7 +376,7 @@ export default class ReportDetail extends React.Component {
                   <img src={require("~/assets/account/find_operdata_money@2x.png")} alt=""
                        className={styles.pandectImg}/>
                   <div className={styles.pandectCont}>
-                    <p>{dataAll.baseAmt===''?'0.00':parseFloat(dataAll.baseAmt)}元</p>
+                    <p>{dataAll.baseAmt===undefined?'0.00':numberFormat(parseFloat(dataAll.baseAmt))}元</p>
                     <p>交易额</p>
                   </div>
                 </div>
@@ -570,7 +384,7 @@ export default class ReportDetail extends React.Component {
                   <img src={require("~/assets/account/find_operdata_profit@2x.png")} alt=""
                        className={styles.pandectImg}/>
                   <div className={styles.pandectCont}>
-                    <p>{dataAll.baseIncome===''?'0.00':parseFloat(dataAll.baseIncome)}元</p>
+                    <p>{dataAll.baseIncome===undefined?'0.00':numberFormat(parseFloat(dataAll.baseIncome))}元</p>
                     <p>用户收益</p>
                   </div>
                 </div>
@@ -578,7 +392,7 @@ export default class ReportDetail extends React.Component {
                   <img src={require("~/assets/account/find_operdata_people@2x.png")} alt=""
                        className={styles.pandectImg}/>
                   <div className={styles.pandectCont}>
-                    <p>{dataAll.baseCount===''?'0':dataAll.baseCount}人</p>
+                    <p>{dataAll.baseCount===undefined?'':numberFormat(dataAll.baseCount,true)}人</p>
                     <p>注册人数</p>
                   </div>
                 </div>
@@ -597,7 +411,7 @@ export default class ReportDetail extends React.Component {
                       <p className={styles.Ranking} key={index}>
                         <span className={index<3?styles.areaTopNone:''}>{index+1}</span>
                         <span className={styles.province}>{item.areaName}</span>
-                        <span>{parseFloat(item.showData)}元</span>
+                        <span>{numberFormat(parseFloat(item.showData))}元</span>
                       </p>
                     )
                   })
@@ -626,7 +440,7 @@ export default class ReportDetail extends React.Component {
                         <td>{filterTel(item.phone)}</td>
                         <td>{item.gender}</td>
                         <td>{item.areaName}</td>
-                        <td>{parseFloat(item.showData)}</td>
+                        <td>{numberFormat(parseFloat(item.showData))}</td>
                       </tr>
                     )
                   })

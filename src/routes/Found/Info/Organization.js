@@ -35,9 +35,11 @@ export default class Organization extends React.Component {
         <h4 className={styles.Organization}> <span className={styles.content}>主要人员信息<span></span></span></h4>
             <div className={styles.personnel }>
         <p ><span className={styles.title}>法定代表人：</span><span className={styles.cont}>吴芷萱</span></p>
-        <p ><span className={styles.title}>总裁：</span><span className={styles.cont}>许义来</span></p>
-        <p ><span className={styles.title}>财务负责人：</span><span className={styles.cont}>张建</span></p>
-        <p ><span className={styles.title}>副总经理/风控负责人：</span><span className={styles.cont}>卢平</span></p>
+        <p ><span className={styles.title}>总裁(CEO)：</span><span className={styles.cont}>许义来</span></p>
+        <p ><span className={styles.title}>首席运营官(COO)：</span><span className={styles.cont}>李林虎</span></p>
+        <p ><span className={styles.title}>首席技术官(CTO)：</span><span className={styles.cont}>伍振兴</span></p>
+        <p ><span className={styles.title}>财务负责人(CFO)：</span><span className={styles.cont}>张建</span></p>
+        <p ><span className={styles.title}>副总经理/风控负责人(CRO)：</span><span className={styles.cont}>卢平</span></p>
             </div>
         <h4 className={styles.Organization}> <span className={styles.content}>股东信息 <span></span></span></h4>
         <table className={styles. shareholder}>
