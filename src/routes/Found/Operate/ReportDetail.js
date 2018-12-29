@@ -1,11 +1,12 @@
 /* 运营报告详情*/
 import React from 'react';
 import { connect } from 'dva';
-import {filterTel,numberFormat}from'~/utils/utils'
+import {filterTel,numberFormat}from'~/utils/utils';
 import styles  from './ReportDetail.less';
 import Information from "~/components/Information/Information";
 import Signature from "~/components/Information/signature";
 import Loading from '~/components/Common/Loading';
+import HighMaps from '~/components/Table/HighMaps';
 /*图表*/
 import ReactHighcharts from 'react-highcharts';
 const fontFamily = '"Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
@@ -21,13 +22,13 @@ export default class ReportDetail extends React.Component {
       dataAll: {},
       periodInfoArrOr: [],
       configSexArr: [],
-      configTerminalArr:[]
+      configTerminalArr:[],
+      Map:[]
     }
   }
 
   componentDidMount(){
     let id = this.props.match.params.id;
-    console.log(id)
     this.props.dispatch({
       type: 'global/post',
       url: '/api/platform/findRunReportDetail',
@@ -67,11 +68,19 @@ export default class ReportDetail extends React.Component {
               terminalArr.push(terminalAPP)
             }
           }
+          /*地图*/
+          let MapData=[];
+          for(let l=0;l<data.areaTop5.length;l++){
+            let mapObj={name:data.areaTop5[l].areaName,value:parseFloat(data.areaTop5[l].showData),color:'#FDE7D6'}
+            MapData.push(mapObj)
+          }
+
           this.setState({
             dataAll: res.data,
             periodInfoArrOr: periodInfoArr2,
             configSexArr: SexArr,
-            configTerminalArr:terminalArr
+            configTerminalArr:terminalArr,
+            Map:MapData
           })
         }
       }
@@ -81,12 +90,11 @@ export default class ReportDetail extends React.Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.match.params.id !== this.props.match.params.id){
       let id = nextProps.match.params.id;
-
     }
   }
 
   render(){
-    const  {dataAll,periodInfoArrOr,configSexArr,configTerminalArr} =this.state;
+    const  {dataAll,periodInfoArrOr,configSexArr,configTerminalArr,Map} =this.state;
     /*项目发布数据*/
     const  config = {
       credits: {
@@ -403,7 +411,9 @@ export default class ReportDetail extends React.Component {
               </div>
               <h4 className={styles.ReportTitle}><span className={styles.content}>{dataAll.title}出借地域数据TOP5 <span></span></span></h4>
               <div className={styles.ChinaBox}>
-                <img src={require("~/assets/account/find_operdata_map@2x.png")} alt="" className={styles.ChinaImg}/>
+                {/*<img src={require("~/assets/account/find_operdata_map@2x.png")} alt="" className={styles.ChinaImg}/>*/}
+                        {/*地图*/}
+                <HighMaps data={Map}/>
                 <div className={styles.areaTop5Box}>
                 {
                   dataAll.areaTop5.map((item,index)=>{
