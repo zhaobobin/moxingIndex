@@ -15,9 +15,9 @@ html{
   position: relative;
   left: 50%;
   top: 50%;
-  width: 200px;
-  height: 200px;
-  margin: -100px 0 0 -100px;
+  width: 160px;
+  height: 160px;
+  margin: -80px 0 0 -80px;
   border-radius: 50%;
   border: 3px solid transparent;
   /* COLOR 1 */
@@ -135,7 +135,7 @@ html{
 .no-js #loader-wrapper {display: none;}
 .no-js h1 {color: #222222;}
 #loader-wrapper .load_logo {
-  width:100px; height: 100px; opacity:1;margin-left:-50px;margin-top:-50px;
+  width:80px; height: 80px; opacity:1;margin-left:-40px;margin-top:-40px;
   position:absolute; top:50%;left:50%; z-index:9999999999999;
 }
-#loader-wrapper .load_logo img{width: 100%; height: auto;margin-top:35px}
+#loader-wrapper .load_logo img{width: 100%; height: auto;margin-top:30px}
