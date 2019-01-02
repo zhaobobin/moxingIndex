@@ -380,11 +380,11 @@ const BaseRoutes = app => [
         exact: true,
         children: [
           {
-            name: '邀请好友-双旦迎新',
-            key: 'yaoqing-201812',
-            path: 'yaoqing-201812',
+            name: '邀请有礼-荐者有份',
+            key: 'yaoqing-201901',
+            path: 'yaoqing-201901',
             exact: true,
-            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201812')),
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201901')),
           },
           {
             name: 'banner-银行存管',

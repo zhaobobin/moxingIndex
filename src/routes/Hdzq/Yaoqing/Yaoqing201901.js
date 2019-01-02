@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import styles from './Yaoqing201812.less';
+import styles from './Yaoqing201901.less';
 import { Carousel } from 'antd';
 import { Link  } from 'dva/router';
 @connect(state => ({
