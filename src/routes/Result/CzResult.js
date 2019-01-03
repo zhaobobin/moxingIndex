@@ -31,11 +31,10 @@ export default class CzResult extends React.Component {
     if (isiOS) {
       /*ios*/
       this.setupWebViewJavascriptBridge( (bridge) => {
-        bridge.registerHandler('h5Action', (data, responseCallback) => {
+      /*  bridge.registerHandler('h5Action', (data, responseCallback) => {
           responseCallback(data);
-        });
-        bridge.callHandler('h5Action', {'paramKey':'paramValue'}, (response) => {
-
+        });*/
+        bridge.callHandler('h5Action', action, (response) => {
         });
       });
     }else if(isAndroid){
