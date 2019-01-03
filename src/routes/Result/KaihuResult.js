@@ -12,11 +12,39 @@ import ResultJson from './ResultJson'
 }))
 export default class KaihuResult extends React.Component {
 
+  /*IOS*/
+  setupWebViewJavascriptBridge(callback) {
+    if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
+    if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+    window.WVJBCallbacks = [callback];
+    let WVJBIframe = document.createElement('iframe');
+    WVJBIframe.style.display = 'none';
+    WVJBIframe.src = 'https://__bridge_loaded__';
+    // WVJBIframe.src = ‘wvjbscheme://__BRIDGE_LOADED__’;
+    document.documentElement.appendChild(WVJBIframe);
+    setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
+  }
+
+
   redirect = (action) => {
-    window.location.href = window.location.href + '&action=' + action;
-    setTimeout(() => {
-      window.location.reload();
-    }, 500)
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
+    if (isiOS) {
+      /*ios*/
+      this.setupWebViewJavascriptBridge( (bridge) => {
+       /* bridge.registerHandler('h5Action', (action, responseCallback) => {
+          responseCallback(action);
+        });*/
+        bridge.callHandler('h5Action', action, (response) => {
+        });
+      });
+    }else if(isAndroid){
+      /*Android*/
+      window.app.h5Action(action);      //与原生交互
+    }else{
+      return ''
+    }
   };
 
   render(){

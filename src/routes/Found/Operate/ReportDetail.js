@@ -300,7 +300,7 @@ export default class ReportDetail extends React.Component {
       tooltip: {
         animation:false,
         // enabled: true,
-        // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+       // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
       legend: {
         labelFormatter: function () {
@@ -363,6 +363,7 @@ export default class ReportDetail extends React.Component {
         allowPointSelect: false,    //动画效果
         innerSize: '65%',//圆环内填充比例
         size: '70%',
+        name:'出借',
         data:configTerminalArr
       },
 
