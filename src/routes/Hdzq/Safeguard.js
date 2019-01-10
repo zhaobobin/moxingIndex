@@ -13,7 +13,7 @@ export default class Safeguard extends React.Component {
     return(
      <div className={styles.safeguard}>
         <div className={styles.safeguardBanner}>
-           <img src={require('../../assets/safeguard/app_sanjdb_top.png')} />
+           <img src={require('../../assets/safeguard/app_sanjdb_top.jpg')} />
         </div>   
         <div className={styles.safeguardCon}>
             <div className={styles.safeguardWid}>
