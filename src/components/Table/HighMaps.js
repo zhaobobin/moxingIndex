@@ -34,7 +34,9 @@ const HighMaps =({data})=> {
       dataLabels: {
         enabled: true,
         color: Theme.labelColor,
-        format: '{point.name}'
+        format: '{point.name}',
+        overflow:'justify', //根据情况自动调整数据标签位置
+        allowOverlap: true , //标签之间的层叠
       },
       tooltip: {
         pointFormat: '{point.name}: {point.value}元'

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './InvitationIndex.less';
 import QRCode from 'qrcode.react';
-import { yaoqingDecrypt } from '~/utils/utils'
+import { yaoqingDecrypt,interaction} from '~/utils/utils'
 import ResultJson from '~/routes/Result/ResultJson';
 import ToastLoading from '~/components/Common/ToastLoading';
 
@@ -12,6 +12,7 @@ import ToastLoading from '~/components/Common/ToastLoading';
 }))
 export default class InvitationIndex extends React.Component {
 	constructor(props){
+
     super(props);
     this.ajaxFlag = true;
     this.setupWebViewJavascriptBridge = this.setupWebViewJavascriptBridge.bind(this);
@@ -47,13 +48,12 @@ export default class InvitationIndex extends React.Component {
             invitationCode: res.data.invitationCode,
 
             webUrl: res.data.webUrl
-
           })
-
         }
       }
     })
   };
+
   /*IOS*/
   setupWebViewJavascriptBridge(callback) {
     if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
@@ -66,7 +66,6 @@ export default class InvitationIndex extends React.Component {
     document.documentElement.appendChild(WVJBIframe);
     setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
   }
-  /*一键分享*/
   redirect = (action) => {
     let u = navigator.userAgent;
     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
@@ -74,9 +73,9 @@ export default class InvitationIndex extends React.Component {
     if (isiOS) {
       /*ios*/
       this.setupWebViewJavascriptBridge( (bridge) => {
-       /* bridge.registerHandler('h5Action', (data, responseCallback) => {
-          responseCallback(data);
-        });*/
+        /* bridge.registerHandler('h5Action', (data, responseCallback) => {
+           responseCallback(data);
+         });*/
         bridge.callHandler('h5Action', action, (response) => {
         });
       });
@@ -87,6 +86,7 @@ export default class InvitationIndex extends React.Component {
       return ''
     }
   };
+
   render(){
   	 const {invitationCode, webUrl} = this.state;
     return(
@@ -112,6 +112,7 @@ export default class InvitationIndex extends React.Component {
         <div className={styles.shareBox}>
           <p>方法二:将邀请码分享至好友</p>
           <h3>{invitationCode ? yaoqingDecrypt(invitationCode) : null}</h3>
+          {/*<img src={require("~/assets/Invitation/invite_bottom_btn@2x.png")} alt="" className={styles.Img}  onClick={()=>this.redirect(interaction(ResultJson.share_yaoqing.action))}/>*/}
           <img src={require("~/assets/Invitation/invite_bottom_btn@2x.png")} alt="" className={styles.Img}  onClick={()=>this.redirect(ResultJson.share_yaoqing.action)}/>
         </div>
         </div>

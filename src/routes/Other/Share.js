@@ -49,7 +49,6 @@ componentDidMount(){
         userId,
         productType: '1'
       },
-
       callback: (res) => {
         this.loading = false;
         if(res.code === 0){
@@ -131,9 +130,7 @@ componentDidMount(){
 	        <p>京ICP证 京B2-20160180 | 京ICP备14014223</p>
 	        <p>北京恒远鑫达投资管理有限公司</p>
 	        </div>
-	       
             }
-
         </div> </div>
        }
       </div>
