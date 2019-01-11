@@ -39,10 +39,38 @@ export default class Yaoqing201812 extends React.Component {
       }
     })
   }
-  /*点击按钮*/
-  redirect=(action)=>{
-
+  /*IOS*/
+  setupWebViewJavascriptBridge(callback) {
+    if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
+    if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+    window.WVJBCallbacks = [callback];
+    let WVJBIframe = document.createElement('iframe');
+    WVJBIframe.style.display = 'none';
+    WVJBIframe.src = 'https://__bridge_loaded__';
+    // WVJBIframe.src = ‘wvjbscheme://__BRIDGE_LOADED__’;
+    document.documentElement.appendChild(WVJBIframe);
+    setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
   }
+  redirect = (action) => {
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
+    if (isiOS) {
+      /*ios*/
+      this.setupWebViewJavascriptBridge( (bridge) => {
+        /*  bridge.registerHandler('h5Action', (data, responseCallback) => {
+            responseCallback(data);
+          });*/
+        bridge.callHandler('h5Action', action, (response) => {
+        });
+      });
+    }else if(isAndroid){
+      /*Android*/
+      window.app.h5Action(action);      //与原生交互
+    }else{
+      return ''
+    }
+  };
   render(){
     const {data}=this.state;
   	const {isAuth} = this.props.global;
@@ -82,7 +110,7 @@ export default class Yaoqing201812 extends React.Component {
 
         <p className={styles.YaoqingFooterBox}>
           <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-          <img src={require(isAuth===false?"~/assets/Invitation/invent_app_bt3@2x.png":'~/assets/Invitation/invent_app_bt2@2x.png')} onClick={() => this.redirect(isAuth===false?ResultJson.invite_login.action:ResultJson.invite.action)}/>
+          <img src={require(isAuth===true?"~/assets/Invitation/invent_app_bt3@2x.png":'~/assets/Invitation/invent_app_bt2@2x.png')} onClick={() => this.redirect(isAuth===true?ResultJson.invite_login.action:ResultJson.invite.action)}/>
         </p>
      </div>
     )

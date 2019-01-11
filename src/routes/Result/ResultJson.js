@@ -72,11 +72,11 @@ export default {
     action: 'qtw_risk'
   },
   invite_login:{
-    name:'邀请-登录',
+    name:'登录',
     action:'qtw_login'
   },
   invite_share:{
-    name:'邀请-分享',
+    name:'立即分享',
     action:'qtw_share_yaoqing_activity'
   },
   invite:{
