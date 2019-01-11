@@ -15,12 +15,15 @@ export default class ZxDetail extends React.Component {
     this.loading = true;
     this.state = {
       detail: {},
+      detail1: {},
     }
   }
 
   componentDidMount(){
     let id = this.props.match.params.id;
+   let cid = this.props.match.params.id;
     this.queryDetail(id);
+    this.queryDetailHead(id);
   }
 
   componentWillReceiveProps(nextProps){
@@ -29,14 +32,17 @@ export default class ZxDetail extends React.Component {
       let id = nextProps.match.params.id;
       this.queryDetail(id);
     }
+       if(nextProps.match.params.id !== this.props.match.params.id){
+      let id = nextProps.match.params.id;
+      this.queryDetailHead(id);
+    }
   }
 
   queryDetail(productNo){
   	 const {  match: { params } } = this.props;
     this.props.dispatch({
-      type: 'global/post',
+      type: 'global/post',      
       url: '/api/wisdomProduct/findProductDetail',
-     
       payload: {      	
         productNo: params.id
       },
@@ -52,10 +58,29 @@ export default class ZxDetail extends React.Component {
       }
     })
   }
-
+ queryDetailHead(productNo){
+  	 const {  match: { params } } = this.props;
+    this.props.dispatch({
+      type: 'global/post',      
+      url: '/api/wisdomProduct/findProjectDetail',
+      payload: {      	
+        productNo: params.id
+      },
+      callback: (res) => {
+      	 console.log(res)
+        this.loading = false;
+        if(res.code === 0){
+        	console.log(res.data)
+          this.setState({
+            detail1: res.data
+          })
+        }
+      }
+    })
+  }
   render(){
 
-    const {detail} = this.state;
+    const {detail,detail1} = this.state;
 
     return(
       <div className={styles.detail}>
@@ -77,16 +102,17 @@ export default class ZxDetail extends React.Component {
                    <span className={styles.sb_top1}>已有{detail.investNum}人出借</span><strong className={styles.sb_top2}><i>{detail.incomeRate}%</i>年化利率</strong></div>
                    <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.investPeriod}个月</i>授权服务期限</span><span><i>{detail.availableAmt}元</i>剩余金额</span></div></div>
                    <div className={styles.sb_contect}>
-                   <h1>项目简介</h1>
-                   <ul className={styles.sb_contectUl}>
-                     <li><span>标的名称</span>{detail.bidName}</li>
-                     <li><span>借款金额</span>{detail.expectTolFormat}</li>
-                     <li><span>发标时间</span>{detail.pubTime}</li>
-                     <li><span>封闭期</span>{detail.investPeriod}天</li>
-                     <li><span>起投金额</span>{detail.minAmt}元</li>
-                     <li><span>还款方式</span>{detail.returnMethod}</li>
-                     <li><span>起息日</span>{detail.startInterestRate}</li>
-                     <li className={styles.iconA}><span>信用等级</span><i>A</i><em>&nbsp;</em></li>
+                   <h1>服务特色</h1>
+                   <ul className={styles.sb_contectUl+' '+ styles.sb_contectUl1}>
+                     <li><span>当前开放金额</span>{detail1.expectTol}</li>                     
+                     <li><span>授权出借条件</span>{detail1.authLendCondition}</li>
+                     <li><span>授权服务金额上限</span>{detail1.maxAmt}</li>
+                     <li><span>利息处理方式</span>{detail1.repayType}</li>
+                     <li><span>服务期限结束日</span>{detail1.endperiod}</li>
+                     <li><span>到期退出方式</span>{detail1.expirationExitMode}</li>
+                     <li><span>提前退出方式</span>{detail1.earlyExitMode}</li>
+                     <li><span>风险提示</span>{detail1.riskHints}</li>
+                     <li><span>退出风险</span>{detail1.exitRisk}</li>
                    </ul>
                    </div>
               </div>

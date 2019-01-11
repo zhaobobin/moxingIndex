@@ -11,122 +11,53 @@ export default class Safeguard extends React.Component {
   
   render(){   
     return(
-       <div className={styles.conatinerWrap}>
-        <div className={styles.contentWrap}>
-            <div className={styles.container}>
-                <div className={styles.start}>
-                    <div className={styles.startN +' '+styles.start1}></div>
-                    <div className={styles.startN +' '+styles.start2}></div>
-                    <div className={styles.startN +' '+styles.start3}></div>
-                    <div className={styles.startN +' '+styles.start4}></div>
-                    <div className={styles.startN +' '+styles.start5}></div>
-                    <div className={styles.startN +' '+styles.start6}></div>
-                    <div className={styles.startN +' '+styles.start7}></div>
-                </div>              	
-                <div className={styles.bannerWrap}>
-                    <div className={styles.bannerContent}><img src={require('../../assets/safeguard/banner-content.png')} /></div>
-                </div>
-            </div>
-        </div>
-        <div className={styles.page}>
-            <div className={styles.line}></div>
-            <div className={styles.container}>
-                <div className={styles.page1}>
-                    <div className={styles.IntroLeft}>
-                        <div className={styles.intro}>
-                            <h5>非银行业信息安全最高标准</h5>
-                            <p className={styles.first}>去投网获得了由国家公安部门颁发认证的</p>
-                            <p className={styles.first}>“信息系统安全等级保护”三级备案证明。</p>
-                            <p>成为业内首批完成网络信息安全第三级认证的互联网金融平台之一。</p>
-                        </div>
+     <div className={styles.safeguard}>
+        <div className={styles.safeguardBanner}>
+           <img src={require('../../assets/safeguard/app_sanjdb_top.jpg')} />
+        </div>   
+        <div className={styles.safeguardCon}>
+            <div className={styles.safeguardWid}>
+                  <div className={styles.safeguard1}>
+                      <div className={styles.safeguardWord}>
+                       <h1>2017年5月17日</h1>                       
+                       <p>去投网以91分的高分顺利通过公安部信息系统安全等级保护三级测评，这标志着去投网拥有完善的网络攻击防范机制，为保护用户隐私、交易安全筑起了一道坚实的防火墙。</p>
+                       </div>
+                       <div className={styles.safeguard1img}><img src={require('../../assets/safeguard/app_sanjdb_pre.png')} /><span>非银行机构信息安全最高级别</span></div>
+                  </div>
+                  <div className={styles.safeguard2}>                     
+                     <dl className={styles.safeguard2Dl}>
+                       <dt>01</dt>
+                       <dd><span>国家网络信息安全等级是什么?</span><i>What is the level of National Network Information Security</i></dd>
+                     </dl>
+                     <div className={styles.safeguard2Word}>
+                     <img src={require('../../assets/safeguard/pc_sanjdb_mestop.png')} />
+                     <div className={styles.safeguard2midd}><p>国家信息安全等级保护认证是中国最权威的信息产品安全等级资格认证，由公安机关依据国家信息安全保护条例及相关制度，按照管理规范和技术标准，对各机构的信息系统安全等级保护状况进行认可及评定。</p><p>信息安全保护等级共分为5级，等级越高意味着安全保护能力越强，其中三级是国家对非银行机构的最高级认证。</p><p> 目前，大多数互联网金融平台以第二级认证为主，第三级属于“监管级别”，四大国有银行(总行)的一二级分行(省行、市行)等<span>重要金融机构一般是第三级认证</span>。</p></div>
+                    <img src={require('../../assets/safeguard/pc_sanjdb_mesbot.png')} />
                     </div>
-                    <div className={styles.protection}>
-                        <img src={require('../../assets/safeguard/protection.png')} />
-                        <p>“信息系统安全等级保护”备案证明</p>
-                    </div>
-                    <div className={styles.btnInt}>
-                        <p>去投网在网络与信息安全工作方面获得认可，将为出借人提供更加安全优质的服务。</p>
-                    </div>
-                    <div className={styles.buttonLiner}>
-                    </div>
-                </div>
-                <div className={styles.page2}>
-                    <div className={styles.IntroRight}>
-                        <div className={styles.intro}>
-                            <h5>高度重视系统安全</h5>
-                            <p>《网络信息中介机构业务活动管理办法》明确要求：P2P平台应当按照国家网络安全相关规定和国家信息安全等级保护制度的要求进行备案
-                            </p>
-                            <p></p>
-                        </div>
-                    </div>
-                    <ul>
-                        <li className={styles.item1}>
-                            <img src={require('../../assets/safeguard/list-1.png')} />
-                            <p>信息系统定级备案</p>
-                        </li>
-                        <li className={styles.item2}>
-                            <img src={require('../../assets/safeguard/list-2.png')} />
-                            <p>等级测试</p>
-                        </li>
-                        <li className={styles.item3}>
-                            <img src={require('../../assets/safeguard/list-3.png')} />
-                            <p>完善的网络安全设施</p>
-                        </li>
-                        <li className={styles.item4}>
-                            <img src={require('../../assets/safeguard/list-4.png')} />
-                            <p>管理制度</p>
-                        </li>
-                    </ul>
-                    <div className={styles.btnInt}>
-                        <p>去投网开展信息系统定级备案和等级测试，具有完善的防火墙、入侵检测、数据加密以及灾难恢复等网络安全设施和管理制度。</p>
-                    </div>
-                    <div className={styles.buttonLiner}>
-                    </div>
-                </div>
-                <div className={styles.page3}>
-                	
-                    <div className={styles.IntroLeft}>
-                        <div className={styles.intro}>
-                            <h5>助力行业和谐发展</h5>
-                            <p>安全是互联网金融平台健康发展的基石</p>
-                        </div>
-                    </div>                
-                    
-                </div>
-                <div className={styles.page4}>                    
-                    <div className={styles.development}>
-                        <div className={styles.api}></div>
-                        <div className={styles.item +' '+styles.item1}>
-                            <div className={styles.imgbox}>
-                                <img src={require('../../assets/safeguard/api-1.png')} />
-                            </div>
-                            <p>合法</p>
-                        </div>
-                        <div className={styles.item +' '+ styles.item2}>
-                            <div className={styles.imgbox}>
-                                <img src={require('../../assets/safeguard/api-2.png')} />
-                            </div>
-                            <p>合规</p>
-                        </div>
-                        <div className={styles.item  +' '+ styles.item3}>
-                            <div className={styles.imgbox}>
-                                <img src={require('../../assets/safeguard/api-3.png')} />
-                            </div>
-                            <p>积极自律</p>
-                        </div>
-                        <div className={styles.item +' '+ styles.item4}>
-                            <div className={styles.imgbox}>
-                                <img src={require('../../assets/safeguard/api-4.png')} />
-                            </div>
-                            <p>安全金融科技生态圈
-                            </p>
-                        </div>
-                    </div>
-                    <div className={styles.btnInt}>
-                        <p>去投网一直来秉持合法合规经营的原则，积极自律，致力于为用户和行业营造一个更安全的金融科技生态圈。</p>
-                    </div>
-                </div>
-            </div>
+                  </div>
+                  <div className={styles.safeguard2}>
+                     <dl className={styles.safeguard2Dl}>
+                       <dt>02</dt>
+                       <dd><span>三级等保认证有多严格?</span><i>How strict is the certification of third-class insurance</i></dd>
+                     </dl>
+                     <div className={styles.safeguard2Word}>
+                     <img src={require('../../assets/safeguard/pc_sanjdb_mestop.png')} />
+                       <div className={styles.safeguard2midd}><p>三级等保是由国家信息安全监管部门进行监督、检查，认证需要测评内容涵盖5个等级保护安全技术要求和5个安全管理要求，主要包含信息保护、安全审计、通信保密等近300项要求，共涉及测评分类73类，<span>要求十分严格</span>。</p></div>
+                     <img src={require('../../assets/safeguard/pc_sanjdb_mesbot.png')} />
+                     </div>
+                  </div>
+                  <div className={styles.safeguard2}>
+                     <dl className={styles.safeguard2Dl}>
+                       <dt>03</dt>
+                       <dd><span>三级等保有何作用？</span><i>What is the role of tertiary retention</i></dd>
+                     </dl>
+                     <div className={styles.safeguard2Word}>
+                     <img src={require('../../assets/safeguard/pc_sanjdb_mestop.png')} />
+                      <div className={styles.safeguard2midd}><p>（1）保障去投网客户信息不被窃取或损坏； </p><p>（2）有效防范黑客等不法分子通过网络展开的各种攻击以及病毒入侵； </p><p>（3）加强去投网对客户信息库的安全防护，<span>防止客户信息泄露</span>。</p></div>
+                     <img src={require('../../assets/safeguard/pc_sanjdb_mesbot.png')} />
+                     </div>
+                  </div>
+             </div>
         </div>
     </div>
     )

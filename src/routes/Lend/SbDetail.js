@@ -70,7 +70,7 @@ export default class SbDetail extends React.Component {
                    <div className={styles.sb_border}><span></span></div>                   
                    <div align="center"><Progress type="dashboard" percent={detail.bidProgress==='' ? '0': detail.bidProgress} gapDegree="160" width="250px" strokeWidth="1" strokeColor="#E6EEFF" format={percent => percent + '%'}/><span className={styles.sb_cirel}></span></div>
                    <span className={styles.sb_top1}>已有{detail.bidPeopleNum===''?'0':detail.bidPeopleNum}人出借</span><strong className={styles.sb_top2}><i>{detail.businessRate===''?'0':detail.businessRate}%</i>年化利率</strong></div>
-                   <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth===''?'0':detail.termMonth}个月</i>借款期限</span><span><i>{detail.bidAmt===''?'0':detail.bidAmt}元</i>剩余金额</span></div></div>
+                   <div className={styles.sb_middle}><div className={styles.sb_middlewid}><span className={styles.border}><i>{detail.termMonth===''?'0':detail.termMonth}个月</i>借款期限</span><span><i>{detail.surplusMoney===''?'0':detail.surplusMoney}元</i>剩余金额</span></div></div>
                    <div className={styles.sb_contect}>
                    <h1>项目简介</h1>
                    <ul className={styles.sb_contectUl}>
@@ -81,7 +81,7 @@ export default class SbDetail extends React.Component {
                      <li><span>起投金额</span>{detail.bidCash===''?'0':detail.bidCash}元</li>
                      <li><span>还款方式</span>{detail.returnMethod===''?'0':detail.returnMethod}</li>
                      <li><span>起息日</span>{detail.beginDate===''?'0':detail.beginDate}</li>
-                     <li className={styles.iconA}><span>信用等级</span><i>A</i><em>&nbsp;</em></li>
+                     <li className={styles.iconA}><span>信用等级</span><i>{detail.xyLevel}</i><em>&nbsp;</em></li>
                    </ul>
                    </div>
               </div>
