@@ -1,20 +1,28 @@
 import React from 'react';
-import { connect } from 'dva';
 import styles from './YaoqingPackage.less';
+import { numberFormat } from "~/utils/utils";
 import { Carousel } from 'antd';
-const  YaoqingPackage =()=> {
+const  YaoqingPackage =({data,isAuth})=> {
+  console.log(data)
     return(
       <div className={styles.PackageBox} >
-        <div className={styles.PackageTitleBox}>
-            <div className={styles.lingquBox}>
-              <p>您已领取</p>
-              <p>999999.00 <span>元</span></p>
+        {
+          isAuth
+            ?
+            null
+            :
+            <div className={styles.PackageTitleBox}>
+              <div className={styles.lingquBox}>
+                <p>您已领取</p>
+                <p>{numberFormat(parseInt(data.rewardSum, 10)/100)}<span>元</span></p>
+              </div>
+              <div className={styles.yaoqingBox}>
+                <p>您已邀请</p>
+                <p>{ data.total}<span>人</span></p>
+              </div>
             </div>
-            <div className={styles.yaoqingBox}>
-              <p>您已邀请</p>
-              <p>999 <span>人</span></p>
-            </div>
-        </div>
+        }
+
         <h2 className={styles.PackageTitle}>
           <img src={require("~/assets/Invitation/invent_app_title@2x.png")}/>
           <p>好友多 红包多</p>
