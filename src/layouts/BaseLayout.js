@@ -6,7 +6,8 @@ import DocumentTitle from 'react-document-title';
 import NotFound from "~/routes/Other/404";
 
 import styles from './BaseLayout.less'
-import GlobalHeader from '~/components/Common/GlobalHeader';
+import Loading from '~/components/Common/Loading';
+//import GlobalHeader from '~/components/Common/GlobalHeader';
 import GlobalContent from '~/components/Common/GlobalContent';
 
 const paramsObj = getUrlParams() || '';
@@ -18,16 +19,18 @@ export default class BaseLayout extends React.Component {
 
   componentDidMount(){
     const { isAuth } = this.props.global;
-
     //处理app调用h5
     if(paramsObj.platform === 'app'){
       if(paramsObj.accessToken) Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
       if(paramsObj.userId) Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
       this.saveUserinfo(paramsObj)
     }else{
-      if(!isAuth && Storage.get(ENV.storageRefreshToken)) {
-        this.validateToken();     //页面F5刷新时执行token验证
-      }
+      if(isAuth) return;                              //isAuth为true时不校验token
+      let refreshToken = Storage.get(ENV.storageRefreshToken),
+        userId = Storage.get(ENV.storageUserId);
+      setTimeout(() => {
+        this.validateToken(refreshToken, userId, paramsObj.platform);     //页面F5刷新时执行token验证
+      }, 200);
     }
   }
 
@@ -49,12 +52,13 @@ export default class BaseLayout extends React.Component {
   };
 
   //验证token
-  validateToken = () => {
+  validateToken = (refreshToken, userId, platform) => {
     this.props.dispatch({
       type: 'global/token',
       payload: {
-        refreshToken: Storage.get(ENV.storageRefreshToken),
-        userId: Storage.get(ENV.storageUserId)
+        refreshToken,
+        userId,
+        platform: platform || 'h5',
       },
       callback: (res) => {}
     })
@@ -102,29 +106,35 @@ export default class BaseLayout extends React.Component {
   render(){
 
     const { getRouteData } = this.props;
+    const { loading } = this.props.global;
 
     const layout = (
       <div className={styles.layout}>
 
-        <GlobalContent>
+        {
+          loading ?
+            <Loading/>
+            :
+            <GlobalContent>
 
-          <Switch>
-            {
-              getRouteData('BaseLayout').map(item =>
-                (
-                  <Route
-                    exact={item.exact}
-                    key={item.path}
-                    path={item.path}
-                    component={item.component}
-                  />
-                )
-              )
-            }
-            <Route component={NotFound} />
-          </Switch>
+              <Switch>
+                {
+                  getRouteData('BaseLayout').map(item =>
+                    (
+                      <Route
+                        exact={item.exact}
+                        key={item.path}
+                        path={item.path}
+                        component={item.component}
+                      />
+                    )
+                  )
+                }
+                <Route component={NotFound} />
+              </Switch>
 
-        </GlobalContent>
+            </GlobalContent>
+        }
 
       </div>
     );

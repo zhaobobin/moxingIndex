@@ -9,9 +9,9 @@ export default {
 
   state: {
 
-    loading: false,             //全局loading状态
+    loading: true,             //全局loading状态
 
-    isAuth: null,               //是否已登录
+    isAuth: false,               //是否已登录
 
     currentUser: {              //当前账户
       userInfo: {},             //用户信息
@@ -40,8 +40,6 @@ export default {
   effects: {
     *register({ payload, callback }, { call, put }) {
 
-      yield put({ type: 'changeLoading', payload: true });
-
       const res = yield call(
         (params) => {return request('/api/userRegister/pc/register', {method: 'POST', body: params})},
         payload
@@ -54,18 +52,16 @@ export default {
         yield put({
           type: 'changeLoginStatus',
           payload: {
+            loading: false,
             isAuth: true,
             userInfo: res.data,
           }
         });
       }
 
-      yield put({ type: 'changeLoading', payload: false });
     },
 
     *login({ payload, callback }, { call, put }) {
-
-      yield put({ type: 'changeLoading', payload: true });
 
       const res = yield call(
         (params) => {return request('/api/userAuth/login', {method: 'POST', body: params})},
@@ -79,47 +75,49 @@ export default {
         yield put({
           type: 'changeLoginStatus',
           payload: {
+            loading: false,
             isAuth: true,
             userInfo: res.data,
           }
         });
       }
 
-      yield put({ type: 'changeLoading', payload: false });
     },
 
     *token({ payload, callback }, { call, put }) {
 
-      yield put({ type: 'changeLoading', payload: true });
+      if(payload.refreshToken){
+        const res = yield call(
+          (params) => {return request('/api/token/refreshToken', {method: 'POST', body: params})},
+          payload
+        );
+        yield callback(res);
 
-      const res = yield call(
-        (params) => {return request('/api/token/refreshToken', {method: 'POST', body: params})},
-        payload
-      );
-      yield callback(res);
-
-      if(res.code === 0){
-        Storage.set(ENV.storageAccessToken, res.data.access_token);               //保存token
-        Storage.set(ENV.storageRefreshToken, res.data.refresh_token);             //保存token
-        Storage.set(ENV.storageUserId, res.data.userId);                          //保存userId
-        yield put({
-          type: 'changeLoginStatus',
-          payload: {
-            isAuth: true,
-            userInfo: res.data,
-          }
-        });
+        if(res.code === 0){
+          Storage.set(ENV.storageAccessToken, res.data.access_token);               //保存token
+          Storage.set(ENV.storageRefreshToken, res.data.refresh_token);             //保存token
+          Storage.set(ENV.storageUserId, res.data.userId);                          //保存userId
+          yield put({
+            type: 'changeLoginStatus',
+            payload: {
+              loading: false,
+              isAuth: true,
+              userInfo: res.data,
+            }
+          });
+        }else{
+          yield put({
+            type: 'changeLoginStatus',
+            payload: {
+              loading: false,
+              isAuth: false,
+              userInfo: '',
+            }
+          });
+        }
       }else{
-        yield put({
-          type: 'changeLoginStatus',
-          payload: {
-            isAuth: false,
-            userInfo: '',
-          }
-        });
+        yield put({ type: 'changeLoading', payload: false });
       }
-
-      yield put({ type: 'changeLoading', payload: false });
 
     },
 
@@ -310,6 +308,7 @@ export default {
     changeUserInfo(state, {payload}){
       return {
         ...state,
+        loading: false,
         currentUser: {
           ...state.currentUser,
           userInfo: Object.assign(state.currentUser.userInfo, payload)
