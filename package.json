@@ -32,6 +32,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
     "react-highcharts": "^16.0.2",
+    "react-lazyload": "^2.3.0",
     "react-navigation": "^2.18.2",
     "setprototypeof": "^1.1.0",
     "size-sensor": "^0.2.1",

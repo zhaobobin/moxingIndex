@@ -371,7 +371,7 @@ const BaseRoutes = app => [
           },
         ]
       },
- //活动专区
+      //活动专区
       {
         name: '活动专区',
         key: 'hdzq',
