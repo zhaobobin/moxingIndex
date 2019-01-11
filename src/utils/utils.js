@@ -633,11 +633,11 @@ export function isUrl(path) {
 }
 /*
 *
-* ios和android交互
+* ios和android与h5交互
 *
 * */
-/*
 export  function  interaction(action) {
+  this.setupWebViewJavascriptBridge = this.setupWebViewJavascriptBridge.bind(this);
   let u = navigator.userAgent;
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
@@ -652,20 +652,19 @@ export  function  interaction(action) {
       // WVJBIframe.src = ‘wvjbscheme://__BRIDGE_LOADED__’;
       document.documentElement.appendChild(WVJBIframe);
       setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
-    }
-    /!*ios*!/
+    };
+    /*ios*/
     this.setupWebViewJavascriptBridge( (bridge) => {
-      /!* bridge.registerHandler('h5Action', (data, responseCallback) => {
+      /* bridge.registerHandler('h5Action', (data, responseCallback) => {
          responseCallback(data);
-       });*!/
+       });*/
       bridge.callHandler('h5Action', action, (response) => {
       });
     });
   }else if(isAndroid){
-    /!*Android*!/
+    /*Android*/
     window.app.h5Action(action);      //与原生交互
   }else{
     return ''
   }
 }
-*/

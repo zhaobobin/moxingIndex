@@ -154,10 +154,15 @@ export default class ReportDetail extends React.Component {
           dataLabels: {
             enabled: true,
             connectorWidth: 1,          //线长度
-            connectorPadding: -25,
-            y:-20,
-            format: '{point.name}项目<br/>{point.y}个占{point.percentage:.1f} %',
+            connectorPadding: -5,
+            // format: '{point.name}项目<br/>{point.y}个占{point.percentage:.1f} %',
+            formatter: function () {
+              // 通过函数判断是否显示数据标签，为了防止数据标签过于密集
+              return this.y > 1 ? '<b>' + this.point.name+'项目' + ':</b> ' + numberFormat(this.y,true)+'个' +'<br/>'+'占'+parseFloat(this.percentage).toFixed(1) +'%': null;
+              // return this.point.name + numberFormat(this.y,true)+this.percentage
+            },
             style: {
+
               fontSize:11,
               color: '#0D2F55',
               fontWeight:400,
@@ -245,9 +250,12 @@ export default class ReportDetail extends React.Component {
           dataLabels: {
             enabled: true,
             connectorWidth: 1,          //线长度
-            connectorPadding: -20,
-            y:-20,
-            format: '{point.name}性{point.y}人<br/>占{point.percentage:.1f} %',
+            connectorPadding: -5,
+            formatter: function () {
+              // 通过函数判断是否显示数据标签，为了防止数据标签过于密集
+              return this.y > 1 ? '<b>' + this.point.name+'性' + ':</b> ' + numberFormat(this.y,true)+'人' +'<br/>'+'占'+parseFloat(this.percentage).toFixed(1) +'%': null;
+              // return this.point.name + numberFormat(this.y,true)+this.percentage
+            },
             style: {
               fontSize:11,
               color: '#0D2F55',
@@ -329,10 +337,14 @@ export default class ReportDetail extends React.Component {
           dataLabels: {
             enabled: true,
             connectorWidth: 1,          //线长度
-            connectorPadding:-25,
+            connectorPadding:-5,
             x:10,
             y:-20,
-            format: '{point.name}端出借{point.y}元<br/>占{point.percentage:.1f} %',
+            formatter: function () {
+              // 通过函数判断是否显示数据标签，为了防止数据标签过于密集
+              return this.y > 1 ? '<b>' + this.point.name+'端出借' + ':</b> ' + numberFormat(this.y,true)+'元' +'<br/>'+'占'+parseFloat(this.percentage).toFixed(1) +'%': null;
+              // return this.point.name + numberFormat(this.y,true)+this.percentage
+            },
             style: {
               fontSize:11,
               color: '#0D2F55',
