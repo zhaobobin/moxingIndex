@@ -14,7 +14,8 @@ export default class Yaoqing201812 extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        data:{}
+        data:{},
+        arr:[]
     }
   }
   componentDidMount(){
@@ -34,6 +35,20 @@ export default class Yaoqing201812 extends React.Component {
         if(res.code===0){
           this.setState({
             data:res.data,
+          })
+        }
+      }
+    })
+
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/coupon/invitationBanner',
+      payload: {
+      },
+      callback: (res) => {
+        if(res.code===0){
+          this.setState({
+            arr:res.data,
           })
         }
       }
@@ -72,9 +87,8 @@ export default class Yaoqing201812 extends React.Component {
     }
   };
   render(){
-    const {data}=this.state;
+    const {data,arr}=this.state;
   	const {isAuth} = this.props.global;
-  	   console.log(isAuth);
     return(
      <div className={styles.YaoqingBox}>
             {/*第一部分*/}
@@ -95,7 +109,7 @@ export default class Yaoqing201812 extends React.Component {
           {/*第二部分*/}
        <div className={styles.YaoqingBoxTwo}>
          <LazyLoad height={'32%'}>
-            <YaoqingPackage data={data} isAuth={isAuth}/>
+            <YaoqingPackage data={data} isAuth={isAuth} arr={arr}/>
          </LazyLoad>
           {/*第三部分*/}
          <LazyLoad height={'18%'}>

@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './YaoqingPackage.less';
 import { numberFormat } from "~/utils/utils";
 import { Carousel } from 'antd';
-const  YaoqingPackage =({data,isAuth})=> {
-  console.log(data)
+const  YaoqingPackage =({data,isAuth,arr})=> {
     return(
       <div className={styles.PackageBox} >
         {
@@ -33,18 +32,22 @@ const  YaoqingPackage =({data,isAuth})=> {
           <img src={require("~/assets/Invitation/invent_app_icon2@2x.png")}/>
           <img src={require("~/assets/Invitation/invent_app_icon3@2x.png")}/>
         </div>
-        <p className={styles.PackageP}>您再邀请xx位有效好友就可以领取xx元红包</p>
+
+        {
+          isAuth
+            ?
+            null
+            :
+            <p className={styles.PackageP}>您再邀请{data.num}位有效好友就可以领取{numberFormat(parseInt(data.awardSum, 10)/100)}元红包</p>
+        }
+
         <div className={styles.PackageLunBo}>
             <Carousel vertical autoplay dots={false}>
-              <p>
-                130****1234好友出借获50元现金红包
-              </p>
-              <p>
-                130****1234好友出借获50元现金红包
-              </p>
-              <p>
-                130****1234好友出借获50元现金红包
-              </p>
+              {
+                arr.map((item, index) => (
+                  <p key={index}>{item.phone}{isAuth?'邀友获得':'好友出借获'}{numberFormat(parseInt(item.reward, 10)/100)}元红包</p>
+                ))
+              }
             </Carousel>
         </div>
       </div>
