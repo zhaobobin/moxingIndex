@@ -9,9 +9,10 @@ import {
   Encrypt, getUrlParams, yaoqingDecrypt, filterTel
 } from "~/utils/utils";
 import styles from './QucikRegister.less';
+import {config} from '~/config'
 
 //import logo from '~/assets/com/logo.png'
-//import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.jpg'
+import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.jpg'
 import sign_banner2 from '~/assets/sign/fast_login_banner2@2x.jpg'
 import SmsValidate from '~/components/Form/SmsValidate'
 
@@ -321,7 +322,7 @@ export default class QucikRegister extends React.Component {
         {/*</div>*/}
 
         <div className={styles.banner}>
-          <img src={sign_banner2} alt=""/>
+          <img src={config.hongbaoFlag ? sign_banner1 : sign_banner2} alt="banner"/>
         </div>
 
         <div className={styles.formBox + " " + styles.register}>
@@ -454,7 +455,7 @@ export default class QucikRegister extends React.Component {
             <div className={showYaoqing ? styles.showYaoqing : styles.hideYaoqing}>
               <p className={styles.toggleBtn} onClick={this.toggleYaoqing}>
                 <i className={showYaoqing ? styles.rotate : null}/>
-                <span>填写邀请码（选填）</span>
+                <span>邀请人手机号码</span>
               </p>
               <FormItem>
                 {getFieldDecorator('invitationCode', {
@@ -510,10 +511,18 @@ export default class QucikRegister extends React.Component {
                     !getFieldValue('smscode')
                   }
                 >
-                  注册
+                  <span>注册</span>
+                  {
+                    config.hongbaoFlag ?
+                      <span>领{config.hongbao}元红包</span>
+                      :
+                      null
+                  }
                 </Button>
               </div>
             </FormItem>
+
+            <p className={styles.hongbaoDesc}>注册成功后，奖励即发放至您的账户</p>
 
           </Form>
         </div>
@@ -557,7 +566,7 @@ export default class QucikRegister extends React.Component {
             <span>|</span>
             <span>{ENV.beian}</span>
           </p>
-          <p><span>{ENV.address}</span></p>
+          <p><span>{ENV.company}</span></p>
         </div>
 
       </div>

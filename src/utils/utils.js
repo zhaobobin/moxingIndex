@@ -33,6 +33,7 @@ export const ENV = {
   verification: 'dXQb0UUYe3',
 
   oldUrl: 'https://hyxd.qutouwang.com/',
+  company: '北京恒远鑫达投资管理有限公司',
   address: '北京市朝阳区亮马桥路甲40号1幢4层401内B02A室',
   youbian: '100105',
   hotline: '400-181-0588',
