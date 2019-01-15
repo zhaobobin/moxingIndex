@@ -8,8 +8,6 @@ const  YaoqingPackage =({data,isAuth,arr})=> {
         {
           isAuth
             ?
-            null
-            :
             <div className={styles.PackageTitleBox}>
               <div className={styles.lingquBox}>
                 <p>您已领取</p>
@@ -20,6 +18,8 @@ const  YaoqingPackage =({data,isAuth,arr})=> {
                 <p>{ data.total}<span>人</span></p>
               </div>
             </div>
+            :
+          null
         }
 
         <h2 className={styles.PackageTitle}>
@@ -36,9 +36,9 @@ const  YaoqingPackage =({data,isAuth,arr})=> {
         {
           isAuth
             ?
-            null
-            :
             <p className={styles.PackageP}>您再邀请{data.num}位有效好友就可以领取{numberFormat(parseInt(data.awardSum, 10)/100)}元红包</p>
+            :
+           null
         }
 
         <div className={styles.PackageLunBo}>

@@ -89,42 +89,48 @@ export default class Yaoqing201812 extends React.Component {
   render(){
     const {data,arr}=this.state;
   	const {isAuth} = this.props.global;
+
     return(
      <div className={styles.YaoqingBox}>
             {/*第一部分*/}
        <LazyLoad height={'19%'}>
-         {
-           isAuth
-             ?
-             null
-             :
-             <img src={require("~/assets/Invitation/invent_app_stars@2x.png")} className={styles.YaoqingStarImg}/>
-         }
+           {
+             isAuth
+               ?
+               <img src={require("~/assets/Invitation/invent_app_stars@2x.png")} className={styles.YaoqingStarImg}/>
+               :
+               null
+           }
        <img src={require("~/assets/Invitation/invent_app_top@2x.png")} className={styles.YaoqingBoxHeadImg}/>
+
        <div className={styles.YaoqingTimeBox}>
          <p>活动时间</p>
          <p>{moment(data.startDate).format("YYYY-MM-DD")}至{moment(data.endDate).format("YYYY-MM-DD")}</p>
        </div>
        </LazyLoad>
+
           {/*第二部分*/}
        <div className={styles.YaoqingBoxTwo}>
          <LazyLoad height={'32%'}>
             <YaoqingPackage data={data} isAuth={isAuth} arr={arr}/>
          </LazyLoad>
+
           {/*第三部分*/}
          <LazyLoad height={'18%'}>
             <YaoqingRegulation />
           </LazyLoad>
+
           {/*第四部分*/}
          <LazyLoad height={'26%'}>
             <YaoqingReturnMoney />
          </LazyLoad>
+
          <div className={styles.YaoqingFooter}> </div>
        </div>
 
         <p className={styles.YaoqingFooterBox}>
           <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-          <img src={require(isAuth===true?"~/assets/Invitation/invent_app_bt3@2x.png":'~/assets/Invitation/invent_app_bt2@2x.png')} onClick={() => this.redirect(isAuth===true?ResultJson.invite_login.action:ResultJson.invite.action)}/>
+          <img src={require(isAuth?'~/assets/Invitation/invent_app_bt2@2x.png':"~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(isAuth?ResultJson.invite.action:ResultJson.invite_login.action)}/>
         </p>
      </div>
     )
