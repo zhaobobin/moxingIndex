@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'dva';
  import styles from './YaoqingReturnMoney.less';
 
 const  YaoqingReturnMoney =()=> {

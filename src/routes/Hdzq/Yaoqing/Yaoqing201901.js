@@ -6,40 +6,44 @@ import YaoqingReturnMoney from '~/components/Hdzq/YaoqingReturnMoney';
 import styles from './Yaoqing201901.less';
 import ResultJson from '../../Result/ResultJson';
 import moment from 'moment';
-import LazyLoad from 'react-lazyload';
+
+import LoadLazy from '~/components/Common/LoadLazy';
+
 @connect(state => ({
   global: state.global,
 }))
 export default class Yaoqing201812 extends React.Component {
   constructor(props){
     super(props);
+    this.ajaxFlag = true;
     this.state = {
-        data:{},
-        arr:[]
+      loading: true,
+      detail:'',
+      dataLB:{}
     }
   }
   componentDidMount(){
-     let { userId } = this.props.global.currentUser.userInfo;
-     if(userId===undefined){
-       userId=null
-     }else {
-       userId;
-     }
+  this.Yaoqing()
+  }
+
+  /*页面接口*/
+  Yaoqing(){
+    let { userId } = this.props.global.currentUser.userInfo;
     this.props.dispatch({
       type: 'global/post',
       url: '/api/coupon/invitationAward',
       payload: {
-         userId,
+        userId:userId || null,
       },
       callback: (res) => {
         if(res.code===0){
-          this.setState({
-            data:res.data,
-          })
+          this.YaoqingLunBo(res.data)
         }
       }
-    })
-
+    });
+  }
+  /*轮播接口*/
+  YaoqingLunBo(detail){
     this.props.dispatch({
       type: 'global/post',
       url: '/api/coupon/invitationBanner',
@@ -48,7 +52,9 @@ export default class Yaoqing201812 extends React.Component {
       callback: (res) => {
         if(res.code===0){
           this.setState({
-            arr:res.data,
+            loading: false,
+            dataLB:res.data.list,
+            detail:detail
           })
         }
       }
@@ -86,52 +92,63 @@ export default class Yaoqing201812 extends React.Component {
       return ''
     }
   };
+
+
   render(){
-    const {data,arr}=this.state;
-  	const {isAuth} = this.props.global;
+    const {detail,dataLB,loading}=this.state;
+  	const { isAuth } = this.props.global;
 
     return(
      <div className={styles.YaoqingBox}>
-            {/*第一部分*/}
-       <LazyLoad height={'19%'}>
-           {
-             isAuth
-               ?
-               <img src={require("~/assets/Invitation/invent_app_stars@2x.png")} className={styles.YaoqingStarImg}/>
-               :
-               null
-           }
-       <img src={require("~/assets/Invitation/invent_app_top@2x.png")} className={styles.YaoqingBoxHeadImg}/>
+       {
+         loading && !detail ?
+           null
+           :
+           <div>
+             {/*第一部分*/}
+             <LoadLazy height={'19%'}>
+               {
+                 isAuth
+                   ?
+                   <img src={require("~/assets/Invitation/invent_app_stars@2x.png")} className={styles.YaoqingStarImg}/>
+                   :
+                   null
+               }
+               <img src={require("~/assets/Invitation/invent_app_top@2x.png")} className={styles.YaoqingBoxHeadImg}/>
+               <div className={styles.YaoqingTimeBox}>
+                 <p>活动时间</p>
+                 <p>{moment(detail.startDate).format("YYYY-MM-DD")}至{moment(detail.endDate).format("YYYY-MM-DD")}</p>
+               </div>
+             </LoadLazy>
 
-       <div className={styles.YaoqingTimeBox}>
-         <p>活动时间</p>
-         <p>{moment(data.startDate).format("YYYY-MM-DD")}至{moment(data.endDate).format("YYYY-MM-DD")}</p>
-       </div>
-       </LazyLoad>
 
-          {/*第二部分*/}
-       <div className={styles.YaoqingBoxTwo}>
-         <LazyLoad height={'32%'}>
-            <YaoqingPackage data={data} isAuth={isAuth} arr={arr}/>
-         </LazyLoad>
+             {/*第二部分*/}
+             <div className={styles.YaoqingBoxTwo}>
 
-          {/*第三部分*/}
-         <LazyLoad height={'18%'}>
-            <YaoqingRegulation />
-          </LazyLoad>
+               <LoadLazy height={'32%'}>
+                 <YaoqingPackage {...this.props}  Packagedata={detail} isAuth={isAuth} dataLB={dataLB}/>
+               </LoadLazy>
 
-          {/*第四部分*/}
-         <LazyLoad height={'26%'}>
-            <YaoqingReturnMoney />
-         </LazyLoad>
 
-         <div className={styles.YaoqingFooter}> </div>
-       </div>
+               {/*第三部分*/}
+               <LoadLazy height={'18%'}>
+                 <YaoqingRegulation  />
+               </LoadLazy>
 
-        <p className={styles.YaoqingFooterBox}>
-          <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-          <img src={require(isAuth?'~/assets/Invitation/invent_app_bt2@2x.png':"~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(isAuth?ResultJson.invite.action:ResultJson.invite_login.action)}/>
-        </p>
+               {/*第四部分*/}
+               <LoadLazy height={'26%'}>
+                 <YaoqingReturnMoney />
+               </LoadLazy>
+
+               <div className={styles.YaoqingFooter}> </div>
+             </div>
+
+             <p className={styles.YaoqingFooterBox}>
+               <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
+               <img src={require(isAuth ? '~/assets/Invitation/invent_app_bt2@2x.png' : "~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(isAuth ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
+             </p>
+           </div>
+       }
      </div>
     )
   }
