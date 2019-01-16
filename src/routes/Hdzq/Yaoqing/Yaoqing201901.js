@@ -96,7 +96,7 @@ export default class Yaoqing201812 extends React.Component {
   render(){
     const {detail,dataLB,loading}=this.state;
   	const { isAuth } = this.props.global;
-
+    const { userId } =this.props.global.currentUser.userInfo;
     return(
      <div className={styles.YaoqingBox}>
        {
@@ -107,7 +107,7 @@ export default class Yaoqing201812 extends React.Component {
              {/*第一部分*/}
              <LoadLazy height={'19%'}>
                {
-                 isAuth
+                 userId
                    ?
                    <img src={require("~/assets/Invitation/invent_app_stars@2x.png")} className={styles.YaoqingStarImg}/>
                    :
@@ -125,7 +125,7 @@ export default class Yaoqing201812 extends React.Component {
              <div className={styles.YaoqingBoxTwo}>
 
                <LoadLazy height={'32%'}>
-                 <YaoqingPackage {...this.props}  Packagedata={detail} isAuth={isAuth} dataLB={dataLB}/>
+                 <YaoqingPackage {...this.props}  Packagedata={detail} userId={userId} dataLB={dataLB}/>
                </LoadLazy>
 
 
@@ -144,7 +144,7 @@ export default class Yaoqing201812 extends React.Component {
 
              <p className={styles.YaoqingFooterBox}>
                <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-               <img src={require(isAuth ? '~/assets/Invitation/invent_app_bt2@2x.png' : "~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(isAuth ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
+               <img src={require(userId ? '~/assets/Invitation/invent_app_bt2@2x.png' : "~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(userId ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
              </p>
            </div>
        }
