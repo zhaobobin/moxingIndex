@@ -379,12 +379,19 @@ const BaseRoutes = app => [
         isHide: true,
         exact: true,
         children: [
-          {
+        /*  {
             name: '邀请有礼-荐者有份',
             key: 'yaoqing-201901',
             path: 'yaoqing-201901',
             exact: true,
             component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201901')),
+          },*/
+          {
+            name: '邀请有礼-荐者有份',
+            key: 'yaoqing-201902',
+            path: 'yaoqing-201902',
+            exact: true,
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201902')),
           },
           {
             name: 'banner-银行存管',
