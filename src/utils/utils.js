@@ -637,11 +637,12 @@ export function isUrl(path) {
 *
 * */
 export  function  interaction(action) {
-  this.setupWebViewJavascriptBridge = this.setupWebViewJavascriptBridge.bind(this);
+
   let u = navigator.userAgent;
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
   if (isiOS) {
+          /*交互固定代码*/
     const setupWebViewJavascriptBridge=(callback)=> {
       if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
       if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
@@ -653,8 +654,9 @@ export  function  interaction(action) {
       document.documentElement.appendChild(WVJBIframe);
       setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
     };
+
     /*ios*/
-    this.setupWebViewJavascriptBridge( (bridge) => {
+  setupWebViewJavascriptBridge ( (bridge) => {
       /* bridge.registerHandler('h5Action', (data, responseCallback) => {
          responseCallback(data);
        });*/
