@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './YaoqingPackage.less';
 import { numberFormat } from "~/utils/utils";
 import { Carousel } from 'antd';
-const  YaoqingPackage =({Packagedata,isAuth,dataLB})=> {
+const  YaoqingPackage =({Packagedata,userId,dataLB})=> {
     return(
       <div className={styles.PackageBox} >
         {
-          isAuth
+          userId
             ?
             <div className={styles.PackageTitleBox}>
               <div className={styles.lingquBox}>
@@ -34,7 +34,7 @@ const  YaoqingPackage =({Packagedata,isAuth,dataLB})=> {
         </div>
 
         {
-          isAuth
+          userId
             ?
             <p className={styles.PackageP}>您再邀请{Packagedata.num}位有效好友就可以领取{numberFormat(parseInt(Packagedata.awardSum, 10)/100)}元红包</p>
             :
@@ -45,7 +45,7 @@ const  YaoqingPackage =({Packagedata,isAuth,dataLB})=> {
             <Carousel vertical autoplay dots={false}>
               {
                 dataLB.map((item, index) => (
-                  <p key={index}>{item.phone}{isAuth?'邀友获得':'好友出借获'}{numberFormat(parseInt(item.reward, 10)/100)}元红包</p>
+                  <p key={index}>{item.phone}{userId?'邀友获得':'好友出借获'}{numberFormat(parseInt(item.reward, 10)/100)}元红包</p>
                 ))
               }
             </Carousel>
