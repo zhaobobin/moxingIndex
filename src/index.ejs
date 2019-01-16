@@ -34,8 +34,10 @@
       var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 
       if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
-        if(window.location.hash.match('/user/quick-register') || window.location.hash.match('/hdzq/yaoqing-')){
-          window.location.href = "https://www.qutouwang.com" + window.location.hash;
+        var url = window.location.href;
+        if(url.match('/user/quick-register') || url.match('/hdzq/yaoqing-')){
+          var relUrl = url.replace(window.location.origin, '');
+          window.location.href = "https://www.qutouwang.com" + relUrl;
         }
       }
     }
