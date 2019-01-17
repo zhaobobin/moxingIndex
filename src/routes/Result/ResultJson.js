@@ -81,6 +81,6 @@ export default {
   },
   invite:{
     name:'立即邀请',
-    action:'qtw_share_yaoqing'
+    action:'qtw_share_yaoqing_invite_right_now'
   }
 }

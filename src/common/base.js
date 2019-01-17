@@ -22,7 +22,22 @@ const BaseRoutes = app => [
         exact: true,
         component: dynamicWrapper(app, [], () => import('../routes/Home/Home')),
       },
-
+      //新手指引
+      {
+        name: '新手指引',
+        key: 'guide',
+        path: 'guide',
+        isHide: true,
+        // component: dynamicWrapper(app, [], () => import('../routes/Guide/GuideIndex')),
+        children:[
+          {
+            name: '风险控制',
+            key: 'risk',
+            path: 'risk',
+            component: dynamicWrapper(app, [], () => import('../routes/Guide/Risk')),
+          },
+        ]
+      },
       //新闻资讯
       {
         name: '新闻资讯',
@@ -236,7 +251,7 @@ const BaseRoutes = app => [
           },
 
           {
-            name: '平台优势',
+            name: '安全保障',
             key: 'platform',
             path: 'platform',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Platform/PlatformIndex')),
