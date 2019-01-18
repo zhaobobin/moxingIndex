@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
-import YaoqingPackage from '~/components/Hdzq/YaoqingPackage';
-import YaoqingRegulation from '~/components/Hdzq/YaoqingRegulation';
-import YaoqingReturnMoney from '~/components/Hdzq/YaoqingReturnMoney';
+import YaoqingPackage from '~/components/Hdzq/Yaoqing201902/YaoqingPackage';
+import YaoqingRegulation from '~/components/Hdzq/Yaoqing201902/YaoqingRegulation';
+import YaoqingReturnMoney from '~/components/Hdzq/Yaoqing201902/YaoqingReturnMoney';
 import styles from './Yaoqing201902.less';
-import ResultJson from '../../Result/ResultJson';
+import ResultJson from '../../../Result/ResultJson';
 import moment from 'moment';
 import {interaction} from '~/utils/utils'
 import LoadLazy from '~/components/Common/LoadLazy';
@@ -49,6 +49,7 @@ export default class Yaoqing201812 extends React.Component {
       type: 'global/post',
       url: '/api/coupon/invitationBanner',
       payload: {
+        rewardType:1,
       },
       callback: (res) => {
         if(res.code===0){

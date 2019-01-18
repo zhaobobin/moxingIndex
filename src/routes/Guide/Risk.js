@@ -18,12 +18,15 @@ export default class Risk extends React.Component {
         <LazyLoad height={'19%'}>
           <RiskOne/>
         </LazyLoad>
+
         <LazyLoad height={'16%'}>
           <RiskTwo/>
         </LazyLoad>
+
         <LazyLoad height={'17%'}>
           <RiskThree/>
         </LazyLoad>
+
         <LazyLoad height={'14%'}>
           <RiskFour/>
         </LazyLoad>
