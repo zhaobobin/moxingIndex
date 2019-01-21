@@ -11,13 +11,19 @@ export default class RiskOne extends React.Component {
   render(){
     return(
       <div className={styles.RiskOneBox}>
-          <div className={styles.OneImgBox}>
-            <img src={require("~/assets/riskManagement/riskmang_icon1@2x.png")}/>
-          </div>
+        <p >
+            <span>
+              大数据风控系统
+              <span></span>
+            </span>
+        </p>
         <div className={styles.OneContBox}>
-          <p> 风险控制是去投网运营的核心，这一方面是为了充分预防风险的发生，另一方面也是为了确保公司可以更顺畅地持续运营，从而为更多的出借人提供更优质的服务。</p>
-          <p> 我们的风控机制包括法务、合规、风控、稽核、借后服务等多个环节，覆盖借前、借中和借后的整个流程。我们主要审核和评估借款人的还款意愿和还款能力，加上对长期积累的大数据的研究后进行多维度的人群、行业及特点分析，不断对风险控制的把控、风险防范的机制进行完善、调整，从而有效地防范了信用风险。</p>
+          <img src={require("~/assets/riskManagement/riskmang_icon1@2x.png")}/>
+          <div className={styles.OneCont}>
+            <p> 独创“先知”大数据风控系统，依托大数据、云计算和人工智能等先进科技技术，通过自动采集2000多个维度的征信数据，结合人脸识别、微表情、关系图谱等，帮助去投网甄别隐藏的风险点，防范欺诈行为</p>
+          </div>
         </div>
+
       </div>
     )
   }

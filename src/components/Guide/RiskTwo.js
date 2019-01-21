@@ -17,12 +17,21 @@ export default class RiskTwo extends React.Component {
               <span></span>
             </span>
           </p>
-        <div className={styles.TwoImgBox}>
+
+        <div className={styles.TwoContBox}>
+          <div className={styles.TwoCont}>
+            <p>去投网先后聘请北京德恒律师事务所和北京盈科律师事务所作为法务保障团队。针对去投网的业务模式、产品模式、风险控制、信息披露等问题，律师事务所出具专业法律意见，协助去投网合规备案和合规运营，更好的保障出借人的合法权益。</p>
+          </div>
+          <img src={require("~/assets/riskManagement/riskmang_icon2@2x.png")}/>
+
+        </div>
+
+      {/*  <div className={styles.TwoImgBox}>
           <img src={require("~/assets/riskManagement/riskmang_icon2@2x.png")}/>
         </div>
         <div className={styles.TwoContBox}>
-          <p> 汇聚来自金融、互联网、法律行业多名精英人士，多人曾经在国内各大银行及知名金融机构从事专业管理工作，亲历中国金融市场的发展与变革，出色的专业素养、丰富的实践经验使众高管对互联网金融形成独到见解，致力于打造同行业最具竞争力、创新能力的P2P风险防控及资产保全团队。</p>
-        </div>
+          <p>去投网先后聘请北京德恒律师事务所和北京盈科律师事务所作为法务保障团队。针对去投网的业务模式、产品模式、风险控制、信息披露等问题，律师事务所出具专业法律意见，协助去投网合规备案和合规运营，更好的保障出借人的合法权益。</p>
+        </div>*/}
       </div>
     )
   }

@@ -58,7 +58,7 @@ export default class RiskThree extends React.Component {
           </p>
           <p><span></span></p>
           <p className={styles.ContP}>
-            <span>撮合匹配</span>
+            <span>财务放款</span>
             <span></span>
             <span></span>
           </p>

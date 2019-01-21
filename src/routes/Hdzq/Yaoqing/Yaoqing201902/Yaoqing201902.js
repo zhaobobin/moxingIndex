@@ -6,7 +6,7 @@ import YaoqingTwo from '~/components/Hdzq/Yaoqing201902/YaoqingTwo';
 import YaoqingThree from '~/components/Hdzq/Yaoqing201902/YaoqingThree';
 import styles from './Yaoqing201902.less';
 import ResultJson from '../../../Result/ResultJson';
-import moment from 'moment';
+
 import {interaction} from '~/utils/utils';
 import LoadLazy from '~/components/Common/LoadLazy';
 import Loading from '~/components/Common/Loading';
@@ -25,6 +25,7 @@ export default class Yaoqing201812 extends React.Component {
     }
   }
   componentDidMount(){
+    this.Yaoqing();
     const u = window.navigator.userAgent;
       if(u.indexOf('Android') === -1 || u.indexOf('ios') === -1) {
        this.setState({
@@ -36,9 +37,7 @@ export default class Yaoqing201812 extends React.Component {
         })
       }
 
-    this.Yaoqing()
   }
-
   /*页面接口*/
   Yaoqing(){
     let { userId } = this.props.global.currentUser.userInfo;
@@ -49,6 +48,7 @@ export default class Yaoqing201812 extends React.Component {
         userId:userId || '',
       },
       callback: (res) => {
+        console.log(res)
         this.loading = false;
         if(res.code===0){
           this.YaoqingLunBo(res.data)
@@ -126,13 +126,13 @@ export default class Yaoqing201812 extends React.Component {
 
               {/*第一部分*/}
                 <LoadLazy height={'32%'}>
-                 <YaoqingOne detail={detail}/>
+                 <YaoqingOne  detail={detail} userId={userId} />
                 </LoadLazy>
 
 
                 {/*第二部分*/}
                 <LoadLazy height={'18%'}>
-                  <YaoqingTwo  detail={detail} />
+                  <YaoqingTwo  detail={detail} userId={userId} />
                 </LoadLazy>
 
                 {/*第三部分*/}
@@ -142,7 +142,7 @@ export default class Yaoqing201812 extends React.Component {
 
                 <div className={styles.YaoqingFooter}> </div>
               {
-                deviceType===false
+                deviceType
                   ?
                   <p className={styles.fenxiang}>
                     <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
