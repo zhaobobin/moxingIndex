@@ -25,7 +25,7 @@ export default class Yaoqing201812 extends React.Component {
       dataLB:{},
       deviceType:true,
       share:null,
-      style: {display:"block"},
+      style: {display:"none"},
 
     }
   }
@@ -61,29 +61,37 @@ export default class Yaoqing201812 extends React.Component {
        },
        callback: (res) => {
          if(res.code===0){
-           const u = window.navigator.userAgent;
-           //判断设备
-           if(u.indexOf('iPhone') > -1 || u.indexOf('OS') > -1||u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
-             this.setState({
-               dataLB:res.data,
-               detail:detail,
-               deviceType:true
-             })
-           }
-           else {
-             this.setState({
-               dataLB:res.data,
-               detail:detail,
-               deviceType:false
-             })
-           }
+          this.equipment(res.data,detail)
          }
        }
      })
    }
 
+   /*判断设备*/
+  equipment(data,detail){
+    const u = this.props.history.location.search;
+    //判断设备
+    if(u.indexOf('platform=app') > -1 ) {
+      this.setState({
+        dataLB:data,
+        detail:detail,
+        deviceType:true
+      })
+    }
+    else {
+      this.setState({
+        dataLB:data,
+        detail:detail,
+        deviceType:false
+      })
+    }
+  }
+
+
   FXModel=()=>{
-    if (this.state.style.display === "block") {
+    if (this.state.style.display === "none") {
+      this.setState({ style: { display: "block", } })
+    }else {
       this.setState({ style: { display: "none", } })
     }
   }
@@ -179,18 +187,13 @@ export default class Yaoqing201812 extends React.Component {
                     <img src={require(userId ? '~/assets/invent/Yaoqing201902/invent_h5_btn1@2x.png' : "~/assets/invent/Yaoqing201902/invent_h5_btn3@2x.png")} onClick={() => this.redirect(userId ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
                   </p>
                   :
-                  <div className={styles.FXmodelBox} onClick={this.FXModel} style={style}>
-                    <img src={require("~/assets/invent/Yaoqing201902/download_word@2x.png")}/>
-                  </div>
-
+                  <p className={styles.fenxiang}>
+                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={this.FXModel}/>
+                  </p>
               }
-
-
-
-              {/*<p className={styles.fenxiang}>
-                <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-              </p>*/}
-
+              <div className={styles.FXmodelBox}  style={style} onClick={this.FXModel} >
+                <img src={require("~/assets/invent/Yaoqing201902/download_word@2x.png")}/>
+              </div>
             </div>
         }
       </div>
