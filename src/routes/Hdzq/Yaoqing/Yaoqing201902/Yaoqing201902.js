@@ -25,7 +25,6 @@ export default class Yaoqing201812 extends React.Component {
     }
   }
   componentDidMount(){
-    this.YaoqingButton();
     this.Yaoqing();
 
   }
@@ -56,18 +55,27 @@ export default class Yaoqing201812 extends React.Component {
       },
       callback: (res) => {
         if(res.code===0){
-          this.setState({
-            dataLB:res.data,
-            detail:detail
-          })
+          const ub = window.navigator.userAgent;
+          if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
+            this.setState({
+              dataLB:res.data,
+              detail:detail,
+              deviceType:true
+            })
+          }else {
+            this.setState({
+              dataLB:res.data,
+              detail:detail,
+              deviceType:false
+            })
+          }
         }
       }
     })
   }
-    YaoqingButton(){
+ /*   YaoqingButton(){
       const ub = window.navigator.userAgent;
       const ua = ub.toLowerCase();
-      console.log(ua)
       if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
         this.setState({
           deviceType:true
@@ -77,7 +85,7 @@ export default class Yaoqing201812 extends React.Component {
           deviceType:false
         })
       }
-    }
+    }*/
   /*IOS*/
   setupWebViewJavascriptBridge(callback) {
     if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
@@ -90,8 +98,9 @@ export default class Yaoqing201812 extends React.Component {
     document.documentElement.appendChild(WVJBIframe);
     setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
   }
-  redirect = (action) => {
 
+  /*点击事件*/
+  redirect = (action) => {
     let u = navigator.userAgent;
     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
@@ -102,7 +111,6 @@ export default class Yaoqing201812 extends React.Component {
             responseCallback(data);
           });*/
         bridge.callHandler('h5Action', action, (response) => {
-
         });
       });
     }else if(isAndroid){
@@ -115,12 +123,11 @@ export default class Yaoqing201812 extends React.Component {
 
   render(){
     const {detail,dataLB,deviceType}=this.state;
-    console.log(deviceType);
     const { userId } =this.props.global.currentUser.userInfo;
     return(
       <div className={styles.YaoqingBox}>
         {
-          this.loading
+          this.loading && !detail
             ?
             <Loading/>
             :

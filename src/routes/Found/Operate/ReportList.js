@@ -70,19 +70,22 @@ export default class ReportList extends React.Component {
               })
             }
           </ul>
+          <Signature/>
       </Information>
 
   {/*等级保护测评报告*/}
         <Information>
             <ReportListTwo colorBlu='true'></ReportListTwo>
+          <Signature/>
         </Information>
   {/*系统安全评估报告*/}
         <Information>
             <ReportListTwo ></ReportListTwo>
+          <Signature/>
         </Information>
       </Tabs>
         </div>
-      <Signature/>
+
         
       </div>
     )
