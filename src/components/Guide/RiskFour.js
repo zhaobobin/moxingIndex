@@ -23,18 +23,18 @@ export default class RiskFour extends React.Component {
         <div className={styles.FourContBox}>
             <div>
               <img src={require("~/assets/riskManagement/riskmang_icon3@2x.png")} className={styles.FourImg1}/>
-              <p className={styles.FourContP1}>系统安全</p>
-              <p className={styles.FourContP2}>3层防火墙隔离系统<br/>保障平台系统安全</p>
+              <p className={styles.FourContP1}>大数据智能风控</p>
+              <p className={styles.FourContP2}>多维度征信数据<br/>智能行为分析</p>
             </div>
           <div>
             <img src={require("~/assets/riskManagement/riskmang_icon5@2x.png")} className={styles.FourImg2}/>
-            <p className={styles.FourContP1}>隐私安全</p>
-            <p className={styles.FourContP2}>严格的用户信息操作规范<br/>确保用户隐私不被泄露和侵犯</p>
+            <p className={styles.FourContP1}>专业加密技术</p>
+            <p className={styles.FourContP2}>全球可信SSL安全加密认证<br/>WEB端及服务端双重验证</p>
           </div>
           <div>
             <img src={require("~/assets/riskManagement/riskmang_icon4@2x.png")} className={styles.FourImg3}/>
-            <p className={styles.FourContP1}>数据安全</p>
-            <p className={styles.FourContP2}>采用最先进数字技术<br/>通过数据中心，同步备份<br/>确保历史数据永久保存</p>
+            <p className={styles.FourContP1}>关系图谱模型</p>
+            <p className={styles.FourContP2}>通过关系图谱模型测算<br/>甄别隐藏的风险点</p>
           </div>
         </div>
 

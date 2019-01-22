@@ -6,7 +6,7 @@ import YaoqingTwo from '~/components/Hdzq/Yaoqing201902/YaoqingTwo';
 import YaoqingThree from '~/components/Hdzq/Yaoqing201902/YaoqingThree';
 import styles from './Yaoqing201902.less';
 import ResultJson from '../../../Result/ResultJson';
-import moment from 'moment';
+
 import {interaction} from '~/utils/utils';
 import LoadLazy from '~/components/Common/LoadLazy';
 import Loading from '~/components/Common/Loading';
@@ -25,20 +25,9 @@ export default class Yaoqing201812 extends React.Component {
     }
   }
   componentDidMount(){
-    const u = window.navigator.userAgent;
-      if(u.indexOf('Android') === -1 || u.indexOf('ios') === -1) {
-       this.setState({
-         deviceType:false
-       })
-    }else {
-        this.setState({
-          deviceType:true
-        })
-      }
+    this.Yaoqing();
 
-    this.Yaoqing()
   }
-
   /*页面接口*/
   Yaoqing(){
     let { userId } = this.props.global.currentUser.userInfo;
@@ -66,14 +55,37 @@ export default class Yaoqing201812 extends React.Component {
       },
       callback: (res) => {
         if(res.code===0){
-          this.setState({
-            dataLB:res.data,
-            detail:detail
-          })
+          const ub = window.navigator.userAgent;
+          if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
+            this.setState({
+              dataLB:res.data,
+              detail:detail,
+              deviceType:true
+            })
+          }else {
+            this.setState({
+              dataLB:res.data,
+              detail:detail,
+              deviceType:false
+            })
+          }
         }
       }
     })
   }
+ /*   YaoqingButton(){
+      const ub = window.navigator.userAgent;
+      const ua = ub.toLowerCase();
+      if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
+        this.setState({
+          deviceType:true
+        })
+      }else {
+        this.setState({
+          deviceType:false
+        })
+      }
+    }*/
   /*IOS*/
   setupWebViewJavascriptBridge(callback) {
     if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
@@ -86,6 +98,8 @@ export default class Yaoqing201812 extends React.Component {
     document.documentElement.appendChild(WVJBIframe);
     setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
   }
+
+  /*点击事件*/
   redirect = (action) => {
     let u = navigator.userAgent;
     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
@@ -113,7 +127,7 @@ export default class Yaoqing201812 extends React.Component {
     return(
       <div className={styles.YaoqingBox}>
         {
-          this.loading
+          this.loading && !detail
             ?
             <Loading/>
             :
@@ -126,13 +140,13 @@ export default class Yaoqing201812 extends React.Component {
 
               {/*第一部分*/}
                 <LoadLazy height={'32%'}>
-                 <YaoqingOne detail={detail}/>
+                 <YaoqingOne  detail={detail} userId={userId} />
                 </LoadLazy>
 
 
                 {/*第二部分*/}
                 <LoadLazy height={'18%'}>
-                  <YaoqingTwo  detail={detail} />
+                  <YaoqingTwo  detail={detail} userId={userId} />
                 </LoadLazy>
 
                 {/*第三部分*/}
@@ -142,15 +156,15 @@ export default class Yaoqing201812 extends React.Component {
 
                 <div className={styles.YaoqingFooter}> </div>
               {
-                deviceType===false
+                deviceType
                   ?
-                  <p className={styles.fenxiang}>
-                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
+                  <p className={styles.YaoqingFooterBox}>
+                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn2@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
+                    <img src={require(userId ? '~/assets/invent/Yaoqing201902/invent_h5_btn1@2x.png' : "~/assets/invent/Yaoqing201902/invent_h5_btn3@2x.png")} onClick={() => this.redirect(userId ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
                   </p>
                   :
-                  <p className={styles.YaoqingFooterBox}>
-                    <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-                    <img src={require(userId ? '~/assets/Invitation/invent_app_bt2@2x.png' : "~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(userId ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
+                  <p className={styles.fenxiang}>
+                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
                   </p>
               }
             </div>

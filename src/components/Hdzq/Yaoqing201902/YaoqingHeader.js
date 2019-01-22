@@ -8,11 +8,12 @@ const  YaoqingHeader =({dataLB,userId})=> {
           <div className={styles.ImgBox}>
             <img src={require("~/assets/invent/Yaoqing201902/invent_h5_top@2x.png")}/>
             <div className={styles.ContBox}>
-              <p>朋友都是壕，给你一个证明自己的机会<br/>看你能抱走多少红包</p>
+              <img src={require("~/assets/invent/Yaoqing201902/invent_h5_topword@2x.png")}/>
               <p>活动时间：{dataLB.startTime}至{dataLB.endTime}</p>
             </div>
           </div>
       <div className={styles.BoxLb}>
+        {/*<img src={require("~/assets/invent/Yaoqing201902/scrollshow@2x.png")}/>*/}
         <Carousel vertical autoplay dots={false}>
           {
             dataLB.list.map((item, index) => (

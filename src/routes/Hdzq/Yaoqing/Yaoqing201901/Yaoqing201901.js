@@ -19,13 +19,27 @@ export default class Yaoqing201812 extends React.Component {
     this.loading = true;
     this.state = {
       detail:'',
-      dataLB:{}
+      dataLB:{},
+      deviceType:true
     }
   }
   componentDidMount(){
+    this.YaoqingButton();
     this.Yaoqing()
   }
-
+  YaoqingButton(){
+    const ub = window.navigator.userAgent;
+    const ua = ub.toLowerCase();
+    if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
+      this.setState({
+        deviceType:true
+      })
+    }else {
+      this.setState({
+        deviceType:false
+      })
+    }
+  }
   /*页面接口*/
   Yaoqing(){
     let { userId } = this.props.global.currentUser.userInfo;

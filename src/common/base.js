@@ -402,7 +402,7 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Yaoqing/Yaoqing201901/Yaoqing201901')),
           },*/
           {
-            name: '邀请有礼-荐者有份',
+            name: '邀友送红包、iPhone Xs',
             key: 'yaoqing-201902',
             path: 'yaoqing-201902',
             exact: true,
