@@ -43,7 +43,7 @@ export default class RegisterResult extends React.Component {
             <span>|</span>
             <span>{ENV.beian}</span>
           </p>
-          <p><span>{ENV.address}</span></p>
+          <p><span>{ENV.company}</span></p>
         </div>
 
       </div>

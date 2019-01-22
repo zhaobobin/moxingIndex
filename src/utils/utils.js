@@ -32,7 +32,6 @@ export const ENV = {
   author: '去投网(www.qutouwang.com)',
   verification: 'dXQb0UUYe3',
 
-  oldUrl: 'https://hyxd.qutouwang.com/',
   company: '北京恒远鑫达投资管理有限公司',
   address: '北京市朝阳区亮马桥路甲40号1幢4层401内B02A室',
   youbian: '100105',
@@ -40,6 +39,7 @@ export const ENV = {
   email: 'qtwinfo@chinacfsc.com',
   worktime: '9:00-17:30',
 
+  oldUrl: 'https://hyxd.qutouwang.com/',
   siteUrl: 'https://www.qutouwang.com/',
   web: 'www.qutouwang.com',
   slogan: '爱投，就去投',
