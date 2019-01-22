@@ -25,17 +25,8 @@ export default class Yaoqing201812 extends React.Component {
     }
   }
   componentDidMount(){
+    this.YaoqingButton();
     this.Yaoqing();
-    const u = window.navigator.userAgent;
-      if(u.indexOf('Android') === -1 || u.indexOf('ios') === -1) {
-       this.setState({
-         deviceType:false
-       })
-    }else {
-        this.setState({
-          deviceType:true
-        })
-      }
 
   }
   /*页面接口*/
@@ -48,7 +39,6 @@ export default class Yaoqing201812 extends React.Component {
         userId:userId || '',
       },
       callback: (res) => {
-        console.log(res)
         this.loading = false;
         if(res.code===0){
           this.YaoqingLunBo(res.data)
@@ -74,6 +64,20 @@ export default class Yaoqing201812 extends React.Component {
       }
     })
   }
+    YaoqingButton(){
+      const ub = window.navigator.userAgent;
+      const ua = ub.toLowerCase();
+      console.log(ua)
+      if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
+        this.setState({
+          deviceType:true
+        })
+      }else {
+        this.setState({
+          deviceType:false
+        })
+      }
+    }
   /*IOS*/
   setupWebViewJavascriptBridge(callback) {
     if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
@@ -87,6 +91,7 @@ export default class Yaoqing201812 extends React.Component {
     setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
   }
   redirect = (action) => {
+
     let u = navigator.userAgent;
     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
@@ -97,6 +102,7 @@ export default class Yaoqing201812 extends React.Component {
             responseCallback(data);
           });*/
         bridge.callHandler('h5Action', action, (response) => {
+
         });
       });
     }else if(isAndroid){
@@ -109,6 +115,7 @@ export default class Yaoqing201812 extends React.Component {
 
   render(){
     const {detail,dataLB,deviceType}=this.state;
+    console.log(deviceType);
     const { userId } =this.props.global.currentUser.userInfo;
     return(
       <div className={styles.YaoqingBox}>
@@ -144,13 +151,13 @@ export default class Yaoqing201812 extends React.Component {
               {
                 deviceType
                   ?
-                  <p className={styles.fenxiang}>
-                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
+                  <p className={styles.YaoqingFooterBox}>
+                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn2@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
+                    <img src={require(userId ? '~/assets/invent/Yaoqing201902/invent_h5_btn1@2x.png' : "~/assets/invent/Yaoqing201902/invent_h5_btn3@2x.png")} onClick={() => this.redirect(userId ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
                   </p>
                   :
-                  <p className={styles.YaoqingFooterBox}>
-                    <img src={require("~/assets/Invitation/invent_app_bt1@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
-                    <img src={require(userId ? '~/assets/Invitation/invent_app_bt2@2x.png' : "~/assets/Invitation/invent_app_bt3@2x.png")} onClick={() => this.redirect(userId ? ResultJson.invite.action : ResultJson.invite_login.action)}/>
+                  <p className={styles.fenxiang}>
+                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
                   </p>
               }
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './YaoqingTwo.less';
 import { numberFormat } from "~/utils/utils";
 const  YaoqingTwo =({detail, userId})=> {
-  console.log(detail)
+
   return(
     <div className={styles.TwoBox}  >
       <div className={styles.TwoImgBox}>
