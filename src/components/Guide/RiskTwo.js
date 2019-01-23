@@ -13,7 +13,7 @@ export default class RiskTwo extends React.Component {
       <div className={styles.RiskTwoBox}>
           <p >
             <span>
-              专业的风控团队
+              双重法律保障
               <span></span>
             </span>
           </p>

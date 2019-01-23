@@ -71,10 +71,11 @@ export default class Organization extends React.Component {
           <tbody>
           <tr>
             <td className={styles.congyeTd} rowSpan="5">年龄构成</td>
-            <td className={styles.congyeTd2}></td>
+            <td className={styles.congyeTd2}><span className={styles.duijiao}></span></td>
             <td className={styles.renshu}>人数</td>
           </tr>
           <tr>
+
             <td className={styles.congyeTd2}>25岁及以下</td>
             <td className={styles.renshu}> 5</td>
           </tr>

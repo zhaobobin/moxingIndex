@@ -30,12 +30,31 @@ export default class Yaoqing201812 extends React.Component {
     }
   }
   componentDidMount(){
-    this.Yaoqing();
+    this.YaoqingLunBo();
   }
-
-  /*页面接口*/
-  Yaoqing(){
+  /*轮播接口*/
+  YaoqingLunBo(){
     let { userId } = this.props.global.currentUser.userInfo;
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/coupon/invitationBanner',
+      payload: {
+        rewardType:2,
+      },
+      callback: (res) => {
+        this.loading = false;
+        if(res.code===0){
+          if(userId){
+            this.Yaoqing(res.data,userId)
+          }else {
+            this.equipment(res.data)
+          }
+        }
+      }
+    })
+  }
+  /*页面接口*/
+  Yaoqing(data,userId){
     this.props.dispatch({
       type: 'global/post',
       url: '/api/coupon/invitationToBid',
@@ -43,29 +62,16 @@ export default class Yaoqing201812 extends React.Component {
         userId:userId || '',
       },
       callback: (res) => {
-        this.loading = false;
         if(res.code===0){
-          this.YaoqingLunBo(res.data)
+          this.equipment(data,res.data)
+        }else {
+            alert(res.message)
         }
       }
     });
   }
 
-  /*轮播接口*/
-   YaoqingLunBo(detail){
-     this.props.dispatch({
-       type: 'global/post',
-       url: '/api/coupon/invitationBanner',
-       payload: {
-         rewardType:2,
-       },
-       callback: (res) => {
-         if(res.code===0){
-          this.equipment(res.data,detail)
-         }
-       }
-     })
-   }
+
 
    /*判断设备*/
   equipment(data,detail){
@@ -97,19 +103,7 @@ export default class Yaoqing201812 extends React.Component {
   }
 
 
- /*   YaoqingButton(){
-      const ub = window.navigator.userAgent;
-      const ua = ub.toLowerCase();
-      if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
-        this.setState({
-          deviceType:true
-        })
-      }else {
-        this.setState({
-          deviceType:false
-        })
-      }
-    }*/
+
   /*IOS*/
   setupWebViewJavascriptBridge(callback) {
     if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
@@ -192,7 +186,7 @@ export default class Yaoqing201812 extends React.Component {
                   </p>
               }
               <div className={styles.FXmodelBox}  style={style} onClick={this.FXModel} >
-                <img src={require("~/assets/invent/Yaoqing201902/download_word@2x.png")}/>
+                <img src={require("~/assets/invent/Yaoqing201902/invent_h5_linkword@2x.png")}/>
               </div>
             </div>
         }

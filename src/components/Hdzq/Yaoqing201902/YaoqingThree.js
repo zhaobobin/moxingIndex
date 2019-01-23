@@ -16,7 +16,8 @@ const  YaoqingThree =()=> {
       </div>
       <div className={styles.FooterContBox}>
         <p>注意：</p>
-        <p> 您最多可获得：2.8*10+200*10=2028元和iPhone Xs一部，拿满以后不再多奖。</p>
+        <p>好友出借红包、额外奖励红包，分别得满10次后不再多奖。</p>
+        <p> 您最多可获得：2.8*10+200*10=2028元及iPhone Xs 一部。</p>
         <p>活动最终解释权归去投网所有。</p>
       </div>
     </div>
