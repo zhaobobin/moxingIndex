@@ -10,9 +10,11 @@ import ResultJson from '../../../Result/ResultJson';
 import {interaction} from '~/utils/utils';
 import LoadLazy from '~/components/Common/LoadLazy';
 import Loading from '~/components/Common/Loading';
+
 @connect(state => ({
   global: state.global,
 }))
+
 export default class Yaoqing201812 extends React.Component {
   constructor(props){
     super(props);
@@ -21,13 +23,16 @@ export default class Yaoqing201812 extends React.Component {
     this.state = {
       detail:'',
       dataLB:{},
-      deviceType:true
+      deviceType:true,
+      share:null,
+      style: {display:"none"},
+
     }
   }
   componentDidMount(){
     this.Yaoqing();
-
   }
+
   /*页面接口*/
   Yaoqing(){
     let { userId } = this.props.global.currentUser.userInfo;
@@ -45,34 +50,53 @@ export default class Yaoqing201812 extends React.Component {
       }
     });
   }
+
   /*轮播接口*/
-  YaoqingLunBo(detail){
-    this.props.dispatch({
-      type: 'global/post',
-      url: '/api/coupon/invitationBanner',
-      payload: {
-        rewardType:2,
-      },
-      callback: (res) => {
-        if(res.code===0){
-          const ub = window.navigator.userAgent;
-          if(ub.indexOf('Android') > -1 || ub.indexOf('ios') > -1) {
-            this.setState({
-              dataLB:res.data,
-              detail:detail,
-              deviceType:true
-            })
-          }else {
-            this.setState({
-              dataLB:res.data,
-              detail:detail,
-              deviceType:false
-            })
-          }
-        }
-      }
-    })
+   YaoqingLunBo(detail){
+     this.props.dispatch({
+       type: 'global/post',
+       url: '/api/coupon/invitationBanner',
+       payload: {
+         rewardType:2,
+       },
+       callback: (res) => {
+         if(res.code===0){
+          this.equipment(res.data,detail)
+         }
+       }
+     })
+   }
+
+   /*判断设备*/
+  equipment(data,detail){
+    const u = this.props.history.location.search;
+    //判断设备
+    if(u.indexOf('platform=app') > -1 ) {
+      this.setState({
+        dataLB:data,
+        detail:detail,
+        deviceType:true
+      })
+    }
+    else {
+      this.setState({
+        dataLB:data,
+        detail:detail,
+        deviceType:false
+      })
+    }
   }
+
+
+  FXModel=()=>{
+    if (this.state.style.display === "none") {
+      this.setState({ style: { display: "block", } })
+    }else {
+      this.setState({ style: { display: "none", } })
+    }
+  }
+
+
  /*   YaoqingButton(){
       const ub = window.navigator.userAgent;
       const ua = ub.toLowerCase();
@@ -122,7 +146,7 @@ export default class Yaoqing201812 extends React.Component {
   };
 
   render(){
-    const {detail,dataLB,deviceType}=this.state;
+    const {detail,dataLB,deviceType,style}=this.state;
     const { userId } =this.props.global.currentUser.userInfo;
     return(
       <div className={styles.YaoqingBox}>
@@ -164,9 +188,12 @@ export default class Yaoqing201812 extends React.Component {
                   </p>
                   :
                   <p className={styles.fenxiang}>
-                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={() => this.redirect(ResultJson.invite_share.action)}/>
+                    <img src={require("~/assets/invent/Yaoqing201902/invent_h5_btn4@2x.png")}  onClick={this.FXModel}/>
                   </p>
               }
+              <div className={styles.FXmodelBox}  style={style} onClick={this.FXModel} >
+                <img src={require("~/assets/invent/Yaoqing201902/download_word@2x.png")}/>
+              </div>
             </div>
         }
       </div>
