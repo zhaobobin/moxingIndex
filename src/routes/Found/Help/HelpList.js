@@ -25,7 +25,6 @@ export default class HelpList extends React.Component {
     return (<div className={styles.helplist}>
         <Tabs
           tabs={tabs}
-          swipeable={false}
           renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3.6}/>}
         >
           <div>
