@@ -47,7 +47,7 @@ const  YaoqingTwo =({detail, userId})=> {
           </tr>
           </tbody>
         </table>
-        <p className={styles.TwoFooterP}>额外奖励红包将于2月25日活动结束后统一发放，最多可拿10次，按最高奖励。</p>
+        <p className={styles.TwoFooterP}>额外奖励红包将于2月25日活动结束后统一发放，最多可获得10次，按最高奖励。</p>
       </div>
         {
           userId
