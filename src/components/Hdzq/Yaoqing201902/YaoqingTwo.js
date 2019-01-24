@@ -15,7 +15,7 @@ const  YaoqingTwo =({detail, userId})=> {
           <img src={require("~/assets/invent/Yaoqing201902/invent_h5_icon2@2x.png")} className={styles.LImg}/>
           <div className={styles.RBox}>
             <img src={require("~/assets/invent/Yaoqing201902/invent_h5_red2@2x.png")} />
-            <p>每有一位好友，在活动期间出借总金额满足以下条件，您都可获得额外奖励：</p>
+            <p>活动期间被邀请的好友，每有1位出借总金额满足以下条件，您都可获得1次额外奖励红包：</p>
           </div>
         </div>
         <table className={styles.tableBox}>
@@ -47,7 +47,7 @@ const  YaoqingTwo =({detail, userId})=> {
           </tr>
           </tbody>
         </table>
-        <p className={styles.TwoFooterP}>额外奖励红包将于2月25日活动结束后统一发放，最多可拿10次，按最高奖励。</p>
+        <p className={styles.TwoFooterP}>额外奖励红包将于2月25日活动结束后统一发放，最多可获得10次，按最高奖励。</p>
       </div>
         {
           userId
