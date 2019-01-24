@@ -119,6 +119,7 @@ export default class Yaoqing201812 extends React.Component {
 
   /*点击事件*/
   redirect = (action) => {
+
     let u = navigator.userAgent;
     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
@@ -129,6 +130,7 @@ export default class Yaoqing201812 extends React.Component {
             responseCallback(data);
           });*/
         bridge.callHandler('h5Action', action, (response) => {
+
         });
       });
     }else if(isAndroid){
@@ -141,6 +143,7 @@ export default class Yaoqing201812 extends React.Component {
 
   render(){
     const {detail,dataLB,deviceType,style}=this.state;
+
     const { userId } =this.props.global.currentUser.userInfo;
     return(
       <div className={styles.YaoqingBox}>
