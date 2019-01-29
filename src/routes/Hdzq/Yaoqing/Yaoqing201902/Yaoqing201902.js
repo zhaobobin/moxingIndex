@@ -14,7 +14,6 @@ import Loading from '~/components/Common/Loading';
 @connect(state => ({
   global: state.global,
 }))
-
 export default class Yaoqing201812 extends React.Component {
   constructor(props){
     super(props);
@@ -142,9 +141,10 @@ export default class Yaoqing201812 extends React.Component {
   };
 
   render(){
-    const {detail,dataLB,deviceType,style}=this.state;
 
+    const {detail,dataLB,deviceType,style}=this.state;
     const { userId } =this.props.global.currentUser.userInfo;
+
     return(
       <div className={styles.YaoqingBox}>
         {

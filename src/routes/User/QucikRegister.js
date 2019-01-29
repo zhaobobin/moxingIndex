@@ -522,7 +522,12 @@ export default class QucikRegister extends React.Component {
               </div>
             </FormItem>
 
-            <p className={styles.hongbaoDesc}>注册成功后，奖励即发放至您的账户</p>
+            {
+              config.hongbaoFlag ?
+                <p className={styles.hongbaoDesc}>注册成功后，奖励即发放至您的账户</p>
+                :
+                null
+            }
 
           </Form>
         </div>
