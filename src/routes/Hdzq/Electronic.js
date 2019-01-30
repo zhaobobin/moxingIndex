@@ -35,7 +35,7 @@ export default class Electronic extends React.Component {
          <div className={styles.electronicWin}>
         <div className={styles.cfcaWord}>
               <h1><img src={require('../../assets/electronic/title03.png')} /></h1>
-              <p>去投网引进的CFCA电子签章，通过可视化签章效果，为用户提供了身份识别、数据加密等安全加密服务，并通过X.509数字证书、对称密钥算法、非对称密钥算法，实现了数据防篡改和不可否认性。 <br />这意味着用户在去投网签署的电子合同，具有与纸质合同相同的法律效力,<span>被法律保护、不可被篡改、不能被否认、不会被泄露。</span></p>
+              <p>去投网引进的CFCA电子签章，通过可视化签章效果，为用户提供了身份识别、数据加密等安全加密服务，并通过X.509数字证书、对称密钥算法、非对称密钥算法，实现了数据防篡改和不可否认性。 <br />这意味着用户在去投网签署的电子合同，具有与纸质合同相同的法律效力，<span>被法律保护、不可被篡改、不能被否认、不会被泄露。</span></p>
          </div>
          </div>
       </div>
