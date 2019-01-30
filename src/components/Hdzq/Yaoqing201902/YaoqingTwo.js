@@ -11,6 +11,7 @@ export default class YaoqingTwo extends React.Component{
   render(){
 
     const {isAuth} = this.props.global;
+    console.log(isAuth)
     const {detail, userId} = this.props;
 
     return(
@@ -30,7 +31,7 @@ export default class YaoqingTwo extends React.Component{
           </div>
 
           {
-            isAuth ?
+            userId ?
               <table className={styles.tableBox}>
                 <tbody>
                 <tr>
