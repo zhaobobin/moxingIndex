@@ -6,10 +6,11 @@
  */
 import styles from './PintuValidate.less';
 
+const screenWidth = document.body.clientWidth - 30;
 const l = 42, // 滑块边长
   r = 9, // 滑块半径
-  w = 320, // canvas宽度
-  h = 160, // canvas高度
+  w = screenWidth, // canvas宽度
+  h = screenWidth / 2, // canvas高度
   PI = Math.PI;
 const L = l + r * 2 + 3; // 滑块实际边长
 
@@ -218,17 +219,17 @@ class jigsaw {
     };
 
     let originX, originY, trail = [], isMouseDown = false, blockCanMove = true;
-    this.slider.addEventListener('mousedown', function (e) {
+    this.slider.addEventListener('touchstart', function (e) {
       if(!blockCanMove) return;
-      originX = e.x;
-      originY = e.y;
+      originX = e.targetTouches[0].clientX;
+      originY = e.targetTouches[0].clientY;
       isMouseDown = true
     });
 
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener('touchmove', (e) => {
       if (!isMouseDown) return false;
-      const moveX = e.x - originX;
-      const moveY = e.y - originY;
+      const moveX = e.targetTouches[0].clientX - originX;
+      const moveY = e.targetTouches[0].clientY - originY;
 
       if (moveX < 0 || moveX + 38 >= w) return false;
       this.slider.style.left = moveX + 'px';
@@ -240,10 +241,10 @@ class jigsaw {
       trail.push(moveY)
     });
 
-    document.addEventListener('mouseup', (e) => {
+    document.addEventListener('touchend', (e) => {
       if (!isMouseDown) return false;
       isMouseDown = false;
-      if (e.x === originX) return false;
+      if (e.targetTouches[0] && e.targetTouches[0].clientX === originX) return false;
       removeClass(this.sliderContainer, styles.sliderContainer_active);
       this.trail = trail;
       const {spliced, verified} = this.verify();

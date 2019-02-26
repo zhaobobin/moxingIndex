@@ -2,9 +2,13 @@ import React from 'react';
 import { Route, Redirect, Switch } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import NotFound from "~/routes/Other/404";
-import { ENV } from '~/utils/utils';
+import { ENV, getUrlParams } from '~/utils/utils';
 
 import styles from './UserLayout.less'
+
+import GlobalHeader from '~/components/Common/GlobalHeader';
+
+const paramsObj = getUrlParams() || '';
 
 export default class BaseLayout extends React.Component {
 
@@ -38,6 +42,13 @@ export default class BaseLayout extends React.Component {
 
     const layout = (
       <div className={styles.layout}>
+
+        {
+          paramsObj.platform === 'app' ?
+            null
+            :
+            <GlobalHeader/>
+        }
 
         <Switch>
           {

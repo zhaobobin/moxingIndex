@@ -425,7 +425,7 @@ export default class QucikRegister extends React.Component {
                           :
                           null
                       }
-                        </span>
+                    </span>
                   }
                 />
               )}
@@ -512,6 +512,12 @@ export default class QucikRegister extends React.Component {
                 >
                   注册
                 </Button>
+
+                <div className={styles.desc}>
+                  <p><span>注册成功后，奖励即发放至您的账户</span></p>
+                  <p><span>已有帐号？</span><Link to="/user/login">立即登录</Link></p>
+                </div>
+
               </div>
             </FormItem>
 
