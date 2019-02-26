@@ -7,7 +7,7 @@ import NotFound from "~/routes/Other/404";
 
 import styles from './BaseLayout.less'
 import Loading from '~/components/Common/Loading';
-//import GlobalHeader from '~/components/Common/GlobalHeader';
+import GlobalHeader from '~/components/Common/GlobalHeader';
 import GlobalContent from '~/components/Common/GlobalContent';
 
 const paramsObj = getUrlParams() || '';
@@ -110,6 +110,13 @@ export default class BaseLayout extends React.Component {
 
     const layout = (
       <div className={styles.layout}>
+
+        {
+          paramsObj.platform === 'app' ?
+            null
+            :
+            <GlobalHeader/>
+        }
 
         {
           loading ?

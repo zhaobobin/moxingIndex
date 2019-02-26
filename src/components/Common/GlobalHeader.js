@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'dva';
+import { Link } from 'dva/router'
+import { Icon } from 'antd'
 import { getTitle } from '~/utils/utils'
+import styles from './GlobalHeader.less'
+
+import logo from '~/assets/com/logo.png'
 
 @connect(state => ({
   global: state.global,
@@ -21,8 +26,13 @@ export default class GlobalHeader extends React.Component {
   render(){
 
     return(
-      <div>
-        {this.state.title}
+      <div className={styles.head}>
+        <Link to="/" className={styles.logo}>
+          <img src={logo} alt="logo"/>
+        </Link>
+        <Link to="/account" className={styles.account}>
+          <Icon type="user" />
+        </Link>
       </div>
     )
   }

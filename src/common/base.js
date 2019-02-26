@@ -269,18 +269,18 @@ const BaseRoutes = app => [
           {
             name: '账户总览',
             key: 'total',
-            path: 'total',
+            path: '',
             isHide: true,
             userType: 'all',
             component: dynamicWrapper(app, [], () => import('../routes/Account/AccountIndex')),
           },
           {
             name: '资产详情',
-            key: 'assets',
-            path: 'assets',
+            key: 'asset',
+            path: 'asset',
             isHide: true,
             userType: 'all',
-            component: dynamicWrapper(app, [], () => import('../routes/Account/AssetsManage/AccountAssets')),
+            component: dynamicWrapper(app, [], () => import('../routes/Account/AssetManage/AccountAssets')),
           },
           {
             name: '邀请好友',
