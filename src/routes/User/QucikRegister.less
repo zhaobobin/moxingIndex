@@ -116,18 +116,23 @@
       font-size:15px;
       border-radius:0;
       border: none;
+      border-bottom: 1px solid #E5E5E5;
       box-shadow: none;
     }
     .ant-input-disabled{
       color: @color_333;
       background: none;
     }
+    .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled){
+      border-color: @color_blue;
+    }
+    .has-error .ant-input:not([disabled]):hover{
+      border-color: @color_red;
+    }
     .ant-input-affix-wrapper{
       border: none;
     }
-    .ant-form-item-children{
-      border-bottom: 1px solid #E5E5E5;
-    }
+
     .has-error .ant-input{
       box-shadow: none;
     }
@@ -161,6 +166,17 @@
 
   .btn{
     margin-top:20px;
+  }
+
+  .desc{
+    margin-top: 10px;
+    text-align: center;
+    span{
+      color: @color_888;
+    }
+    a{
+      color: @color_blue
+    }
   }
 
   .inputEye{

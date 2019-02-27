@@ -5,7 +5,7 @@ import { Icon } from 'antd'
 import { getTitle } from '~/utils/utils'
 import styles from './GlobalHeader.less'
 
-import logo from '~/assets/com/m_nav_logo@2x.png'
+import logo from '~/assets/com/logo.png'
 
 @connect(state => ({
   global: state.global,

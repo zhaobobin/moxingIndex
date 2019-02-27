@@ -16,7 +16,7 @@ export default class PintuValidate extends React.Component {
   }
 
   componentDidMount(){
-    this.init()
+    this.init();
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -74,7 +74,7 @@ export default class PintuValidate extends React.Component {
 
   render(){
     return(
-      <div className="pintu" style={{width: '320px', margin: 'auto'}}>
+      <div className="pintu" style={{margin: '0 15px'}}>
         <div id="captcha"/>
       </div>
     )
