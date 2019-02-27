@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router'
+import { Icon } from 'antd'
+import { getTitle } from '~/utils/utils'
 import styles from './GlobalHeader.less'
 
-import logo from '~/assets/com/m_nav_logo@2x.png'
-import account from '~/assets/com/m_myaccount@2x.png'
+import logo from '~/assets/com/logo.png'
 
 @connect(state => ({
   global: state.global,
@@ -30,7 +31,7 @@ export default class GlobalHeader extends React.Component {
           <img src={logo} alt="logo"/>
         </Link>
         <Link to="/account" className={styles.account}>
-          <img src={account} alt=""/>
+          <Icon type="user" />
         </Link>
       </div>
     )
