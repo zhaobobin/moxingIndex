@@ -69,6 +69,7 @@ export default {
       );
       yield callback(res);
       if(res.code === 0){
+        console.log(res)
         Storage.set(ENV.storageAccessToken, res.data.access_token);               //保存token
         Storage.set(ENV.storageRefreshToken, res.data.refresh_token);             //保存token
         Storage.set(ENV.storageUserId, res.data.userId);                          //保存userId
@@ -276,6 +277,7 @@ export default {
     changeLoginStatus(state, {payload}){
       return {
         ...state,
+        loading: payload.loading,
         isAuth: payload.isAuth,
         currentUser: {
           ...state.currentUser,
