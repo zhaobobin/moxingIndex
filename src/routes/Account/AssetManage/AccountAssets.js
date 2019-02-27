@@ -15,7 +15,7 @@ export default class AccountAssets extends React.Component {
     this.ajaxFlag = true;
     this.loading = true;
     this.state = {
-          data:''
+          data:{}
     }
   }
   componentDidMount(){
@@ -45,162 +45,169 @@ export default class AccountAssets extends React.Component {
     })
   };
   render(){
+    const {data}=this.state;
 
-    const config={
-      chart: {
-        height:300,
-        spacing : [0, 0 , 0, 0]
-      },
-      credits: {
-        enabled: false  //版权开关
-      },
-      title: {
-        floating:true,
-        text: null,
-      },
-      tooltip: {
-        enabled: false  //提示框开关
-      },
-      legend: {
-        enabled: false  //图例开关
-      },
-      colors: [
-        {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
-          stops: [
-            [1, '#F18925']
-          ]
-        },
-        {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-          stops: [
-            [1, '#0D2F55']
-          ]
-        },
-        {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-          stops: [
-            [1, '#71829B']
-          ]
-        },
+    let config;
+    if(data.accountTol==='0.00'){
+     config={
+           chart: {
+             height:300,
+             spacing : [0, 0 , 0, 0]
+           },
+           credits: {
+             enabled: false  //版权开关
+           },
+           title: {
+             floating:true,
+             text: null,
+           },
+           tooltip: {
+             enabled: false  //提示框开关
+           },
+           legend: {
+             enabled: false  //图例开关
+           },
+           colors: [
+             {
+               linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
+               stops: [
+                 [1, '#F5F5F5']
+               ]
+             },
+           ],
+           plotOptions: {
+             series: {
+               allowPointSelect: false //点击动画开关
+             },
+             pie: {
+               allowPointSelect: true,
+               cursor: 'pointer',
+               dataLabels: {
+                 enabled: false,
+               },
+             }
+           },
+           series: [{
+             type: 'pie',
+             innerSize: '75%',
+             size:'70%',
+             name: '市场份额',
+             data: [
+               ['账户可用余额',  100],
 
-        {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
-          stops: [
-            [1, '#FDE7D6']
-          ]
-        }
-      ],
-      plotOptions: {
-        series: {
-          allowPointSelect: false //点击动画开关
+             ]
+           }]
+         };
+    }else {
+      config={
+        chart: {
+          height:300,
+          spacing : [0, 0 , 0, 0]
         },
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: false,
+        credits: {
+          enabled: false  //版权开关
+        },
+        title: {
+          floating:true,
+          text: null,
+        },
+        tooltip: {
+          enabled: false  //提示框开关
+        },
+        legend: {
+          enabled: false  //图例开关
+        },
+        colors: [
+          {
+            linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
+            stops: [
+              [1, '#F18925']
+            ]
           },
-        }
-      },
-      series: [{
-        type: 'pie',
-        innerSize: '75%',
-        size:'70%',
-        name: '市场份额',
-        data: [
-          ['Firefox',   45.0],
-          ['其他',  30],
-            ['Firefox',   25],
-          ['其他',  35]
-        ]
-      }]
-    };
-   /* const config={
-      chart: {
-        height:300,
-        spacing : [0, 0 , 0, 0]
-      },
-      credits: {
-        enabled: false  //版权开关
-      },
-      title: {
-        floating:true,
-        text: null,
-      },
-      tooltip: {
-        enabled: false  //提示框开关
-      },
-      legend: {
-        enabled: false  //图例开关
-      },
-      colors: [
-        {
-          linearGradient: { x1: 0.2, x2: 0.2, y1: 0.2, y2: 1 },
-          stops: [
-            [1, '#F5F5F5']
-          ]
-        },
-      ],
-      plotOptions: {
-        series: {
-          allowPointSelect: false //点击动画开关
-        },
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: false,
+          {
+            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+            stops: [
+              [1, '#0D2F55']
+            ]
           },
-        }
-      },
-      series: [{
-        type: 'pie',
-        innerSize: '75%',
-        size:'70%',
-        name: '市场份额',
-        data: [
-          ['Firefox',  100],
+          {
+            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+            stops: [
+              [1, '#71829B']
+            ]
+          },
 
-        ]
-      }]
-    };*/
+          {
+            linearGradient: { x1: 0.2, x2: 0.2, y1: 1, y2: 0.2 },
+            stops: [
+              [1, '#FDE7D6']
+            ]
+          }
+        ],
+        plotOptions: {
+          series: {
+            allowPointSelect: false //点击动画开关
+          },
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: false,
+            },
+          }
+        },
+        series: [{
+          type: 'pie',
+          innerSize: '75%',
+          size:'70%',
+          name: '市场份额',
+          data: [
+            ['账户可用余额',parseFloat(data.freeAmt)],
+            ['冻结金额', parseFloat(data.frozenAmt)],
+            ['待收本金',parseFloat(data.frozenAmt)],
+            ['待收回报',parseFloat(data.gainingprincipal)]
+          ]
+        }]
+      };
+    }
+
+
 
 
     return(
       <div className={styles.AccountAssetsBox}>
-       {/* {
+        {
           this.loading
             ?
             <Loading/>
-            :*/}
+            :
             <div className={styles.AssetsChartsBox}>
               <ReactHighcharts config={config} ref="chart"/>
               <div className={styles.AssetsChartsContent}>
-                <p>99,999,999.33</p>
+                <p>{data.accountTol}</p>
                 <p>资产总额(元)</p>
               </div>
               <div className={styles.LegendBox}>
                 <p>
                   <span className={styles.LegendColor1}> </span>
-                  <span>账户可用余额 5,639,423.12</span>
+                  <span>账户可用余额 {data.freeAmt}</span>
                 </p>
                 <p>
                   <span className={styles.LegendColor2}> </span>
-                  <span>冻结金额 455,639,423.12</span>
+                  <span>冻结金额 {data.frozenAmt}</span>
                 </p>
                 <p>
                   <span className={styles.LegendColor3}> </span>
-                  <span>待收本金 39,423.12</span>
+                  <span>待收本金 {data.gainingAmt}</span>
                 </p>
                 <p>
                   <span className={styles.LegendColor4}> </span>
-                  <span>待收回报 39,423.12</span>
+                  <span>待收回报 {data.gainingprincipal}</span>
                 </p>
               </div>
 
             </div>
-       {/* }*/}
+        }
       </div>
     )
   }
