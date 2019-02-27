@@ -165,15 +165,8 @@ export default class Login extends React.Component {
       callback: (res) => {
         this.setState({loading: false});
         if(res.code === 0){
-
           Storage.set(ENV.storageLastTel, values.account);      //手机号保存到本地存储
-
-          if(res.data.cusType === '1'){
-            this.back();
-          }else{
-            this.props.dispatch(routerRedux.push('/account'))
-          }
-
+          this.direct(res.data.cusType);
         }else{
           //登录失败，重置表单和拼图
           Storage.remove(ENV.storageLastTel);
