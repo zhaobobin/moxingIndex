@@ -96,7 +96,6 @@ const BaseRoutes = app => [
         ]
       },
       //新闻资讯 end
-
       {
         name: '我要出借',
         key: 'lend',
@@ -256,7 +255,6 @@ const BaseRoutes = app => [
             path: 'platform',
             component: dynamicWrapper(app, [], () => import('../routes/Found/Platform/PlatformIndex')),
           },
-
         ]
       },
 
@@ -312,7 +310,7 @@ const BaseRoutes = app => [
             path: 'record',
             isHide: true,
             userType: 'all',
-            component: dynamicWrapper(app, [], () => import('../routes/Account/AssetsManage/Record')),
+            component: dynamicWrapper(app, [], () => import('../routes/Account/AssetManage/Record')),
           },
           {
             name: '我的信息',

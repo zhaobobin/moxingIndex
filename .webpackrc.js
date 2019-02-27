@@ -63,7 +63,7 @@ export  default {
   },
   "proxy": {
     "/api": {
-      "target": ENV.api.test,
+      "target": ENV.api.api3,
       "changeOrigin": true,
       //"pathRewrite": { "^/api" : "" }
     }

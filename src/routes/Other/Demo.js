@@ -68,6 +68,8 @@ export default class Demo extends React.Component {
             <p><Link to="/lend/zxfwxq/xsb20181130001?platform=app">智享详情</Link></p>
             <p><Link to="/lend/sbxq/bd18120100005?platform=app">散标详情</Link></p>
             <p><Link to="/lend/zqxq/18111056560681?platform=app">债权详情</Link></p>
+            <p><Link to="/account/asset?platform=app&userId=18121276596049&accessToken=12345">资产详情</Link></p>
+            <p><Link to="/account/record?platform=app&userId=18121276596049&accessToken=12345">交易记录</Link></p>
             <p><Link to="/question?platform=app">常见问题</Link></p>
             <p><Link to="/hdzq/yaoqing-201902?platform=app&userId=18121276596049&accessToken=12345">邀请有礼</Link></p>
           </dd>
