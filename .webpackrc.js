@@ -46,6 +46,7 @@ export  default {
     "description": ENV.description,
     "author": ENV.author,
     "verification": ENV.verification,
+    "hotline": ENV.hotline,
   },
   "lessLoaderOptions": {
     "javascriptEnabled": true,

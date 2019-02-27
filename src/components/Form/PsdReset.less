@@ -1,54 +1,38 @@
 @import '../../theme/index.less';
 
 .psdReset{
-  height:680px;
-  padding-top:30px;
-  background:#fff;
 
-  :global(.ant-steps-item-tail){
-    top:14px;
+  :global{
+    .ant-input{
+      height:46px;
+      font-size:15px;
+      border:none;
+      border-radius:0;
+      box-shadow: none;
+    }
+    .ant-btn-primary[disabled]{
+      background-color: @color_orange2;
+      border-color: @color_orange2;
+    }
   }
-  :global(.ant-steps-item-tail:after){
-    height:3px;
-  }
-  :global(.ant-steps-item-process .ant-steps-item-tail:after){
-    background: #FDE7D5;
-  }
-  :global(.ant-steps-item-wait .ant-steps-item-tail:after){
-    background: #FDE7D5;
-  }
-  :global(.ant-steps-item-wait .ant-steps-item-icon){
-    border-color: #FDE7D5;
-    background-color: #FDE7D5;
-  }
-  :global(.ant-steps-item-wait .ant-steps-icon){
-    color: #fff;
-  }
+
 }
 
 .form{
-  margin:0 88px;
 
   .formContent{
-    margin:50px auto;
 
     .desc{
-      margin:30px 0;
-      text-align:center;
+      padding: 0 15px;
     }
 
     .formItemBox{
-      width:360px;
       margin: 0 auto;
     }
   }
 
-  input{
-    height:50px;
-    font-size:15px;
-    border:none;
-    border-radius:0;
-    background: @color_orange3;
+  .btns{
+    margin: 15px;
   }
 
   .clearInput {

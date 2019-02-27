@@ -1,25 +1,20 @@
 import React from 'react';
-import { connect } from 'dva';
-import { Link } from 'dva/router';
-
 import HomeBanner from '~/components/Home/HomeBanner'
 import HomeBtns from '~/components/Home/HomeBtns'
+import HomeFooter from '~/components/Home/HomeFooter'
 
-@connect(state => ({
-  global: state.global,
-}))
-export default class Home extends React.Component {
+export default function Home () {
 
-  render(){
-    return(
-      <div>
+  return(
+    <div>
 
-        <HomeBanner/>
+      <HomeBanner/>
 
-        <HomeBtns/>
+      <HomeBtns/>
 
-      </div>
-    )
-  }
+      <HomeFooter/>
+
+    </div>
+  )
 
 }

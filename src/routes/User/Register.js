@@ -9,6 +9,7 @@ import {
   Encrypt, getUrlParams, yaoqingDecrypt, filterTel
 } from "~/utils/utils";
 import styles from './QucikRegister.less';
+import GlobalFooter from '~/components/Common/GlobalFooter';
 
 //import logo from '~/assets/com/logo.png'
 //import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.jpg'
@@ -556,15 +557,7 @@ export default class QucikRegister extends React.Component {
           </dd>
         </dl>
 
-        <div className={styles.download}>
-          {/*<Link to="/download" className={styles.link}>下载去投网APP</Link>*/}
-          <p>
-            <span>{ENV.icp}</span>
-            <span>|</span>
-            <span>{ENV.beian}</span>
-          </p>
-          <p><span>{ENV.address}</span></p>
-        </div>
+        <GlobalFooter/>
 
       </div>
     )

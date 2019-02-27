@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { NavLink, Link, routerRedux } from 'dva/router';
+import { Link, routerRedux } from 'dva/router';
 import { Toast } from 'antd-mobile';
 import { Form, Input, Button, Icon, Checkbox, Radio } from 'antd'
 import {

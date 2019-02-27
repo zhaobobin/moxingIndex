@@ -29,6 +29,7 @@
     "qrcode.react": "^0.8.0",
     "react": "^16.2.0",
     "react-amap": "^1.2.7",
+    "react-countup": "^4.1.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
     "react-highcharts": "^16.0.2",

@@ -64,6 +64,7 @@ export default class BaseLayout extends React.Component {
             )
           }
           <Redirect exact from="/user" to="/user/login" />
+          <Redirect exact from="/user/reset" to="/user/reset/index" />
           <Route component={NotFound} />
         </Switch>
 

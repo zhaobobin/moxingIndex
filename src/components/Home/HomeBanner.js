@@ -53,7 +53,7 @@ export default class HomeBanner extends React.Component {
 
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/home/pc/findPcBannerList',
+      url: '/api/home/app/findAppBannerList',
       payload:{},
       callback: (res) => {
         this.ajaxFlag = true;
@@ -89,7 +89,7 @@ export default class HomeBanner extends React.Component {
             <LoadingBg
               style={{
                 width: "100%",
-                height: "100%",
+                height: imgHeight,
                 position: 'absolute',
                 left: 0,
                 top: 0,

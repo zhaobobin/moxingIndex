@@ -15,6 +15,7 @@ import {config} from '~/config'
 import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.jpg'
 import sign_banner2 from '~/assets/sign/fast_login_banner2@2x.jpg'
 import SmsValidate from '~/components/Form/SmsValidate'
+import GlobalFooter from '~/components/Common/GlobalFooter';
 
 const FormItem = Form.Item;
 
@@ -564,15 +565,7 @@ export default class QucikRegister extends React.Component {
           </dd>
         </dl>
 
-        <div className={styles.download}>
-          {/*<Link to="/download" className={styles.link}>下载去投网APP</Link>*/}
-          <p>
-            <span>{ENV.icp}</span>
-            <span>|</span>
-            <span>{ENV.beian}</span>
-          </p>
-          <p><span>{ENV.company}</span></p>
-        </div>
+        <GlobalFooter/>
 
       </div>
     )

@@ -5,19 +5,18 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
-import { Form, Input, Button, Icon, Steps } from 'antd'
+import { routerRedux, Redirect } from 'dva/router';
+import { Toast } from 'antd-mobile';
+import { Form, Input, Button, Icon } from 'antd'
 import { hasErrors, checkPhone, isPhone, checkPsdLevel, Encrypt, filterTel } from '~/utils/utils'
 import styles from './PsdReset.less';
 
 import PintuValidate from '~/components/Form/PintuValidate'
 import SmsValidate from '~/components/Form/SmsValidate'
-import { ResultAlert } from '~/components/Dialog/Dialog'
 
 const FormItem = Form.Item;
-const Step = Steps.Step;
 //const keys = ['mobile', 'pintu', 'smscode', 'password', 'rpassword'];
-const btnStyle = {display: 'block', width: '360px', height: '50px', lineHeight: '48px', margin: '0 auto'};
+const btnStyle = {display: 'block', width: '100%', height: '40px', lineHeight: '38px', margin: '0 auto'};
 
 const steps = [
   {
@@ -51,6 +50,8 @@ export default class Reset extends React.Component {
   constructor(props){
     super(props);
     this.ajaxFlag = true;
+    this.phoneFlag = true;
+    this.loading = false;
     this.state = {
       current: 0,
       disabled: true,
@@ -60,12 +61,11 @@ export default class Reset extends React.Component {
       smsCheckCode: '',
       password: '',
       rpassword: '',
-      psdType1: 'text',
-      psdType2: 'password',
       psdLevelVisible: true,
       psdLevel: '',
       psdLevelStyle: '',
       autoSubmitTimer: 5,
+      smscodeSended: false,       //短信验证码是否已发送
     }
   }
 
@@ -96,24 +96,63 @@ export default class Reset extends React.Component {
 
   //监控手机号输入
   onChangeMobile = (rule, value, callback) => {
+    value = value.replace(/\D/g,'');
+    this.props.form.setFieldsValue({'mobile': value});
     if(checkPhone(value)){
-      if(!isPhone(value)) return;
+      if(isPhone(value)){
+        this.checkPhone(value, (res) => {
+          if(res) {
+            callback(res);
+          }else{
+            callback();
+            this.setState({
+              mobile: value
+            });
+          }
+        })
+      }else{
+        callback('请输入正确的手机号码');
+      }
+      callback();
+    }else{
+      callback('请输入正确的手机号码')
+    }
+  };
+
+  //手机失焦检测
+  mobileOnBlur = (e) => {
+    let value = e.target.value;
+    if(isPhone(value)){
       this.checkPhone(value, (res) => {
-        if(res){
-          callback(res);
-          this.setState({mobile: ''});
+        if(res) {
+          this.props.form.setFields({
+            'mobile': {
+              value: value,
+              errors: [new Error(res)]
+            }
+          })
         }else{
-          callback();
-          this.setState({mobile: value});
+          this.setState({
+            mobile: value
+          });
         }
       })
     }else{
-      callback('请输入正确的手机号！')
+      this.props.form.setFields({
+        'mobile': {
+          value: value,
+          errors: [new Error('请输入正确的手机号码')]
+        }
+      })
     }
   };
 
   //检查手机号是否注册
   checkPhone(mobile, cb){
+
+    if(!this.phoneFlag) return;
+    this.phoneFlag = false;
+
     this.props.dispatch({
       type: 'global/post',
       url: '/api/userRegister/checkPhone',
@@ -121,13 +160,18 @@ export default class Reset extends React.Component {
         mobile: mobile
       },
       callback: (res) => {
+
+        if(!res) return;
         if(res.code === 21010){
-          cb('此手机号未注册！')
+          cb('该手机号码尚未注册')
         }else{
           cb()
         }
+
       }
-    })
+    });
+
+    setTimeout(() => { this.phoneFlag = true }, 500);
   }
 
   //拼图
@@ -137,21 +181,74 @@ export default class Reset extends React.Component {
 
   //获得短信验证码
   getSmscode = (value) => {
-    this.props.form.setFieldsValue({'smscode': value});
-    this.props.form.validateFields(['smscode'], (err, values) => {
-      if(!err){
-        this.setState({
-          smsCheckCode: values.smscode
-        })
-      }
-    });
+    //清空错误提示
+    if(value === 'clearError'){
+      this.props.form.setFields({
+        'smscode': {
+          value: '',
+          errors: ''
+        }
+      });
+      this.setState({smscodeSended: true});
+    }
+    else if(value === 'yuyinSended'){
+      this.props.form.setFields({
+        'smscode': {
+          value: '',
+          errors: [new Error('语言验证码已发送，请保持手机畅通')]
+        }
+      });
+      this.setState({smscodeSended: true});
+    }
+    else{
+      this.props.form.setFieldsValue({'smscode': value});
+      this.props.form.validateFields(['smscode'], (err, values) => {
+        if(!err){
+          this.setState({
+            smsCheckCode: values.smscode
+          })
+        }
+      });
+    }
   };
 
-  //step 2 - 输入验证码
-  next = () => {
+  //step 1
+  next1 = () => {
     const current = this.state.current + 1;
     let step = steps[current].key;
     this.props.dispatch(routerRedux.push(`/user/reset/${step}`))
+  };
+
+  //step 2 - 检验短信验证码
+  next2 = () => {
+    const current = this.state.current + 1;
+    let step = steps[current].key;
+
+    //检查验证码是否过期
+    let { mobile, smsCheckCode } = this.state;
+
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/userAuth/checkCode',
+      payload: {
+        mobile,
+        smsCheckCode,
+      },
+      callback: (res) => {
+        if(res.code === 0){
+          this.props.dispatch(routerRedux.push(`/user/reset/${step}`))
+        }else{
+          this.setState({smscodeSended: false});            //重置短信验证码已发送的标志
+          this.props.form.setFields({
+            'smscode': {
+              value: '',
+              errors: [new Error(res.message)]
+            }
+          });
+        }
+      }
+    })
+
   };
 
   //step 3 - 修改密码
@@ -161,6 +258,7 @@ export default class Reset extends React.Component {
     if(!this.ajaxFlag) return;
     this.ajaxFlag = false;
 
+    this.loading = true;
     let { mobile, smsCheckCode } = this.state;
 
     this.props.form.validateFields(['password', 'rpassword'], (err, values) => {
@@ -175,6 +273,7 @@ export default class Reset extends React.Component {
             affirmPassword: Encrypt(mobile, values.rpassword),
           },
           callback: (res) => {
+            this.loading = false;
             setTimeout(() => { this.ajaxFlag = true }, 500);
             if(res.code === 0){
               this.props.dispatch(routerRedux.push('/user/reset/finish'))
@@ -182,16 +281,8 @@ export default class Reset extends React.Component {
               //修改失败，重置表单和拼图
               //this.props.form.resetFields();
               //this.setState({pintuNo: new Date().getTime()});
-              ResultAlert({
-                title: '修改失败',
-                img: require('~/assets/com/login_right@2x.png'),
-                msg: res.message,
-                btns: ['确定'],
-                callback: (r) => {
-                  //验证码错误、过期
-                  this.props.dispatch(routerRedux.push('/user/reset/index'))
-                }
-              })
+              Toast.info(res.message);
+              this.props.dispatch(routerRedux.push('/user/reset/index'))
             }
           }
         })
@@ -202,9 +293,15 @@ export default class Reset extends React.Component {
 
   //比对密码
   checkConfirm = (rule, value, callback) => {
-    if(value && value !== this.props.form.getFieldValue('password')){
-      callback('您输入的密码不一致')
+    let password = this.props.form.getFieldValue('password'),
+      rpassword = this.props.form.getFieldValue('rpassword');
+    if(password && rpassword && password !== rpassword){
+      callback('两次输入的密码不一致')
     }else{
+      this.props.form.setFields({
+        password: {value: password, errors: ''},
+        rpassword: {value: rpassword, errors: ''},
+      });
       callback()
     }
   };
@@ -248,7 +345,7 @@ export default class Reset extends React.Component {
   changePsdType1 = (value) => {
     let psdLevelVisible = !this.state.psdLevelVisible;
     this.setState({
-      psdType1: value,
+      //psdType1: value,
       psdLevelVisible
     })
   };
@@ -282,9 +379,9 @@ export default class Reset extends React.Component {
 
     const {
       mobile, current, autoSubmitTimer, pintuNo,
-      psdType1, psdType2, psdLevelVisible, psdLevel, psdLevelStyle
+      psdLevelVisible, psdLevel, psdLevelStyle, smscodeSended
     } = this.state;
-    const { loading } = this.props;
+
     const { getFieldDecorator, getFieldValue, getFieldsError } = this.props.form;
 
     steps[0].content = (
@@ -295,14 +392,16 @@ export default class Reset extends React.Component {
               initialValue: mobile,
               validateFirst: true,
               rules: [
-                { required: true, message: '请输入手机号！' },
+                { required: true, message: '请输入手机号码' },
                 { validator: this.onChangeMobile },
               ],
             })(
               <Input
                 autoFocus
-                type="number"
-                placeholder="手机号"
+                size="large"
+                maxLength="11"
+                autoComplete="off"
+                placeholder="请输入手机号码"
                 suffix={
                   getFieldValue('mobile') ?
                     <Icon
@@ -319,7 +418,7 @@ export default class Reset extends React.Component {
           <FormItem>
             {getFieldDecorator('pintu', {
               rules: [
-                { required: true, message: '请完成拼图！' },
+                { required: true, message: '请完成拼图' },
               ],
             })(
               <PintuValidate no={pintuNo} callback={this.pintuResult}/>
@@ -332,25 +431,22 @@ export default class Reset extends React.Component {
     steps[1].content = (
       <div className={styles.step2}>
         <div className={styles.desc}>
-          <p>已将短信验证码发送到您{filterTel(mobile)}的手机当中，请注意查收！</p>
+          <p>验证码短信已发送至{filterTel(mobile)}</p>
         </div>
         <div className={styles.formItemBox}>
           <FormItem>
             {getFieldDecorator('smscode', {
               validateFirst: true,
               rules: [
-                { required: true, message: '验证码不能为空！' },
-                { pattern: /^[0-9]{6}$/, message: '只能输入6位数值！' },
+                { required: true, message: '请输入短信验证码' },
+                { pattern: /^[0-9]{6}$/, message: '请输入正确的短信验证码' },
               ],
             })(
               <SmsValidate
                 auto={true}
-                boxStyle={{height: '50px'}}
-                inputStyle={{width: '215px'}}
-                bottonStyle={{width: '135px', height: '50px', lingHeight: '50px'}}
+                hasYuyin={false}
                 action="reset"
                 mobile={mobile}
-                api='/api/userAuth/sendMobileCode'
                 callback={this.getSmscode}
               />
             )}
@@ -366,15 +462,17 @@ export default class Reset extends React.Component {
             {getFieldDecorator('password', {
               validateFirst: true,
               rules: [
-                { required: true, message: '请输入新密码！' },
-                { min: 8, message: '密码长度只能在8-16位字符之间！' },
-                { max: 16, message: '密码长度只能在8-16位字符之间！' },
-                { pattern: /^[A-Za-z0-9~!@#$%^&*()_-]+$/, message: '不能输入敏感字符，如尖括号、百分号等！' },
-                { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[A-Za-z0-9~!@#$%^&*()_-]{8,16}$/, message: '密码不能全都是数字、字母（包括大写）、符号！' },
+                { required: true, message: '请输入新密码' },
+                { min: 8, message: '请输入8-16位字母、数字或符号的组合' },
+                { max: 16, message: '请输入8-16位字母、数字或符号的组合' },
+                { validator: this.checkConfirm },
+                // { pattern: /^[A-Za-z0-9_]+$/, message: '不能输入敏感字符，只能输入下划线' },
+                // { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[A-Za-z0-9_]{8,16}$/, message: '请输入8-16位字母、数字或符号的组合' },
               ],
             })(
               <Input
-                type={psdType1}
+                type="password"
+                maxLength="16"
                 onFocus={() => this.changePsdType1('text')}
                 onBlur={() => this.changePsdType1('password')}
                 onChange={this.checkPsd}
@@ -391,19 +489,6 @@ export default class Reset extends React.Component {
                         :
                         null
                     }
-                    {
-                      psdLevelVisible && getFieldValue('password') ?
-                        <div className={styles.psdStatus + " " + psdLevelStyle} style={{width: '360px'}}>
-                          <p className={styles.box}>
-                            <span className={styles.line}><em className={styles.block}/></span>
-                            <span className={styles.line}><em className={styles.block}/></span>
-                            <span className={styles.line}><em className={styles.block}/></span>
-                            <span className={styles.text}>{psdLevel}</span>
-                          </p>
-                        </div>
-                        :
-                        null
-                    }
                   </span>
                 }
               />
@@ -412,15 +497,15 @@ export default class Reset extends React.Component {
           <FormItem>
             {getFieldDecorator('rpassword', {
               rules: [
-                { required: true, message: '请输入确认密码！' },
+                { required: true, message: '请再次输入新密码' },
                 { validator: this.checkConfirm }
               ],
             })(
               <Input
-                type={psdType2}
-                onFocus={() => this.changePsdType2('text')}
-                onBlur={() => this.changePsdType2('password')}
-                placeholder="请输入确认密码"
+                type="password"
+                // onFocus={() => this.changePsdType2('text')}
+                // onBlur={() => this.changePsdType2('password')}
+                placeholder="请再次输入新密码"
                 suffix={
                   <span className={styles.suffix}>
                     {
@@ -454,86 +539,93 @@ export default class Reset extends React.Component {
     return(
 
       <div className={styles.psdReset}>
-        <h1>找回密码</h1>
 
-        <Form className={styles.form}>
-          <Steps current={current} labelPlacement="vertical">
-            {steps.map(item => <Step key={item.key} title={item.title} />)}
-          </Steps>
+        {
+          current > 0 && !mobile ?
+            <Redirect to="/user/reset/index" />
+            :
+            <Form className={styles.form}>
 
-          <div className={styles.formContent}>
-            <div className={styles.stepsContent}>
-              {steps[current].content}
-            </div>
+              <div className={styles.formContent}>
+                <div className={styles.stepsContent}>
+                  {steps[current].content}
+                </div>
 
-            <FormItem>
-              {
-                current === 0 ?
-                  <Button
-                    type="primary"
-                    className={styles.btn}
-                    style={btnStyle}
-                    onClick={this.next}
-                    disabled={hasErrors(getFieldsError(['mobile'])) || !getFieldValue('mobile') || !getFieldValue('pintu')}
-                  >
-                    下一步
-                  </Button>
-                  :
-                  null
-              }
-
-              {
-                current === 1 ?
-                  <Button
-                    type="primary"
-                    className={styles.btn}
-                    style={btnStyle}
-                    onClick={this.next}
-                    disabled={hasErrors(getFieldsError(['smscode'])) || !getFieldValue('smscode')}
-                  >
-                    下一步
-                  </Button>
-                  :
-                  null
-              }
-
-              {
-                current === 2 ?
-                  <Button
-                    loading={loading}
-                    type="primary"
-                    className={styles.btn}
-                    style={btnStyle}
-                    onClick={this.changePsdSubmit}
-                    disabled={
-                      hasErrors(getFieldsError(['password', 'rpassword'])) ||
-                      !getFieldValue('password') ||
-                      !getFieldValue('rpassword')
+                <FormItem>
+                  <div className={styles.btns}>
+                    {
+                      current === 0 ?
+                        <Button
+                          type="primary"
+                          className={styles.btn}
+                          style={btnStyle}
+                          onClick={this.next1}
+                          disabled={hasErrors(getFieldsError(['mobile'])) || !getFieldValue('mobile') || !getFieldValue('pintu')}
+                        >
+                          下一步
+                        </Button>
+                        :
+                        null
                     }
-                  >
-                    下一步
-                  </Button>
-                  :
-                  null
-              }
 
-              {
-                current === 3 ?
-                  <Button
-                    type="primary"
-                    className={styles.btn}
-                    style={btnStyle}
-                    onClick={this.toLogin}
-                  >
-                    立即登录
-                    {this.autoSubmit()}
-                  </Button>
-                  :
-                  null
-              }
-            </FormItem>
-          </div>
-        </Form>
+                    {
+                      current === 1 ?
+                        <Button
+                          type="primary"
+                          className={styles.btn}
+                          style={btnStyle}
+                          onClick={this.next2}
+                          disabled={
+                            hasErrors(getFieldsError(['smscode'])) ||
+                            !getFieldValue('smscode') ||
+                            smscodeSended === false
+                          }
+                        >
+                          下一步
+                        </Button>
+                        :
+                        null
+                    }
+
+                    {
+                      current === 2 ?
+                        <Button
+                          loading={this.loading}
+                          type="primary"
+                          className={styles.btn}
+                          style={btnStyle}
+                          onClick={this.changePsdSubmit}
+                          disabled={
+                            hasErrors(getFieldsError(['password', 'rpassword'])) ||
+                            !getFieldValue('password') ||
+                            !getFieldValue('rpassword')
+                          }
+                        >
+                          下一步
+                        </Button>
+                        :
+                        null
+                    }
+
+                    {
+                      current === 3 ?
+                        <Button
+                          type="primary"
+                          className={styles.btn}
+                          style={btnStyle}
+                          onClick={this.toLogin}
+                        >
+                          立即登录
+                          {this.autoSubmit()}
+                        </Button>
+                        :
+                        null
+                    }
+                  </div>
+                </FormItem>
+              </div>
+            </Form>
+        }
       </div>
 
     )
