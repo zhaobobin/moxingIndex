@@ -38,7 +38,7 @@ export default class Beian extends React.Component {
             <p>资金存管银行全称：<span>廊坊银行股份有限公司</span></p>
             <p>三方存管协议：
               <span className={styles.agreement}>
-              {/*<a target="_blank" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> */}
+              {/*<a target="_blank" rel="noopener noreferrer nofollow" href="http://investtest.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/depository_agreement.pdf">存管协议</a> */}
                 <a href="javascript:void(0);"  onClick={this.xieyiClick}>存管协议</a>
               </span>
             </p>

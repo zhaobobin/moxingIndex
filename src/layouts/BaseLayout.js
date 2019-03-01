@@ -37,6 +37,9 @@ export default class BaseLayout extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps){
     if(nextProps.location.pathname !== this.props.location.pathname){
       window.scrollTo(0, 0);
+      let routerHistory = Storage.get(ENV.storageHistory) || [];
+      routerHistory.push(nextProps.location.pathname);
+      Storage.set(ENV.storageHistory, routerHistory);
     }
   }
 
@@ -137,6 +140,7 @@ export default class BaseLayout extends React.Component {
                     )
                   )
                 }
+                <Redirect exact from="/account" to="/account/total" />
                 <Route component={NotFound} />
               </Switch>
 

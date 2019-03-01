@@ -4,8 +4,8 @@ export default function LoadingBg (props) {
 
   const style = {
     margin: 'auto',
-    width: '500px',
-    height: '180px',
+    width: '100%',
+    height: '100px',
     background: `url(${require('~/assets/com/loading_bg.jpg')}) no-repeat center center #f8f9fb`,
     ...props.style,
   };

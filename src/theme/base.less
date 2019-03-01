@@ -1,0 +1,49 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+ul, li{
+  list-style: none;
+}
+
+em, i{
+  font-style: normal;
+}
+
+html, body, :global(#root) {
+  height: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
+}
+
+:global{
+  #qtw{
+    a{
+      text-decoration: none;
+    }
+    .ant-btn-primary[disabled]{
+      color: #FFF;
+    }
+    .ant-btn{
+      border-radius: 4px;
+      font-size:16px;
+    }
+    .ant-pagination{
+      margin-top:75px;
+      height:32px;
+      text-align:center
+    }
+    .ant-form-item-children{
+      display:block;
+      margin-bottom:8px;
+    }
+  }
+}
+

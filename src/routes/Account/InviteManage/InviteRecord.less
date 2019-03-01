@@ -1,0 +1,77 @@
+.record{
+
+  position: relative;
+
+  .head{
+    height: 0;
+    padding-bottom: 50%;
+    background:linear-gradient(174deg,rgba(249,190,76,1) 0%,rgba(241,137,37,1) 100%);
+    position: relative;
+
+    .com{
+      width:100%;
+      height:100%;
+      padding: 30px 0;
+      position:absolute;
+      left:0;
+      top:0;
+      color: #fff;
+      p{
+        margin:0;
+      }
+
+      .amt{
+        margin-bottom:20px;
+        text-align: center;
+        span{
+          font-size:27px;
+        }
+        em{
+          font-size:13px;
+        }
+        label{
+          font-size:13px;
+        }
+      }
+      ul{
+        margin:0;
+        overflow:hidden;
+        li{
+          float:left;
+          width:50%;
+          text-align:center;
+        }
+      }
+    }
+
+    @media screen and (max-width: 320px){
+      &{
+        padding-bottom: 55%;
+      }
+    }
+    @media screen and (min-width: 410px){
+      &{
+        padding-bottom: 45%;
+      }
+    }
+
+  }
+
+  .body{
+    padding-bottom: 80px;
+  }
+
+  .foot{
+    width:100%;
+    height:80px;
+    padding: 20px 15px;
+    position: fixed;
+    left:0;
+    bottom:0;
+    background: #fff;
+
+    button{
+      width:100%;
+    }
+  }
+}

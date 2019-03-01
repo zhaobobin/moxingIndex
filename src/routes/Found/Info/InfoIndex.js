@@ -26,7 +26,6 @@ export default class InfoIndex extends React.Component {
   }
 
   render(){
-    const arr=this.state.arr
 
     return(
       <div className={styles.InfoIndex}>
@@ -39,34 +38,34 @@ export default class InfoIndex extends React.Component {
           项目信息（请见具体借款标的页面）、出借人教育等方面进行信息披露，供用户查看监督。
         </div>
           <p className={styles.system}>
-            <a target="_blank" href="https://www.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/information_disclosure.pdf">
+            <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.qutouwang.com/hyxd_qtw/customer_invest_info/pdf/information_disclosure.pdf">
               北京恒远鑫达投资管理有限公司-信息披露制度>>
             </a>
            </p>
                 <ul className={styles.listUl}>
                   <Link to='/found/beian?equipmentType=app'>
-                    <li>备案信息 <span></span> </li>
+                    <li>备案信息 <span/> </li>
                   </Link>
                   <Link to='/found/organization?equipmentType=app'>
-                    <li>组织信息 <span></span> </li>
+                    <li>组织信息 <span/> </li>
                   </Link>
                   <Link to='/found/examine?equipmentType=app'>
-                    <li>审核信息 <span></span> </li>
+                    <li>审核信息 <span/> </li>
                   </Link>
                   <Link to='/found/disclosure?equipmentType=app'>
-                    <li>经营信息 <span></span> </li>
+                    <li>经营信息 <span/> </li>
                   </Link>
                   <Link to='/found/event?equipmentType=app'>
-                    <li>重大事项 <span></span> </li>
+                    <li>重大事项 <span/> </li>
                   </Link>
                   <Link to='/found/other?equipmentType=app'>
-                    <li>其他信息 <span></span> </li>
+                    <li>其他信息 <span/> </li>
                   </Link>
                   <Link to='/found/education?equipmentType=app'>
-                    <li>出借人教育 <span></span> </li>
+                    <li>出借人教育 <span/> </li>
                   </Link>
                   <Link to='/found/operate?equipmentType=app'>
-                    <li>平台报告 <span></span> </li>
+                    <li>平台报告 <span/> </li>
                   </Link>
                 </ul>
 

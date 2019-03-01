@@ -12,7 +12,7 @@ export default function GlobalHeader () {
       <Link to="/" className={styles.logo}>
         <img src={logo} alt="logo"/>
       </Link>
-      <Link to="/account" className={styles.account}>
+      <Link to="/account/total" className={styles.account}>
         <img src={account} alt="account"/>
       </Link>
     </div>

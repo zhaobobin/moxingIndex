@@ -69,7 +69,6 @@ export default {
       );
       yield callback(res);
       if(res.code === 0){
-        console.log(res)
         Storage.set(ENV.storageAccessToken, res.data.access_token);               //保存token
         Storage.set(ENV.storageRefreshToken, res.data.refresh_token);             //保存token
         Storage.set(ENV.storageUserId, res.data.userId);                          //保存userId
@@ -123,28 +122,17 @@ export default {
     },
 
     *logout({ payload, callback }, { call, put }) {
-      const res = yield call(
-        (params) => {return request('/api/userAuth/logout', {method: 'POST', body: params})},
-        payload
-      );
-      //yield callback(res);
-      if(res.code === 0){
-        Storage.remove(ENV.storageAccessToken);              //删除token
-        Storage.remove(ENV.storageRefreshToken);              //删除token
-        yield put({
-          type: 'changeLoginStatus',
-          payload: {
-            isAuth: false,
-            userInfo: '',
-          }
-        });
-        yield put(routerRedux.push({ pathname: '/' }));
-      }else{
-        notification.error({
-          message: '退出失败！',
-          description: res.message,
-        });
-      }
+      Storage.remove(ENV.storageAccessToken);              //删除token
+      Storage.remove(ENV.storageRefreshToken);              //删除token
+      yield put({
+        type: 'changeLoginStatus',
+        payload: {
+          isAuth: false,
+          userInfo: '',
+        }
+      });
+      yield callback();
+      yield put(routerRedux.push({ pathname: '/' }));
     },
 
     //初始化账户 - 查询账户信息、资产信息

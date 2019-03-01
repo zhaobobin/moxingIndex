@@ -166,7 +166,11 @@ export default class Login extends React.Component {
         this.setState({loading: false});
         if(res.code === 0){
           Storage.set(ENV.storageLastTel, values.account);      //手机号保存到本地存储
-          this.direct(res.data.cusType);
+          if(res.data.cusType === '1'){
+            this.back();
+          }else{
+            this.props.dispatch(routerRedux.push('/account/total'))
+          }
         }else{
           //登录失败，重置表单和拼图
           Storage.remove(ENV.storageLastTel);
@@ -190,6 +194,16 @@ export default class Login extends React.Component {
       this.props.dispatch(routerRedux.push('/'))
     }else{
       this.props.dispatch(routerRedux.push('/account'));
+    }
+  };
+
+  //后退
+  back = () => {
+    let routerHistory = Storage.get(ENV.storageHistory);
+    if(routerHistory){
+      this.props.dispatch(routerRedux.push(routerHistory[routerHistory.length - 1]));
+    }else{
+      this.props.dispatch(routerRedux.push('/'));
     }
   };
 

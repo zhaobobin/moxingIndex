@@ -1,7 +1,7 @@
 import './polyfill';
 import dva from 'dva';
 import browserHistory from 'history/createBrowserHistory';
-import './theme/base.css';
+import './theme/base.less';
 
 const history = process.env.NODE_ENV === 'production' ?
   {history: browserHistory()}
