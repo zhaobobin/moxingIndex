@@ -50,23 +50,28 @@ export default class BaseLayout extends React.Component {
             <GlobalHeader/>
         }
 
-        <Switch>
-          {
-            getRouteData('UserLayout').map(item =>
-              (
-                <Route
-                  exact={item.exact}
-                  key={item.path}
-                  path={item.path}
-                  component={item.component}
-                />
+        <div
+          className={styles.content}
+          style={paramsObj.platform === 'app' ? null : {paddingTop: '46px'}}
+        >
+          <Switch>
+            {
+              getRouteData('UserLayout').map(item =>
+                (
+                  <Route
+                    exact={item.exact}
+                    key={item.path}
+                    path={item.path}
+                    component={item.component}
+                  />
+                )
               )
-            )
-          }
-          <Redirect exact from="/user" to="/user/login" />
-          <Redirect exact from="/user/reset" to="/user/reset/index" />
-          <Route component={NotFound} />
-        </Switch>
+            }
+            <Redirect exact from="/user" to="/user/login" />
+            <Redirect exact from="/user/reset" to="/user/reset/index" />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
 
       </div>
     );

@@ -1,20 +1,40 @@
 import React from 'react';
-import { connect } from 'dva';
 import { Link } from 'dva/router';
+import styles from './CouponsDesc.less'
 
-@connect(state => ({
-  global: state.global,
-}))
-export default class CouponsDesc extends React.Component {
+import AccountJson from '~/routes/Account/AccountJson'
+const coupons = AccountJson.coupons;
 
-  render(){
-    return(
-      <div>
+export default function CouponsDesc () {
 
-        优惠卷说明
+  return(
+    <div className={styles.container}>
 
+      <div className={styles.content}>
+        <dl>
+          <dt>{coupons.desc1.title}</dt>
+          <dd>
+            {
+              coupons.desc1.list.map((item, index) => (
+                <p key={index}>{item}</p>
+              ))
+            }
+          </dd>
+        </dl>
+
+        <dl>
+          <dt>{coupons.desc2.title}</dt>
+          <dd>
+            {
+              coupons.desc2.list.map((item, index) => (
+                <p key={index}>{item}</p>
+              ))
+            }
+          </dd>
+        </dl>
       </div>
-    )
-  }
+
+    </div>
+  )
 
 }

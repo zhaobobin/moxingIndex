@@ -2,7 +2,6 @@
  * 文章详情
  */
 import React from 'react';
-import { Link } from 'dva/router';
 import moment from 'moment';
 
 import styles from './ArticleDetail.less';

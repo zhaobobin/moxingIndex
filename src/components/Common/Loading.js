@@ -6,7 +6,7 @@ import { Spin } from 'antd';
 
 const Loading = () => {
   return(
-    <div style={{padding: '50px', textAlign: 'center'}}>
+    <div style={{padding: '200px 0', textAlign: 'center'}}>
       <Spin size="large" delay={200}/>
     </div>
   )
