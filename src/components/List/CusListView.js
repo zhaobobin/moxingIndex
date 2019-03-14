@@ -1,9 +1,18 @@
+/**
+ * 自定义ListView
+ * api [String] 查询接口
+ * queryParams [Object] 查询参数
+ * listViewProps [Object] listView自定义参数，支持自定义renderHeader,renderBodyComponent,renderFooter,renderItem
+ * callback [Function] 查询结果回调
+ * 备注: 出事状态渲染emptyData，查询结果有数据时重新渲染，emptyData样式在自定义renderItem中设置。
+ */
 import React from 'react';
 import { connect } from 'dva';
 import { PullToRefresh, ListView } from 'antd-mobile';
 import styles from './CusListView.less'
 
-const data = [
+//空状态
+const emptyData = [
   {
     title: 'ListNull',
     desc: '暂无数据',
@@ -29,7 +38,7 @@ export default class CusListView extends React.Component {
 
       pageNun: 1,
       pageSize: 10,
-      list: data,
+      list: emptyData,
       hasMore: true,
     };
   }

@@ -9,7 +9,7 @@ export default function CouponsItem ({item, id}) {
 
       {
         item.title === 'ListNull' ?
-          <div className={styles.null}>
+          <div className={styles.empty}>
             <img src={require('~/assets/com/no_redenvelopes@2x.png')} alt="null"/>
             <p>优惠券福利陆续来袭，敬请留意平台动态！</p>
           </div>
