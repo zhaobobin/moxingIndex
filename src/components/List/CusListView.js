@@ -32,7 +32,7 @@ export default class CusListView extends React.Component {
     this.state = {
       dataSource,
       refreshing: false,
-      isLoading: false,
+      isLoading: true,
       height: document.documentElement.clientHeight,
       defaultBodyScroll: false,
 

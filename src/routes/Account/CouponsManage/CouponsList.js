@@ -4,7 +4,7 @@ import { Link } from 'dva/router';
 import styles from './CouponsList.less'
 
 import CusListView from '~/components/List/CusListView'
-import CouponsItem from '~/components/Account/CouponsManage/CouponsItem'
+import CouponsItem from '~/components/Account/AccountCoupons/CouponsItem'
 
 @connect(state => ({
   global: state.global,

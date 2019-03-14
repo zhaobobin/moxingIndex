@@ -3,6 +3,8 @@ import { connect } from 'dva';
 import { Toast, ListView } from 'antd-mobile';
 import styles from './InviteList.less'
 
+import CusListView from '~/components/List/CusListView'
+
 @connect(state => ({
   global: state.global,
 }))
