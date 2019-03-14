@@ -13,11 +13,8 @@ export default class CouponsList extends React.Component {
 
   constructor(props){
     super(props);
-    this.ajaxFlag = true;
     this.state = {
-      loading: true,
       total: null,
-      list: '',
     }
   }
 
@@ -32,13 +29,6 @@ export default class CouponsList extends React.Component {
 
     const {userId} = this.props.global.currentUser.userInfo;
     const {total} = this.state;
-
-    const listNull = (
-      <div className={styles.listNull}>
-        <img src={require('~/assets/com/no_redenvelopes@2x.png')} alt="null"/>
-        <p>优惠券福利陆续来袭，敬请留意平台动态！</p>
-      </div>
-    );
 
     return(
       <div className={styles.container}>
@@ -60,15 +50,16 @@ export default class CouponsList extends React.Component {
           <div className={styles.body}>
             <CusListView
               api="/api/userCoupon/pc/findMyCoupon"
-              payload={{
-                userId: 19010310321353,                 //19010310321353
+              queryParams={{
+                userId,                 //19010310321353
                 isAbleUse: 0,
               }}
-              pageSize={10}
-              useBodyScroll={false}
-              renderHeader={false}
-              renderRow={<CouponsItem/>}
-              listNull={listNull}
+              listViewProps={{
+                pageSize: 10,
+                useBodyScroll: false,
+                renderHeader: false,
+                renderItem: (item, id) => <CouponsItem item={item} id={id}/>
+              }}
               callback={this.queryCallback}
             />
           </div>
