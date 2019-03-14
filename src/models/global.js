@@ -1,7 +1,7 @@
 import { routerRedux } from 'dva/router';
-import { notification } from 'antd';
+import { Toast } from 'antd-mobile';
 import request from '~/utils/request';
-import {ENV, Storage} from '~/utils/utils';
+import {ENV, Storage, getUrlParams} from '~/utils/utils';
 
 export default {
 
@@ -205,8 +205,6 @@ export default {
     //exp如果不为空：在查询时，先检查本地存储数据是否过期，再读取远程数据；并且在查询成功后，本地存储查询结果。
     *post({ url, payload, callback }, { call, put }) {
 
-      //yield put({ type: 'changeLoading', payload: true });
-
       let res, exp = payload.exp, storage = Storage.get(url, exp);
 
       if(exp && storage){
@@ -219,17 +217,33 @@ export default {
         if(exp) Storage.set(url, res);
       }
 
-      yield callback(res);
+      //登录过期等
+      if(res.code > 1001000){
 
-      //yield put({ type: 'changeLoading', payload: false });
+        const paramsObj = getUrlParams() || '';
 
-      //系统异常提示
-      // if(res.code === -1){
-      //   notification.error({
-      //     message: '失败',
-      //     description: res.message
-      //   })
-      // }
+        Storage.remove(ENV.storageAccessToken);               //删除token
+        Storage.remove(ENV.storageRefreshToken);              //删除token
+        Toast.info(res.message, 2);
+        yield put({
+          type: 'changeLoginStatus',
+          payload: {
+            isAuth: false,
+            userInfo: '',
+          }
+        });
+        //app平台套用，不跳转登录
+        if(paramsObj.platform !== 'app') {
+          yield put(routerRedux.push({ pathname: '/user/login' }));
+        }
+
+      }else{
+        yield callback(res);
+        if(res.code === -1){
+          Toast.info(res.message, 2);
+          //yield put(routerRedux.push({ pathname: '/page500' }));
+        }
+      }
 
     },
 

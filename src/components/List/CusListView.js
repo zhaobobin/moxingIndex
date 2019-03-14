@@ -53,13 +53,11 @@ export default class CusListView extends React.Component {
   }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.dataSource !== this.props.dataSource) {
-  //     this.setState({
-  //       dataSource: this.state.dataSource.cloneWithRows(nextProps.dataSource),
-  //     });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.queryParams !== this.props.queryParams) {
+      this.refreshList();
+    }
+  }
 
   //依据列表长度，生成key数组
   getData = (len) => {
@@ -99,15 +97,17 @@ export default class CusListView extends React.Component {
             this.lv.scrollTo(0, 0);       //滚动到顶部
           }
 
-          this.rData = this.getData(list.length);
-          this.setState({
-            refreshing: false,
-            isLoading: false,
-            dataSource: this.state.dataSource.cloneWithRows(this.rData),
-            list: list,
-            pageNun: pageNum,
-            hasMore: hasMore
-          })
+          setTimeout(() => {
+            this.rData = this.getData(list.length);
+            this.setState({
+              refreshing: false,
+              isLoading: false,
+              dataSource: this.state.dataSource.cloneWithRows(this.rData),
+              list: list,
+              pageNun: pageNum,
+              hasMore: hasMore
+            })
+          }, 500)
 
         }
       }

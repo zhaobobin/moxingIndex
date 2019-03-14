@@ -7,7 +7,8 @@ import copy from 'copy-to-clipboard';
 import { numberFormat } from "~/utils/utils";
 import styles from './InviteRecord.less'
 
-import InviteList from '~/components/Account/AccountInvite/InviteList'
+import CusListView from '~/components/List/CusListView'
+import InviteItem from '~/components/Account/AccountInvite/InviteItem'
 
 @connect(state => ({
   global: state.global,
@@ -18,7 +19,6 @@ export default class InviteRecord extends React.Component {
     super(props);
     this.ajaxFlag = true;
     this.state = {
-      loading: true,
       total: null,
       invitationDetail: '',
       webUrl: '',
@@ -62,24 +62,28 @@ export default class InviteRecord extends React.Component {
     Toast.info('邀请好友链接已复制成功，可分享给好友', 2);
   };
 
-  listCb = (data) => {
+  queryCallback = (values) => {
+    if(!values) return;
     this.setState({
-      loading: false,
-      invitationDetail: data.invitationDetail
+      total: values.count,
+      invitationDetail: values.invitationDetail
     })
   };
 
   render(){
 
-    const { invitationDetail } = this.state;
+    const { userId } = this.props.global.currentUser.userInfo;
+    const { total, invitationDetail, webUrl } = this.state;
 
     return(
       <div className={styles.record}>
 
-        <div className={styles.head}>
-          <div className={styles.com}>
-            <div className={styles.amt}>
-              <p>
+        {
+          total > 0 ?
+            <div className={styles.head}>
+              <div className={styles.com}>
+                <div className={styles.amt}>
+                  <p>
                 <span>
                   {
                     invitationDetail && invitationDetail.invitationTotalAmt ?
@@ -88,13 +92,13 @@ export default class InviteRecord extends React.Component {
                       '0.00'
                   }
                 </span>
-                <em>元</em>
-              </p>
-              <label>累计奖励金额</label>
-            </div>
-            <ul className={styles.p2}>
-              <li>
-                <p>
+                    <em>元</em>
+                  </p>
+                  <label>累计奖励金额</label>
+                </div>
+                <ul className={styles.p2}>
+                  <li>
+                    <p>
                   <span>
                     {
                       invitationDetail && invitationDetail.receiverNum ?
@@ -103,12 +107,12 @@ export default class InviteRecord extends React.Component {
                         0
                     }
                   </span>
-                  <em>人</em>
-                </p>
-                <label>累计邀请好友人数</label>
-              </li>
-              <li>
-                <p>
+                      <em>人</em>
+                    </p>
+                    <label>累计邀请好友人数</label>
+                  </li>
+                  <li>
+                    <p>
                   <span>
                     {
                       invitationDetail && invitationDetail.investTotalAmt ?
@@ -117,21 +121,56 @@ export default class InviteRecord extends React.Component {
                         '0.00'
                     }
                   </span>
-                  <em>元</em>
-                </p>
-                <label>累计好友出借金额</label>
-              </li>
-            </ul>
-          </div>
-        </div>
+                      <em>元</em>
+                    </p>
+                    <label>累计好友出借金额</label>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            :
+            null
+        }
+
+        {
+          total > 0 ?
+            <div className={styles.tableHead}>
+              <div className={styles.hr}/>
+              <p>
+                <span className={styles.sp1}>好友手机号码</span>
+                <span className={styles.sp2}>累计邀请好友奖励</span>
+                <span className={styles.sp3}>注册时间</span>
+              </p>
+            </div>
+            :
+            null
+        }
 
         <div className={styles.body}>
-          <InviteList callback={this.listCb}/>
+          <CusListView
+            api="/api/home/app/findAppInvitationRecord"
+            queryParams={{
+              userId,                 //19010310321353
+            }}
+            listViewProps={{
+              pageSize: 10,
+              useBodyScroll: false,
+              renderHeader: false,
+              renderItem: (item, id, webUrl) => <InviteItem item={item} id={id} webUrl={webUrl}/>
+            }}
+            callback={this.queryCallback}
+          />
         </div>
 
-        <div className={styles.foot}>
-          <Button type="primary" size="large" onClick={this.copyLink}>立即邀请</Button>
-        </div>
+        {
+          total > 0 ?
+            <div className={styles.foot}>
+              <Button type="primary" size="large" onClick={this.copyLink}>立即邀请</Button>
+            </div>
+            :
+            null
+        }
 
       </div>
     )

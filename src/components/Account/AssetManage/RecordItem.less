@@ -1,0 +1,36 @@
+@import '../../../theme/index.less';
+
+.item{
+  dl{
+
+  }
+  dt{
+    height: 40px;
+    line-height: 40px;
+    background: #F5F5F5;
+  }
+  dd{
+    background: #fff;
+  }
+
+  ul{
+    margin:0;
+    padding-left: 15px;
+
+    li{
+      border-bottom: 1px solid #E5E5E5;
+      overflow:hidden;
+      &:last-child{
+        border: none;
+      }
+      p{
+        &.left{
+          float:left;
+        }
+        &.right{
+          float:right;
+        }
+      }
+    }
+  }
+}
