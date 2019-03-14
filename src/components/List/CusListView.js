@@ -4,7 +4,7 @@
  * queryParams [Object] 查询参数
  * listViewProps [Object] listView自定义参数，支持自定义renderHeader,renderBodyComponent,renderFooter,renderItem
  * callback [Function] 查询结果回调
- * 备注: 出事状态渲染emptyData，查询结果有数据时重新渲染，emptyData样式在自定义renderItem中设置。
+ * 备注: 初始状态渲染emptyData，查询结果有数据时重新渲染，emptyData样式在自定义renderItem中设置。
  */
 import React from 'react';
 import { connect } from 'dva';
