@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { parse, stringify } from 'qs';
 const CryptoJS = require('crypto-js');  //引用AES源码js
+const _ = require('lodash');
 
 /**
  * 全局变量
@@ -171,6 +172,23 @@ export function yaoqingDecrypt(text) {
 }
 
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 通用工具函数 start!!! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+
+/**
+ * Deep diff between two object, using lodash
+ * @param  {Object} object Object compared
+ * @param  {Object} base   Object to compare with
+ * @return {Object}        Return a new object who represent the diff
+ */
+export function difference(object, base) {
+  function changes(object, base) {
+    return _.transform(object, function(result, value, key) {
+      if (!_.isEqual(value, base[key])) {
+        result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+      }
+    });
+  }
+  return changes(object, base);
+}
 
 /**
  * 浏览器后退

@@ -310,7 +310,7 @@ const BaseRoutes = app => [
             path: 'record',
             isHide: true,
             userType: 'all',
-            component: dynamicWrapper(app, [], () => import('../routes/Account/AssetManage/Record')),
+            component: dynamicWrapper(app, [], () => import('../routes/Account/AssetManage/AssetsRecord')),
           },
           {
             name: '我的信息',

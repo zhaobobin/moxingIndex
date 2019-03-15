@@ -4,15 +4,15 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Tabs } from 'antd-mobile';
-import styles from './Record.less'
+import styles from './AssetsRecord.less'
 
 import CusListView from '~/components/List/CusListView'
-import InviteItem from '~/components/Account/AccountInvite/InviteItem'
+import RecordItem from '~/components/Account/AssetManage/RecordItem'
 
 @connect(state => ({
   global: state.global,
 }))
-export default class Record extends React.Component {
+export default class AssetsRecord extends React.Component {
 
   constructor(props){
     super(props);
@@ -57,31 +57,28 @@ export default class Record extends React.Component {
           >
             {
               tabs.map((item, index) => (
-                <div
-                  key={index}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}
-                >
-                  Content of first tab {index}
-                </div>
+                <div key={index} />
               ))
             }
           </Tabs>
         </div>
 
-        <CusListView
-          api="/api/userAccountInfo/findUserTradeRecordsPC"
-          queryParams={{
-            userId,                 //19010310321353
-            cashType
-          }}
-          listViewProps={{
-            pageSize: 10,
-            useBodyScroll: false,
-            renderHeader: false,
-            renderItem: (item, id) => <InviteItem item={item} id={id}/>
-          }}
-          callback={this.queryCallback}
-        />
+        <div className={styles.body}>
+          <CusListView
+            api="/api/userAccountInfo/findUserTradeRecordsPC"
+            queryParams={{
+              userId,                 //19010310321353
+              cashType
+            }}
+            listViewProps={{
+              pageSize: 10,
+              useBodyScroll: false,
+              renderHeader: false,
+              renderItem: (item, id) => <RecordItem item={item} id={id}/>
+            }}
+            callback={this.queryCallback}
+          />
+        </div>
 
       </div>
     )

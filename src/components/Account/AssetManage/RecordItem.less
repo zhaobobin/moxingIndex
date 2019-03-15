@@ -1,36 +1,54 @@
 @import '../../../theme/index.less';
 
 .item{
-  dl{
 
-  }
-  dt{
-    height: 40px;
-    line-height: 40px;
-    background: #F5F5F5;
-  }
-  dd{
-    background: #fff;
-  }
+  .detail{
+    dl{
 
-  ul{
-    margin:0;
-    padding-left: 15px;
+    }
+    dt{
+      height: 40px;
+      line-height: 40px;
+      background: #F5F5F5;
+    }
+    dd{
+      background: #fff;
+    }
 
-    li{
-      border-bottom: 1px solid #E5E5E5;
-      overflow:hidden;
-      &:last-child{
-        border: none;
-      }
-      p{
-        &.left{
-          float:left;
+    ul{
+      margin:0;
+      padding-left: 15px;
+
+      li{
+        border-bottom: 1px solid #E5E5E5;
+        overflow:hidden;
+        &:last-child{
+          border: none;
         }
-        &.right{
-          float:right;
+        p{
+          &.left{
+            float:left;
+          }
+          &.right{
+            float:right;
+          }
         }
       }
     }
   }
+
+  .empty{
+    min-height: 500px;
+    padding: 20px 0;
+    text-align: center;
+    img{
+      width: 50%;
+      height: auto;
+    }
+    p{
+      margin-top: 25px;
+      margin-bottom: 40px;
+    }
+  }
+
 }

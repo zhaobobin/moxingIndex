@@ -9,6 +9,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { PullToRefresh, ListView } from 'antd-mobile';
+import { difference } from '~/utils/utils'
 import styles from './CusListView.less'
 
 //空状态
@@ -38,7 +39,7 @@ export default class CusListView extends React.Component {
 
       pageNun: 1,
       pageSize: 10,
-      list: emptyData,
+      list: [],                     //数据列表
       hasMore: true,
     };
   }
@@ -54,9 +55,9 @@ export default class CusListView extends React.Component {
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   componentWillReceiveProps(nextProps) {
-    if (nextProps.queryParams !== this.props.queryParams) {
-      this.refreshList();
-    }
+    let diff = difference(nextProps.queryParams, this.props.queryParams);
+    //console.log(JSON.stringify(diff))
+    if(JSON.stringify(diff) !== "{}") this.initList();
   }
 
   //依据列表长度，生成key数组
@@ -83,18 +84,19 @@ export default class CusListView extends React.Component {
           this.props.callback(res.data);
 
           let {list, pageNum, hasMore} = this.state;
-          if(res.data.list){
-            hasMore = res.data.list.length === pageSize
+          if(res.data.list && res.data.list.length > 0){
+            hasMore = res.data.list.length === pageSize;
+            if(action === 'loadMore'){
+              list = this.state.list.concat(res.data.list);
+              pageNum = this.state.hasMore + 1 ;
+            }else{
+              list = res.data.list;
+              pageNum = 1;
+              this.lv.scrollTo(0, 0);       //滚动到顶部
+            }
           }else{
-            hasMore = false
-          }
-          if(action === 'loadMore'){
-            if(res.data.list) list = this.state.list.concat(res.data.list);
-            pageNum = this.state.hasMore + 1 ;
-          }else{
-            if(res.data.list) list = res.data.list;
-            pageNum = 1;
-            this.lv.scrollTo(0, 0);       //滚动到顶部
+            hasMore = false;
+            list = emptyData;
           }
 
           setTimeout(() => {
