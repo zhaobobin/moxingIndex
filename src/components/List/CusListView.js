@@ -129,21 +129,15 @@ export default class CusListView extends React.Component {
         if(res.code === 0){
 
           this.props.callback(res.data);
-
           let {dataList, renderList, hasMore, pageNum} = this.state;
+
           //是否有数据
           if(res.data.list && res.data.list.length > 0){
-
-            let forDataRes = this.forDataList({
-              action,
-              sortBy,
-              resList: res.data.list,
-            });
+            let forDataRes = this.forDataList({action, sortBy, resList: res.data.list});
             dataList = forDataRes.dataList;
             renderList = forDataRes.renderList;
             pageNum = pageNum + 1;
             hasMore = res.data.list.length === pageSize;
-
           }else{
             dataList = emptyData;
             renderList = emptyData;
@@ -152,7 +146,6 @@ export default class CusListView extends React.Component {
           }
 
           this.rData = this.getData(renderList.length);
-
           setTimeout(() => {
             this.setState({
               refreshing: false,

@@ -55,7 +55,7 @@ export default class AccountIndex extends React.Component {
             <div>
               {
                 this.state.loading ?
-                  <LoadingBg style={{width: '100%', height: '100%', position: 'fixed', left: 0, top: 0, zIndex: 99}} />
+                  <LoadingBg style={{height: 'auto', position: 'fixed', left: 0, top: '46px', right: 0, bottom: 0, zIndex: 99}} />
                   :
                   <AccountTotal/>
               }

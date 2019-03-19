@@ -17,7 +17,7 @@ export default class AccountTotal extends React.Component {
 
   //退出
   logout = () => {
-    Alert('退出登录', '', [
+    Alert('确定退出吗？', '', [
       { text: '取消'},
       {
         text: '确定',
