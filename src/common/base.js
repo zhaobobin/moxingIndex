@@ -497,6 +497,13 @@ const BaseRoutes = app => [
         isHide: true,
         component: dynamicWrapper(app, [], () => import('../routes/Other/Xieyi')),
       },
+      {
+        name: 'PDF预览',
+        key: 'pdf',
+        path: 'pdf',
+        isHide: true,
+        component: dynamicWrapper(app, [], () => import('../routes/Other/RenderPdf')),
+      },
 
       {
         name: '示例',
