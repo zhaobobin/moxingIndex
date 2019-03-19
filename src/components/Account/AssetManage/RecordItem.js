@@ -17,14 +17,28 @@ export default function RecordItem (props) {
           <div className={styles.detail}>
             <dl>
               <dt>
-                日期
+                {props.item.label}
               </dt>
               <dd>
                 <ul>
-                  <li>
-                    <p className={styles.left}>left</p>
-                    <p className={styles.right}>right</p>
-                  </li>
+                  {
+                    props.item.list.map((topic, index) => (
+                      <li key={index}>
+                        <p className={styles.left}>
+                          <span className={styles.sp1}>{topic.cashMode}</span>
+                          <span className={styles.sp2}>{topic.flowTime}</span>
+                        </p>
+                        <p className={styles.right}>
+                          <span className={styles.sp1}>
+                            <em className={parseFloat(topic.flowAmout) > 0 ? styles.orange : null}>
+                              {topic.flowAmout}
+                            </em>
+                          </span>
+                          <span className={styles.sp2}>{topic.curFreeAmt}</span>
+                        </p>
+                      </li>
+                    ))
+                  }
                 </ul>
               </dd>
             </dl>

@@ -4,14 +4,18 @@
 
   .detail{
     dl{
-
+      margin: 0;
     }
     dt{
+      padding: 0 15px;
       height: 40px;
       line-height: 40px;
+      font-size: 13px;
+      color: @color_888;
       background: #F5F5F5;
     }
     dd{
+      margin: 0;
       background: #fff;
     }
 
@@ -20,17 +24,36 @@
       padding-left: 15px;
 
       li{
+        padding: 15px 15px 15px 0;
         border-bottom: 1px solid #E5E5E5;
         overflow:hidden;
         &:last-child{
           border: none;
         }
         p{
+          margin: 0;
           &.left{
-            float:left;
+            float: left;
           }
           &.right{
-            float:right;
+            float: right;
+            text-align: right;
+          }
+        }
+        span{
+          display: block;
+
+          &.sp1{
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: @color_333;
+          }
+          &.sp2{
+            font-size: 14px;
+            color: @color_888;
+          }
+          em.orange{
+            color: @color_orange;
           }
         }
       }

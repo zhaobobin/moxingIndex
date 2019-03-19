@@ -12,6 +12,8 @@ import { PullToRefresh, ListView } from 'antd-mobile';
 import { difference } from '~/utils/utils'
 import styles from './CusListView.less'
 
+const _ = require('lodash');
+
 //空状态
 const emptyData = [
   {
@@ -30,22 +32,25 @@ export default class CusListView extends React.Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
+    this.ajaxFlag = true;
     this.state = {
       dataSource,
       refreshing: false,
-      isLoading: true,
-      height: document.documentElement.clientHeight,
+      isLoading: false,
+      height: document.documentElement.clientHeight - 46,
       defaultBodyScroll: false,
 
-      pageNun: 1,
+      queryParams: '',
+      pageNum: 1,
       pageSize: 10,
-      list: [],                     //数据列表
+      dataList: [],                         //记录用数组
+      renderList: [],                       //渲染用数组
       hasMore: true,
     };
   }
 
   componentDidMount() {
-    this.initList();
+    this.initList(this.props.queryParams);
     if (this.state.useBodyScroll) {
       document.body.style.overflow = 'auto';
     } else {
@@ -55,9 +60,9 @@ export default class CusListView extends React.Component {
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   componentWillReceiveProps(nextProps) {
-    let diff = difference(nextProps.queryParams, this.props.queryParams);
-    //console.log(JSON.stringify(diff))
-    if(JSON.stringify(diff) !== "{}") this.initList();
+    if(JSON.stringify(nextProps.queryParams) !== JSON.stringify(this.props.queryParams)) {
+      this.initList(nextProps.queryParams);
+    }
   }
 
   //依据列表长度，生成key数组
@@ -71,43 +76,93 @@ export default class CusListView extends React.Component {
     return dataArr;
   };
 
+  //遍历数据列表
+  forDataList = ({action, sortBy, resList}) => {
+
+    //let {dataList, renderList} = this.state;
+
+    let dataList = [], renderList = [];
+
+    if(action === 'loadMore'){
+      dataList = this.state.dataList.concat(resList);
+    }else{
+      dataList = resList;
+    }
+
+    //排序
+    if(sortBy){
+      let arr = [];
+      for(let i in dataList){
+        dataList[i][sortBy + '2'] = dataList[i][sortBy].split(' ')[0];
+        arr.push(dataList[i]);
+      }
+      let obj = _.groupBy(arr, sortBy + '2');
+      for(let i in obj){
+        renderList.push({label: i, list: obj[i]})
+      }
+    }else{
+      renderList = dataList;
+    }
+
+    //console.log(renderList)
+    return {dataList, renderList}
+  };
+
   //查询列表
-  queryList = (action) => {
-    let {api, queryParams, listViewProps: {pageSize}} = this.props;
+  queryList = (action, queryParams) => {
+
+    if(!this.ajaxFlag) return;
+    this.ajaxFlag = false;
+
+    let {api, listViewProps} = this.props;
+    let { sortBy, pageSize } = listViewProps;
     this.props.dispatch({
       type: 'global/post',
       url: api,
-      payload: queryParams,
+      payload: {
+        ...queryParams,
+        pageNum: this.state.pageNum,
+        pageSize: pageSize || this.state.pageSize,
+      },
       callback: (res) => {
+        setTimeout(() => {this.ajaxFlag = true}, 500);
         if(res.code === 0){
 
           this.props.callback(res.data);
 
-          let {list, pageNum, hasMore} = this.state;
+          let {dataList, renderList, hasMore, pageNum} = this.state;
+          //是否有数据
           if(res.data.list && res.data.list.length > 0){
+
+            let forDataRes = this.forDataList({
+              action,
+              sortBy,
+              resList: res.data.list,
+            });
+            dataList = forDataRes.dataList;
+            renderList = forDataRes.renderList;
+            pageNum = pageNum + 1;
             hasMore = res.data.list.length === pageSize;
-            if(action === 'loadMore'){
-              list = this.state.list.concat(res.data.list);
-              pageNum = this.state.hasMore + 1 ;
-            }else{
-              list = res.data.list;
-              pageNum = 1;
-              this.lv.scrollTo(0, 0);       //滚动到顶部
-            }
+
           }else{
+            dataList = emptyData;
+            renderList = emptyData;
+            pageNum = 1;
             hasMore = false;
-            list = emptyData;
           }
 
+          this.rData = this.getData(renderList.length);
+
           setTimeout(() => {
-            this.rData = this.getData(list.length);
             this.setState({
               refreshing: false,
               isLoading: false,
               dataSource: this.state.dataSource.cloneWithRows(this.rData),
-              list: list,
-              pageNun: pageNum,
-              hasMore: hasMore
+              dataList: dataList,
+              renderList: renderList,
+              hasMore: hasMore,
+              pageNum: pageNum,
+              queryParams: queryParams,
             })
           }, 500)
 
@@ -117,33 +172,43 @@ export default class CusListView extends React.Component {
   };
 
   //初始化列表
-  initList = () => {
-    this.queryList('init');
+  initList = (queryParams) => {
+    this.lv.scrollTo(0, 0);       //滚动到顶部
+    this.setState({ isLoading: true, hasMore: true, pageNum: 1 });
+    setTimeout(() => {
+      this.queryList('init', queryParams);
+    }, 500)
   };
 
   //刷新列表
   refreshList = () => {
-    this.setState({ refreshing: true });
-    this.queryList('reFresh');
+    this.lv.scrollTo(0, 0);       //滚动到顶部
+    this.setState({ refreshing: true, hasMore: true, pageNum: 1 });
+    setTimeout(() => {
+      this.queryList('reFresh', this.state.queryParams);
+    }, 500)
   };
 
   //查询更多
   queryMoreList = () => {
     if (this.state.isLoading || !this.state.hasMore) return;
     this.setState({ isLoading: true });
-    this.queryList('loadMore');
+    setTimeout(() => {
+      this.queryList('loadMore', this.state.queryParams);
+    }, 500)
   };
 
   render() {
 
     const {pageSize, renderHeader, useBodyScroll, renderItem} = this.props.listViewProps;
-    const {isLoading, defaultBodyScroll, height, dataSource, list, refreshing} = this.state;
 
-    let index = list.length - 1;
+    const {isLoading, defaultBodyScroll, height, dataSource, renderList, refreshing} = this.state;
+
+    let index = renderList.length - 1;
     const renderRow = (rowData, sectionID, rowID) => {
       //console.log(index)
-      if (index < 0) index = list.length - 1;
-      const item = list[index--];
+      if (index < 0) index = renderList.length - 1;
+      const item = renderList[index--];
       return renderItem(item, rowID);
     };
 

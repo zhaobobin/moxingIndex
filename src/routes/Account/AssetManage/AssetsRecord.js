@@ -49,36 +49,33 @@ export default class AssetsRecord extends React.Component {
     return(
       <div className={styles.record}>
 
-        <div className={styles.head}>
-          <Tabs
-            tabs={tabs}
-            prerenderingSiblingsNumber={false}
-            onTabClick={(tab, index) => this.setState({cashType: tab.value})}
-          >
-            {
-              tabs.map((item, index) => (
-                <div key={index} />
-              ))
-            }
-          </Tabs>
-        </div>
-
-        <div className={styles.body}>
-          <CusListView
-            api="/api/userAccountInfo/findUserTradeRecordsPC"
-            queryParams={{
-              userId,                 //19010310321353
-              cashType
-            }}
-            listViewProps={{
-              pageSize: 10,
-              useBodyScroll: false,
-              renderHeader: false,
-              renderItem: (item, id) => <RecordItem item={item} id={id}/>
-            }}
-            callback={this.queryCallback}
-          />
-        </div>
+        <Tabs
+          tabs={tabs}
+          prerenderingSiblingsNumber={false}
+          onTabClick={(tab, index) => this.setState({cashType: tab.value})}
+        >
+          {
+            tabs.map((item, index) => (
+              <div key={index} >
+                <CusListView
+                  api="/api/userAccountInfo/findUserTradeRecordsPC"
+                  queryParams={{
+                    userId,                 //19010310321353
+                    cashType
+                  }}
+                  listViewProps={{
+                    sortBy: 'flowTime',
+                    pageSize: 10,
+                    useBodyScroll: false,
+                    renderHeader: false,
+                    renderItem: (item, id) => <RecordItem item={item} id={id}/>
+                  }}
+                  callback={this.queryCallback}
+                />
+              </div>
+            ))
+          }
+        </Tabs>
 
       </div>
     )

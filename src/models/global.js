@@ -224,7 +224,7 @@ export default {
 
         Storage.remove(ENV.storageAccessToken);               //删除token
         Storage.remove(ENV.storageRefreshToken);              //删除token
-        Toast.info(res.message, 2);
+        Toast.info(res.message || '请求错误', 2);
         yield put({
           type: 'changeLoginStatus',
           payload: {
@@ -240,7 +240,7 @@ export default {
       }else{
         yield callback(res);
         if(res.code === -1){
-          Toast.info(res.message, 2);
+          Toast.info(res.message || '请求错误', 2);
           //yield put(routerRedux.push({ pathname: '/page500' }));
         }
       }
