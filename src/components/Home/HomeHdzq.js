@@ -8,13 +8,14 @@ export default class HomeHdzq extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI']
+      list: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+      height: document.documentElement.clientWidth * 0.38,
     }
   }
 
   render() {
 
-    const { list } = this.state;
+    const { list, height } = this.state;
 
     return (
       <div className={styles.list}>
@@ -26,12 +27,13 @@ export default class HomeHdzq extends React.Component {
         >
           {
             list.map((val, index) => (
-              <Link
-                to="/"
-                key={index}
-                className={styles.link}
-              >
-                <img src={`https://zos.alipayobjects.com/rmsportal/${val}.png`} alt="bg" />
+              <Link key={index} to="/">
+                <img
+                  src={`https://zos.alipayobjects.com/rmsportal/${val}.png`}
+                  width="100%"
+                  height={height}
+                  alt="bg"
+                />
               </Link>
             ))
           }

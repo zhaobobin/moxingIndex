@@ -12,8 +12,8 @@ export default class RenderPdf extends React.Component{
     super(props);
     this.state = {
       loading: true,
-      page: 0,
-      pages: 0,
+      page: 1,
+      pages: 1,
     };
   }
 
@@ -76,7 +76,7 @@ export default class RenderPdf extends React.Component{
             null
         }
         <Pdf
-          file={url}
+          file={'https://metuwang.oss-cn-qingdao.aliyuncs.com/20190319014528015-yvafx5jezzzd.pdf'}
           onDocumentComplete={this.onDocumentComplete}
           page={page}
         />
