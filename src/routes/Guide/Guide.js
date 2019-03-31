@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default class AccountTotal extends React.Component{
+export default class Guide extends React.Component{
 
   render(){
     return(
       <div>
-        AccountTotal
+        Guide
       </div>
     )
   }

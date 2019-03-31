@@ -1,0 +1,49 @@
+@import '../../theme/index.less';
+
+.menu{
+
+  padding: 20px 0;
+  background:#fff;
+
+  a{
+    color: @color_333;
+    text-decoration: none;
+
+    &:hover{
+      color: @color_orange
+    }
+    &.active{
+      color: @color_orange
+    }
+  }
+
+  .menuOuter {
+    p{
+      margin: 0;
+
+      a{
+        display: block;
+        padding-left:48px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 30px 0;
+        border-right:2px solid #fff;
+
+        &:hover{
+          color: #F18925;
+        }
+        &.active{
+          color: #F18925;
+          border-right:2px solid #F18925;
+        }
+      }
+    }
+
+  }
+
+
+}
+
+

@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { getNavData } from '~/common/nav';
 import { getPlainNode } from '~/utils/utils';
 
-import NotFound from "~/routes/Other/404";
+import NotFound from "~/routes/Other/page404";
 
 function getRouteData(navData, path) {
   if (!navData.some(item => item.layout === path) ||

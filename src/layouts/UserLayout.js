@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'dva/router';
 import DocumentTitle from 'react-document-title';
-import NotFound from "~/routes/Other/404";
+import NotFound from "~/routes/Other/page404";
 import { ENV, getUrlParams } from '~/utils/utils';
 
 import styles from './UserLayout.less'

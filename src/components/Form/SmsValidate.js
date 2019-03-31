@@ -238,14 +238,7 @@ export default class SmsValidate extends React.Component {
           >
             <span className={sendNum > 0 ? styles.showYuyin : null}>{btnText}</span>
           </a>
-          {
-            sendNum > 0 ?
-              <span className={styles.yuyin} onClick={() => this.queryPintu('yuyin')}>
-                <i/>
-              </span>
-              :
-              null
-          }
+
         </div>
       </div>
     )

@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
 import { ENV, Storage, getUrlParams } from '~/utils/utils';
 import DocumentTitle from 'react-document-title';
-import NotFound from "~/routes/Other/404";
+import NotFound from "~/routes/Other/page404";
 
 import styles from './BaseLayout.less'
 import Loading from '~/components/Common/Loading';
@@ -114,12 +114,7 @@ export default class BaseLayout extends React.Component {
     const layout = (
       <div className={styles.layout}>
 
-        {
-          paramsObj.platform === 'app' ?
-            null
-            :
-            <GlobalHeader/>
-        }
+        <GlobalHeader/>
 
         {
           loading ?

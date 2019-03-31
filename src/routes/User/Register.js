@@ -8,12 +8,9 @@ import {
   checkPhone, isPhone, checkPsdLevel,
   Encrypt, getUrlParams, yaoqingDecrypt, filterTel
 } from "~/utils/utils";
-import styles from './QucikRegister.less';
+import styles from './Register.less';
 import GlobalFooter from '~/components/Common/GlobalFooter';
 
-//import logo from '~/assets/com/logo.png'
-//import sign_banner1 from '~/assets/sign/fast_login_banner1@2x.jpg'
-import sign_banner2 from '~/assets/sign/fast_login_banner2@2x.jpg'
 import SmsValidate from '~/components/Form/SmsValidate'
 
 const FormItem = Form.Item;
@@ -321,10 +318,6 @@ export default class QucikRegister extends React.Component {
         {/*<h1>注册去投网</h1>*/}
         {/*</div>*/}
 
-        <div className={styles.banner}>
-          <img src={sign_banner2} alt=""/>
-        </div>
-
         <div className={styles.formBox + " " + styles.register}>
 
           <Form
@@ -524,38 +517,6 @@ export default class QucikRegister extends React.Component {
 
           </Form>
         </div>
-
-        <dl className={styles.signDesc}>
-          <dt>为什么选择去投网</dt>
-          <dd>
-            <ul>
-              <li>
-                <p>
-                  <img src={require('~/assets/sign/home_icon1@2x.png')} alt=""/>
-                  <span>廊坊银行资金存管</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <img src={require('~/assets/sign/home_icon2@2x.png')} alt=""/>
-                  <span>合规运营 真实透明</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <img src={require('~/assets/sign/home_icon3@2x.png')} alt=""/>
-                  <span>多重审核 风控闭环</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <img src={require('~/assets/sign/home_icon4@2x.png')} alt=""/>
-                  <span>三级备案 数据加密</span>
-                </p>
-              </li>
-            </ul>
-          </dd>
-        </dl>
 
         <GlobalFooter/>
 

@@ -28,24 +28,6 @@ const UserRoutes = app => [
         component: dynamicWrapper(app, [], () => import('../routes/User/Register')),
       },
       {
-        name: '快速注册',
-        key: 'quick-register',
-        path: 'user/quick-register',
-        component: dynamicWrapper(app, [], () => import('../routes/User/QucikRegister')),
-      },
-      {
-        name: '用户注册-成功',
-        key: 'register-result',
-        path: 'user/register-result',
-        component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
-      },
-      {
-        name: '用户注册协议',
-        key: 'register-xieyi',
-        path: 'user/register-xieyi',
-        component: dynamicWrapper(app, [], () => import('../routes/Other/Xieyi')),
-      },
-      {
         name: '忘记密码',
         key: 'reset',
         path: 'user/reset/:step',

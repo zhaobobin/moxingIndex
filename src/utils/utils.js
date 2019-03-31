@@ -8,57 +8,40 @@ const _ = require('lodash');
  */
 export const ENV = {
 
-  host: {
-    test: 'http://192.168.1.77:88',
-    pro: 'https://m.qutouwang.com',
-  },
-
-  apiName: 'qtw-invest-api',                                      //生产项目接口名称
-
   api: {
-    auto: 'http://192.168.1.64:85/qtw-invest-api',                              //自动化
-    test: 'http://192.168.1.77:88/qtw-invest-api',                              //自动化
-    dev:  'https://m.qutouwang.com/qtw-invest-api',                              //准生产  出借号：18610313202，借款人：18610313201，企业：13406660018 / abc123456
-    pro:  'https://m.qutouwang.com/qtw-invest-api',                              //生产
-
-    api3: 'http://192.168.55.70:8080',                              //张欢ip
-    api4: 'http://192.168.55.13:8080',                              //朱旭ip
-    api5: 'http://192.168.55.20:8080',                              //国强ip
+    dev: 'http://192.168.1.64:85/',                              //开发
+    pro: 'http://192.168.1.77:88/',                              //生产
   },
 
   appname: '去投网',
-  hometitle: '【去投网】P2P出借- 中国领先的互联网借贷P2P平台',
-  keywords: '去投网，p2p网贷平台，出借服务平台,网上出借,p2p出借,普惠金融, 智慧金融,出借者平台,个人出借,互联网出借,出借,投资出借网,网络出借,企业贷款,足值抵押平台,p2p网贷平台,互联网金融,科技金融,放心出借,短期借款产品,互联网金融服务，云计算。',
-  description: '去投网（www.qutouwang.com）- 中国领先互联网金融P2P借贷平台，通过云计算、监管系统、人工智能、大数据、安全系统等各种手段谋求风控安全最大化。为出借用户和借款用户提供公平、透明、安全、高效的网上出借、小额借款、短期借款、个人借款、无抵押借款等互联网金融服务。（1分钟快速注册，100元即可轻松加入去投网）。',
-  author: '去投网(www.qutouwang.com)',
-  verification: 'dXQb0UUYe3',
+  hometitle: '趣族',
+  keywords: '趣族',
+  description: '趣族',
 
-  company: '北京恒远鑫达投资管理有限公司',
-  address: '北京市朝阳区亮马桥路甲40号1幢4层401内B02A室',
+  company: '趣族',
+  address: '趣族',
   youbian: '100105',
-  hotline: '400-181-0588',
-  email: 'qtwinfo@chinacfsc.com',
-  worktime: '9:00-17:30',
+  hotline: '',
+  email: '',
+  worktime: '',
 
-  oldUrl: 'https://hyxd.qutouwang.com/',
-  siteUrl: 'https://www.qutouwang.com/',
-  web: 'www.qutouwang.com',
-  slogan: '爱投，就去投',
-  weixin: '去投网（QTW-DYH）',
-  icp: '京ICP证 京B2-20160180',
-  beian: '京ICP备14014223号-2',
-  copyright: '©2015-2018 去投网 All rights reserved',
+  web: 'www.moxinga.com',
+  slogan: '',
+  weixin: '',
+  icp: '',
+  beian: '',
+  copyright: '',
 
-  storageAccessToken: 'qtw-access-token',
-  storageRefreshToken: 'qtw-refresh-token',
-  storageUserId: 'qtw-userid',
-  storageCurrentUser: 'qtw-currentCurrentUser',
-  storageLastTel: 'qtw-lastTel',
-  storageRemenber: 'qtw-remenber',
-  storageTheme: 'qtw-theme',
-  storageCurrentMenu: 'qtw-currentMenu',
-  storagePagesize: 'qtw-pagesize',
-  storageHistory: 'qtw-history',          //路由历史
+  storageAccessToken: 'qz-access-token',
+  storageRefreshToken: 'qz-refresh-token',
+  storageUserId: 'qz-userid',
+  storageCurrentUser: 'qz-currentCurrentUser',
+  storageLastTel: 'qz-lastTel',
+  storageRemenber: 'qz-remenber',
+  storageTheme: 'qz-theme',
+  storageCurrentMenu: 'qz-currentMenu',
+  storagePagesize: 'qz-pagesize',
+  storageHistory: 'qz-history',          //路由历史
 };
 
 /**
