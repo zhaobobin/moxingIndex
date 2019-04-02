@@ -24,7 +24,7 @@ export default function request(url, options) {
   //打包正式接口
   let api = url;
   if(process.env.NODE_ENV === 'production'){
-    api = ENV.api.dev + url;
+    api = ENV.api.pro + url;
   }
 
   let newOptions = {
@@ -36,8 +36,7 @@ export default function request(url, options) {
 
     let newOptionsHeaders = {
       Accept: 'application/json',
-      'platform': 'h5',
-      'accessToken': Storage.get(ENV.storageAccessToken) || null,
+      //'accessToken': Storage.get(ENV.storageAccessToken) || null,
       ...newOptions.headers,
     };
 

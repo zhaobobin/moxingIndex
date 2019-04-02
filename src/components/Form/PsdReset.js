@@ -16,7 +16,7 @@ import SmsValidate from '~/components/Form/SmsValidate'
 
 const FormItem = Form.Item;
 //const keys = ['mobile', 'pintu', 'smscode', 'password', 'rpassword'];
-const btnStyle = {display: 'block', width: '100%', height: '40px', lineHeight: '38px', margin: '0 auto'};
+const btnStyle = {display: 'block', width: '100%', height: '50px', lineHeight: '48px', margin: '0 auto'};
 
 const steps = [
   {

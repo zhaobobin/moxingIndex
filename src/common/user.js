@@ -22,12 +22,6 @@ const UserRoutes = app => [
         component: dynamicWrapper(app, [], () => import('../routes/User/Login')),
       },
       {
-        name: '用户注册',
-        key: 'register',
-        path: 'user/register',
-        component: dynamicWrapper(app, [], () => import('../routes/User/Register')),
-      },
-      {
         name: '忘记密码',
         key: 'reset',
         path: 'user/reset/:step',

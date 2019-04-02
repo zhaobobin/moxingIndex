@@ -6,7 +6,7 @@ import { Modal } from 'antd';
 import CountDown from '~/components/Common/Number/CountDown';
 import styles from './Dialog.less'
 
-const modal_width = '750px';
+const modal_width = '500px';
 
 const modal_options = {
   width: modal_width,
@@ -16,7 +16,6 @@ const modal_options = {
 
 export function Alert(opt){
   Modal.info({
-    ...modal_options,
     maskClosable: true,
     title: (
       <p className={styles.dialogTitle}>{opt.title}</p>

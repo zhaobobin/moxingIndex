@@ -9,11 +9,11 @@ const _ = require('lodash');
 export const ENV = {
 
   api: {
-    dev: 'http://192.168.1.64:85/',                              //开发
-    pro: 'http://192.168.1.77:88/',                              //生产
+    dev: 'http://47.94.100.232/',                              //开发
+    pro: 'http://47.94.100.232/',                              //生产
   },
 
-  appname: '去投网',
+  appname: '趣族',
   hometitle: '趣族',
   keywords: '趣族',
   description: '趣族',

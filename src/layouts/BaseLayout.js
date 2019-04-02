@@ -3,12 +3,13 @@ import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
 import { ENV, Storage, getUrlParams } from '~/utils/utils';
 import DocumentTitle from 'react-document-title';
-import NotFound from "~/routes/Other/page404";
-
 import styles from './BaseLayout.less'
+
+import NotFound from "~/routes/Other/page404";
 import Loading from '~/components/Common/Loading';
 import GlobalHeader from '~/components/Common/GlobalHeader';
 import GlobalContent from '~/components/Common/GlobalContent';
+import GlobalFooter from '~/components/Common/GlobalFooter';
 
 const paramsObj = getUrlParams() || '';
 
@@ -108,13 +109,18 @@ export default class BaseLayout extends React.Component {
 
   render(){
 
-    const { getRouteData } = this.props;
+    const { getRouteData, navData, location } = this.props;
     const { loading } = this.props.global;
 
     const layout = (
       <div className={styles.layout}>
 
-        <GlobalHeader/>
+        {
+          paramsObj.platform === 'app' || location.pathname === '/' ?
+            null
+            :
+            <GlobalHeader navData={navData[0].children}/>
+        }
 
         {
           loading ?
@@ -122,7 +128,7 @@ export default class BaseLayout extends React.Component {
             :
             <div
               className={styles.content}
-              style={paramsObj.platform === 'app' ? null : {paddingTop: '46px'}}
+              style={paramsObj.platform === 'app' ? null : {paddingTop: '60px'}}
             >
               <GlobalContent>
 
@@ -145,6 +151,13 @@ export default class BaseLayout extends React.Component {
 
               </GlobalContent>
             </div>
+        }
+
+        {
+          location.pathname === '/' ?
+            null
+            :
+            <GlobalFooter/>
         }
 
       </div>

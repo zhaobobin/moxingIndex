@@ -4,13 +4,14 @@
  * globalCompositeOperation： 'destination-over' 兼容Edge、IE
  * IE浏览器下，阻止跨域图片的渲染。drawImage
  */
-import styles from './PintuValidate.less';
+import styles from './Pintu.less';
 
-const screenWidth = document.body.clientWidth - 30;
+let errorNum = 0;       //拼图错误次数
+
 const l = 42, // 滑块边长
   r = 9, // 滑块半径
-  w = screenWidth, // canvas宽度
-  h = screenWidth / 2, // canvas高度
+  w = 320, // canvas宽度
+  h = 160, // canvas高度
   PI = Math.PI;
 const L = l + r * 2 + 3; // 滑块实际边长
 
@@ -54,7 +55,7 @@ function removeClass(tag, className) {
 }
 
 function getRandomImg() {
-  //let url = 'https://picsum.photos/300/150/?image=' + getRandomNumberByRange(0, 1084);
+  //let url = 'https://picsum.photos/300/160/?image=' + getRandomNumberByRange(0, 1084);
   let num = randNum(0, 50);
   return require('~/assets/pintu/pintu' + num + '.jpeg');
 }
@@ -130,6 +131,7 @@ if (!("classList" in document.documentElement)) {
 
 //拼图类
 class jigsaw {
+
   constructor({el, onSuccess, onFail, onRefresh}) {
     el.style.position = el.style.position || 'relative';
     this.el = el;
@@ -154,7 +156,8 @@ class jigsaw {
     const sliderIcon = createElement('span');
     const text = createElement('span');
 
-    block.className = styles.block;
+    canvas.className = styles.pintuCanvas;
+    block.className = styles.pintuBlock;
     sliderContainer.className = styles.sliderContainer;
     refreshIcon.className = styles.refreshIcon;
     sliderMask.className = styles.sliderMask;
@@ -213,12 +216,79 @@ class jigsaw {
   bindEvents() {
 
     this.el.onselectstart = () => false;
+
     this.refreshIcon.onclick = () => {
+      typeof this.onRefresh === 'function' && this.onRefresh();
       this.reset();
-      typeof this.onRefresh === 'function' && this.onRefresh()
+    };
+
+    this.sliderContainer.children[1].onclick = () => {
+      if(errorNum < 6) return;
+      errorNum = 0;
+      this.reset();
     };
 
     let originX, originY, trail = [], isMouseDown = false, blockCanMove = true;
+
+    // pc
+    this.slider.addEventListener('mousedown', function (e) {
+      if(!blockCanMove) return;
+      originX = e.x;
+      originY = e.y;
+      isMouseDown = true
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return false;
+      const moveX = e.x - originX;
+      const moveY = e.y - originY;
+
+      if (moveX < 0 || moveX + 38 >= w) return false;
+      this.slider.style.left = moveX + 'px';
+      let blockLeft = (w - 40 - 20) / (w - 40) * moveX;
+      this.block.style.left = blockLeft + 'px';
+
+      addClass(this.sliderContainer, styles.sliderContainer_active);
+      this.sliderMask.style.width = moveX + 'px';
+      trail.push(moveY)
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (!isMouseDown) return false;
+      isMouseDown = false;
+      if (e.x === originX) return false;
+      removeClass(this.sliderContainer, styles.sliderContainer_active);
+      this.trail = trail;
+      const {spliced, verified} = this.verify();
+      if (spliced) {
+        if (verified) {
+          blockCanMove = false;
+          addClass(this.sliderContainer, styles.sliderContainer_success);
+          this.refreshIcon.className = '';
+          typeof this.onSuccess === 'function' && this.onSuccess()
+        } else {
+          addClass(this.sliderContainer, styles.sliderContainer_fail);
+          this.text.innerHTML = '再试一次';
+          this.reset()
+        }
+      } else {
+        errorNum += 1;
+        if(errorNum < 6){
+          addClass(this.sliderContainer, styles.sliderContainer_fail);
+          typeof this.onFail === 'function' && this.onFail();
+          setTimeout(() => {
+            this.reset()
+          }, 1000);
+        }else{
+          addClass(this.sliderContainer, styles.sliderContainer_refresh);
+          typeof this.onRefresh === 'function' && this.onRefresh();
+          this.sliderContainer.children[1].innerHTML = "<i></i> 失败过多，点此重试";
+        }
+      }
+    });
+    // pc end!
+
+    // mobile
     this.slider.addEventListener('touchstart', function (e) {
       if(!blockCanMove) return;
       originX = e.targetTouches[0].clientX;
@@ -267,6 +337,8 @@ class jigsaw {
         }, 1000)
       }
     })
+    // mobile end!
+
   }
 
   verify() {

@@ -1,8 +1,8 @@
 export default {
-  "primary-color": "#F18925",                         // 全局主色
-  "processing-color": "#F18925",                      // 处理主色
-  "link-color": "#F18925",                            // 链接色
-  "success-color": "#F18925",                         // 成功色
+  "primary-color": "#FFBB00",                         // 全局主色
+  "processing-color": "#FFBB00",                      // 处理主色
+  "link-color": "#FFBB00",                            // 链接色
+  "success-color": "#FFBB00",                         // 成功色
   "warning-color": "#FC514F",                         // 警告色
   "error-color": "#FC514F",                           // 错误色
 

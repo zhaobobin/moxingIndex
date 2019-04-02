@@ -28,9 +28,6 @@ export  default {
     "title": ENV.hometitle,
     "keywords": ENV.keywords,
     "description": ENV.description,
-    "author": ENV.author,
-    "verification": ENV.verification,
-    "hotline": ENV.hotline,
   },
   "lessLoaderOptions": {
     "javascriptEnabled": true,
@@ -48,9 +45,9 @@ export  default {
   },
   "proxy": {
     "/api": {
-      "target": ENV.api.test,
+      "target": ENV.api.dev,
       "changeOrigin": true,
-      //"pathRewrite": { "^/api" : "" }
+      "pathRewrite": { "^/api" : "" }
     }
   }
 }

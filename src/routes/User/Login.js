@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Link, routerRedux } from 'dva/router';
+import { NavLink, Link, routerRedux } from 'dva/router';
 import { Toast } from 'antd-mobile';
 import { Form, Input, Button, Icon, Checkbox, Radio } from 'antd'
 import {
@@ -8,40 +8,51 @@ import {
   checkPhone, isPhone, checkPsdLevel,
   Encrypt, getUrlParams, yaoqingDecrypt, filterTel
 } from "~/utils/utils";
-import styles from './Login.less'
+import styles from './Login.less';
 
-import PintuValidate from '~/components/Form/PintuValidate'
+import {Confirm} from '~/components/Dialog/Dialog'
+import InputPassword from '~/components/Form/InputPassword'
+import InputSmscode from '~/components/Form/InputSmscode'
 
 const FormItem = Form.Item;
-const keys1 = ['account', 'password', 'pintu'];
-const keys2 = ['account', 'password'];
 
 @connect(state => ({
   global: state.global,
 }))
 @Form.create()
-export default class Login extends React.Component {
+export default class QucikRegister extends React.Component {
 
   constructor(props){
     super(props);
     this.ajaxFlag = true;
+    this.phoneFlag = true;
     this.state = {
       loading: false,
-      lastTel: Storage.get(ENV.storageRemenber) && Storage.get(ENV.storageLastTel, 432000) ? Storage.get(ENV.storageLastTel, 432000) : '',          //保存的手机号5天过期
-      remember: Storage.get(ENV.storageRemenber) !== null ? Storage.get(ENV.storageRemenber) : true,
-      psdType: 'password',
+      loginType: 'sms',
       captcha: '',
-      pintuNo: new Date().getTime(),
-      errorNum: 0,         //登录错误次数
+      tel: '',
+      isRegister: false,    //手机号已注册
+      prevMobile: '',      //上一次校验的手机号
+
+      xieyiChecked: true,
+      smscodeSended: false,       //短信验证码是否已发送
     }
   }
 
   //监控手机号输入
   onChangeMobile = (rule, value, callback) => {
     value = value.replace(/\D/g,'');
-    this.props.form.setFieldsValue({'account': value});
+    this.props.form.setFieldsValue({'tel': value});
     if(checkPhone(value)){
-      callback()
+      //是手机号，并且不等于上次校验的手机号时，才执行接口校验
+      if(isPhone(value) && value !== this.state.prevMobile){
+        this.checkPhone(value, (res) => {
+          if(!res) return;
+          callback(res);
+        })
+      }else{
+        callback();
+      }
     }else{
       callback('请输入正确的手机号码')
     }
@@ -51,19 +62,9 @@ export default class Login extends React.Component {
   mobileOnBlur = (e) => {
     let value = e.target.value;
     if(value){
-      if(isPhone(value)){
-        this.checkPhone(value, (res) => {
-          if(!res) return;
-          this.props.form.setFields({
-            'account': {
-              value: value,
-              errors: [new Error(res)]
-            }
-          })
-        })
-      }else{
+      if(!isPhone(value)){
         this.props.form.setFields({
-          'account': {
+          'tel': {
             value: value,
             errors: [new Error('请输入正确的手机号码')]
           }
@@ -71,61 +72,91 @@ export default class Login extends React.Component {
       }
     }else{
       this.props.form.setFields({
-        'account': {
+        'tel': {
           value: value,
           errors: [new Error('请输入手机号码')]
         }
       })
     }
-
   };
 
   //检查手机号是否注册
-  checkPhone(mobile, cb){
+  checkPhone(tel, cb){
 
     if(!this.phoneFlag) return;
     this.phoneFlag = false;
 
+    let {isRegister} = this.state;
+
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/userRegister/checkPhone',
+      url: '/api/user/is_repeat',
       payload:{
-        mobile: mobile
+        tel,
       },
       callback: (res) => {
 
         if(!res) return;
-        if(res.code === 21010){       //未注册
-          cb('此手机号未注册')
-        }else{
-          //Storage.set(ENV.storageLastTel, mobile);      //已注册过的手机号，保存到本地存储
+        if(res.code === '0'){           // 0代表未注册
+          isRegister = false;
+          cb()
+        }
+        else{
+          isRegister = true;
+          Storage.set(ENV.storageLastTel, tel);      //已注册过的手机号，保存到本地存储
           cb();
         }
+        this.setState({
+          isRegister,
+          prevMobile: tel
+        });
 
       }
     });
 
     setTimeout(() => { this.phoneFlag = true }, 500);
+
   }
 
-  //切换密码框显示
-  changePsdType = () => {
-    let {psdType} = this.state;
-    this.setState({
-      psdType: psdType === 'password' ? 'text' : 'password',
-    })
+  //密码
+  passwordCallback = (value) => {
+    this.props.form.setFieldsValue({'password': value});
+    this.props.form.validateFields(['password'], (err, values) => {});
   };
 
-  //记住登录账号
-  rememberChange = (e) => {
-    let checked = e.target.checked,
-      mobile = this.props.form.getFieldValue('account');
-    Storage.set(ENV.storageRemenber, checked);
-    if(checked){
-      Storage.set(ENV.storageLastTel, mobile);
-    }else{
-      Storage.remove(ENV.storageLastTel);
+  //短信验证码回调
+  smscodeCallback = (value) => {
+    //清空错误提示
+    if(value === 'clearError'){
+      this.props.form.setFields({
+        'smscode': {
+          value: '',
+          errors: ''
+        }
+      });
+      this.setState({smscodeSended: true});
     }
+    else if(value === 'telError'){
+      this.props.form.setFields({
+        'tel': {
+          value: '',
+          errors: [new Error('请输入手机号')]
+        }
+      });
+      this.setState({smscodeSended: true});
+    }
+    else{
+      this.props.form.setFieldsValue({'smscode': value});
+      this.props.form.validateFields(['smscode'], (err, values) => {});
+    }
+  };
+
+  //协议勾选
+  xieyiChecked = () => {
+    let xieyiChecked = !this.state.xieyiChecked;
+    this.setState({
+      xieyiChecked
+    })
   };
 
   //清空输入框
@@ -133,15 +164,25 @@ export default class Login extends React.Component {
     this.props.form.resetFields([key]);
   };
 
-  //表单确定
+  //切换登录方式
+  changeLoginType = () => {
+    const {loginType} = this.state;
+    this.setState({
+      loginType: loginType === 'psd' ? 'sms' : 'psd'
+    })
+  };
+
+  //表单确认
   handleFormSubmit = (e) => {
     e.preventDefault();
 
     if(!this.ajaxFlag) return;
     this.ajaxFlag = false;
 
-    const {errorNum} = this.state;
-    const keys = errorNum > 5 ? keys1 : keys2;
+    const {loginType} = this.state;
+
+    let keys = loginType === 'sms' ? ['tel', 'smscode'] : ['tel', 'pwd'];
+
     this.props.form.validateFields(keys, (err, values) => {
       if (!err) {
         this.login(values);
@@ -150,79 +191,60 @@ export default class Login extends React.Component {
     setTimeout(() => { this.ajaxFlag = true }, 500);
   };
 
-  //登录提交
+  // 登录
   login = (values) => {
-
-    this.setState({loading: true});
-
+    const {loginType} = this.state;
+    let type, payload;
+    if(loginType === 'sms'){
+      type = 'global/login_sms';
+      payload = {
+        tel: values.tel,
+        verity: values.smscode
+      }
+    }else{
+      type = 'global/login_psd';
+      payload = {
+        tel: values.tel,
+        pwd: values.pwd,
+      }
+    }
     this.props.dispatch({
-      type: 'global/login',
-      payload:{
-        account: values.account,
-        password: Encrypt(values.account, values.password),
-        platform: 'pc',
-      },
+      type: type,
+      payload: payload,
       callback: (res) => {
-        this.setState({loading: false});
-        if(res.code === 0){
-          Storage.set(ENV.storageLastTel, values.account);      //手机号保存到本地存储
-          if(res.data.cusType === '1'){
-            this.back();
-          }else{
-            this.props.dispatch(routerRedux.push('/account/total'))
-          }
+        if(res.code === '0'){
+          Storage.set(ENV.storageLastTel, values.tel);      //手机号保存到本地存储;
+          this.props.dispatch(routerRedux.push('/account'))
         }else{
-          //登录失败，重置表单和拼图
-          Storage.remove(ENV.storageLastTel);
-          this.props.form.resetFields(['password', 'pintu']);
-          this.setState({pintuNo: new Date().getTime(), errorNum: this.state.errorNum + 1});
-          Toast.info(res.message);
+          Toast.info(res.msg, 2);
         }
       }
     })
   };
 
-  //拼图回调
-  pintuResult = (value) => {
-    this.props.form.setFieldsValue({'pintu': value});
-  };
+  register = () => {
 
-  //登录成功后跳转，借款端登录后跳转至账户总览
-  direct = (cusType) => {
-    //出借端登录后跳转至首页，其他到账户总览
-    if(cusType === '1'){
-      this.props.dispatch(routerRedux.push('/'))
-    }else{
-      this.props.dispatch(routerRedux.push('/account'));
-    }
-  };
-
-  //后退
-  back = () => {
-    let routerHistory = Storage.get(ENV.storageHistory);
-    if(routerHistory){
-      this.props.dispatch(routerRedux.push(routerHistory[routerHistory.length - 1]));
-    }else{
-      this.props.dispatch(routerRedux.push('/'));
-    }
   };
 
   render(){
 
-    const { lastTel, psdType, pintuNo, loading, errorNum } = this.state;
+    const {loading, loginType, isRegister} = this.state;
     const { getFieldDecorator, getFieldValue, getFieldsError } = this.props.form;
-    const keys = errorNum > 5 ? keys1 : keys2;
+
+    const winWidth = window.innerWidth - 30;
 
     return(
-      <div className={styles.login}>
+      <div className={styles.container}>
 
-        <Form
-          onSubmit={this.handleFormSubmit}
-        >
-          <FormItem>
-            {getFieldDecorator('account',
-              {
-                initialValue: lastTel,
+
+        <div className={styles.formBox + " " + styles.login}>
+
+          <Form
+            onSubmit={this.handleFormSubmit}
+          >
+
+            <FormItem>
+              {getFieldDecorator('tel', {
                 validateFirst: true,
                 rules: [
                   { required: true, message: '请输入手机号码' },
@@ -230,113 +252,92 @@ export default class Login extends React.Component {
                   //{ pattern: /^1[0-9]{10}$/, message: '请输入正确的手机号' },
                 ],
               })(
-              <Input
-                autoFocus
-                size="large"
-                maxLength="11"
-                autoComplete="off"
-                placeholder="请输入手机号码"
-                onBlur={this.mobileOnBlur}
-                suffix={
-                  getFieldValue('account') ?
-                    <Icon
-                      type="close-circle"
-                      className={styles.clearInput}
-                      onClick={ () => {
-                        lastTel ?
-                          this.setState({lastTel: ''})
-                          :
-                          this.emitEmpty('account')
-                      } }
-                    />
-                    :
-                    null
-                }
-              />
-            )}
-          </FormItem>
-
-          <FormItem>
-            {getFieldDecorator('password', {
-              validateFirst: true,
-              rules: [
-                { required: true, message: '请输入登录密码' },
-                //{ pattern: /^[A-Za-z0-9_]+$/, message: '不能输入敏感字符，只能输入下划线' },
-                { min: 6, message: '密码长度只能在6-16位字符之间' },
-                { max: 16, message: '密码长度只能在6-16位字符之间' },
-              ],
-            })(
-              <Input
-                type={psdType}
-                autoComplete="off"
-                maxLength="30"
-                // onFocus={() => this.changePsdType('text')}
-                // onBlur={() => this.changePsdType('password')}
-                placeholder="请输入登录密码"
-                suffix={
-                  <span className={styles.suffix}>
-                      {
-                        getFieldValue('password') ?
-                          <Icon
-                            type="close-circle"
-                            className={styles.clearInput}
-                            onClick={() => this.emitEmpty('password')}
-                          />
-                          :
-                          null
-                      }
-                    <em className={styles.inputEye}>
-                      <i
-                        className={psdType === 'password' ? styles.close : styles.open}
-                        onClick={this.changePsdType}
+                <Input
+                  size="large"
+                  maxLength="11"
+                  autoComplete="off"
+                  placeholder="请输入手机号码"
+                  onBlur={this.mobileOnBlur}
+                  suffix={
+                    getFieldValue('tel') ?
+                      <Icon
+                        type="close-circle"
+                        className={styles.clearInput}
+                        onClick={() => this.emitEmpty('tel')}
                       />
-                    </em>
-                  </span>
+                      :
+                      null
+                  }
+                />
+              )}
+            </FormItem>
+
+            {
+              loginType === 'psd' ?
+                <FormItem>
+                  {getFieldDecorator('pwd', {
+                    validateTrigger: 'onBlur',
+                    rules: [
+                      { required: true, message: '请输入密码' },
+                      { min: 6, message: '密码长度只能在6-20位字符之间' },
+                      { max: 20, message: '密码长度只能在6-20位字符之间' },
+                    ],
+                  })(
+                    <InputPassword psdLevelStyle={{width: '365px'}} callback={this.passwordCallback}/>
+                  )}
+                </FormItem>
+                :
+                <FormItem>
+                  {getFieldDecorator('smscode', {
+                    validateFirst: true,
+                    rules: [
+                      { required: true, message: '请输入短信验证码' },
+                      { pattern: /^[0-9]{4}$/, message: '短信验证码错误' },
+                    ],
+                  })(
+                    <InputSmscode
+                      tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
+                      api={'/api/user/get_code'}
+                      isrepeat={isRegister ? '3' : '1'}       // 1是注册, 2找回密码, 3验证码登录
+                      callback={this.smscodeCallback}
+                    />
+                  )}
+                </FormItem>
+            }
+
+            <div>
+
+              <p className={styles.xieyi}>
+                <span>注册即表示已阅读并同意</span>
+                <Link to="/guide">《用户注册协议》</Link>
+              </p>
+
+              <Button
+                loading={loading}
+                type="primary"
+                htmlType="submit"
+                className={styles.btn}
+                style={{width: '100%', height: '50px', lineHeight: '48px'}}
+                disabled={
+                  hasErrors(getFieldsError()) ||
+                  !getFieldValue('tel') ||
+                  !getFieldValue('smscode')
                 }
-              />
-            )}
-          </FormItem>
+              >
+                登录 / 注册
+              </Button>
 
-          {
-            errorNum > 5 ?
-              <FormItem style={{marginBottom: '10px'}}>
-                {getFieldDecorator('pintu', {
-                  rules: [
-                    { required: true, message: '请完成拼图' },
-                  ],
-                })(
-                  <PintuValidate no={pintuNo} callback={this.pintuResult}/>
-                )}
-              </FormItem>
-              :
-              null
-          }
+              <p className={styles.desc}>
+                <Link to="/user/reset">忘记密码</Link>
+                <a onClick={this.changeLoginType} className={styles.loginType}>
+                  {loginType === 'psd' ? '快捷登录' : '密码登录'}
+                </a>
+              </p>
 
+            </div>
 
-          <div>
-            <p className={styles.desc}>！完成登录后，将为您开启免登录功能</p>
-            <Button
-              loading={loading}
-              type="primary"
-              htmlType="submit"
-              className={styles.submit}
-              style={{width: '100%', height: '50px', lineHeight: '48px'}}
-              disabled={
-                hasErrors(getFieldsError(keys)) ||
-                !getFieldValue('account') ||
-                !getFieldValue('password') ||
-                errorNum > 5 ? !getFieldValue('pintu') : null
-              }
-            >
-              授权登录
-            </Button>
-            <p className={styles.btns}>
-              <Link className={styles.forgotPsd} to="/user/reset/index">忘记密码？</Link>
-              <Link className={styles.register} to="/user/register">注册</Link>
-            </p>
-          </div>
-
-        </Form>
+          </Form>
+        </div>
 
       </div>
     )

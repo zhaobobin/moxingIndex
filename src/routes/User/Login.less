@@ -2,7 +2,107 @@
 
 .login{
 
-  padding: 10px 15px;
+  .banner{
+    display:block;
+    margin-bottom:5px;
+    img{
+      width:100%;
+      height:auto;
+    }
+  }
+
+  .header{
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    height: 48px;
+    border-bottom: 1px solid #E5E5E5;
+    position:relative;
+
+    img{
+      display:inline-block;
+      width:auto;
+      height:20px;
+      float:left;
+      margin-right:40px;
+    }
+
+    h1{
+      float:left;
+      margin:0;
+      text-align:center;
+      font-size:18px;
+      font-weight:normal;
+      line-height:20px;
+    }
+  }
+
+  .result{
+    padding: 15% 30px 10px;
+    text-align: center;
+    img{
+      width:100%;
+      height:auto;
+    }
+    p{
+      color:#BDBDBD
+    }
+  }
+
+  .download{
+    margin-bottom:30px;
+    padding: 15px;
+    text-align:center;
+
+    .link{
+      display:inline-block;
+      margin-bottom:30px;
+      width:160px;
+      height:40px;
+      line-height:38px;
+      color:#0D2F55;
+      border:1px solid #0D2F55;
+      border-radius:3px;
+
+    }
+
+    span{
+      color: @color_888;
+      margin: 0 2px;
+    }
+  }
+
+  .signDesc{
+    dt{
+      margin-bottom:20px;
+      text-align:center;
+      font-size:15px;
+    }
+    ul{
+      overflow:hidden;
+      li{
+        float:left;
+        width:50%;
+        margin-bottom:10px;
+        text-align:center;
+
+        img{
+          width:34px;
+          height:auto;
+        }
+        span{
+          display:block;
+          font-size:12px;
+          color:@color_888;
+        }
+      }
+    }
+  }
+
+}
+
+.formBox{
+
+  padding: 80px 15px;
 
   :global{
     .ant-form-item{
@@ -56,25 +156,29 @@
     }
   }
 
-  .desc{
-    margin-bottom: 30px;
-    color: @color_orange
+  .checked{
+    color: @color_888
+  }
+  .forgotPsd{
+    float: right;
+    color: @color_orange;
   }
 
-  .submit{
+  .btn{
     margin-top:20px;
   }
 
-  .btns{
-    margin-top: 30px;
-    overflow:hidden;
-    .forgotPsd{
-      float: left;
-      color: @color_blue;
+  .desc{
+    margin: 20px 5px;
+    overflow: hidden;
+    span{
+      color: @color_888;
     }
-    .register{
-      float: right;
-      color: @color_blue;
+    a{
+      color: @color_blue
+    }
+    .loginType{
+      float: right
     }
   }
 
@@ -100,16 +204,10 @@
 
   }
 
-  .clearInput {
-    cursor: pointer;
-    color: #ccc;
-    transition: color 0.3s;
-    font-size: 14px;
-    &:hover {
-      color: #999;
-    }
-    &:active {
-      color: #666;
+  .xieyi{
+    color:@color_888;
+    a{
+      color: @color_blue
     }
   }
 

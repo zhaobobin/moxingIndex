@@ -40,6 +40,28 @@ const BaseRoutes = app => [
         path: 'about',
         component: dynamicWrapper(app, [], () => import('../routes/About/About')),
       },
+      {
+        name: 'App下载',
+        key: 'download',
+        path: 'download',
+        isHide: true,
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Download')),
+      },
+
+      {
+        name: '活动专区',
+        key: 'hdzq',
+        path: 'hdzq',
+        isHide: true,
+        children: [
+          {
+            name: '幸运抽奖',
+            key: 'lucky',
+            path: 'lucky',
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Lucky')),
+          },
+        ]
+      },
 
       {
         name: '我的账户',
@@ -54,9 +76,22 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Account/Total/AccountTotal')),
           },
           {
+            name: '内容管理',
+            key: 'content',
+            path: 'content',
+            component: dynamicWrapper(app, [], () => import('../routes/Account/Content/ContentManage')),
+          },
+          {
+            name: '评论管理',
+            key: 'comment',
+            path: 'comment',
+            component: dynamicWrapper(app, [], () => import('../routes/Account/Comment/CommentManage')),
+          },
+          {
             name: '发布文章',
             key: 'publish-article',
             path: 'publish-article',
+            isHide: true,
             component: dynamicWrapper(app, [], () => import('../routes/Account/Publish/PublishArticle')),
           },
         ]

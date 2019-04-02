@@ -11,16 +11,16 @@ export default class PintuValidate extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      no: ''              //拼图初始化标志
+      no: '',              //拼图初始化标志
     }
   }
 
   componentDidMount(){
-    this.init();
+    this.init()
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.no !== this.props.no) {
+    if (this.props.no && nextProps.no !== this.props.no) {
       this.reset()
     }
   }
@@ -74,7 +74,7 @@ export default class PintuValidate extends React.Component {
 
   render(){
     return(
-      <div className="pintu" style={{margin: '0 15px'}}>
+      <div className="pintu" style={{width: '320px', margin: 'auto'}}>
         <div id="captcha"/>
       </div>
     )
