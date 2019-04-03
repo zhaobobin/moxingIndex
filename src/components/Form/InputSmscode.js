@@ -3,7 +3,8 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import { Row, Col, Input, Icon, Modal, notification } from 'antd';
+import { Row, Col, Input, Icon, notification } from 'antd';
+import { Modal, Toast } from 'antd-mobile'
 import {filterTel} from '~/utils/utils'
 import styles from './InputSmscode.less';
 
@@ -26,7 +27,7 @@ export default class InputSmscode extends React.Component {
       btnStyle: styles.null,
 
       pintuNo: new Date().getTime(),
-      pintuVisible: false,    //拼图
+      modalVisible: false,    //拼图
     }
   }
 
@@ -98,14 +99,9 @@ export default class InputSmscode extends React.Component {
         if (res.code === '0') {
           this.interval();                                      //执行倒计时
           this.props.callback('clearError');
-          notification.success({
-            message: '验证码发送成功',
-            description: `已将短信验证码发送到您${filterTel(tel)}的手机当中，请注意查收！`
-          });
+          Toast.info(`已将短信验证码发送到您${filterTel(tel)}的手机当中，请注意查收！`, 2);
         }else{
-          notification.error({
-            message: res.msg
-          });
+          Toast.info(res.msg, 2);
         }
       }
     });
@@ -135,17 +131,21 @@ export default class InputSmscode extends React.Component {
 
   modalCancel = () => {
     this.setState({
-      pintuVisible: false
+      modalVisible: false
     });
   };
 
   render(){
 
-    const {value, btnText, btnStyle, pintuNo, pintuVisible} = this.state;
+    const {value, btnText, btnStyle, pintuNo, modalVisible} = this.state;
+
+    const buttonStyle = this.props.buttonStyle || {height: '50px', lineHeight: '50px'};
+
+    const modalWidth = document.body.clientWidth < 750 ? '95%' : '360px';
 
     return(
       <Row gutter={10} className={styles.smscode}>
-        <Col span={16}>
+        <Col xs={14} sm={14} md={16} lg={16}>
           <Input
             size="large"
             maxLength="4"
@@ -165,9 +165,10 @@ export default class InputSmscode extends React.Component {
             }
           />
         </Col>
-        <Col span={8}>
+        <Col xs={10} sm={10} md={8} lg={8}>
           <span
             className={styles.btn + " " + btnStyle}
+            style={buttonStyle}
             onClick={this.submit}
           >
             {btnText}
@@ -176,13 +177,14 @@ export default class InputSmscode extends React.Component {
 
         <Col span={0}>
           <Modal
+            style={{width: modalWidth}}
             title="请先完成下方验证"
-            width={360}
-            footer={null}
-            centered={true}
-            destroyOnClose={true}
-            visible={pintuVisible}
-            onCancel={this.modalCancel}
+            footer={false}
+            closable={true}
+            maskClosable={false}
+            transparent={true}
+            visible={modalVisible}
+            onClose={this.modalCancel}
             className={styles.pintuModal}
           >
             <PintuValidate no={pintuNo} callback={this.pintuResult}/>

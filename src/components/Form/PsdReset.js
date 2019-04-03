@@ -12,7 +12,7 @@ import { hasErrors, checkPhone, isPhone, checkPsdLevel, Encrypt, filterTel } fro
 import styles from './PsdReset.less';
 
 import PintuValidate from '~/components/Form/PintuValidate'
-import SmsValidate from '~/components/Form/SmsValidate'
+import InputSmscode from '~/components/Form/InputSmscode'
 
 const FormItem = Form.Item;
 //const keys = ['mobile', 'pintu', 'smscode', 'password', 'rpassword'];
@@ -179,8 +179,8 @@ export default class Reset extends React.Component {
     this.props.form.setFieldsValue({'pintu': value});
   };
 
-  //获得短信验证码
-  getSmscode = (value) => {
+  //短信验证码回调
+  smscodeCallback = (value) => {
     //清空错误提示
     if(value === 'clearError'){
       this.props.form.setFields({
@@ -191,24 +191,18 @@ export default class Reset extends React.Component {
       });
       this.setState({smscodeSended: true});
     }
-    else if(value === 'yuyinSended'){
+    else if(value === 'telError'){
       this.props.form.setFields({
-        'smscode': {
+        'tel': {
           value: '',
-          errors: [new Error('语言验证码已发送，请保持手机畅通')]
+          errors: [new Error('请输入手机号')]
         }
       });
       this.setState({smscodeSended: true});
     }
     else{
       this.props.form.setFieldsValue({'smscode': value});
-      this.props.form.validateFields(['smscode'], (err, values) => {
-        if(!err){
-          this.setState({
-            smsCheckCode: values.smscode
-          })
-        }
-      });
+      this.props.form.validateFields(['smscode'], (err, values) => {});
     }
   };
 
@@ -442,12 +436,10 @@ export default class Reset extends React.Component {
                 { pattern: /^[0-9]{6}$/, message: '请输入正确的短信验证码' },
               ],
             })(
-              <SmsValidate
-                auto={true}
-                hasYuyin={false}
-                action="reset"
-                mobile={mobile}
-                callback={this.getSmscode}
+              <InputSmscode
+                tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
+                api={'/api/user/get_code'}
+                callback={this.smscodeCallback}
               />
             )}
           </FormItem>

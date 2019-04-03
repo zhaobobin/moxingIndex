@@ -73,8 +73,9 @@ export default class PintuValidate extends React.Component {
   };
 
   render(){
+    const width = document.body.clientWidth > 320 ? '320px' : '100%';
     return(
-      <div className="pintu" style={{width: '320px', margin: 'auto'}}>
+      <div className="pintu" style={{width: width, margin: 'auto', padding: '5px 0', overflow: 'hidden'}}>
         <div id="captcha"/>
       </div>
     )

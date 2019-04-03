@@ -116,7 +116,7 @@ export default class BaseLayout extends React.Component {
       <div className={styles.layout}>
 
         {
-          paramsObj.platform === 'app' || location.pathname === '/' ?
+          paramsObj.platform === 'app' ?
             null
             :
             <GlobalHeader navData={navData[0].children}/>

@@ -42,6 +42,7 @@ export const ENV = {
   storageCurrentMenu: 'qz-currentMenu',
   storagePagesize: 'qz-pagesize',
   storageHistory: 'qz-history',          //路由历史
+  storageLucky: 'qz-lucky',               // 抽奖记录
 };
 
 /**

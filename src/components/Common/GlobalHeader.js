@@ -5,7 +5,6 @@ import styles from './GlobalHeader.less'
 
 import logo from '~/assets/com/logo.png'
 import GlobalHeaderMenu from '~/components/Common/GlobalHeaderMenu'
-import GlobalHeaderMenuDrop from '~/components/Common/GlobalHeaderMenuDrop'
 
 export default function GlobalHeader ({navData}) {
 
@@ -27,12 +26,7 @@ export default function GlobalHeader ({navData}) {
             </div>
 
             <div className={styles.menu}>
-              <Col xs={0} sm={0} md={0} lg={24}>
-                <GlobalHeaderMenu navData={navData}/>
-              </Col>
-              <Col xs={24} sm={24} md={24} lg={0}>
-                <GlobalHeaderMenuDrop navData={navData}/>
-              </Col>
+              <GlobalHeaderMenu navData={navData}/>
             </div>
 
           </div>

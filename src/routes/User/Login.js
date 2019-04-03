@@ -239,9 +239,7 @@ export default class QucikRegister extends React.Component {
 
         <div className={styles.formBox + " " + styles.login}>
 
-          <Form
-            onSubmit={this.handleFormSubmit}
-          >
+          <Form onSubmit={this.handleFormSubmit}>
 
             <FormItem>
               {getFieldDecorator('tel', {

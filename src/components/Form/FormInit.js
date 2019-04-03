@@ -18,7 +18,7 @@ import { Form, Input, InputNumber, Button, Row, Col, Select, DatePicker, Modal, 
 import { hasErrors, checkPsdLevel } from "~/utils/utils";
 import styles from './FormInit.less';
 
-import SmsValidate from './SmsValidate'
+import InputSmscode from '~/components/Form/InputSmscode'
 //import CitySelect from './CitySelect'
 
 import locale from 'antd/lib/date-picker/locale/zh_CN';
@@ -341,10 +341,8 @@ export default class FormInit extends PureComponent {
           {form.getFieldDecorator(topic.key, {
             rules: topic.rules ? topic.rules : undefined
           })(
-            <SmsValidate
-              boxStyle={topic.boxStyle}
-              action={topic.action}
-              mobile={topic.mobile ? topic.mobile : hasErrors(form.getFieldsError([topic.telKey])) ? '' : form.getFieldValue(topic.telKey)}
+            <InputSmscode
+              tel={topic.tel ? topic.tel : hasErrors(form.getFieldsError([topic.telKey])) ? '' : form.getFieldValue(topic.telKey)}
               api={topic.api}
               callback={(value) => {
                 this.props.form.setFieldsValue({[topic.key]: value});
