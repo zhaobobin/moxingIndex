@@ -76,6 +76,12 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Account/Total/AccountTotal')),
           },
           {
+            name: '发布文章',
+            key: 'publish',
+            path: 'publish',
+            component: dynamicWrapper(app, [], () => import('../routes/Account/Publish/ArticleAdd')),
+          },
+          {
             name: '内容管理',
             key: 'content',
             path: 'content',
@@ -86,13 +92,6 @@ const BaseRoutes = app => [
             key: 'comment',
             path: 'comment',
             component: dynamicWrapper(app, [], () => import('../routes/Account/Comment/CommentManage')),
-          },
-          {
-            name: '发布文章',
-            key: 'publish-article',
-            path: 'publish-article',
-            isHide: true,
-            component: dynamicWrapper(app, [], () => import('../routes/Account/Publish/PublishArticle')),
           },
         ]
       },

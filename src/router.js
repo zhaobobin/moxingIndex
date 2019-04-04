@@ -6,6 +6,9 @@ import { getPlainNode } from '~/utils/utils';
 
 import NotFound from "~/routes/Other/page404";
 
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+
 function getRouteData(navData, path) {
   if (!navData.some(item => item.layout === path) ||
     !(navData.filter(item => item.layout === path)[0].children)) {
@@ -45,12 +48,14 @@ export default function RouterConfig({ history, app }) {
   };
 
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
-        <Route path="/" render={props => <BaseLayout {...props} {...passProps} />} />
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
+    <LocaleProvider locale={zh_CN}>
+      <Router history={history}>
+        <Switch>
+          <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
+          <Route path="/" render={props => <BaseLayout {...props} {...passProps} />} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </LocaleProvider>
 );
 }
