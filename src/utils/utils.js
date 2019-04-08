@@ -9,8 +9,8 @@ const _ = require('lodash');
 export const ENV = {
 
   api: {
-    dev: 'http://47.94.100.232/',                              //开发
-    pro: 'http://47.94.100.232/',                              //生产
+    dev: 'http://47.94.100.232',                              //开发
+    pro: 'http://47.94.100.232',                              //生产
   },
 
   appname: '趣族',
@@ -220,6 +220,21 @@ export function getUrlParams() {
     obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
   }
   return obj;
+}
+
+/**
+ * IOS
+ */
+export function setupWebViewJavascriptBridge(callback) {
+  if (window.WebViewJavascriptBridge) { return callback(window.WebViewJavascriptBridge); }
+  if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+  window.WVJBCallbacks = [callback];
+  let WVJBIframe = document.createElement('iframe');
+  WVJBIframe.style.display = 'none';
+  WVJBIframe.src = 'https://__bridge_loaded__';
+  // WVJBIframe.src = ‘wvjbscheme://__BRIDGE_LOADED__’;
+  document.documentElement.appendChild(WVJBIframe);
+  setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
 }
 
 /*************************** 表单工具函数 ***************************/

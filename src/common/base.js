@@ -60,6 +60,24 @@ const BaseRoutes = app => [
             path: 'lucky',
             component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Lucky')),
           },
+          {
+            name: '活动详情',
+            key: 'activity-detail',
+            path: 'activity-detail/:id',
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/ActivityDetail')),
+          },
+          {
+            name: '展会详情',
+            key: 'exhibition-detail',
+            path: 'exhibition-detail/:id',
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/ExhibitionDetail')),
+          },
+          {
+            name: '抽奖详情',
+            key: 'prize-detail',
+            path: 'prize-detail/:id',
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/PrizeDetail')),
+          },
         ]
       },
 

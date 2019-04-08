@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Link } from 'dva/router'
 import { Form, Button } from 'antd'
 import { Modal, Toast } from 'antd-mobile';
-import { ENV, Storage, hasErrors } from "~/utils/utils";
+import { ENV, Storage, hasErrors, setupWebViewJavascriptBridge } from "~/utils/utils";
 import styles from './Lucky.less'
 
 import InputMobile from '~/components/Form/InputMobile'
@@ -110,6 +110,26 @@ export default class Lucky extends React.Component {
     });
   };
 
+  // 分享交互
+  share = () => {
+    let action = 'share_lucky';
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //判断是否是 android终端
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
+
+    if (isiOS) {
+      setupWebViewJavascriptBridge( (bridge) => {
+        bridge.callHandler('h5Action', action, (response) => {
+        });
+      });
+    }
+    else if(isAndroid){
+      window.app.h5Action(action);      //与原生交互
+    }else{
+      return ''
+    }
+  };
+
   render() {
 
     const { luckyCount, modalVisible } = this.state;
@@ -172,7 +192,7 @@ export default class Lucky extends React.Component {
                     })(
                       <InputSmscode
                         api={'/api/user/get_code'}
-                        isrepeat={'3'}
+                        isrepeat={'5'}
                         tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
                         callback={this.smscodeCallback}
                         buttonStyle={{height: '40px', lineHeight: '40px', background: '#fff', color: '#333'}}
@@ -242,7 +262,7 @@ export default class Lucky extends React.Component {
               <Button><Link to="/download">下载APP立即使用</Link></Button>
             </p>
             <p>
-              <Button type="primary">分享优惠给朋友</Button>
+              <Button type="primary" onClick={this.share}>分享优惠给朋友</Button>
             </p>
           </div>
         </Modal>

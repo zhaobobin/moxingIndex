@@ -29,7 +29,7 @@ export default class Ueditor extends React.Component {
     const { content } = this.props;
     if(!content) return;
     let html = content.replace('↵', '');
-    html = '<div>' + html + '</div>';
+    // html = '<div>' + html + '</div>';
     const blocksFromHtml = htmlToDraft(html);
     const { contentBlocks, entityMap } = blocksFromHtml;
     const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);

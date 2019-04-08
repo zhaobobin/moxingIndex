@@ -22,15 +22,12 @@ export default class BaseLayout extends React.Component {
     const { isAuth } = this.props.global;
     //处理app调用h5
     if(paramsObj.platform === 'app'){
-      if(paramsObj.accessToken) Storage.set(ENV.storageAccessToken, paramsObj.accessToken);               //保存token
-      if(paramsObj.userId) Storage.set(ENV.storageUserId, paramsObj.userId);                         //保存userId
-      this.saveUserinfo(paramsObj)
+      this.validateToken(paramsObj.accessToken)
     }else{
       if(isAuth) return;                              //isAuth为true时不校验token
-      let refreshToken = Storage.get(ENV.storageRefreshToken),
-        userId = Storage.get(ENV.storageUserId);
+      let accessToken = Storage.get(ENV.storageAccessToken);
       setTimeout(() => {
-        this.validateToken(refreshToken, userId, paramsObj.platform);     //页面F5刷新时执行token验证
+        this.validateToken(accessToken);     //页面F5刷新时执行token验证
       }, 200);
     }
   }
@@ -44,25 +41,12 @@ export default class BaseLayout extends React.Component {
     }
   }
 
-  //保存用户信息 http://localhost:8001/demo?accessToken=c572cadb54a74357aec2f932d7285c76&refreshToken=18b9e1df769f48d0adf5d407456f8cb6&userId=18111457224731&platform=app
-  saveUserinfo = (paramsObj) => {
-    this.props.dispatch({
-      type: 'global/changeUserInfo',
-      payload: {
-        accessToken: paramsObj.accessToken,
-        userId: paramsObj.userId
-      },
-    })
-  };
-
   //验证token
-  validateToken = (refreshToken, userId, platform) => {
+  validateToken = (accessToken) => {
     this.props.dispatch({
       type: 'global/token',
       payload: {
-        refreshToken,
-        userId,
-        platform: platform || 'h5',
+        login_code: accessToken,
       },
       callback: (res) => {}
     })

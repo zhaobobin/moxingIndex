@@ -210,21 +210,15 @@ export default class ArticleForm extends React.Component {
 
     const columns = [
       {
+        title: '分类id',
+        dataIndex: 'id',
+        key: 'id',
+        align: 'center',
+      },
+      {
         title: '分类名称',
         dataIndex: 'name',
         key: 'name',
-      },
-      {
-        title: '分类介绍',
-        dataIndex: 'explain',
-        key: 'explain',
-        align: 'center',
-      },
-      {
-        title: '排序',
-        dataIndex: 'list_order',
-        key: 'list_order',
-        align: 'center',
       },
       {
         title: '状态',

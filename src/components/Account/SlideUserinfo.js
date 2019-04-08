@@ -20,9 +20,9 @@ export default function SlideUserinfo ({userInfo}) {
       <p className={styles.name}>
         <strong>{userInfo.nickname || userInfo.name}</strong>
       </p>
-      <p className={styles.tel}>
-        <strong>{userInfo.tel}</strong>
-      </p>
+      {/*<p className={styles.tel}>*/}
+        {/*<strong>{userInfo.tel}</strong>*/}
+      {/*</p>*/}
 
     </div>
   )

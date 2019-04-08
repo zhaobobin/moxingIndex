@@ -67,13 +67,14 @@ export default class InputSmscode extends React.Component {
       this.props.callback('telError');
       return;
     }
+
     if(this.state.btnStyle !== styles.actived) return;
 
     if(!this.ajaxFlag) return;
     this.ajaxFlag = false;
 
     this.setState({
-      pintuVisible: true
+      modalVisible: true
     });
 
     setTimeout(() => { this.ajaxFlag = true }, 500);
@@ -81,6 +82,7 @@ export default class InputSmscode extends React.Component {
 
   //拼图回调
   pintuResult = (value) => {
+    console.log(value)
     if(!value) return;
     this.sendSmsCode();
   };
@@ -88,6 +90,7 @@ export default class InputSmscode extends React.Component {
   //发送验证码
   sendSmsCode = () => {
     let {tel, api, isrepeat} = this.props;
+    console.log(isrepeat)
     this.props.dispatch({
       type: 'global/post',
       url: api,
@@ -110,7 +113,7 @@ export default class InputSmscode extends React.Component {
   //短信倒计时
   interval(){
     let num = 60;
-    this.setState({btnText: '重新发送(' + num + 's)', btnStyle: styles.disabled, pintuVisible: false});
+    this.setState({btnText: '重新发送(' + num + 's)', btnStyle: styles.disabled, modalVisible: false});
     timer = setInterval(() => {
       if(num === 1){
         this.ajaxFlag = true;

@@ -104,15 +104,15 @@ export default {
 
     *token({ payload, callback }, { call, put }) {
 
-      if(payload.refreshToken){
+      if(payload.login_code){
         const res = yield call(
-          (params) => {return request('/api/user/get_user_info', {method: 'POST', body: params})},
+          (params) => {return request('/api/user/get_code_user_info', {method: 'POST', body: params})},
           payload
         );
         yield callback(res);
 
         if(res.code === '0'){
-          Storage.set(ENV.storageAccessToken, res.data.login_code);               //保存token
+          //Storage.set(ENV.storageAccessToken, res.data.login_code);               //保存token
           Storage.set(ENV.storageUserId, res.data.uid);                          //保存userId
           yield put({
             type: 'changeLoginStatus',
@@ -182,13 +182,10 @@ export default {
         if(exp) Storage.set(url, res);
       }
 
+      yield callback(res);
+
       // 登录过期等
-      if(res.code === '0'){
-        yield callback(res);
-      }else{
-        Toast.info(res.msg || '请求错误', 2);
-        if(res.code === '9') yield put(routerRedux.push({ pathname: '/user/login' }));
-      }
+      if(res.code === '9') yield put(routerRedux.push({ pathname: '/user/login' }));
 
     },
 
@@ -232,27 +229,6 @@ export default {
         },
       };
     },
-    //开户信息
-    changeKaihuInfo(state, {payload}){
-      return {
-        ...state,
-        kaihuInfo: {
-          ...state.kaihuInfo,
-          ...payload
-        },
-      };
-    },
-    //修改账户信息
-    changeAccountInfo(state, {payload}){
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          userInfo: Object.assign(state.currentUser.userInfo, payload.userInfo),
-          assetInfo: payload.assetInfo
-        },
-      };
-    },
     //修改用户信息
     changeUserInfo(state, {payload}){
       return {
@@ -261,26 +237,6 @@ export default {
         currentUser: {
           ...state.currentUser,
           userInfo: Object.assign(state.currentUser.userInfo, payload)
-        },
-      };
-    },
-    //修改资产信息
-    changeAssetInfo(state, {payload}){
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          assetInfo: payload
-        },
-      };
-    },
-    //修改银行信息
-    changeBankInfo(state, {payload}){
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          bankInfo: payload
         },
       };
     },

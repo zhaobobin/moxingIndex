@@ -1,6 +1,6 @@
 const html = '<div class="container w">\n' +
   '    <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(23, 43, 77); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">\n' +
-  '      趣玩是最 in 最流行的模型爱好者交流社区，无论爱好技，或者爱好酱，都能在趣玩找到志同道合的朋友\n' +
+  '      趣族是最 in 最流行的模型爱好者交流社区，无论爱好技，或者爱好酱，都能在趣族找到志同道合的朋友\n' +
   '    </p>\n' +
   '    <p style="margin-top: 10px; margin-bottom: 0px; padding: 0px; color: rgb(23, 43, 77); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">\n' +
   '      <br/>\n' +
