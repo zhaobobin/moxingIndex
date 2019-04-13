@@ -68,7 +68,11 @@ export default function GlobalHeaderMenu({navData}) {
               width: '100px'
             }}
           >
-            <div className={styles.menuButton}/>
+            <div className={styles.menuButton}>
+              <Icon type="minus" />
+              <Icon type="minus" />
+              <Icon type="minus" />
+            </div>
           </Dropdown>
         </div>
       </Col>

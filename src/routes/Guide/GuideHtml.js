@@ -3,8 +3,7 @@ const html = '<div class="container w">\n' +
   '      <strong>特别提示</strong>\n' +
   '    </p>\n' +
   '    <p style="margin-top: 10px; margin-bottom: 0px; padding: 0px; color: rgb(23, 43, 77); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">\n' +
-  '      趣族' +
-  '&nbsp;在此特别提醒您（用户）在注册成为用户之前，请认真阅读本《用户服务协议》（以下简称“协议”），确保您充分理解本协议中各条款。请您审慎阅读并选择接受或不接受本协议。除非您接受本协议所有条款，否则您无权注册、登录或使用本协议所涉服务。您的注册、登录、使用等行为将视为对本协议的接受，并同意接受本协议各项条款的约束。\n' +
+  '      趣族在此特别提醒您（用户）在注册成为用户之前，请认真阅读本《用户服务协议》（以下简称“协议”），确保您充分理解本协议中各条款。请您审慎阅读并选择接受或不接受本协议。除非您接受本协议所有条款，否则您无权注册、登录或使用本协议所涉服务。您的注册、登录、使用等行为将视为对本协议的接受，并同意接受本协议各项条款的约束。\n' +
   '    </p>\n' +
   '    <p style="margin-top: 10px; margin-bottom: 0px; padding: 0px; color: rgb(23, 43, 77); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">\n' +
   '      本协议约定趣族' +

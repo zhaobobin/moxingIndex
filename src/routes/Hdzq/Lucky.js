@@ -3,13 +3,14 @@ import { connect } from 'dva';
 import { Link } from 'dva/router'
 import { Form, Button } from 'antd'
 import { Modal, Toast } from 'antd-mobile';
-import { ENV, Storage, hasErrors, setupWebViewJavascriptBridge } from "~/utils/utils";
+import { ENV, Storage, hasErrors, getUrlParams, setupWebViewJavascriptBridge } from "~/utils/utils";
 import styles from './Lucky.less'
 
 import InputMobile from '~/components/Form/InputMobile'
 import InputSmscode from '~/components/Form/InputSmscode'
 
 const FormItem = Form.Item;
+const paramsObj = getUrlParams() || '';
 
 @connect(state => ({
   global: state.global,
@@ -149,73 +150,80 @@ export default class Lucky extends React.Component {
           <img className={styles.bg} src={require('~/assets/hdzq/lucky/lucky_bg.jpg')} alt="bg"/>
 
           {
-            luckyCount ?
-              <div className={styles.download}>
-                <dl>
-                  <dt>恭喜您已获得</dt>
-                  <dd>
-                    <p className={styles.p1}>特等奖</p>
-                    <p className={styles.p2}>已放入180****3234 趣族账户</p>
-                  </dd>
-                </dl>
-                <p>
-                  <Link to="/download">下载APP立即使用</Link>
-                </p>
-                {/*<p>*/}
-                  {/*<a onClick={this.modalShow}>显示modal</a>*/}
-                {/*</p>*/}
-              </div>
+            paramsObj.platform === 'app' ?
+              null
               :
-              <div className={styles.form}>
+              <div>
+                {
+                  luckyCount ?
+                    <div className={styles.download}>
+                      <dl>
+                        <dt>恭喜您已获得</dt>
+                        <dd>
+                          <p className={styles.p1}>特等奖</p>
+                          <p className={styles.p2}>已放入180****3234 趣族账户</p>
+                        </dd>
+                      </dl>
+                      <p>
+                        <Link to="/download">下载APP立即使用</Link>
+                      </p>
+                      {/*<p>*/}
+                      {/*<a onClick={this.modalShow}>显示modal</a>*/}
+                      {/*</p>*/}
+                    </div>
+                    :
+                    <div className={styles.form}>
 
-                <Form onSubmit={this.handleFormSubmit}>
+                      <Form onSubmit={this.handleFormSubmit}>
 
-                  <FormItem>
-                    {getFieldDecorator('tel', {
-                      validateTrigger: 'onBlur',
-                      rules: [
-                        { required: true, message: '请输入手机号' },
-                        { pattern: /^1[0-9]{10}$/, message: '手机号输入有误' }
-                      ],
-                    })(
-                      <InputMobile callback={this.mobileCallback}/>
-                    )}
-                  </FormItem>
+                        <FormItem>
+                          {getFieldDecorator('tel', {
+                            validateTrigger: 'onBlur',
+                            rules: [
+                              { required: true, message: '请输入手机号' },
+                              { pattern: /^1[0-9]{10}$/, message: '手机号输入有误' }
+                            ],
+                          })(
+                            <InputMobile callback={this.mobileCallback}/>
+                          )}
+                        </FormItem>
 
-                  <FormItem>
-                    {getFieldDecorator('smscode', {
-                      validateTrigger: 'onBlur',
-                      rules: [
-                        { required: true, message: '请输入验证码' },
-                        { pattern: /^[0-9]{4}$/, message: '短信验证码错误' },
-                      ]
-                    })(
-                      <InputSmscode
-                        api={'/api/user/get_code'}
-                        isrepeat={'5'}
-                        tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
-                        callback={this.smscodeCallback}
-                        buttonStyle={{height: '40px', lineHeight: '40px', background: '#fff', color: '#333'}}
-                      />
-                    )}
-                  </FormItem>
+                        <FormItem>
+                          {getFieldDecorator('smscode', {
+                            validateTrigger: 'onBlur',
+                            rules: [
+                              { required: true, message: '请输入验证码' },
+                              { pattern: /^[0-9]{4}$/, message: '短信验证码错误' },
+                            ]
+                          })(
+                            <InputSmscode
+                              api={'/api/user/get_code'}
+                              isrepeat={'5'}
+                              tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
+                              callback={this.smscodeCallback}
+                              buttonStyle={{height: '40px', lineHeight: '40px', background: '#fff', color: '#333'}}
+                            />
+                          )}
+                        </FormItem>
 
-                  <Button
-                    size="large"
-                    type="primary"
-                    htmlType="submit"
-                    className={styles.btn}
-                    disabled={
-                      hasErrors(getFieldsError()) ||
-                      !getFieldValue('tel') ||
-                      !getFieldValue('smscode')
-                    }
-                  >
-                    立即抽奖
-                  </Button>
+                        <Button
+                          size="large"
+                          type="primary"
+                          htmlType="submit"
+                          className={styles.btn}
+                          disabled={
+                            hasErrors(getFieldsError()) ||
+                            !getFieldValue('tel') ||
+                            !getFieldValue('smscode')
+                          }
+                        >
+                          立即抽奖
+                        </Button>
 
-                </Form>
+                      </Form>
 
+                    </div>
+                }
               </div>
           }
 

@@ -6,7 +6,7 @@ export default function LoadingBg (props) {
     margin: 'auto',
     width: '100%',
     height: '100px',
-    background: `url(${require('~/assets/com/loading_bg.jpg')}) no-repeat center center #f8f9fb`,
+    background: `url(${require('~/assets/com/loading_bg.png')}) no-repeat center center #f8f9fb`,
     ...props.style,
   };
 

@@ -80,33 +80,19 @@
 .miniMenu{
   .menuButton{
     display: block;
+    margin-right: -10px;
+    padding: 12px 0;
+    width: 60px;
     height: 60px;
+    text-align: center;
     color: #000;
     cursor: pointer;
-    font-size: 14px;
-    text-transform: uppercase;
+    position: relative;
 
-    &::before{
-      content: '';
-      position: absolute;
-      top: 30px;
-      right: 20px;
-      display: block;
-      width: 15px;
-      height: 7px;
-      border-top: 2px solid #000000;
-      border-bottom: 2px solid #000000;
-    }
-
-    &::after{
-      content: '';
-      position: absolute;
-      top: 25px;
-      right: 20px;
-      display: block;
-      width: 15px;
-      height: 2px;
-      background: #000000;
+    i{
+      display:block;
+      height: 6px;
+      font-size: 24px;
     }
 
   }

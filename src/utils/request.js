@@ -40,26 +40,11 @@ export default function request(url, options) {
       ...newOptions.headers,
     };
 
-    //风险测评接口传输json格式
-    // console.log(url)
-    if(url === '/api/risk/saveRisk'){
-      newOptions.headers = {
-        'Content-Type': 'application/json; charset=utf-8',
-        ...newOptionsHeaders,
-      };
-      newOptions.body = JSON.stringify(newOptions.body);
-    }else{
-      newOptions.headers = {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        ...newOptionsHeaders,
-      };
-      let params = "";
-      for(let i in options.body){
-        params += i + "=" + options.body[i] + "&";
-      }
-      params = params.substring(0, params.length - 1);
-      newOptions.body = params;
-    }
+    newOptions.headers = {
+      'Content-Type': 'application/json; charset=utf-8',
+      ...newOptionsHeaders,
+    };
+    newOptions.body = JSON.stringify(newOptions.body);
 
   }
 
