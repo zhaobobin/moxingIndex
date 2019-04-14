@@ -82,7 +82,6 @@ export default class InputSmscode extends React.Component {
 
   //拼图回调
   pintuResult = (value) => {
-    console.log(value)
     if(!value) return;
     this.sendSmsCode();
   };
@@ -90,12 +89,12 @@ export default class InputSmscode extends React.Component {
   //发送验证码
   sendSmsCode = () => {
     let {tel, api, isrepeat} = this.props;
-    console.log(isrepeat)
+    // console.log(isrepeat)
     this.props.dispatch({
       type: 'global/post',
       url: api,
       payload: {
-        tel: tel,
+        tel: tel,     //15201441209
         isrepeat
       },
       callback: (res) => {

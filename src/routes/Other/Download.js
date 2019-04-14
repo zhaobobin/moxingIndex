@@ -115,6 +115,15 @@ export default class Download extends React.Component{
             null
         }
 
+        {
+          isWeixin === 'weixin' ?
+            null
+            :
+            <Link to="/user/login" className={styles.login}>登录</Link>
+        }
+
+        <img className={styles.bg} src={require('~/assets/download/download_bg.jpg')} alt="bg"/>
+
         <div className={styles.left}>
 
           <Link to="/">
@@ -134,6 +143,10 @@ export default class Download extends React.Component{
             </span>
           </p>
 
+        </div>
+
+        <div className={styles.text}>
+          <img src={require('~/assets/download/text.png')} alt="text"/>
         </div>
 
       </div>

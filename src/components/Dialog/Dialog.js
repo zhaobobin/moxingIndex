@@ -12,6 +12,7 @@ const modal_options = {
   width: modal_width,
   centered: true,
   destroyOnClose: true,
+  zIndex: 1000,
 };
 
 export function Alert(opt){

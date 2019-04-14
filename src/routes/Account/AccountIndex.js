@@ -96,7 +96,7 @@ export default class AccountIndex extends React.Component {
                     <AccountContent>
                       <Switch>
                         {
-                          isAuth ?
+                          !isAuth ?
                             <Redirect to="/user/login" />
                             :
                             Routes.children.map((item, index) => (

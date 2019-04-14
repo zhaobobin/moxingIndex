@@ -29,7 +29,7 @@ export const ENV = {
   slogan: '',
   weixin: '',
   icp: '',
-  beian: '',
+  beian: '京ICP备15018716号-2',
   copyright: '',
 
   storageAccessToken: 'qz-access-token',

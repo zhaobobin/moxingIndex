@@ -22,6 +22,9 @@ export default function Home() {
     <div className={styles.home}>
 
       <div className={styles.download}>
+
+        <Link to="/user/login" className={styles.login}>登录</Link>
+
         <img className={styles.bg} src={require('~/assets/home/home_bg.jpg')} alt="bg"/>
 
         <div className={styles.left}>

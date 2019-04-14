@@ -1,12 +1,33 @@
 .download{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 999;
-  background: url('../../assets/download/download_bg.jpg') no-repeat center center;
-  background-size: 100% 100%;
+  margin-top: -60px;
+  position: relative;
+
+  .bg{
+    width: 100%;
+    height: auto;
+  }
+
+  .login{
+    display:block;
+    width:82px;
+    height:38px;
+    line-height:36px;
+    text-align:center;
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,1);
+    color:#fff;
+    font-size:15px;
+    background:#FFBC00;
+    position:absolute;
+    top:25px;
+    right:10%;
+    z-index: 999;
+
+    &:hover{
+      color:#FFBC00;
+      background:#fff;
+    }
+  }
 
   .bg{
     width: 100%;
@@ -85,6 +106,16 @@
       z-index:0;
     }
 
+  }
+
+  .text{
+    position: absolute;
+    left: 25px;
+    bottom: 60px;
+    img{
+      width:156px;
+      height:auto;
+    }
   }
 
 }

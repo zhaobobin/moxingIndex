@@ -227,6 +227,10 @@ export default class Lucky extends React.Component {
               </div>
           }
 
+          <p style={{textAlign: 'center'}}>
+            <Button onClick={this.share}>分享给朋友</Button>
+          </p>
+
           <div className={styles.desc}>
             <dl>
               <dt><i/><strong>活动细则</strong></dt>

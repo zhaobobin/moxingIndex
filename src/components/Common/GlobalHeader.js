@@ -25,9 +25,14 @@ export default function GlobalHeader ({navData}) {
               </Link>
             </div>
 
-            <div className={styles.menu}>
-              <GlobalHeaderMenu navData={navData}/>
-            </div>
+            {
+              navData ?
+                <div className={styles.menu}>
+                  <GlobalHeaderMenu navData={navData}/>
+                </div>
+                :
+                null
+            }
 
           </div>
 
