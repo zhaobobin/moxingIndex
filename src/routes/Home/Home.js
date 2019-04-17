@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'dva/router'
+import { Link } from 'dva/router';
+import { ENV } from '~/utils/utils'
 import styles from './Home.less'
 
 import { Alert } from '~/components/Dialog/Dialog'
@@ -40,7 +41,7 @@ export default function Home() {
               </a>
             </span>
             <span>
-              <a className={styles.android} onClick={alert}>
+              <a className={styles.android} href={ENV.download.android}>
                 <img src={require('~/assets/home/btn_android.png')} alt="趣族android下载" />
               </a>
             </span>

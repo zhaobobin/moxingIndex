@@ -24,6 +24,7 @@ export default class Lucky extends React.Component {
     this.state = {
       luckyCount: Storage.get(ENV.storageLucky) || 0,     //抽奖次数
       modalVisible: false,
+      luckyResult: ''
     }
   }
 
@@ -75,7 +76,10 @@ export default class Lucky extends React.Component {
     if(!this.ajaxFlag) return;
     this.ajaxFlag = false;
 
-    this.props.form.validateFields('', (err, values) => {
+    let keys = '';
+    if(paramsObj.platform === 'h5') keys = ['tel', 'smscode'];
+
+    this.props.form.validateFields(keys, (err, values) => {
       if (!err) {
         this.submit(values);
       }
@@ -83,15 +87,32 @@ export default class Lucky extends React.Component {
     setTimeout(() => { this.ajaxFlag = true }, 500);
   };
 
-  submit = () => {
+  // 确定抽奖
+  submit = (values) => {
+
+    let data = {
+      id: paramsObj.id,
+      accessToken: paramsObj.accessToken || '',
+      inviteCode: paramsObj.inviteCode || '',
+      platform: paramsObj.platform || '',
+      tel: '',
+      verity: ''
+    };
+    if(values){
+      data.tel = values.tel;
+      data.verty = values.smscode;
+    }
+
     this.props.dispatch({
       type: 'global/post',
-      payload: {
-
-      },
+      url: '/api/details/draw',
+      payload: data,
       callback: (res) => {
         if(res.code === '0'){
-
+          this.setState({
+            luckyResult: res.data
+          });
+          this.modalShow();
         }else{
           Toast.info(res.msg, 2);
         }
@@ -133,10 +154,86 @@ export default class Lucky extends React.Component {
 
   render() {
 
-    const { luckyCount, modalVisible } = this.state;
+    const { luckyCount, modalVisible, luckyResult } = this.state;
     const { getFieldDecorator, getFieldValue, getFieldsError } = this.props.form;
 
     const modalWidth = document.body.clientWidth < 750 ? '95%' : '360px';
+
+    const h5LuckyForm = (
+      <div className={styles.form}>
+
+        <Form onSubmit={this.handleFormSubmit}>
+
+          {
+            paramsObj.platform === 'h5' ?
+              <FormItem>
+                {getFieldDecorator('tel', {
+                  validateTrigger: 'onBlur',
+                  rules: [
+                    { required: true, message: '请输入手机号' },
+                    { pattern: /^1[0-9]{10}$/, message: '手机号输入有误' }
+                  ],
+                })(
+                  <InputMobile callback={this.mobileCallback}/>
+                )}
+              </FormItem>
+              :
+              null
+          }
+
+          {
+            paramsObj.platform === 'h5' ?
+              <FormItem>
+                {getFieldDecorator('smscode', {
+                  validateTrigger: 'onBlur',
+                  rules: [
+                    { required: true, message: '请输入验证码' },
+                    { pattern: /^[0-9]{4}$/, message: '短信验证码错误' },
+                  ]
+                })(
+                  <InputSmscode
+                    api={'/api/user/get_code'}
+                    isrepeat={'5'}
+                    tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
+                    callback={this.smscodeCallback}
+                    buttonStyle={{height: '40px', lineHeight: '40px', background: '#fff', color: '#333'}}
+                  />
+                )}
+              </FormItem>
+              :
+              null
+          }
+
+          {
+            paramsObj.platform === 'h5' ?
+              <Button
+                size="large"
+                type="primary"
+                htmlType="submit"
+                className={styles.btn}
+                disabled={
+                  hasErrors(getFieldsError()) ||
+                  !getFieldValue('tel') ||
+                  !getFieldValue('smscode')
+                }
+              >
+                立即抽奖
+              </Button>
+              :
+              <Button
+                size="large"
+                type="primary"
+                htmlType="submit"
+                className={styles.btn}
+              >
+                立即抽奖
+              </Button>
+          }
+
+        </Form>
+
+      </div>
+    );
 
     return (
       <div className={styles.container}>
@@ -149,87 +246,32 @@ export default class Lucky extends React.Component {
         <div className={styles.content}>
           <img className={styles.bg} src={require('~/assets/hdzq/lucky/lucky_bg.jpg')} alt="bg"/>
 
-          {
-            paramsObj.platform === 'app' ?
-              null
-              :
-              <div>
-                {
-                  luckyCount ?
-                    <div className={styles.download}>
-                      <dl>
-                        <dt>恭喜您已获得</dt>
-                        <dd>
-                          <p className={styles.p1}>特等奖</p>
-                          <p className={styles.p2}>已放入180****3234 趣族账户</p>
-                        </dd>
-                      </dl>
-                      <p>
-                        <Link to="/download">下载APP立即使用</Link>
-                      </p>
-                      {/*<p>*/}
-                      {/*<a onClick={this.modalShow}>显示modal</a>*/}
-                      {/*</p>*/}
-                    </div>
-                    :
-                    <div className={styles.form}>
+          <div>
+            {
+              luckyCount ?
+                <div className={styles.download}>
+                  <dl>
+                    <dt>恭喜您已获得</dt>
+                    <dd>
+                      <p className={styles.p1}>特等奖</p>
+                      <p className={styles.p2}>已放入180****3234 趣族账户</p>
+                    </dd>
+                  </dl>
+                  <p>
+                    <Link to="/download">下载APP立即使用</Link>
+                  </p>
+                  {/*<p>*/}
+                  {/*<a onClick={this.modalShow}>显示modal</a>*/}
+                  {/*</p>*/}
+                </div>
+                :
+                h5LuckyForm
+            }
+          </div>
 
-                      <Form onSubmit={this.handleFormSubmit}>
-
-                        <FormItem>
-                          {getFieldDecorator('tel', {
-                            validateTrigger: 'onBlur',
-                            rules: [
-                              { required: true, message: '请输入手机号' },
-                              { pattern: /^1[0-9]{10}$/, message: '手机号输入有误' }
-                            ],
-                          })(
-                            <InputMobile callback={this.mobileCallback}/>
-                          )}
-                        </FormItem>
-
-                        <FormItem>
-                          {getFieldDecorator('smscode', {
-                            validateTrigger: 'onBlur',
-                            rules: [
-                              { required: true, message: '请输入验证码' },
-                              { pattern: /^[0-9]{4}$/, message: '短信验证码错误' },
-                            ]
-                          })(
-                            <InputSmscode
-                              api={'/api/user/get_code'}
-                              isrepeat={'5'}
-                              tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
-                              callback={this.smscodeCallback}
-                              buttonStyle={{height: '40px', lineHeight: '40px', background: '#fff', color: '#333'}}
-                            />
-                          )}
-                        </FormItem>
-
-                        <Button
-                          size="large"
-                          type="primary"
-                          htmlType="submit"
-                          className={styles.btn}
-                          disabled={
-                            hasErrors(getFieldsError()) ||
-                            !getFieldValue('tel') ||
-                            !getFieldValue('smscode')
-                          }
-                        >
-                          立即抽奖
-                        </Button>
-
-                      </Form>
-
-                    </div>
-                }
-              </div>
-          }
-
-          <p style={{textAlign: 'center'}}>
-            <Button onClick={this.share}>分享给朋友</Button>
-          </p>
+          {/*<p style={{textAlign: 'center'}}>*/}
+            {/*<Button onClick={this.share}>分享给朋友</Button>*/}
+          {/*</p>*/}
 
           <div className={styles.desc}>
             <dl>
@@ -256,7 +298,7 @@ export default class Lucky extends React.Component {
 
         <Modal
           style={{width: modalWidth}}
-          title="恭喜您已获得"
+          title={luckyResult.name === "未中奖" ? "感谢抽奖" : "恭喜您已获得"}
           footer={false}
           closable={true}
           maskClosable={false}
@@ -266,12 +308,22 @@ export default class Lucky extends React.Component {
           className={styles.luckyModal}
         >
           <div className={styles.con}>
-            <img src={require('~/assets/hdzq/lucky/modal_bg.png')} width="200" height="auto" alt="bg"/>
-            <p className={styles.p1}>特等奖</p>
-            <p className={styles.p2}>已放入180****3234 趣族账户</p>
+            <img className={styles.bg} src={require('~/assets/hdzq/lucky/modal_bg.png')} width="200" height="auto" alt="bg"/>
+            <p className={styles.p1}>{luckyResult.name}</p>
+            <p className={styles.p2}>
+              {
+                luckyResult.name === "未中奖" ?
+                  "手气还差一点点，下载app可再来一次！"
+                  :
+                  `已存入 ${luckyResult.tel}趣族账户`
+              }
+            </p>
             <p className={styles.hr}/>
-            <p>
-              <Button><Link to="/download">下载APP立即使用</Link></Button>
+            <p className={styles.download}>
+              <Link to="/download">
+                <span>下载APP立即使用</span>
+                <img className={styles.plus} src={require('~/assets/hdzq/lucky/plus.png')} alt="plus"/>
+              </Link>
             </p>
             <p>
               <Button type="primary" onClick={this.share}>分享优惠给朋友</Button>

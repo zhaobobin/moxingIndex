@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'dva/router'
 import { Toast } from 'antd-mobile'
+import { ENV } from '~/utils/utils'
 import styles from './Download.less'
 
 import { Alert } from '~/components/Dialog/Dialog'
@@ -137,7 +138,7 @@ export default class Download extends React.Component{
               </a>
             </span>
             <span>
-              <a className={styles.android} onClick={alert}>
+              <a className={styles.android} href={ENV.download.android}>
                 <img src={require('~/assets/home/btn_android.png')} alt="趣族android下载" />
               </a>
             </span>

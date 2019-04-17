@@ -10,7 +10,12 @@ export const ENV = {
 
   api: {
     dev: 'http://47.94.100.232',                              //开发
-    pro: 'http://47.94.100.232',                              //生产
+    pro: 'https://data.moxinga.com',                              //生产
+  },
+
+  download: {
+    android: 'http://moxingqun.oss-cn-beijing.aliyuncs.com/apk/quzuV1.2.4.apk',
+    ios: '',
   },
 
   appname: '趣族',
