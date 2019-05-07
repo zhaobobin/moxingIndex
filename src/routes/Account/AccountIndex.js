@@ -6,7 +6,7 @@ import { ENV, Storage } from '~/utils/utils';
 import styles from './AccountIndex.less'
 
 import NotFound from "~/routes/Other/page404";
-import LoadingBg from '~/components/Common/LoadingBg';
+import Loading from '~/components/Common/Loading';
 
 import SlideUserinfo from '~/components/Account/SlideUserinfo'
 import SlideMenu from '~/components/Account/SlideMenu'
@@ -75,7 +75,7 @@ export default class AccountIndex extends React.Component {
 
         {
           this.loading ?
-            <LoadingBg/>
+            <Loading/>
             :
             <Row>
 

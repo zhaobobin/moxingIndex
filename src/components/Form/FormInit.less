@@ -1,11 +1,17 @@
 .formInit{
 
-  .col{
-    height:64px;
-    :global(.ant-input-disabled){
+  :global{
+    .ant-row{
+      overflow: hidden;
+    }
+    .ant-input-disabled{
       background-color: transparent;
       cursor: default;
     }
+  }
+
+  .col{
+    height:64px;
   }
   .btnGroup{
     button{

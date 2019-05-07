@@ -6,7 +6,7 @@ import {
   Select, Switch, Checkbox, DatePicker, Radio, Modal, Message
 } from 'antd'
 import styles from './ArticleForm.less'
-
+import { flatten } from '~/utils/utils'
 //import UploadImage from '~/components/Form/UploadImage'
 import Ueditor from '~/components/Form/Ueditor'
 
@@ -65,6 +65,7 @@ export default class ArticleForm extends React.Component {
       currentCategoryIds: '',
       currentCategoryIdsBeifen: '',
       category: [],
+      category_arr: [],             // 分类 一维数组
       selectedRowKeys: [],
     }
   }
@@ -93,9 +94,12 @@ export default class ArticleForm extends React.Component {
       payload: {},
       callback: (res) => {
         if (res.code === '0') {
+          let category = res.data,
+            category_arr = flatten(category);
           this.setState({
             modalVisible: true,
-            category: res.data
+            category,
+            category_arr,
           })
         }
       }
@@ -129,12 +133,12 @@ export default class ArticleForm extends React.Component {
   };
 
   onSubmitCategory = () => {
-    const {currentCategoryIdsBeifen, category} = this.state;
+    const {currentCategoryIdsBeifen, category_arr} = this.state;
     let currentCategoryNames = [];
-    for(let i in category){
+    for(let i in category_arr){
       for(let j in currentCategoryIdsBeifen){
-        if(category[i].id === currentCategoryIdsBeifen[j]){
-          currentCategoryNames.push(category[i].name)
+        if(category_arr[i].id === currentCategoryIdsBeifen[j]){
+          currentCategoryNames.push(category_arr[i].name)
         }
       }
     }
@@ -177,9 +181,29 @@ export default class ArticleForm extends React.Component {
 
   //保存
   save = (values) => {
+    const { category_arr } = this.state;
     const {action, detail} = this.props;
     const api = action === 'add' ? '/api/portal/add_portal' : '/api/portal/edit_portal';
-    let data = values;
+
+    // get category_id
+    let category_id = [],
+      category = values.category.split(',');
+    for(let i in category_arr){
+      for(let j in category){
+        if(category_arr[i].name === category[j]){
+          category_id.push(category_arr[i].id)
+        }
+      }
+    }
+    category_id = category_id.join(',');
+
+    let data = {
+      uid: this.props.global.currentUser.userInfo.uid,
+      title: values.title,
+      content: values.content,
+      category_id: category_id.substring(0, category_id.length - 1),
+      type: '1'
+    };
     if (action === 'edit') {
       data.id = detail.id;
     }

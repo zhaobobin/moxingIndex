@@ -142,8 +142,8 @@ export default class ContentManage extends React.Component {
       },
       {
         title: '发布时间',
-        dataIndex: 'published_time',
-        key: 'published_time',
+        dataIndex: 'create_time',
+        key: 'create_time',
         align: 'center',
       },
       {
@@ -172,8 +172,8 @@ export default class ContentManage extends React.Component {
       },
       {
         title: '点赞',
-        dataIndex: 'like',
-        key: 'like',
+        dataIndex: 'digg_count',
+        key: 'digg_count',
         align: 'center',
       },
       {
@@ -228,7 +228,7 @@ export default class ContentManage extends React.Component {
             api: apiList,
             columns,
             queryParams: {
-              uid: ''
+              uid: currentUser.userInfo.id
             },
           }}
         />

@@ -60,7 +60,7 @@ export default class Ueditor extends React.Component {
           imageList.push(data.base64);
           _this.props.dispatch({
             type: 'global/post',
-            url: '/api/expert/upload',
+            url: '/api/oss/upload',
             payload: {
               type: '2',
               image: JSON.stringify(imageList),

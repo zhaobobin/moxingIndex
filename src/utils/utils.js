@@ -15,7 +15,7 @@ export const ENV = {
 
   download: {
     android: 'http://moxingqun.oss-cn-beijing.aliyuncs.com/apk/quzuV1.2.4.apk',
-    ios: '',
+    ios: 'https://www.pgyer.com/4KmZ',
   },
 
   appname: '趣族',
@@ -496,6 +496,15 @@ export function isArrVal(arr, value){
   return -1;      //不存在
 }
 
+/**
+ * 多维数组转一维数组
+ * var arr2 = flatten(arr1); // arr2 [0, 1, 2, 3, 4, 5]
+ * @param arr
+ * @returns {*[]}
+ */
+export function flatten(arr) {
+  return [].concat( ...arr.map(x => Array.isArray(x) ? flatten(x) : x) )
+}
 
 /*************************** 对象工具函数 ***************************/
 

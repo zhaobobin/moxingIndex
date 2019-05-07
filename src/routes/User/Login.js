@@ -120,8 +120,8 @@ export default class QucikRegister extends React.Component {
 
   //密码
   passwordCallback = (value) => {
-    this.props.form.setFieldsValue({'password': value});
-    this.props.form.validateFields(['password'], (err, values) => {});
+    this.props.form.setFieldsValue({'pwd': value});
+    this.props.form.validateFields(['pwd'], (err, values) => {});
   };
 
   //短信验证码回调
@@ -181,7 +181,7 @@ export default class QucikRegister extends React.Component {
 
     const {loginType} = this.state;
 
-    let keys = loginType === 'sms' ? ['tel', 'smscode'] : ['tel', 'pwd'];
+    let keys = loginType === 'psd' ? ['tel', 'pwd'] : ['tel', 'smscode'];
 
     this.props.form.validateFields(keys, (err, values) => {
       if (!err) {
@@ -310,20 +310,39 @@ export default class QucikRegister extends React.Component {
                 <Link to="/guide">《用户注册协议》</Link>
               </p>
 
-              <Button
-                loading={loading}
-                type="primary"
-                htmlType="submit"
-                className={styles.btn}
-                style={{width: '100%', height: '50px', lineHeight: '48px'}}
-                disabled={
-                  hasErrors(getFieldsError()) ||
-                  !getFieldValue('tel') ||
-                  !getFieldValue('smscode')
-                }
-              >
-                登录 / 注册
-              </Button>
+              {
+                loginType === 'psd' ?
+                  <Button
+                    loading={loading}
+                    type="primary"
+                    htmlType="submit"
+                    className={styles.btn}
+                    style={{width: '100%', height: '50px', lineHeight: '48px'}}
+                    disabled={
+                      hasErrors(getFieldsError()) ||
+                      !getFieldValue('tel') ||
+                      !getFieldValue('pwd')
+                    }
+                  >
+                    登录 / 注册
+                  </Button>
+                  :
+                  <Button
+                    loading={loading}
+                    type="primary"
+                    htmlType="submit"
+                    className={styles.btn}
+                    style={{width: '100%', height: '50px', lineHeight: '48px'}}
+                    disabled={
+                      hasErrors(getFieldsError()) ||
+                      !getFieldValue('tel') ||
+                      !getFieldValue('smscode')
+                    }
+                  >
+                    登录 / 注册
+                  </Button>
+              }
+
 
               <p className={styles.desc}>
                 <Link to="/user/reset">忘记密码</Link>

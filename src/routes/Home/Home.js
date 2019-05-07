@@ -9,10 +9,13 @@ import GlobalFooter from '~/components/Common/GlobalFooter';
 function alert(){
   Alert({
     width: '270px',
-    title: '应用还在上架中，敬请期待哦！',
-    btns: '知道了',
+    title: '温馨提示',
+    content: 'iOS安装方法:（设置-通用-管理-信任-趣族）',
+    btns: '去下载',
     callback: (res) => {
-
+      if(res === 1){
+        window.open(ENV.download.ios)
+      }
     }
   })
 }
@@ -36,7 +39,7 @@ export default function Home() {
 
           <p className={styles.btns}>
             <span>
-              <a className={styles.ios} onClick={alert}>
+              <a className={styles.ios} onClick={alert} target="_blank" rel="noopener noreferrer nofollow">
                 <img src={require('~/assets/home/btn_ios.png')} alt="趣族ios下载" />
               </a>
             </span>

@@ -112,8 +112,8 @@ export default {
         yield callback(res);
 
         if(res.code === '0'){
-          //Storage.set(ENV.storageAccessToken, res.data.login_code);               //保存token
-          Storage.set(ENV.storageUserId, res.data.uid);                          //保存userId
+          // Storage.set(ENV.storageAccessToken, res.data.login_code);               //保存token
+          // Storage.set(ENV.storageUserId, res.data.uid);                          //保存userId
           yield put({
             type: 'changeLoginStatus',
             payload: {
@@ -123,6 +123,8 @@ export default {
             }
           });
         }else{
+          Storage.remove(ENV.storageAccessToken);               //删除token
+          Storage.remove(ENV.storageUserId);                    //删除uid
           yield put({
             type: 'changeLoginStatus',
             payload: {

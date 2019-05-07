@@ -21,6 +21,11 @@ export function Alert(opt){
     title: (
       <p className={styles.dialogTitle}>{opt.title}</p>
     ),
+    content: (
+      <div className={styles.dialogContent}>
+        <span>{opt.content}</span>
+      </div>
+    ),
     okText: opt.btns || '确定',
     onOk() {
       return opt.callback(1)

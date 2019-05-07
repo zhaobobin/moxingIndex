@@ -52,9 +52,9 @@ export default class UploadImage extends React.Component {
     //console.log(imageList)
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/expert/upload',
+      url: '/api/oss/upload',
       payload: {
-        type: '4',
+        type: '2',
         image: JSON.stringify(imageList),
       },
       callback: (res) => {

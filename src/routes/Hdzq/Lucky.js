@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from 'dva';
-import { Link } from 'dva/router'
-import { Form, Button } from 'antd'
-import { Modal, Toast } from 'antd-mobile';
-import { ENV, Storage, hasErrors, getUrlParams, setupWebViewJavascriptBridge } from "~/utils/utils";
+import {connect} from 'dva';
+import {Link} from 'dva/router'
+import {Form, Button} from 'antd'
+import {Modal, Toast} from 'antd-mobile';
+import {ENV, Storage, hasErrors, getUrlParams, setupWebViewJavascriptBridge} from "~/utils/utils";
 import styles from './Lucky.less'
 
 import InputMobile from '~/components/Form/InputMobile'
@@ -18,7 +18,7 @@ const paramsObj = getUrlParams() || '';
 @Form.create()
 export default class Lucky extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.ajaxFlag = true;
     this.state = {
@@ -39,13 +39,14 @@ export default class Lucky extends React.Component {
   //手机号
   mobileCallback = (value) => {
     this.props.form.setFieldsValue({'tel': value});
-    this.props.form.validateFields(['tel'], (err, values) => {});
+    this.props.form.validateFields(['tel'], (err, values) => {
+    });
   };
 
   //短信验证码回调
   smscodeCallback = (value) => {
     //清空错误提示
-    if(value === 'clearError'){
+    if (value === 'clearError') {
       this.props.form.setFields({
         'smscode': {
           value: '',
@@ -54,7 +55,7 @@ export default class Lucky extends React.Component {
       });
       this.setState({smscodeSended: true});
     }
-    else if(value === 'telError'){
+    else if (value === 'telError') {
       this.props.form.setFields({
         'tel': {
           value: '',
@@ -63,9 +64,10 @@ export default class Lucky extends React.Component {
       });
       this.setState({smscodeSended: true});
     }
-    else{
+    else {
       this.props.form.setFieldsValue({'smscode': value});
-      this.props.form.validateFields(['smscode'], (err, values) => {});
+      this.props.form.validateFields(['smscode'], (err, values) => {
+      });
     }
   };
 
@@ -73,18 +75,20 @@ export default class Lucky extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if(!this.ajaxFlag) return;
+    if (!this.ajaxFlag) return;
     this.ajaxFlag = false;
 
     let keys = '';
-    if(paramsObj.platform === 'h5') keys = ['tel', 'smscode'];
+    if (!paramsObj.platform || paramsObj.platform === 'h5') keys = ['tel', 'smscode'];
 
     this.props.form.validateFields(keys, (err, values) => {
       if (!err) {
         this.submit(values);
       }
     });
-    setTimeout(() => { this.ajaxFlag = true }, 500);
+    setTimeout(() => {
+      this.ajaxFlag = true
+    }, 500);
   };
 
   // 确定抽奖
@@ -95,12 +99,10 @@ export default class Lucky extends React.Component {
       accessToken: paramsObj.accessToken || '',
       inviteCode: paramsObj.inviteCode || '',
       platform: paramsObj.platform || '',
-      tel: '',
-      verity: ''
     };
-    if(values){
+    if (values) {
       data.tel = values.tel;
-      data.verty = values.smscode;
+      data.verity = values.smscode;
     }
 
     this.props.dispatch({
@@ -108,12 +110,12 @@ export default class Lucky extends React.Component {
       url: '/api/details/draw',
       payload: data,
       callback: (res) => {
-        if(res.code === '0'){
+        if (res.code === '0') {
           this.setState({
             luckyResult: res.data
           });
           this.modalShow();
-        }else{
+        } else {
           Toast.info(res.msg, 2);
         }
       }
@@ -140,22 +142,22 @@ export default class Lucky extends React.Component {
     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //判断是否是 ios终端
 
     if (isiOS) {
-      setupWebViewJavascriptBridge( (bridge) => {
+      setupWebViewJavascriptBridge((bridge) => {
         bridge.callHandler('h5Action', action, (response) => {
         });
       });
     }
-    else if(isAndroid){
+    else if (isAndroid) {
       window.app.h5Action(action);      //与原生交互
-    }else{
+    } else {
       return ''
     }
   };
 
   render() {
 
-    const { luckyCount, modalVisible, luckyResult } = this.state;
-    const { getFieldDecorator, getFieldValue, getFieldsError } = this.props.form;
+    const {luckyCount, modalVisible, luckyResult} = this.state;
+    const {getFieldDecorator, getFieldValue, getFieldsError} = this.props.form;
 
     const modalWidth = document.body.clientWidth < 750 ? '95%' : '360px';
 
@@ -165,30 +167,32 @@ export default class Lucky extends React.Component {
         <Form onSubmit={this.handleFormSubmit}>
 
           {
-            paramsObj.platform === 'h5' ?
+            paramsObj.platform === 'app' ?
+              null
+              :
               <FormItem>
                 {getFieldDecorator('tel', {
                   validateTrigger: 'onBlur',
                   rules: [
-                    { required: true, message: '请输入手机号' },
-                    { pattern: /^1[0-9]{10}$/, message: '手机号输入有误' }
+                    {required: true, message: '请输入手机号'},
+                    {pattern: /^1[0-9]{10}$/, message: '手机号输入有误'}
                   ],
                 })(
                   <InputMobile callback={this.mobileCallback}/>
                 )}
               </FormItem>
-              :
-              null
           }
 
           {
-            paramsObj.platform === 'h5' ?
+            paramsObj.platform === 'app' ?
+              null
+              :
               <FormItem>
                 {getFieldDecorator('smscode', {
                   validateTrigger: 'onBlur',
                   rules: [
-                    { required: true, message: '请输入验证码' },
-                    { pattern: /^[0-9]{4}$/, message: '短信验证码错误' },
+                    {required: true, message: '请输入验证码'},
+                    {pattern: /^[0-9]{4}$/, message: '短信验证码错误'},
                   ]
                 })(
                   <InputSmscode
@@ -200,12 +204,19 @@ export default class Lucky extends React.Component {
                   />
                 )}
               </FormItem>
-              :
-              null
           }
 
           {
-            paramsObj.platform === 'h5' ?
+            paramsObj.platform === 'app' ?
+              <Button
+                size="large"
+                type="primary"
+                htmlType="submit"
+                className={styles.btn}
+              >
+                立即抽奖
+              </Button>
+              :
               <Button
                 size="large"
                 type="primary"
@@ -216,15 +227,6 @@ export default class Lucky extends React.Component {
                   !getFieldValue('tel') ||
                   !getFieldValue('smscode')
                 }
-              >
-                立即抽奖
-              </Button>
-              :
-              <Button
-                size="large"
-                type="primary"
-                htmlType="submit"
-                className={styles.btn}
               >
                 立即抽奖
               </Button>
@@ -270,26 +272,18 @@ export default class Lucky extends React.Component {
           </div>
 
           {/*<p style={{textAlign: 'center'}}>*/}
-            {/*<Button onClick={this.share}>分享给朋友</Button>*/}
+          {/*<Button onClick={this.share}>分享给朋友</Button>*/}
           {/*</p>*/}
 
           <div className={styles.desc}>
             <dl>
               <dt><i/><strong>活动细则</strong></dt>
               <dd>
-                <p>1、活动简介：扫描二维码，在活动页面输入手机号+验证码即可参与抽奖活动，奖品含模型、手办等</p>
-
-                <p>2、领取方式：奖品至APP内领取，填写手机号与活动页面所输入的手机号一致即可领取奖品</p>
-
-                <p>3、更多抽奖机会：</p>
-
-                <p>3.1 下载APP登录后，即可再获得一次抽奖机会；</p>
-
-                <p>3.2 将抽奖页面分享给5个微信好友，即可多一次抽奖机会，距离手办大礼更近一步</p>
-
-                <p>4、填写信息后可领取奖品，特等奖、一等奖、二等奖可联系工作人员邮寄发放，其他奖品须在现场领取</p>
-
-                <p>5、领奖日期为4月19日-4月30日，逾期领奖资格作废</p>
+                <p>1、扫描二维码参与抽奖，奖品含模型、手办等。</p>
+                <p>2、领奖：奖品需下载APP领取，手机号需与活动页手机号一致。</p>
+                <p>3、更多抽奖活动：下载APP登录后，即可再获得一次抽奖机会，距离手办大礼更近一步！</p>
+                <p>4、奖品均可在现场2号馆馆底领取，特等奖、一等奖奖品可联系工作人员邮寄，同等奖品不同种类可任选其一领取，视领奖顺序而定，先到先得。</p>
+                <p>5、领奖日期为4月19日—4月30日，逾期领奖资格作废，活动最终解释权归官方所有。</p>
               </dd>
             </dl>
           </div>
@@ -308,26 +302,39 @@ export default class Lucky extends React.Component {
           className={styles.luckyModal}
         >
           <div className={styles.con}>
-            <img className={styles.bg} src={require('~/assets/hdzq/lucky/modal_bg.png')} width="200" height="auto" alt="bg"/>
+
+            <img className={styles.bg} src={require('~/assets/hdzq/lucky/modal_bg.png')} width="200" height="auto"
+                 alt="bg"/>
             <p className={styles.p1}>{luckyResult.name}</p>
             <p className={styles.p2}>
               {
                 luckyResult.name === "未中奖" ?
-                  "手气还差一点点，下载app可再来一次！"
+                  paramsObj.platform === 'app' ?
+                    "手气还差一点点"
+                    :
+                    "手气还差一点点，下载app可再来一次！"
                   :
                   `已存入 ${luckyResult.tel}趣族账户`
               }
             </p>
             <p className={styles.hr}/>
-            <p className={styles.download}>
-              <Link to="/download">
-                <span>下载APP立即使用</span>
-                <img className={styles.plus} src={require('~/assets/hdzq/lucky/plus.png')} alt="plus"/>
-              </Link>
-            </p>
+
+            {
+              paramsObj.platform === 'app' ?
+                null
+                :
+                <p className={styles.download}>
+                  <Link to="/download">
+                    <span>下载APP立即使用</span>
+                    <img className={styles.plus} src={require('~/assets/hdzq/lucky/plus.png')} alt="plus"/>
+                  </Link>
+                </p>
+            }
+
             <p>
               <Button type="primary" onClick={this.share}>分享优惠给朋友</Button>
             </p>
+
           </div>
         </Modal>
 
