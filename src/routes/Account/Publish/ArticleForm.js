@@ -47,8 +47,8 @@ const btnItemLayout = {
   },
 };
 
-@connect(({global}) => ({
-  global,
+@connect(state => ({
+  global: state.global,
 }))
 @Form.create()
 export default class ArticleForm extends React.Component {
@@ -57,7 +57,6 @@ export default class ArticleForm extends React.Component {
     super(props);
     this.ajaxFlag = true;
     this.state = {
-      loading: false,
       detail: '',
       modalVisible: false,
 
@@ -72,13 +71,15 @@ export default class ArticleForm extends React.Component {
 
   componentDidMount() {
     let {detail, action} = this.props;
+
     if (action === 'add') return;
-    let currentCategoryNames = [], currentCategoryIds, currentCategoryIdsBeifen;
+    let currentCategoryNames = [], currentCategoryIds = [], currentCategoryIdsBeifen = [];
     for(let i in detail.category){
       currentCategoryNames.push(detail.category[i].name);
       currentCategoryIds.push(detail.category[i].category_id);
       currentCategoryIdsBeifen.push(detail.category[i].category_id);
     }
+
     this.setState({
       detail,
       currentCategoryNames,
@@ -144,6 +145,12 @@ export default class ArticleForm extends React.Component {
     }
     currentCategoryNames = currentCategoryNames.join(',');
     //console.log(currentCategoryNames)
+    this.props.form.setFields({
+      'category': {
+        value: currentCategoryNames,
+        errors: ''
+      }
+    });
     this.setState({
       currentCategoryNames,
       currentCategoryIds: currentCategoryIdsBeifen,
@@ -156,10 +163,27 @@ export default class ArticleForm extends React.Component {
     this.props.form.setFieldsValue({'content': content});
   };
 
+  //匹配文章图片
+  filterImages = (str) => {
+    let images = [];
+    let imgReg = /<img.*?(?:>|\/>)/gi;
+    //匹配src属性
+    let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+    let arr = str.match(imgReg);
+
+    for (let i = 0; i < arr.length; i++) {
+      let src = arr[i].match(srcReg);
+      //获取图片地址
+      if(src[1] && images.length < 3) images.push(src[1]);
+    }
+    return images.join(',')
+  }
+
   //重置表单
   handleFormReset = (e) => {
     e.preventDefault();
     this.props.form.resetFields();
+    window.history.go(-1);
   };
 
   //表单确定
@@ -207,6 +231,7 @@ export default class ArticleForm extends React.Component {
     if (action === 'edit') {
       data.id = detail.id;
     }
+    data.img = this.filterImages(data.content);      // 截取文章图片
     this.props.dispatch({
       type: 'global/post',
       url: api,
@@ -224,13 +249,9 @@ export default class ArticleForm extends React.Component {
 
   render() {
 
-    const {detail, modalVisible, currentCategoryNames, currentCategoryIds, currentCategoryIdsBeifen, category} = this.state;
-    const {action, getFieldDecorator, getFieldValue, getFieldsError} = this.props.form;
-
-    const children = [];
-    for (let i = 10; i < 36; i++) {
-      children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    }
+    const {detail, modalVisible, currentCategoryNames, currentCategoryIdsBeifen, category} = this.state;
+    const { action } = this.props;
+    const { getFieldDecorator } = this.props.form;
 
     const columns = [
       {
@@ -259,7 +280,7 @@ export default class ArticleForm extends React.Component {
       <div className={styles.container}>
 
         {
-          action === 'edit' && detail === '' ?
+          action === 'edit' && !detail ?
             null
             :
             <Form
@@ -305,7 +326,7 @@ export default class ArticleForm extends React.Component {
                     initialValue: currentCategoryNames || undefined,
                     validateFirst: true,
                     rules: [
-                      // {required: true, message: '请选择文章所属分类'},
+                      {required: true, message: '请选择文章所属分类'},
                     ],
                   })(
                   <Input autoComplete="off" onClick={this.onShowCategory} placeholder="文章所属分类"/>
@@ -316,7 +337,6 @@ export default class ArticleForm extends React.Component {
                 {getFieldDecorator('content',
                   {
                     initialValue: detail.content || undefined,
-                    validateFirst: true,
                     rules: [
                       {required: true, message: '请输入内容'},
                     ],

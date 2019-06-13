@@ -345,7 +345,7 @@ export default class QucikRegister extends React.Component {
 
 
               <p className={styles.desc}>
-                <Link to="/user/reset">忘记密码</Link>
+                {/*<Link to="/user/reset">忘记密码</Link>*/}
                 <a onClick={this.changeLoginType} className={styles.loginType}>
                   {loginType === 'psd' ? '快捷登录' : '密码登录'}
                 </a>

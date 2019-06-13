@@ -59,7 +59,7 @@ export default class ArticleEdit extends React.Component {
     return(
       <div>
         {
-          loading && !detail ?
+          loading || !detail ?
             <Loading/>
             :
             <ArticleForm detail={detail} action="edit"/>

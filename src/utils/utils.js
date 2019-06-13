@@ -15,7 +15,7 @@ export const ENV = {
 
   download: {
     android: 'http://moxingqun.oss-cn-beijing.aliyuncs.com/apk/quzuV1.2.4.apk',
-    ios: 'https://www.pgyer.com/4KmZ',
+    ios: 'https://itunes.apple.com/cn/app/%E8%B6%A3%E6%97%8F/id1457663646?mt=8',
   },
 
   appname: '趣族',

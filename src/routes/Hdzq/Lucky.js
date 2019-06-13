@@ -1,3 +1,7 @@
+/**
+ * 抽奖活动详情
+ * http://www.moxinga.com/hdzq/lucky?platform=app&id=8
+ */
 import React from 'react'
 import {connect} from 'dva';
 import {Link} from 'dva/router'
@@ -24,16 +28,38 @@ export default class Lucky extends React.Component {
     this.state = {
       luckyCount: Storage.get(ENV.storageLucky) || 0,     //抽奖次数
       modalVisible: false,
-      luckyResult: ''
+      luckyResult: '',
+      detail: ''
     }
   }
 
   componentDidMount() {
+    this.queryDetail();
     document.body.style.overflow = 'hidden'
   }
 
   componentWillUnmount() {
     document.body.style.overflow = 'auto'
+  }
+
+  // 查询抽奖活动详情
+  queryDetail = () => {
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/details/prize',
+      payload: {
+        id: paramsObj.id
+      },
+      callback: (res) => {
+        if (res.code === '0') {
+          this.setState({
+            detail: res.data
+          })
+        } else {
+          Toast.info(res.msg, 2);
+        }
+      }
+    })
   }
 
   //手机号
@@ -156,7 +182,7 @@ export default class Lucky extends React.Component {
 
   render() {
 
-    const {luckyCount, modalVisible, luckyResult} = this.state;
+    const {luckyCount, modalVisible, luckyResult, detail} = this.state;
     const {getFieldDecorator, getFieldValue, getFieldsError} = this.props.form;
 
     const modalWidth = document.body.clientWidth < 750 ? '95%' : '360px';
@@ -245,50 +271,53 @@ export default class Lucky extends React.Component {
           </Link>
         </div>
 
-        <div className={styles.content}>
-          <img className={styles.bg} src={require('~/assets/hdzq/lucky/lucky_bg.jpg')} alt="bg"/>
+        {
+          detail ?
+            <div className={styles.content}>
 
-          <div>
-            {
-              luckyCount ?
-                <div className={styles.download}>
-                  <dl>
-                    <dt>恭喜您已获得</dt>
-                    <dd>
-                      <p className={styles.p1}>特等奖</p>
-                      <p className={styles.p2}>已放入180****3234 趣族账户</p>
-                    </dd>
-                  </dl>
-                  <p>
-                    <Link to="/download">下载APP立即使用</Link>
-                  </p>
-                  {/*<p>*/}
-                  {/*<a onClick={this.modalShow}>显示modal</a>*/}
-                  {/*</p>*/}
-                </div>
-                :
-                h5LuckyForm
-            }
-          </div>
+              {/*<img className={styles.bg} src={require('~/assets/hdzq/lucky/lucky_bg.jpg')} alt="bg"/>*/}
+              <img className={styles.bg} src={detail.img} alt="bg"/>
 
-          {/*<p style={{textAlign: 'center'}}>*/}
-          {/*<Button onClick={this.share}>分享给朋友</Button>*/}
-          {/*</p>*/}
+              <div>
+                {
+                  luckyCount ?
+                    <div className={styles.download}>
+                      <dl>
+                        <dt>恭喜您已获得</dt>
+                        <dd>
+                          <p className={styles.p1}>特等奖</p>
+                          <p className={styles.p2}>已放入180****3234 趣族账户</p>
+                        </dd>
+                      </dl>
+                      <p>
+                        <Link to="/download">下载APP立即使用</Link>
+                      </p>
+                      {/*<p>*/}
+                      {/*<a onClick={this.modalShow}>显示modal</a>*/}
+                      {/*</p>*/}
+                    </div>
+                    :
+                    h5LuckyForm
+                }
+              </div>
 
-          <div className={styles.desc}>
-            <dl>
-              <dt><i/><strong>活动细则</strong></dt>
-              <dd>
-                <p>1、扫描二维码参与抽奖，奖品含模型、手办等。</p>
-                <p>2、领奖：奖品需下载APP领取，手机号需与活动页手机号一致。</p>
-                <p>3、更多抽奖活动：下载APP登录后，即可再获得一次抽奖机会，距离手办大礼更近一步！</p>
-                <p>4、奖品均可在现场2号馆馆底领取，特等奖、一等奖奖品可联系工作人员邮寄，同等奖品不同种类可任选其一领取，视领奖顺序而定，先到先得。</p>
-                <p>5、领奖日期为4月19日—4月30日，逾期领奖资格作废，活动最终解释权归官方所有。</p>
-              </dd>
-            </dl>
-          </div>
+              {/*<p style={{textAlign: 'center'}}>*/}
+              {/*<Button onClick={this.share}>分享给朋友</Button>*/}
+              {/*</p>*/}
 
-        </div>
+              <div className={styles.desc}>
+                <dl>
+                  <dt><i/><strong>活动细则</strong></dt>
+                  <dd>
+                    <p dangerouslySetInnerHTML={{__html: detail.content}} />
+                  </dd>
+                </dl>
+              </div>
+
+            </div>
+            :
+            null
+        }
 
         <Modal
           style={{width: modalWidth}}

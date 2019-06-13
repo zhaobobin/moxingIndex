@@ -103,6 +103,7 @@ const BaseRoutes = app => [
             name: '编辑文章',
             key: 'article-edit',
             path: 'article-edit/:id',
+            isHide: true,
             component: dynamicWrapper(app, [], () => import('../routes/Account/Publish/ArticleEdit')),
           },
           {

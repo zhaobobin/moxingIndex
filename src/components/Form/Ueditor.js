@@ -26,10 +26,12 @@ export default class Ueditor extends React.Component {
   }
 
   initContent = () => {
-    const { content } = this.props;
+    const { content, detail } = this.props;
+
     if(!content) return;
     let html = content.replace('↵', '');
-    // html = '<div>' + html + '</div>';
+    html = '<div>' + html + '</div>';
+
     const blocksFromHtml = htmlToDraft(html);
     const { contentBlocks, entityMap } = blocksFromHtml;
     const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -60,7 +62,7 @@ export default class Ueditor extends React.Component {
           imageList.push(data.base64);
           _this.props.dispatch({
             type: 'global/post',
-            url: '/api/oss/upload',
+            url: '/api/expert/upload',
             payload: {
               type: '2',
               image: JSON.stringify(imageList),
@@ -81,7 +83,7 @@ export default class Ueditor extends React.Component {
 
   render(){
 
-    const { height } = this.props
+    const { height } = this.props;
     const { editorState } = this.state;
 
     return(

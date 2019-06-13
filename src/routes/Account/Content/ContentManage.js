@@ -178,8 +178,8 @@ export default class ContentManage extends React.Component {
       },
       {
         title: '作者',
-        dataIndex: 'author',
-        key: 'author',
+        dataIndex: 'nickname',
+        key: 'nickname',
         align: 'center',
       },
       {
@@ -228,7 +228,7 @@ export default class ContentManage extends React.Component {
             api: apiList,
             columns,
             queryParams: {
-              uid: currentUser.userInfo.id
+              uid: currentUser.userInfo.uid
             },
           }}
         />
