@@ -39,12 +39,12 @@ export default function Home() {
 
           <p className={styles.btns}>
             <span>
-              <a className={styles.ios} onClick={alert} target="_blank" rel="noopener noreferrer nofollow">
+              <a className={styles.ios} href={ENV.download.ios} target="_blank" rel="noopener noreferrer nofollow">
                 <img src={require('~/assets/home/btn_ios.png')} alt="趣族ios下载" />
               </a>
             </span>
             <span>
-              <a className={styles.android} href={ENV.download.android}>
+              <a className={styles.android} href={ENV.download.android} target="_blank" rel="noopener noreferrer nofollow">
                 <img src={require('~/assets/home/btn_android.png')} alt="趣族android下载" />
               </a>
             </span>

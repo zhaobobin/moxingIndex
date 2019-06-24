@@ -276,7 +276,7 @@ export default class Lucky extends React.Component {
             <div className={styles.content}>
 
               {/*<img className={styles.bg} src={require('~/assets/hdzq/lucky/lucky_bg.jpg')} alt="bg"/>*/}
-              <img className={styles.bg} src={detail.img} alt="bg"/>
+              <img className={styles.bg} src={require('~/assets/hdzq/lucky/theme.png')} width="100%" height="auto" alt="bg"/>
 
               <div>
                 {
@@ -286,7 +286,7 @@ export default class Lucky extends React.Component {
                         <dt>恭喜您已获得</dt>
                         <dd>
                           <p className={styles.p1}>特等奖</p>
-                          <p className={styles.p2}>已放入180****3234 趣族账户</p>
+                          <p className={styles.p2}>已放入{detail.tel} 趣族账户</p>
                         </dd>
                       </dl>
                       <p>
