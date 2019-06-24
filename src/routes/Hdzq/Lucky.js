@@ -275,8 +275,11 @@ export default class Lucky extends React.Component {
           detail ?
             <div className={styles.content}>
 
-              {/*<img className={styles.bg} src={require('~/assets/hdzq/lucky/lucky_bg.jpg')} alt="bg"/>*/}
-              <img className={styles.bg} src={require('~/assets/hdzq/lucky/theme.png')} width="100%" height="auto" alt="bg"/>
+              <div className={styles.bg}>
+                <img src={require('~/assets/hdzq/lucky/theme.png')} width="100%" height="auto" alt="bg"/>
+                <h1>{detail.name}</h1>
+              </div>
+
 
               <div>
                 {
