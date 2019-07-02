@@ -144,7 +144,7 @@ export default class ArticleForm extends React.Component {
       }
     }
     currentCategoryNames = currentCategoryNames.join(',');
-    //console.log(currentCategoryNames)
+    // console.log(currentCategoryNames)
     this.props.form.setFields({
       'category': {
         value: currentCategoryNames,
@@ -156,6 +156,7 @@ export default class ArticleForm extends React.Component {
       currentCategoryIds: currentCategoryIdsBeifen,
       modalVisible: false,
     });
+    this.props.form.setFieldsValue({ category_id: currentCategoryIdsBeifen.join(',') });
   };
 
   //富文本
@@ -164,20 +165,22 @@ export default class ArticleForm extends React.Component {
   };
 
   //匹配文章图片
-  filterImages = (str) => {
+  filterImages = str => {
     let images = [];
     let imgReg = /<img.*?(?:>|\/>)/gi;
     //匹配src属性
     let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
     let arr = str.match(imgReg);
 
-    for (let i = 0; i < arr.length; i++) {
-      let src = arr[i].match(srcReg);
-      //获取图片地址
-      if(src[1] && images.length < 3) images.push(src[1]);
-    }
-    return images.join(',')
-  }
+    if(arr){
+      for (let i = 0; i < arr.length; i++) {
+        let src = arr[i].match(srcReg);
+        //获取图片地址
+        if (src[1] && images.length < 3) images.push(src[1]);
+      }
+    };
+    return images.join(',');
+  };
 
   //重置表单
   handleFormReset = (e) => {
@@ -209,28 +212,16 @@ export default class ArticleForm extends React.Component {
     const {action, detail} = this.props;
     const api = action === 'add' ? '/api/portal/add_portal' : '/api/portal/edit_portal';
 
-    // get category_id
-    let category_id = [],
-      category = values.category.split(',');
-    for(let i in category_arr){
-      for(let j in category){
-        if(category_arr[i].name === category[j]){
-          category_id.push(category_arr[i].id)
-        }
-      }
-    }
-    category_id = category_id.join(',');
-
     let data = {
       uid: this.props.global.currentUser.userInfo.uid,
       title: values.title,
       content: values.content,
-      category_id: category_id.substring(0, category_id.length - 1),
       type: '1'
     };
     if (action === 'edit') {
       data.id = detail.id;
     }
+    data.category_id = this.state.currentCategoryIds.join(',');
     data.img = this.filterImages(data.content);      // 截取文章图片
     this.props.dispatch({
       type: 'global/post',
