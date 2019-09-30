@@ -156,14 +156,18 @@ export default class InputSmscode extends React.Component {
             onChange={this.changeValue}
             value={value}
             suffix={
-              value ?
-                <Icon
-                  type="close-circle"
-                  className={styles.clearInput}
-                  onClick={() => this.emitEmpty()}
-                />
-                :
-                null
+              <span>
+                {
+                  value ?
+                    <Icon
+                      type="close-circle"
+                      className={styles.clearInput}
+                      onClick={() => this.emitEmpty()}
+                    />
+                    :
+                    null
+                }
+              </span>
             }
           />
         </Col>

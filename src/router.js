@@ -6,8 +6,12 @@ import { getPlainNode } from '~/utils/utils';
 
 import NotFound from "~/routes/Other/page404";
 
-import { LocaleProvider } from 'antd';
+import { ConfigProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+
+moment.locale('zh-cn');
 
 function getRouteData(navData, path) {
   if (!navData.some(item => item.layout === path) ||
@@ -48,7 +52,7 @@ export default function RouterConfig({ history, app }) {
   };
 
   return (
-    <LocaleProvider locale={zh_CN}>
+    <ConfigProvider locale={zh_CN}>
       <Router history={history}>
         <Switch>
           <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
@@ -56,6 +60,6 @@ export default function RouterConfig({ history, app }) {
           <Route component={NotFound} />
         </Switch>
       </Router>
-    </LocaleProvider>
+    </ConfigProvider>
 );
 }

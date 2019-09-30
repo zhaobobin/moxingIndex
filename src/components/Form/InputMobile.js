@@ -40,13 +40,17 @@ export default class InputMobile extends React.Component {
         onChange={this.changeValue}
         value={value}
         suffix={
-          value ?
-            <Icon
-              type="close-circle"
-              onClick={() => this.emitEmpty()}
-            />
-            :
-            null
+          <span>
+            {
+              value ?
+                <Icon
+                  type="close-circle"
+                  onClick={() => this.emitEmpty()}
+                />
+                :
+                null
+            }
+          </span>
         }
       />
     )

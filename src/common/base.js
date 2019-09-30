@@ -61,6 +61,18 @@ const BaseRoutes = app => [
             component: dynamicWrapper(app, [], () => import('../routes/Hdzq/Lucky')),
           },
           {
+            name: '活动报名',
+            key: 'activity-sign',
+            path: 'activity-sign',
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/ActivitySign')),
+          },
+          {
+            name: '填写报名信息',
+            key: 'activity-sign-form',
+            path: 'activity-sign-form',
+            component: dynamicWrapper(app, [], () => import('../routes/Hdzq/ActivitySignForm')),
+          },
+          {
             name: '活动详情',
             key: 'activity-detail',
             path: 'activity-detail/:id',

@@ -13,10 +13,10 @@
   "dependencies": {
     "@antv/data-set": "^0.9.6",
     "ant-design-pro": "^2.0.0",
-    "antd": "^3.8.0",
-    "antd-mobile": "^2.2.6",
+    "antd": "3.15.0",
+    "antd-mobile": "^2.2.14",
     "bizcharts": "^3.2.4",
-    "china-division": "^2.1.1",
+    "china-division": "^2.2.0",
     "copy-to-clipboard": "^3.0.8",
     "crypto-js": "^3.1.9-1",
     "draft-js": "^0.10.5",
@@ -47,7 +47,6 @@
     "url-polyfill": "^1.0.14"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.1.5",
     "babel-jest": "^23.4.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dva-hmr": "^0.3.2",
@@ -76,7 +75,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "redbox-react": "^1.4.3",
-    "roadhog": "^2.4.9",
+    "roadhog": "^2.5.0-beta.4",
     "style-loader": "^0.23.1"
   },
   "theme": {

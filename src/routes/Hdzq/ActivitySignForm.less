@@ -1,0 +1,70 @@
+.container{
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  overflow-y: auto;
+
+  .head{
+    width: 100%;
+    height: 60px;
+    //padding-top: 30px;
+    background: #F8DB60;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    h1{
+      margin: 0;
+      text-align: center;
+      line-height: 60px;
+      font-size: 16px;
+      color: #fff;
+    }
+    .back{
+      display: block;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      i{
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+    .submit{
+      display: block;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      font-size: 15px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #fff;
+    }
+
+  }
+
+  .body{
+    padding: 80px 0 200px;
+
+    :global{
+      .am-list-item .am-input-control input{
+        text-align: right;
+      }
+    }
+
+    .item{
+      margin-bottom: 0;
+    }
+  }
+
+}
