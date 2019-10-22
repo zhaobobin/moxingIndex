@@ -1,6 +1,6 @@
 /**
  * 活动报名
- * http://www.moxinga.com/hdzq/activity-sign?id=22&platform=h5
+ * http://www.moxinga.com/hdzq/activity-sign?id=28&platform=h5
  */
 import React from 'react'
 import {connect} from 'dva';
@@ -122,7 +122,7 @@ export default class ActivitySign extends React.Component {
 
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/activities/login',
+      url: '/api/user/code_login',
       payload: {
         id: paramsObj.id,
         tel: values.tel,
@@ -130,11 +130,12 @@ export default class ActivitySign extends React.Component {
       },
       callback: (res) => {
         if (res.code === '0') {
-          if(res.data.is_sign === '0') {
-            this.props.dispatch(routerRedux.push(`/hdzq/activity-sign-form?activity_id=${paramsObj.id}&uid=${res.data.uid}`))
-          } else {
-            Toast.info('不能重复报名', 2);
-          }
+          this.props.dispatch(routerRedux.push(`/hdzq/activity-sign-form?activity_id=${paramsObj.id}&uid=${res.data.uid}`))
+          // if(res.data.is_sign === '0') {
+          //   this.props.dispatch(routerRedux.push(`/hdzq/activity-sign-form?activity_id=${paramsObj.id}&uid=${res.data.uid}`))
+          // } else {
+          //   Toast.info('不能重复报名', 2);
+          // }
         } else {
           Toast.info(res.msg, 2);
         }
@@ -161,7 +162,6 @@ export default class ActivitySign extends React.Component {
                   validateTrigger: 'onBlur',
                   rules: [
                     {required: true, message: '请输入手机号'},
-                    {pattern: /^1[0-9]{10}$/, message: '手机号输入有误'}
                   ],
                 })(
                   <InputMobile callback={this.mobileCallback}/>
