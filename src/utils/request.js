@@ -45,7 +45,12 @@ export default function request(url, options) {
       ...newOptionsHeaders,
     };
     newOptions.body = JSON.stringify(newOptions.body);
-
+    // let params = "";
+    // for(let i in options.body){
+    //   params += i + "=" + options.body[i] + "&";
+    // }
+    // params = params.substring(0, params.length - 1);
+    // newOptions.body = params;
   }
 
   return fetch(api, newOptions)

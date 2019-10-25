@@ -130,7 +130,7 @@ export default class ActivitySign extends React.Component {
       },
       callback: (res) => {
         if (res.code === '0') {
-          this.props.dispatch(routerRedux.push(`/hdzq/activity-sign-form?activity_id=${paramsObj.id}&uid=${res.data.uid}`))
+          this.props.dispatch(routerRedux.push(`/hdzq/activity-sign-form?id=${paramsObj.id}&uid=${res.data.uid}`))
           // if(res.data.is_sign === '0') {
           //   this.props.dispatch(routerRedux.push(`/hdzq/activity-sign-form?activity_id=${paramsObj.id}&uid=${res.data.uid}`))
           // } else {
