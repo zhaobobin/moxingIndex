@@ -94,6 +94,39 @@ const BaseRoutes = app => [
       },
 
       {
+        name: '活动',
+        key: 'activity',
+        path: 'activity',
+        isHide: true,
+        children: [
+          {
+            name: '活动列表',
+            key: 'list',
+            path: 'list',
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityList')),
+          },
+          {
+            name: '活动详情',
+            key: 'detail',
+            path: 'detail/:id',
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityDetail')),
+          },
+          {
+            name: '订单确认',
+            key: 'order',
+            path: 'order/:id',
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityOrder')),
+          },
+          {
+            name: '购票成功',
+            key: 'pay',
+            path: 'pay',
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityPay')),
+          },
+        ]
+      },
+
+      {
         name: '我的账户',
         key: 'account',
         path: 'account',

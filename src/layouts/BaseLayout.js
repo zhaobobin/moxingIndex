@@ -102,7 +102,9 @@ export default class BaseLayout extends React.Component {
       <div className={styles.layout}>
 
         {
-          paramsObj.platform === 'app' || location.pathname === '/download' ?
+          paramsObj.platform === 'app' ||
+          location.pathname === '/download' ||
+          location.pathname.split('/')[1] === 'activity' ?
             null
             :
             <GlobalHeader navData={navData[0].children}/>
@@ -132,6 +134,7 @@ export default class BaseLayout extends React.Component {
                     )
                   }
                   <Redirect exact from="/account" to="/account/total" />
+                  <Redirect exact from="/activity" to="/activity/list" />
                   <Route component={NotFound} />
                 </Switch>
 
@@ -140,7 +143,8 @@ export default class BaseLayout extends React.Component {
         }
 
         {
-          location.pathname === '/' ?
+          location.pathname === '/' ||
+          location.pathname.split('/')[1] === 'activity' ?
             null
             :
             <GlobalFooter/>
