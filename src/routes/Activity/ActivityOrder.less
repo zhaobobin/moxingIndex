@@ -1,6 +1,5 @@
 .container{
 
-  margin-top: -60px;
   padding-bottom: 50px;
 
   .content{
@@ -11,6 +10,7 @@
         border: none;
       }
       h2{
+        margin-bottom: 17px;
         color: #353535;
         font-size: 16px;
         line-height: 22px;
@@ -33,6 +33,108 @@
 
       }
     }
+
+    .section1{
+
+      .item{
+        a{
+          display: block;
+          margin-bottom: 8px;
+          height: 46px;
+          line-height: 46px;
+          padding: 0 10px;
+          background: #F3F4F3;
+          border: 1px solid #F3F4F3;
+          border-radius: 8px;
+          color: #353535;
+          &.current{
+            background: #FFF8E5;
+            border:1px solid #FFBC00;
+          }
+          span{
+            margin-right: 5px;
+          }
+        }
+      }
+
+    }
+
+    .section2{
+
+      .item{
+        a{
+          display: block;
+          margin-bottom: 8px;
+          height: 46px;
+          line-height: 46px;
+          text-align: center;
+          background: #F3F4F3;
+          border: 1px solid #F3F4F3;
+          border-radius: 8px;
+          color: #353535;
+          &.current{
+            background: #FFF8E5;
+            border:1px solid #FFBC00;
+          }
+
+        }
+      }
+
+    }
+
+    .section5{
+      .item{
+        margin-bottom: 8px;
+        padding: 12px 38px;
+        height:64px;
+        background:#fff;
+        border-radius:8px;
+        border:1px solid #F3F4F3;
+        position: relative;
+        .avatar{
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          margin-top: -18px;
+          i{
+            font-size: 16px;
+            color: #999
+          }
+        }
+        .name{
+          margin-bottom: 5px;
+          color: #353535;
+          font-size: 13px;
+          line-height: 18px;
+        }
+        .mobile{
+          margin-bottom: 0;
+          color: #ABABAB;
+          font-size: 13px;
+          line-height: 18px;
+        }
+        .del{
+          display: block;
+          height: 18px;
+          line-height: 18px;
+          position: absolute;
+          right: 24px;
+          top: 50%;
+          margin-top: -9px;
+          i{
+            font-size: 16px;
+            color: #F63719;
+          }
+          span{
+            margin-left: 3px;
+            font-size: 13px;
+            color: #F63719;
+          }
+        }
+      }
+
+    }
+
   }
 
   .foot{

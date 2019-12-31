@@ -1,18 +1,18 @@
 /**
- * 活动 - 列表
+ * 我的 - 门票
  */
 import React from 'react'
 import {connect} from 'dva';
 import {Toast} from 'antd-mobile';
-import styles from './ActivityList.less'
+import styles from './MyTicket.less'
 
 import InfiniteScroll from 'react-infinite-scroller';			// 无限加载
-import ActivityListItem from '~/components/Activity/ActivityListItem'
+import TicketListItem from '~/components/My/TicketListItem'
 
 @connect(state => ({
   global: state.global,
 }))
-export default class ActivityList extends React.Component{
+export default class MyTicket extends React.Component{
 
   constructor(props){
     super(props);
@@ -34,7 +34,7 @@ export default class ActivityList extends React.Component{
   queryList = (params) => {
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/activities/index',
+      url: '/api//my/ticket',
       payload: {},
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500)
@@ -86,7 +86,7 @@ export default class ActivityList extends React.Component{
           {
             list.map((item, index) => (
               <div key={index}>
-                <ActivityListItem item={item} />
+                <TicketListItem item={item} />
               </div>
             ))
           }

@@ -7,6 +7,9 @@ import { Link } from 'dva/router'
 import {Toast} from 'antd-mobile';
 import styles from './ActivityDetail.less'
 
+import mapIcon from '~/assets/com/map.png'
+import Loading from '~/components/Common/Loading'
+
 @connect(state => ({
  global: state.global,
 }))
@@ -67,7 +70,7 @@ export default class ActivityDetail extends React.Component{
       <>
       {
         loading ?
-          null
+          <Loading/>
           :
           <div className={styles.container}>
 
@@ -83,10 +86,28 @@ export default class ActivityDetail extends React.Component{
               </div>
             </div>
 
+            <div className={styles.body}>
+              <div className={styles.date}>
+                <p>{detail.start_time}</p>
+                <p>{detail.end_time}</p>
+              </div>
+              <div className={styles.info}>
+                <p><strong>{detail.title}</strong></p>
+                <p className={styles.place}>{detail.place_details}</p>
+                <Link to={`/m/activity/address/${detail.place}`} className={styles.address}>
+                  <img src={mapIcon} alt="address"/>
+                </Link>
+              </div>
+              <div className={styles.introduce}>
+                <h2>展会介绍</h2>
+                <div className={styles.content} dangerouslySetInnerHTML={{__html: detail.content}}/>
+              </div>
+            </div>
+
             <div className={styles.foot}>
               {
                 detail.state === '1' ?
-                  <Link to={`/activity/order/${id}`} className={styles.start}>
+                  <Link to={`/m/activity/order/${id}`} className={styles.start}>
                     立即报名
                   </Link>
                   :
@@ -94,17 +115,17 @@ export default class ActivityDetail extends React.Component{
               }
               {
                 detail.state === '0' ?
-                  <Link className={styles.disabled}>
+                  <a className={styles.disabled}>
                     未开售
-                  </Link>
+                  </a>
                   :
                   null
               }
               {
                 detail.state === '2' ?
-                  <Link className={styles.disabled}>
+                  <a className={styles.disabled}>
                     已结束
-                  </Link>
+                  </a>
                   :
                   null
               }

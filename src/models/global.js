@@ -151,7 +151,6 @@ export default {
         }
       });
       yield callback();
-      yield put(routerRedux.push({ pathname: '/' }));
     },
 
     //查询账户详情

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-import ArtivleDetail from '~/components/Article/ArticleDetail'
+import ArticleDetail from '~/components/Article/ArticleDetail'
 import AboutHtml from './AboutHtml'
 
 export default class Privacy extends React.Component{
@@ -21,7 +21,7 @@ export default class Privacy extends React.Component{
 
           <Col xs={22} sm={20} md={16} lg={16}>
 
-            <ArtivleDetail hideHead={true} detail={detail}/>
+            <ArticleDetail hideHead={true} detail={detail}/>
 
           </Col>
 

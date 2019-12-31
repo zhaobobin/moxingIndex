@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Route, Redirect, Switch } from 'dva/router';
+import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { Row, Col } from 'antd'
 import { ENV, Storage } from '~/utils/utils';
 import styles from './AccountIndex.less'
@@ -59,7 +59,9 @@ export default class AccountIndex extends React.Component {
           this.props.dispatch({
             type: 'global/logout',
             payload: {},
-            callback: () => {}
+            callback: () => {
+              this.props.dispatch(routerRedux.push('/'))
+            }
           })
         }
       }

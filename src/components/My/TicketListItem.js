@@ -1,13 +1,13 @@
 /**
- * 活动 - 列表Item
+ * 门票 - 列表Item
  */
 import React from 'react'
 import {Link} from 'dva/router'
 import { Button } from 'antd'
 import moment from 'moment'
-import styles from './ActivityListItem.less'
+import styles from './TicketListItem.less'
 
-export default function ActivityListItem ({ item }) {
+export default function TicketListItem ({ item }) {
 
   return(
     <Link to={`/m/activity/detail/${item.id}`} className={styles.item}>

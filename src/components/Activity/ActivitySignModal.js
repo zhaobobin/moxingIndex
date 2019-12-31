@@ -27,7 +27,7 @@ export default class ActivitySignModal extends React.Component {
   }
 
   componentDidMount(){
-    this.props.onRef(this)
+    this.props.onRef(this);
   }
 
   componentWillUnmount(){
@@ -61,6 +61,9 @@ export default class ActivitySignModal extends React.Component {
         // console.log(values)
         this.props.callback(values)
         this.close()
+      } else {
+        // console.log(err)
+        Toast.info('请完善报名信息', 2)
       }
     });
   }
@@ -74,6 +77,7 @@ export default class ActivitySignModal extends React.Component {
       <Modal
         visible={visible}
         maskClosable={false}
+        destroyOnClose={true}
         onClose={this.close}
         className={styles.signModal}
       >
@@ -82,14 +86,18 @@ export default class ActivitySignModal extends React.Component {
           <div className={styles.body}>
             <List>
               <InputItem
-                {...getFieldProps('name')}
+                {...getFieldProps('name', {
+                  rules: [{required: true}]
+                })}
                 clear
                 placeholder="请输入"
                 // onChange={value => this.onChange(value, 'name')}
               >名称</InputItem>
 
               <InputItem
-                {...getFieldProps('mobile')}
+                {...getFieldProps('mobile', {
+                  rules: [{required: true}]
+                })}
                 clear
                 placeholder="请输入"
                 // onChange={value => this.onChange(value, 'mobile')}

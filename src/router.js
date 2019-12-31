@@ -42,6 +42,7 @@ export default function RouterConfig({ history, app }) {
 
   const BaseLayout = getLayout(navData, 'BaseLayout').component;
   const UserLayout = getLayout(navData, 'UserLayout').component;
+  const MobileLayout = getLayout(navData, 'MobileLayout').component;
 
   const passProps = {
     app,
@@ -55,6 +56,7 @@ export default function RouterConfig({ history, app }) {
     <ConfigProvider locale={zh_CN}>
       <Router history={history}>
         <Switch>
+          <Route path="/m" render={props => <MobileLayout {...props} {...passProps} />} />
           <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
           <Route path="/" render={props => <BaseLayout {...props} {...passProps} />} />
           <Route component={NotFound} />
