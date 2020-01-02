@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'dva';
-import { Link } from 'dva/router'
+import { Link, routerRedux } from 'dva/router'
 import { Row, Col, Button, Icon } from 'antd'
 import { Toast, Modal } from 'antd-mobile';
 import moment from 'moment'
@@ -24,6 +24,7 @@ export default class ActivityOrder extends React.Component{
     this.state = {
       loading: true,
       id: '',
+      type: this.props.match.params.type,
       detail: '',
       currentRound: 0,  //当前轮次
       currentTicket: 0, //当前门票
@@ -60,9 +61,10 @@ export default class ActivityOrder extends React.Component{
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500)
         if (res.code === '0') {
+          if(res.data.length === 0) window.history.go(-1); // 内容为空
           const detail = res.data,
             currentTicketPrice = detail[0].ticket[0].price,
-            totalTicketPrice = currentTicketPrice * 1
+            totalTicketPrice = currentTicketPrice * 1;
           this.setState({
             id,
             loading: false,
@@ -127,6 +129,64 @@ export default class ActivityOrder extends React.Component{
     memberList.splice(index, 1)
     this.setState({
       memberList
+    })
+  }
+
+  // 创建活动订单
+  createOrder = () => {
+
+    if(!this.ajaxFlag) return;
+    this.ajaxFlag = false;
+
+    const { uid } = this.props.global.currentUser.userInfo,
+      {
+        id, type, detail, currentRound, currentTicket,
+        totalTicketNumber, totalTicketPrice, memberList
+      } = this.state;
+
+    let ticketArr = [];
+    let ticketDetail = detail[currentRound].ticket[currentTicket];
+    ticketDetail.num = totalTicketNumber;
+    ticketDetail.start_time = detail[currentRound].start_time;
+    ticketDetail.end_time = detail[currentRound].end_time;
+    // let member_detail = [];
+    // for(let i in memberList) {
+    //
+    // }
+    ticketDetail.member_detail = memberList;
+    ticketArr.push(ticketDetail)
+    ticketArr = JSON.stringify(ticketArr)
+
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/orderweb/create',
+      payload: {
+        uid,
+        activity_id: id,
+        type,
+        order_amount: totalTicketPrice,
+        // pay_type: '2',
+        ticket: ticketArr
+      },
+      callback: (res) => {
+        setTimeout(() => { this.ajaxFlag = true }, 500);
+        if (res.code === 0) {
+          this.saveOrderinfo({
+            order_no: res.data.order_no,
+            order_amount: totalTicketPrice,
+          })
+          this.props.dispatch(routerRedux.push(`/m/activity/pay/${res.data.order_no}`))
+        } else {
+          Toast.info(res.msg, 2);
+        }
+      }
+    })
+  }
+
+  saveOrderinfo = (values) => {
+    this.props.dispatch({
+      type: 'global/changeOrderInfo',
+      payload: values
     })
   }
 
@@ -240,9 +300,9 @@ export default class ActivityOrder extends React.Component{
             <div className={styles.foot}>
 
               <div className={styles.right}>
-                <Link to={`/m/activity/pay/${id}`} className={styles.start}>
+                <a className={styles.start} onClick={this.createOrder}>
                   立即购买
-                </Link>
+                </a>
               </div>
 
               <div className={styles.left}>
@@ -254,6 +314,7 @@ export default class ActivityOrder extends React.Component{
 
             <ActivitySignModal
               onRef={e => this.activitySignModal = e}
+              explain={detail[currentRound].ticket[currentTicket].explain}
               callback={this.addSignCb}
             />
 

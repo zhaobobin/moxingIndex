@@ -117,7 +117,7 @@ export default class MobileLayout extends React.Component {
   render(){
 
     const { location } = this.props;
-    const { loading } = this.props.global;
+    const { loading, isAuth } = this.props.global;
 
     const hiddenTab = location.pathname !== '/m/activity/list' && location.pathname !== '/m/my/index'
     const selectedTab = location.pathname.split('/')[2]
@@ -128,54 +128,57 @@ export default class MobileLayout extends React.Component {
           loading ?
             <Loading/>
             :
-            <TabBar
-              unselectedTintColor="#353535"
-              tintColor="#FFBC00"
-              barTintColor="white"
-              hidden={hiddenTab}
-            >
-              <TabBar.Item
-                title="活动"
-                key="Activity"
-                icon={<img src={require('~/assets/tabs/home01.png')} width="40px" height="auto" alt="home"/>}
-                selectedIcon={<img src={require('~/assets/tabs/home02.png')} width="40px" height="auto" alt="home"/>}
-                selected={selectedTab === 'activity'}
-                // badge={1}
-                onPress={() => {
-                  this.setState({
-                    selectedTab: 'activity',
-                  });
-                  this.props.dispatch(routerRedux.push('/m/activity/list'))
-                }}
+            !isAuth ?
+              <Redirect to={`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`} />
+              :
+              <TabBar
+                unselectedTintColor="#353535"
+                tintColor="#FFBC00"
+                barTintColor="white"
+                hidden={hiddenTab}
               >
-                {
-                  selectedTab === 'activity' ?
-                    this.renderContent()
-                    :
-                    null
-                }
-              </TabBar.Item>
-              <TabBar.Item
-                icon={<img src={require('~/assets/tabs/my01.png')} width="40px" height="auto" alt="my"/>}
-                selectedIcon={<img src={require('~/assets/tabs/my02.png')} width="40px" height="auto" alt="my"/>}
-                title="我的"
-                key="My"
-                selected={selectedTab === 'my'}
-                onPress={() => {
-                  this.setState({
-                    selectedTab: 'my',
-                  });
-                  this.props.dispatch(routerRedux.push('/m/my/index'))
-                }}
-              >
-                {
-                  selectedTab === 'my' ?
-                    this.renderContent()
-                    :
-                    null
-                }
-              </TabBar.Item>
-            </TabBar>
+                <TabBar.Item
+                  title="活动"
+                  key="Activity"
+                  icon={<img src={require('~/assets/tabs/home01.png')} width="40px" height="auto" alt="home"/>}
+                  selectedIcon={<img src={require('~/assets/tabs/home02.png')} width="40px" height="auto" alt="home"/>}
+                  selected={selectedTab === 'activity'}
+                  // badge={1}
+                  onPress={() => {
+                    this.setState({
+                      selectedTab: 'activity',
+                    });
+                    this.props.dispatch(routerRedux.push('/m/activity/list'))
+                  }}
+                >
+                  {
+                    selectedTab === 'activity' ?
+                      this.renderContent()
+                      :
+                      null
+                  }
+                </TabBar.Item>
+                <TabBar.Item
+                  icon={<img src={require('~/assets/tabs/my01.png')} width="40px" height="auto" alt="my"/>}
+                  selectedIcon={<img src={require('~/assets/tabs/my02.png')} width="40px" height="auto" alt="my"/>}
+                  title="我的"
+                  key="My"
+                  selected={selectedTab === 'my'}
+                  onPress={() => {
+                    this.setState({
+                      selectedTab: 'my',
+                    });
+                    this.props.dispatch(routerRedux.push('/m/my/index'))
+                  }}
+                >
+                  {
+                    selectedTab === 'my' ?
+                      this.renderContent()
+                      :
+                      null
+                  }
+                </TabBar.Item>
+              </TabBar>
 
         }
       </div>

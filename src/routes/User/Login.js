@@ -20,7 +20,7 @@ const FormItem = Form.Item;
   global: state.global,
 }))
 @Form.create()
-export default class QucikRegister extends React.Component {
+export default class Login extends React.Component {
 
   constructor(props){
     super(props);
@@ -214,7 +214,7 @@ export default class QucikRegister extends React.Component {
       callback: (res) => {
         if(res.code === '0'){
           Storage.set(ENV.storageLastTel, values.tel);      //手机号保存到本地存储;
-          this.props.dispatch(routerRedux.push('/account'))
+          this.back()
         }else{
           Toast.info(res.msg, 2);
         }
@@ -222,9 +222,19 @@ export default class QucikRegister extends React.Component {
     })
   };
 
-  register = () => {
-
-  };
+  back = () => {
+    const redirect = getUrlParams().redirect;
+    if(redirect) {  // 重定向
+      this.props.dispatch(routerRedux.push(decodeURIComponent(redirect)));
+    } else { // 返回历史页面
+      let routerHistory = Storage.get(ENV.storageHistory, 3600*24); // 读取路由历史 24小时过期
+      if (routerHistory) {
+        this.props.dispatch(routerRedux.push(routerHistory[routerHistory.length - 1]))
+      } else {
+        this.props.dispatch(routerRedux.push('/account'))
+      }
+    }
+  }
 
   render(){
 
@@ -257,14 +267,18 @@ export default class QucikRegister extends React.Component {
                   placeholder="请输入手机号码"
                   onBlur={this.mobileOnBlur}
                   suffix={
-                    getFieldValue('tel') ?
-                      <Icon
-                        type="close-circle"
-                        className={styles.clearInput}
-                        onClick={() => this.emitEmpty('tel')}
-                      />
-                      :
-                      null
+                    <span>
+                      {
+                        getFieldValue('tel') ?
+                          <Icon
+                            type="close-circle"
+                            className={styles.clearInput}
+                            onClick={() => this.emitEmpty('tel')}
+                          />
+                          :
+                          null
+                      }
+                    </span>
                   }
                 />
               )}

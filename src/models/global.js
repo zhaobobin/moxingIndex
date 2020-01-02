@@ -26,7 +26,12 @@ export default {
       authAmt: '',              //授权金额（元）
       authDue: '',              //授权期限（月）
       equipmentType: 'pc'
-    }
+    },
+
+    orderInfo: {                //订单
+      order_no: '',
+      order_amount: '',
+    },
 
   },
 
@@ -239,6 +244,13 @@ export default {
           ...state.currentUser,
           userInfo: Object.assign(state.currentUser.userInfo, payload)
         },
+      };
+    },
+    //修改订单信息
+    changeOrderInfo(state, {payload}){
+      return {
+        ...state,
+        orderInfo: payload,
       };
     },
   },

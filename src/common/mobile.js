@@ -43,14 +43,20 @@ const BaseRoutes = app => [
           {
             name: '订单确认',
             key: 'order',
-            path: 'order/:id',
+            path: 'order/:id/:type',
             component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityOrder')),
           },
           {
-            name: '购票成功',
+            name: '订单付款',
             key: 'pay',
-            path: 'pay',
-            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityPay')),
+            path: 'pay/:order_no',
+            component: dynamicWrapper(app, ['pay'], () => import('../routes/Activity/ActivityPay')),
+          },
+          {
+            name: '付款结果',
+            key: 'callback',
+            path: 'callback',
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityResult')),
           },
         ]
       },

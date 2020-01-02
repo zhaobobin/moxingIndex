@@ -20,9 +20,10 @@ export default class ActivitySignModal extends React.Component {
     this.ajaxFlag = true;
     this.state = {
       visible: false,
-      values: {
-
-      }
+      values: [
+        { type: '1', key: 'name', name: '姓名', value: '', },
+        { type: '2', key: 'mobile', name: '手机号', value: '', }
+      ]
     }
   }
 
@@ -48,8 +49,11 @@ export default class ActivitySignModal extends React.Component {
 
   onChange = (value, key) => {
     const {values} = this.state;
-    values[key] = value;
-    console.log(values)
+    for(let i in values) {
+      if(values[i].key === key) {
+        values[i].value = value
+      }
+    }
     this.setState({
       values
     })

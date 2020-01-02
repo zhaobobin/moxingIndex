@@ -242,6 +242,39 @@ export function setupWebViewJavascriptBridge(callback) {
   setTimeout(() => { document.documentElement.removeChild(WVJBIframe);}, 0);
 }
 
+export function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
+  //compatibility for firefox and chrome
+  let myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+  let pc = new myPeerConnection({
+      iceServers: []
+    }),
+    noop = function() {},
+    localIPs = {},
+    ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g,
+    key;
+  function iterateIP(ip) {
+    if (!localIPs[ip]) onNewIP(ip);
+    localIPs[ip] = true;
+  }
+  //create a bogus data channel
+  pc.createDataChannel("");
+  // create offer and set local description
+  pc.createOffer().then(function(sdp) {
+    sdp.sdp.split('\n').forEach(function(line) {
+      if (line.indexOf('candidate') < 0) return;
+      line.match(ipRegex).forEach(iterateIP);
+    });
+    pc.setLocalDescription(sdp, noop, noop);
+  }).catch(function(reason) {
+    // An error occurred, so handle the failure to connect
+  });
+  //sten for candidate events
+  pc.onicecandidate = function(ice) {
+    if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) return;
+    ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
+  };
+}
+
 /*************************** 表单工具函数 ***************************/
 
 
@@ -322,6 +355,34 @@ export function filterCard(str){
 
   return str.toString().replace(/^(\d{3})\d{4}(\d+)/,"$1****$2");
 
+}
+
+// 生成指定长度的随机字符串
+export function getRandomStr(len){
+  len = len || 23;
+  let chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+  let maxPos = chars.length;
+  let str = '';
+  for (let i = 0; i < len; i++) {
+    str += chars.charAt(Math.floor(Math.random() * maxPos));
+  }
+  return new Date().getTime() + str;
+}
+
+// 把对象进行ASCII码排序
+export function sort_ASCII(obj) {
+  let arr = new Array();
+  let num = 0;
+  for (let i in obj) {
+    arr[num] = i;
+    num++;
+  }
+  let sortArr = arr.sort();
+  let sortObj = {};
+  for (let i in sortArr) {
+    sortObj[sortArr[i]] = obj[sortArr[i]];
+  }
+  return sortObj;
 }
 
 /*************************** 图片工具函数 ***************************/

@@ -70,3 +70,48 @@ export default function request(url, options) {
       return error;
     });
 }
+
+export function post(url, options) {
+
+  options.head = {
+    ...options.headers,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
+  }
+  options.body = JSON.stringify(options.body);
+  options.method = 'POST';
+
+  return fetch(url, options)
+    .then(checkStatus)
+    .then(response => response.json())
+    .catch(error => {
+      if (error.code) {
+        notification.error({
+          message: error.name
+        });
+      }
+      if ('stack' in error && 'message' in error) {
+        notification.error({
+          message: '请求错误'
+        });
+      }
+      return error;
+    });
+
+}
+
+export function get(url) {
+
+  let option = {
+    method: 'GET',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'}
+  };
+  return fetch(url, option)
+    .then(response => response.json())
+    .catch((error) => {
+      return error;
+    });
+
+}
+

@@ -107,7 +107,7 @@ export default class ActivityDetail extends React.Component{
             <div className={styles.foot}>
               {
                 detail.state === '1' ?
-                  <Link to={`/m/activity/order/${id}`} className={styles.start}>
+                  <Link to={`/m/activity/order/${id}/${detail.type}`} className={styles.start}>
                     立即报名
                   </Link>
                   :
