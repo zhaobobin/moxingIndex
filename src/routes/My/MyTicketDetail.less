@@ -1,0 +1,100 @@
+.container{
+  height: 100%;
+  padding: 10px 14px 20px;
+  background:linear-gradient(131deg,rgba(178,196,196,1) 0%,rgba(235,238,231,1) 100%);
+  overflow: auto;
+
+  .section{
+    padding: 18px 16px;
+    background: #fff;
+    box-shadow:0 2px 2px 0 rgba(17,17,17,0.1),0 6px 6px 0 rgba(0,0,0,0.1),0 10px 10px 0 rgba(7,7,7,0.1);
+    border-radius:5px;
+  }
+
+  .head{
+    margin-bottom: 36px;
+    .item{
+      height: 420px;
+      position: relative;
+      .state{
+        color: #43D233;
+        position: absolute;
+        top: 2px;
+        right: 0;
+      }
+      p{
+        min-height: 20px;
+        line-height: 20px;
+        label{
+          display: block;
+          float: left;
+          width: 75px;
+          color: #ABABAB
+        }
+        span{
+          display: block;
+          margin-left: 75px;
+          text-align: right;
+          color: #353535
+        }
+        img{
+          display: block;
+          margin: 10px auto;
+          width: 106px;
+          height: 106px;
+        }
+        &.name{
+          margin-bottom: 40px;
+          color: #353535;
+          font-size: 18px;
+        }
+        &.ma{
+          text-align: center;
+          color: #353535;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .foot{
+    position: relative;
+    p{
+      min-height: 20px;
+      line-height: 20px;
+      label{
+        display: block;
+        float: left;
+        width: 60px;
+        color: #ABABAB
+      }
+      span{
+        display: block;
+        margin-left: 60px;
+        text-align: right;
+        color: #353535
+      }
+      &.place{
+        height: 40px;
+        padding-right: 60px;
+      }
+    }
+    .line{
+      margin: 16px 0;
+      height: 1px;
+      background: #F3F4F3;
+    }
+    .address{
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      right: 18px;
+      bottom: 26px;
+      img{
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+}

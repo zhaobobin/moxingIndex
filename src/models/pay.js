@@ -10,7 +10,10 @@ export default {
 
   state: {
 
-    client_ip: ''
+    orderInfo: {                //订单
+      order_no: '',
+      order_amount: '',
+    },
 
   },
 
@@ -58,14 +61,13 @@ export default {
         loading: payload
       }
     },
-    saveClientIp(state, {payload}){
-      const client_ip = qs.parse(payload.split(' = ')[1])
-      console.log(client_ip)
+    //修改订单信息
+    changeOrderInfo(state, {payload}){
       return {
         ...state,
-        client_ip
-      }
-    }
+        orderInfo: payload,
+      };
+    },
   },
 
 };

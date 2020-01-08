@@ -43,7 +43,7 @@ export default class ActivityDetail extends React.Component{
   queryDetail = (id) => {
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/activities/activities',
+      url: '/api/activities/activitiesnew',
       payload: {
         id
       },

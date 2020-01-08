@@ -26,9 +26,9 @@ export default class BaseLayout extends React.Component {
     }else{
       if(isAuth) return;                              //isAuth为true时不校验token
       let accessToken = Storage.get(ENV.storageAccessToken);
-      let userId = Storage.get(ENV.storageUserId);
+      // let userId = Storage.get(ENV.storageUserId);
       setTimeout(() => {
-        this.validateToken(accessToken, userId);     //页面F5刷新时执行token验证
+        this.validateToken(accessToken);     //页面F5刷新时执行token验证
       }, 200);
     }
   }
@@ -43,12 +43,12 @@ export default class BaseLayout extends React.Component {
   }
 
   //验证token
-  validateToken = (accessToken, userId) => {
+  validateToken = (accessToken) => {
     this.props.dispatch({
       type: 'global/token',
       payload: {
         login_code: accessToken,
-        uid: userId
+        // uid: userId
       },
       callback: (res) => {}
     })

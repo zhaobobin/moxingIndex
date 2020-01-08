@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'dva';
+import {Empty} from 'antd';
 import {Toast} from 'antd-mobile';
 import styles from './MyTicket.less'
 
@@ -32,10 +33,13 @@ export default class MyTicket extends React.Component{
   }
 
   queryList = (params) => {
+    const { uid } = this.props.global.currentUser.userInfo;
     this.props.dispatch({
       type: 'global/post',
-      url: '/api//my/ticket',
-      payload: {},
+      url: '/api/my/ticket',
+      payload: {
+        uid
+      },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500)
         if (res.code === '0') {
@@ -44,7 +48,8 @@ export default class MyTicket extends React.Component{
             // hasMore: res.data.length > 10
           })
         } else {
-          Toast.info(res.msg, 2);
+          Toast.info(res.msg || '数据错误', 2);
+          window.history.go(-1);
         }
       }
     })
@@ -84,11 +89,16 @@ export default class MyTicket extends React.Component{
           hasMore={hasMore}
         >
           {
-            list.map((item, index) => (
-              <div key={index}>
-                <TicketListItem item={item} />
+            list.length > 0 ?
+              list.map((item, index) => (
+                <div key={index}>
+                  <TicketListItem item={item} />
+                </div>
+              ))
+              :
+              <div className={styles.empty}>
+                <Empty/>
               </div>
-            ))
           }
         </InfiniteScroll>
 

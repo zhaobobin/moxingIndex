@@ -262,7 +262,7 @@ export default class Login extends React.Component {
               })(
                 <Input
                   size="large"
-                  maxLength="11"
+                  maxLength={11}
                   autoComplete="off"
                   placeholder="请输入手机号码"
                   onBlur={this.mobileOnBlur}

@@ -7,7 +7,7 @@ import { Link, routerRedux } from 'dva/router'
 import { Row, Col, Button, Icon } from 'antd'
 import { Toast, Modal } from 'antd-mobile';
 import moment from 'moment'
-import { filterTel } from '~/utils/utils'
+import { filterTel, Storage, ENV } from '~/utils/utils'
 import styles from './ActivityOrder.less'
 
 import InputNumberPlus from '~/components/Form/InputNumberPlus'
@@ -38,8 +38,13 @@ export default class ActivityOrder extends React.Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
-    let id = this.props.match.params.id;
-    this.queryDetail(id);
+    const { isAuth } = this.props.global;
+    if(isAuth) {
+      let id = this.props.match.params.id;
+      this.queryDetail(id);
+    } else {
+      this.props.dispatch(routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`))
+    }
   }
 
   //处理用户登录、退出时，重新渲染文章数据
@@ -54,26 +59,31 @@ export default class ActivityOrder extends React.Component{
   queryDetail = (id) => {
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/activities/sign',
+      url: '/api/activities/signnew',
       payload: {
         id
       },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500)
         if (res.code === '0') {
-          if(res.data.length === 0) window.history.go(-1); // 内容为空
-          const detail = res.data,
-            currentTicketPrice = detail[0].ticket[0].price,
-            totalTicketPrice = currentTicketPrice * 1;
-          this.setState({
-            id,
-            loading: false,
-            detail,
-            currentTicketPrice,
-            totalTicketPrice
-          })
+          if(res.data.length > 0) {
+            const detail = res.data,
+              currentTicketPrice = detail[0].ticket[0].price,
+              totalTicketPrice = currentTicketPrice * 1;
+            this.setState({
+              id,
+              loading: false,
+              detail,
+              currentTicketPrice,
+              totalTicketPrice
+            })
+          } else {
+            Toast.info('暂无报名信息', 2);
+            window.history.go(-1); // 内容为空
+          }
         } else {
           Toast.info(res.msg, 2);
+          if(res.code === '1075') window.history.go(-1);
         }
       }
     })
@@ -116,7 +126,6 @@ export default class ActivityOrder extends React.Component{
   }
 
   addSignCb = (values) => {
-    console.log(values)
     let { memberList } = this.state;
     memberList.unshift(values);
     this.setState({
@@ -144,6 +153,12 @@ export default class ActivityOrder extends React.Component{
         totalTicketNumber, totalTicketPrice, memberList
       } = this.state;
 
+    if(memberList.length === 0){
+      Toast.info('请添加参会人员', 2);
+      this.ajaxFlag = true;
+      return false;
+    }
+
     let ticketArr = [];
     let ticketDetail = detail[currentRound].ticket[currentTicket];
     ticketDetail.num = totalTicketNumber;
@@ -165,28 +180,25 @@ export default class ActivityOrder extends React.Component{
         activity_id: id,
         type,
         order_amount: totalTicketPrice,
-        // pay_type: '2',
         ticket: ticketArr
       },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);
         if (res.code === 0) {
-          this.saveOrderinfo({
+          Storage.set('orderInfo', {
             order_no: res.data.order_no,
             order_amount: totalTicketPrice,
           })
-          this.props.dispatch(routerRedux.push(`/m/activity/pay/${res.data.order_no}`))
+          const ua = window.navigator.userAgent.toLowerCase();
+          if(ua.match(/MicroMessenger/i) == "micromessenger") {
+            window.location.replace(`${window.location.origin}/m/activity/pay/${res.data.order_no}?token=${Storage.get(ENV.storageAccessToken)}`);
+          } else {
+            this.props.dispatch(routerRedux.push(`/m/activity/pay/${res.data.order_no}`))
+          }
         } else {
           Toast.info(res.msg, 2);
         }
       }
-    })
-  }
-
-  saveOrderinfo = (values) => {
-    this.props.dispatch({
-      type: 'global/changeOrderInfo',
-      payload: values
     })
   }
 

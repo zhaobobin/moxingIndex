@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form id='alipaysubmit' name='alipaysubmit' action='https://openapi.alipay.com/gateway.do?charset=UTF-8' method='POST'>
+  <input type='hidden' name='biz_content' value='{"body":"\u8da3\u65cf\u8ba2\u5355","subject":"\u8da3\u65cf\u8ba2\u5355","out_trade_no":"2020010310085700014143904304","timeout_express":"30m","total_amount":10,"product_code":"QUICK_MSECURITY_PAY"}'/>
+  <input type='hidden' name='app_id' value='2019030863476665'/>
+  <input type='hidden' name='version' value='1.0'/>
+  <input type='hidden' name='format' value='json'/>
+  <input type='hidden' name='sign_type' value='RSA2'/>
+  <input type='hidden' name='method' value='alipay.trade.wap.pay'/>
+  <input type='hidden' name='timestamp' value='2020-01-03 10:08:57'/>
+  <input type='hidden' name='alipay_sdk' value='alipay-sdk-php-easyalipay-20190926'/>
+  <input type='hidden' name='notify_url' value='https://data.moxinga.com/pay/alipayCallback'/>
+  <input type='hidden' name='charset' value='UTF-8'/>
+  <input type='hidden' name='sign' value='wOts93nRb+xVF8+D7plv6yg0XNWRWIB5/urudWUNMSPYWDJEwXwWno5qxEOpX8hE8ptpmlmMhNrrKgqsjRgbBBPOxD1/1R/sHLLwxNcook9UcKYwSMw0K0CH7QhwDXXO3k6BCxWZ7OozQzhtzoo21koVe5SWxeKapI9RJ1e/y84qBqznWEC3EF6cpZE+G95FPFnoLoBLTOs0Br2TFLNv8YOHmWY97IjQj8CFiF4Jo3pT7vPJWNZ68SPtW/iyJ1gIYtwYk5bpT8xmoudNf74kSQX+L9QisTVah2p6fXur22kFYZLDhuXVUrZCkK8bfrbcYyQ/Bz4FllQXpBq/zf5Fhg=='/>
+  <input type='submit' value='ok' style='display:none;'>
+</form>
+<script>document.forms['alipaysubmit'].submit()</script>
+<script>document.forms['alipaysubmit'].submit()</script>
+</body>
+</html>

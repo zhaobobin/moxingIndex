@@ -34,7 +34,7 @@ export default class ActivityList extends React.Component{
   queryList = (params) => {
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/activities/index',
+      url: '/api/activities/indexnew',
       payload: {},
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500)

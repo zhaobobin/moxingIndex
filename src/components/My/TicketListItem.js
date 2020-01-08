@@ -10,37 +10,23 @@ import styles from './TicketListItem.less'
 export default function TicketListItem ({ item }) {
 
   return(
-    <Link to={`/m/activity/detail/${item.id}`} className={styles.item}>
+    <Link to={`/m/my/ticket-detail/${item.order_no}`} className={styles.item}>
+
       <div className={styles.head}>
         <div className={styles.thumb}>
           <img src={item.image} alt={item.name}/>
         </div>
         <div className={styles.info}>
-          <p className={styles.name}>{item.name}</p>
-          <p className={styles.date}>{moment(item.start_time).format('YYYY年MM月DD日 HH:mm')}</p>
-          <p className={styles.place}>{item.place}</p>
-          {
-            item.price === '0' ?
-              null
-              :
-              <p className={styles.price}>
-                <em>¥</em>
-                <span>{item.price}起</span>
-              </p>
-          }
+          <p className={styles.activityName}>{item.name}</p>
+          <p className={styles.ticketName}>
+            {item.goods_name}
+            <span>X</span>
+            <span>{item.goods_num}</span>
+          </p>
+          {/*<p className={styles.date}>{item.order_no}</p>*/}
         </div>
       </div>
 
-      <div className={styles.foot}>
-        <div className={styles.btn}>
-          {
-            item.state === '1' ?
-              <span className={styles.start}>立即报名</span>
-              :
-              <span className={styles.disabled}>已结束</span>
-          }
-        </div>
-      </div>
     </Link>
   )
 

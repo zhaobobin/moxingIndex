@@ -49,8 +49,8 @@ export default class InputPassword extends React.Component {
       <Input
         type={inputType}
         size="large"
-        minLength="6"
-        maxLength="20"
+        minLength={6}
+        maxLength={20}
         autoComplete="off"
         placeholder="密码"
         onChange={this.changeValue}

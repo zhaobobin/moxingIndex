@@ -6,13 +6,16 @@ import {connect} from 'dva';
 import { routerRedux } from 'dva/router';
 import { Icon } from 'antd';
 import { Carousel, Toast, Modal } from 'antd-mobile';
-import { numberFormat, getRandomStr } from '~/utils/utils'
+import { Storage, ENV, numberFormat, getRandomStr, getUrlParams } from '~/utils/utils'
 import { getSign } from '~/utils/wechat'
 import styles from './ActivityPay.less'
 
+import ActivityPayWechatModal from '~/components/Activity/ActivityPayWechatModal'
+
+const paramsObj = getUrlParams() || '';
+
 @connect(state => ({
   global: state.global,
-  pay: state.pay,
 }))
 export default class ActivityPay extends React.Component{
 
@@ -27,13 +30,13 @@ export default class ActivityPay extends React.Component{
         {
           name: '微信支付',
           key: 'wechat',
-          pay_type: '1',
+          pay_type: '2',
           icon: require('~/assets/com/pay_wechat.png')
         },
         {
           name: '支付宝',
           key: 'ali',
-          pay_type: '2',
+          pay_type: '1',
           icon: require('~/assets/com/pay_ali.png')
         },
       ],
@@ -43,9 +46,17 @@ export default class ActivityPay extends React.Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
-    let order_no = this.props.match.params.order_no;
-    this.queryDetail(order_no);
-    this.getClientIp();
+    // 支付宝回调
+    if(paramsObj.sign && paramsObj.method === 'alipay.trade.wap.pay.return') {
+      this.props.dispatch(routerRedux.push(`/m/activity/ticket/${paramsObj.out_trade_no}`))
+    }
+    const { isAuth } = this.props.global;
+    if(isAuth) {
+      let order_no = this.props.match.params.order_no;
+      this.queryDetail(order_no);
+    } else {
+      this.props.dispatch(routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`))
+    }
   }
 
   //处理用户登录、退出时，重新渲染文章数据
@@ -60,7 +71,7 @@ export default class ActivityPay extends React.Component{
   queryDetail = (order_no) => {
     this.props.dispatch({
       type: 'global/post',
-      url: '/api/order/order_details',
+      url: '/api/activity/ticketnew',
       payload: {
         order_no
       },
@@ -79,76 +90,145 @@ export default class ActivityPay extends React.Component{
     })
   }
 
-  getClientIp = () => {
-    this.props.dispatch({
-      type: 'pay/getClientIp',
-    })
-  }
-
   selectPayWay = (index) => {
     this.setState({
       selectedPayWay: index
     })
   }
 
+  // 确定支付
   submitPay = () => {
-    const { selectedPayWay } = this.state;
 
-    // 调用支付
-    switch(selectedPayWay){
-      case 0: this.callWechatPay(); break;
-      case 1: this.callAliPay(); break;
-      default: break;
+    if(!this.ajaxFlag) return;
+    this.ajaxFlag = false;
+
+    const { uid } = this.props.global.currentUser.userInfo;
+    const { detail, selectedPayWay, payWay } = this.state;
+    const pay_type = payWay[selectedPayWay].pay_type; // 1：ali、2：wechat
+
+    this.props.dispatch({
+      type: 'global/post',
+      url: '/api/orderweb/again_pay',
+      payload: {
+        uid,
+        order_no: detail.order_no,
+        order_amount: detail.price,
+        pay_type
+      },
+      callback: (res) => {
+        setTimeout(() => { this.ajaxFlag = true }, 500);
+        if(res.code === 0 || res.code === '0') {
+          switch(pay_type) {
+            case '1':
+              this.goAliPay(res.data);
+              break;
+            case '2':
+              this.goWechatPay(res.data);
+              break;
+            default: break;
+          }
+        } else {
+          Toast.info(res.msg, 2);
+        }
+      }
+    })
+
+  }
+
+  // 支付宝支付
+  goAliPay = (data) => {
+    const ua = window.navigator.userAgent.toLowerCase();
+    // 判断是否是微信
+    if(ua.match(/MicroMessenger/i) == "micromessenger") {
+      this.activitySignWechatModal.show();
+    }else{
+      const aliOrderForm = data.ali_order;
+      const aliPayDiv = document.getElementById('aliPay');
+      aliPayDiv.innerHTML = aliOrderForm;
+      document.forms[0].submit();
+      this.payAlert();
     }
-    // 弹框提示
-    Modal.alert('微信支付', <div>请确认微信支付是否已完成</div>, [
-      { text: '已完成支付', onPress: () => {} },
+
+  }
+
+  // 微信支付
+  goWechatPay = (data) => {
+
+  }
+
+  // 支付弹框提示
+  payAlert = () => {
+    Modal.alert('订单支付', <div>请确认支付是否已完成</div>, [
+      { text: '已完成支付',
+        onPress: () => {
+          if(paramsObj.sign && paramsObj.method === 'alipay.trade.wap.pay.return') {
+            this.props.dispatch(routerRedux.push(`/m/activity/ticket/${paramsObj.out_trade_no}`))
+          }
+        }
+      },
       { text: '支付遇到问题', onPress: () => {} },
       { text: '取消', onPress: () => {} },
     ])
   }
 
-  // 调用微信支付
-  callWechatPay = () => {
-
-    const { order_no, detail } = this.state;
-
-    let data = {
-      nonce_str: getRandomStr(32),
-      body: '趣族-活动购票',
-      out_trade_no: order_no,
-      total_fee: detail.goods_amount || 1,
-      spbill_create_ip: window.client_ip,
-      notify_url: `http://www.moxinga.com/m/activity/pay/${order_no}`,
-      trade_type: 'MWEB',
-      scene_info: {
-        "h5_info":
-          {
-            "type": "Wap",  //场景类型
-            "wap_url": "http://www.moxinga.com/",//WAP网站URL地址
-            "wap_name": "趣族"  //WAP 网站名
-          }
-      }
-    }
-    data = getSign(data)
-
+  // 查询支付情况
+  queryOrderPay = (order_no) => {
     this.props.dispatch({
-      type: 'pay/wechat',
-      payload: data,
+      type: 'global/post',
+      url: '/api/pay/query_order_pay',
+      payload: {
+        order_no
+      },
       callback: (res) => {
-
+        if(res.code === '0') {
+          this.props.dispatch(routerRedux.push(`/m/activity/ticket/${order_no}`))
+        } else {
+          this.queryDetail(order_no);
+        }
       }
     })
   }
 
-  callAliPay = () => {
-
-  }
+  // 调用微信支付
+  // callWechatPay = () => {
+  //
+  //   const { order_no, detail } = this.state;
+  //
+  //   let data = {
+  //     nonce_str: getRandomStr(32),
+  //     body: '趣族-活动购票',
+  //     out_trade_no: order_no,
+  //     total_fee: detail.goods_amount || 100,
+  //     spbill_create_ip: window.client_ip,
+  //     notify_url: 'http://www.moxinga.com/m/activity/pay',
+  //     trade_type: 'MWEB',
+  //     scene_info: {
+  //       "h5_info":
+  //         {
+  //           "type": "Wap",  //场景类型
+  //           "wap_url": "http://www.moxinga.com/",//WAP网站URL地址
+  //           "wap_name": "趣族"  //WAP 网站名
+  //         }
+  //     }
+  //   }
+  //   data = getSign(data)
+  //
+  //   this.props.dispatch({
+  //     type: 'pay/wechat',
+  //     payload: data,
+  //     callback: (res) => {
+  //
+  //     }
+  //   })
+  // }
+  //
+  // callAliPay = () => {
+  //
+  // }
 
   render(){
 
-    const { loading, payWay, selectedPayWay } = this.state;
-    const { orderInfo } = this.props.global;
+    const { loading, detail, payWay, selectedPayWay } = this.state;
 
     return(
       <>
@@ -181,12 +261,16 @@ export default class ActivityPay extends React.Component{
             <div className={styles.foot}>
               <div className={styles.left}>
                 <label>订单金额：</label>
-                <span>{numberFormat(100)}</span>
+                <span>{detail.price ? numberFormat(detail.price) : ''}</span>
               </div>
               <div className={styles.right} onClick={this.submitPay}>
                 <span>去支付</span>
               </div>
             </div>
+
+            <div id="aliPay"/>
+
+            <ActivityPayWechatModal onRef={e => this.activitySignWechatModal = e}/>
 
           </div>
       }

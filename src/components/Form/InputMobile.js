@@ -34,7 +34,7 @@ export default class InputMobile extends React.Component {
     return(
       <Input
         size="large"
-        maxLength="11"
+        maxLength={11}
         autoComplete="off"
         placeholder="手机号"
         onChange={this.changeValue}

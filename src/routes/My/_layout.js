@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import { Redirect, routerRedux } from 'dva/router';
 import { List, Modal } from 'antd-mobile';
 import styles from './_layout.less'
 
@@ -29,39 +29,50 @@ export default class _layout extends React.Component{
   }
 
   render(){
+
+    const { isAuth, currentUser } = this.props.global;
+
     return(
-      <div className={styles.container}>
-        <UserinfoCard detail={{ name: '老番茄', avatar: '' }}/>
+      <>
+      {
+        !isAuth ?
+          <Redirect to="/user/login" />
+          :
+          <div className={styles.container}>
 
-        <div className={styles.menu}>
-          <List>
-            <Item
-              thumb={require('~/assets/my/menu01.png')}
-              arrow="horizontal"
-              onClick={() => {
-                this.props.dispatch(routerRedux.push('/m/my/ticket'))
-              }}
-            >我的门票</Item>
-            <Item
-              thumb={require('~/assets/my/menu02.png')}
-              onClick={() => {
-                this.props.dispatch(routerRedux.push('/m/my/about'))
-              }}
-              arrow="horizontal"
-            >
-              关于我们
-            </Item>
-            <Item
-              thumb={require('~/assets/my/menu03.png')}
-              onClick={this.logout}
-              arrow="horizontal"
-            >
-              安全退出
-            </Item>
-          </List>
-        </div>
+            <UserinfoCard detail={{ name: currentUser.userInfo.nickname, avatar: currentUser.userInfo.avatar }}/>
 
-      </div>
+            <div className={styles.menu}>
+              <List>
+                <Item
+                  thumb={require('~/assets/my/menu01.png')}
+                  arrow="horizontal"
+                  onClick={() => {
+                    this.props.dispatch(routerRedux.push('/m/my/ticket'))
+                  }}
+                >我的门票</Item>
+                <Item
+                  thumb={require('~/assets/my/menu02.png')}
+                  onClick={() => {
+                    this.props.dispatch(routerRedux.push('/m/my/about'))
+                  }}
+                  arrow="horizontal"
+                >
+                  关于我们
+                </Item>
+                <Item
+                  thumb={require('~/assets/my/menu03.png')}
+                  onClick={this.logout}
+                  arrow="horizontal"
+                >
+                  安全退出
+                </Item>
+              </List>
+            </div>
+
+          </div>
+      }
+      </>
     )
   }
 

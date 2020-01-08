@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { TabBar } from 'antd-mobile';
-import { ENV, Storage } from '~/utils/utils';
+import { ENV, Storage, getUrlParams } from '~/utils/utils';
 import DocumentTitle from 'react-document-title';
 import styles from './MobileLayout.less'
 
 import NotFound from "~/routes/Other/page404";
 import Loading from '~/components/Common/Loading';
-import GlobalContent from '~/components/Common/GlobalContent';
+
+const paramsObj = getUrlParams() || '';
 
 @connect(state => ({
   global: state.global,
@@ -25,10 +26,11 @@ export default class MobileLayout extends React.Component {
   componentDidMount(){
     const { isAuth } = this.props.global;
     if(isAuth) return;                              //isAuth为true时不校验token
-    let accessToken = Storage.get(ENV.storageAccessToken);
-    let userId = Storage.get(ENV.storageUserId);
+    // console.log(Storage.get(ENV.storageAccessToken))
+    let accessToken = Storage.get(ENV.storageAccessToken) || paramsObj.token;
+    // let userId = Storage.get(ENV.storageUserId);
     setTimeout(() => {
-      this.validateToken(accessToken, userId);     //页面F5刷新时执行token验证
+      this.validateToken(accessToken);     //页面F5刷新时执行token验证
     }, 200);
   }
 
@@ -42,12 +44,12 @@ export default class MobileLayout extends React.Component {
   }
 
   //验证token
-  validateToken = (accessToken, userId) => {
+  validateToken = (accessToken) => {
     this.props.dispatch({
       type: 'global/token',
       payload: {
         login_code: accessToken,
-        uid: userId
+        // uid: userId
       },
       callback: (res) => {}
     })
@@ -117,7 +119,7 @@ export default class MobileLayout extends React.Component {
   render(){
 
     const { location } = this.props;
-    const { loading, isAuth } = this.props.global;
+    const { loading } = this.props.global;
 
     const hiddenTab = location.pathname !== '/m/activity/list' && location.pathname !== '/m/my/index'
     const selectedTab = location.pathname.split('/')[2]
@@ -128,58 +130,78 @@ export default class MobileLayout extends React.Component {
           loading ?
             <Loading/>
             :
-            !isAuth ?
-              <Redirect to={`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`} />
-              :
-              <TabBar
-                unselectedTintColor="#353535"
-                tintColor="#FFBC00"
-                barTintColor="white"
-                hidden={hiddenTab}
+            <TabBar
+              unselectedTintColor="#353535"
+              tintColor="#FFBC00"
+              barTintColor="white"
+              hidden={hiddenTab}
+            >
+              <TabBar.Item
+                title="活动"
+                key="Activity"
+                icon={
+                  <div style={{
+                    width: '22px',
+                    height: '22px',
+                    background: `url(${require('~/assets/tabs/home01.png')}) center center /  auto 22px no-repeat` }}
+                  />
+                }
+                selectedIcon={
+                  <div style={{
+                    width: '22px',
+                    height: '22px',
+                    background: `url(${require('~/assets/tabs/home02.png')}) center center /  auto 22px no-repeat` }}
+                  />
+                }
+                selected={selectedTab === 'activity'}
+                // badge={1}
+                onPress={() => {
+                  this.setState({
+                    selectedTab: 'activity',
+                  });
+                  this.props.dispatch(routerRedux.push('/m/activity/list'))
+                }}
               >
-                <TabBar.Item
-                  title="活动"
-                  key="Activity"
-                  icon={<img src={require('~/assets/tabs/home01.png')} width="40px" height="auto" alt="home"/>}
-                  selectedIcon={<img src={require('~/assets/tabs/home02.png')} width="40px" height="auto" alt="home"/>}
-                  selected={selectedTab === 'activity'}
-                  // badge={1}
-                  onPress={() => {
-                    this.setState({
-                      selectedTab: 'activity',
-                    });
-                    this.props.dispatch(routerRedux.push('/m/activity/list'))
-                  }}
-                >
-                  {
-                    selectedTab === 'activity' ?
-                      this.renderContent()
-                      :
-                      null
-                  }
-                </TabBar.Item>
-                <TabBar.Item
-                  icon={<img src={require('~/assets/tabs/my01.png')} width="40px" height="auto" alt="my"/>}
-                  selectedIcon={<img src={require('~/assets/tabs/my02.png')} width="40px" height="auto" alt="my"/>}
-                  title="我的"
-                  key="My"
-                  selected={selectedTab === 'my'}
-                  onPress={() => {
-                    this.setState({
-                      selectedTab: 'my',
-                    });
-                    this.props.dispatch(routerRedux.push('/m/my/index'))
-                  }}
-                >
-                  {
-                    selectedTab === 'my' ?
-                      this.renderContent()
-                      :
-                      null
-                  }
-                </TabBar.Item>
-              </TabBar>
-
+                {
+                  selectedTab === 'activity' ?
+                    this.renderContent()
+                    :
+                    null
+                }
+              </TabBar.Item>
+              <TabBar.Item
+                icon={
+                  <div style={{
+                    width: '22px',
+                    height: '22px',
+                    background: `url(${require('~/assets/tabs/my01.png')}) center center /  auto 22px no-repeat` }}
+                  />
+                }
+                selectedIcon={
+                  <div style={{
+                    width: '22px',
+                    height: '22px',
+                    background: `url(${require('~/assets/tabs/my02.png')}) center center /  auto 22px no-repeat` }}
+                  />
+                }
+                title="我的"
+                key="My"
+                selected={selectedTab === 'my'}
+                onPress={() => {
+                  this.setState({
+                    selectedTab: 'my',
+                  });
+                  this.props.dispatch(routerRedux.push('/m/my/index'))
+                }}
+              >
+                {
+                  selectedTab === 'my' ?
+                    this.renderContent()
+                    :
+                    null
+                }
+              </TabBar.Item>
+            </TabBar>
         }
       </div>
     );

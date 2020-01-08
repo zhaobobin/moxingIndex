@@ -50,13 +50,13 @@ const BaseRoutes = app => [
             name: '订单付款',
             key: 'pay',
             path: 'pay/:order_no',
-            component: dynamicWrapper(app, ['pay'], () => import('../routes/Activity/ActivityPay')),
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityPay')),
           },
           {
             name: '付款结果',
-            key: 'callback',
-            path: 'callback',
-            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityResult')),
+            key: 'ticket',
+            path: 'ticket/:order_no',
+            component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityTicket')),
           },
         ]
       },
@@ -78,6 +78,12 @@ const BaseRoutes = app => [
             key: 'ticket',
             path: 'ticket',
             component: dynamicWrapper(app, [], () => import('../routes/My/MyTicket')),
+          },
+          {
+            name: '门票详情',
+            key: 'ticket-detail',
+            path: 'ticket-detail/:order_no',
+            component: dynamicWrapper(app, [], () => import('../routes/My/MyTicketDetail')),
           },
           {
             name: '关于我们',

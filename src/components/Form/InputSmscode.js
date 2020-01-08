@@ -42,6 +42,10 @@ export default class InputSmscode extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    clearInterval(timer)
+  }
+
   //初始化按钮样式
   initBtnStyle(tel){
     let btnStyle = tel ? styles.actived : styles.null;
@@ -103,6 +107,9 @@ export default class InputSmscode extends React.Component {
           this.props.callback('clearError');
           Toast.info(`已将短信验证码发送到您${filterTel(tel)}的手机当中，请注意查收！`, 2);
         }else{
+          this.setState({
+            modalVisible: false
+          });
           Toast.info(res.msg, 2);
         }
       }
@@ -150,7 +157,7 @@ export default class InputSmscode extends React.Component {
         <Col xs={14} sm={14} md={16} lg={16}>
           <Input
             size="large"
-            maxLength="4"
+            maxLength={4}
             autoComplete="off"
             placeholder="短信验证码"
             onChange={this.changeValue}
