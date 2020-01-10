@@ -20,10 +20,8 @@ export default class ActivitySignModal extends React.Component {
     this.ajaxFlag = true;
     this.state = {
       visible: false,
-      values: [
-        { type: '1', key: 'name', name: '姓名', value: '', },
-        { type: '2', key: 'mobile', name: '手机号', value: '', }
-      ]
+      explain: props.explain,
+      values: props.explain
     }
   }
 
@@ -43,15 +41,16 @@ export default class ActivitySignModal extends React.Component {
 
   close = () => {
     this.setState({
-      visible: false
+      visible: false,
+      values: ''
     })
   }
 
-  onChange = (value, key) => {
-    const {values} = this.state;
+  onChange = (value, name) => {
+    const { values } = this.state;
     for(let i in values) {
-      if(values[i].key === key) {
-        values[i].value = value
+      if(values[i].name === name) {
+        values[i].val = value
       }
     }
     this.setState({
@@ -60,22 +59,60 @@ export default class ActivitySignModal extends React.Component {
   }
 
   save = () => {
-    this.props.form.validateFields('', (err, values) => {
-      if (!err) {
-        // console.log(values)
-        this.props.callback(values)
-        this.close()
-      } else {
-        // console.log(err)
-        Toast.info('请完善报名信息', 2)
+    let flag = true
+    let { values } = this.state;
+    for(let i in values) {
+      if(!values[i].val){
+        flag = false
+        Toast.info(`请填写${values[i].name}`, 2);
+        return false;
       }
-    });
+      if(values[i].type === '2' && values[i].val.replace(/\s/g, '').length !== 11) {
+        flag = false
+        Toast.info('请填写正确的手机号', 2);
+        return false;
+      }
+    }
+    if(flag) {
+      this.props.callback(values);
+      this.close()
+    }
+  }
+
+  renderFormItem = (item, index, getFieldProps) => {
+    const { values } = this.state;
+    switch(item.type){
+      case '1':
+        item['key'] = 'name';
+        item['inputType'] = 'text'
+        break;
+      case '2':
+        item['key'] = 'mobile';
+        item['inputType'] = 'number'
+        break;
+      default: break;
+    }
+    return(
+      <InputItem
+        {...getFieldProps(item.name, {
+          rules: [{required: true}]
+        })}
+        type={item.inputType}
+        placeholder={item.explain}
+        maxLength={item.type === '2' ? 11 : parseInt(item.max)}
+        value={values ? values[index].val : ''}
+        onChange={(value) => this.onChange(value, item.name)}
+        clear
+      >
+        {item.name}
+      </InputItem>
+    )
   }
 
   render(){
 
-    const { visible } = this.state;
     const { getFieldProps } = this.props.form;
+    const { visible, explain } = this.state;
 
     return(
       <Modal
@@ -89,23 +126,13 @@ export default class ActivitySignModal extends React.Component {
 
           <div className={styles.body}>
             <List>
-              <InputItem
-                {...getFieldProps('name', {
-                  rules: [{required: true}]
-                })}
-                clear
-                placeholder="请输入"
-                // onChange={value => this.onChange(value, 'name')}
-              >名称</InputItem>
-
-              <InputItem
-                {...getFieldProps('mobile', {
-                  rules: [{required: true}]
-                })}
-                clear
-                placeholder="请输入"
-                // onChange={value => this.onChange(value, 'mobile')}
-              >手机号</InputItem>
+              {
+                explain.map((item, index) => (
+                  <div key={index}>
+                    {this.renderFormItem(item, index, getFieldProps)}
+                  </div>
+                ))
+              }
             </List>
           </div>
 

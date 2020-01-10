@@ -296,7 +296,7 @@ class jigsaw {
       isMouseDown = true
     });
 
-    document.addEventListener('touchmove', (e) => {
+    this.slider.addEventListener('touchmove', (e) => {
       if (!isMouseDown) return false;
       const moveX = e.targetTouches[0].clientX - originX;
       const moveY = e.targetTouches[0].clientY - originY;
@@ -311,7 +311,7 @@ class jigsaw {
       trail.push(moveY)
     });
 
-    document.addEventListener('touchend', (e) => {
+    this.slider.addEventListener('touchend', (e) => {
       if (!isMouseDown) return false;
       isMouseDown = false;
       if (e.targetTouches[0] && e.targetTouches[0].clientX === originX) return false;

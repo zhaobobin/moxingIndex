@@ -48,6 +48,8 @@ export const ENV = {
   storagePagesize: 'qz-pagesize',
   storageHistory: 'qz-history',          //路由历史
   storageLucky: 'qz-lucky',               // 抽奖记录
+  storageInviteCode: 'qz-invite_code',               // 邀请码
+  storageChanelCode: 'qz-chanel_code',               // 渠道码
 };
 
 /**

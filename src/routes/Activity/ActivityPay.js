@@ -11,6 +11,7 @@ import { getSign } from '~/utils/wechat'
 import styles from './ActivityPay.less'
 
 import ActivityPayWechatModal from '~/components/Activity/ActivityPayWechatModal'
+import Loading from '~/components/Common/Loading'
 
 const paramsObj = getUrlParams() || '';
 
@@ -46,13 +47,13 @@ export default class ActivityPay extends React.Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
-    // 支付宝回调
-    if(paramsObj.sign && paramsObj.method === 'alipay.trade.wap.pay.return') {
-      this.props.dispatch(routerRedux.push(`/m/activity/ticket/${paramsObj.out_trade_no}`))
-    }
     const { isAuth } = this.props.global;
     if(isAuth) {
       let order_no = this.props.match.params.order_no;
+      // 支付宝回调
+      if(paramsObj.sign && paramsObj.method === 'alipay.trade.wap.pay.return') {
+        this.props.dispatch(routerRedux.push(`/m/activity/ticket/${order_no}`))
+      }
       this.queryDetail(order_no);
     } else {
       this.props.dispatch(routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`))
@@ -113,7 +114,8 @@ export default class ActivityPay extends React.Component{
         uid,
         order_no: detail.order_no,
         order_amount: detail.price,
-        pay_type
+        pay_type,
+        token: Storage.get(ENV.storageAccessToken)
       },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);
@@ -234,7 +236,7 @@ export default class ActivityPay extends React.Component{
       <>
       {
         loading ?
-          null
+          <Loading/>
           :
           <div className={styles.container}>
 

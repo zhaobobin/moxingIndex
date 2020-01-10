@@ -19,6 +19,8 @@ const paramsObj = getUrlParams() || '';
 export default class BaseLayout extends React.Component {
 
   componentDidMount(){
+    if(paramsObj.invite) Storage.set(ENV.storageInviteCode, paramsObj.invite); // 保存邀请码
+    if(paramsObj.chanel) Storage.set(ENV.storageChanelCode, paramsObj.chanel); // 保存邀请码
     const { isAuth } = this.props.global;
     //处理app调用h5
     if(paramsObj.platform === 'app'){

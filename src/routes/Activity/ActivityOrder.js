@@ -1,5 +1,6 @@
 /**
  * 活动 - 订单
+ * 路由参数： {id}_{type}_{is_real}
  */
 import React from 'react'
 import {connect} from 'dva';
@@ -12,6 +13,7 @@ import styles from './ActivityOrder.less'
 
 import InputNumberPlus from '~/components/Form/InputNumberPlus'
 import ActivitySignModal from '~/components/Activity/ActivitySignModal'
+import Loading from '~/components/Common/Loading'
 
 @connect(state => ({
   global: state.global,
@@ -24,7 +26,7 @@ export default class ActivityOrder extends React.Component{
     this.state = {
       loading: true,
       id: '',
-      type: this.props.match.params.type,
+      param: props.match.params.param,
       detail: '',
       currentRound: 0,  //当前轮次
       currentTicket: 0, //当前门票
@@ -32,7 +34,7 @@ export default class ActivityOrder extends React.Component{
       totalTicketNumber: 1, //总票数
       totalTicketPrice: 0, //总票价
       signModalVisible: false,
-      memberList: []
+      memberList: [], // 用于页面展示
     }
   }
 
@@ -40,8 +42,8 @@ export default class ActivityOrder extends React.Component{
     window.scrollTo(0, 0);
     const { isAuth } = this.props.global;
     if(isAuth) {
-      let id = this.props.match.params.id;
-      this.queryDetail(id);
+      let param = this.state.param;
+      this.queryDetail(param.split('_')[0]);
     } else {
       this.props.dispatch(routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`))
     }
@@ -49,9 +51,9 @@ export default class ActivityOrder extends React.Component{
 
   //处理用户登录、退出时，重新渲染文章数据
   UNSAFE_componentWillReceiveProps(nextProps){
-    if(nextProps.match.params.id !== this.props.match.params.id){
-      let id = nextProps.match.params.id;
-      this.queryDetail(id);
+    if(nextProps.match.params.param !== this.props.match.params.param){
+      let param = nextProps.match.params.param;
+      this.queryDetail(param.split('_')[0]);
     }
   }
 
@@ -126,8 +128,17 @@ export default class ActivityOrder extends React.Component{
   }
 
   addSignCb = (values) => {
-    let { memberList } = this.state;
-    memberList.unshift(values);
+    let arr = [],
+      { memberList } = this.state;
+    for(let i in values) {
+      let item = {
+        type: values[i].type,
+        name: values[i].name,
+        val: values[i].val,
+      }
+      arr.push(item);
+    }
+    memberList.unshift(arr);
     this.setState({
       memberList
     })
@@ -149,7 +160,7 @@ export default class ActivityOrder extends React.Component{
 
     const { uid } = this.props.global.currentUser.userInfo,
       {
-        id, type, detail, currentRound, currentTicket,
+        param, detail, currentRound, currentTicket,
         totalTicketNumber, totalTicketPrice, memberList
       } = this.state;
 
@@ -164,21 +175,27 @@ export default class ActivityOrder extends React.Component{
     ticketDetail.num = totalTicketNumber;
     ticketDetail.start_time = detail[currentRound].start_time;
     ticketDetail.end_time = detail[currentRound].end_time;
-    // let member_detail = [];
-    // for(let i in memberList) {
-    //
-    // }
-    ticketDetail.member_detail = memberList;
-    ticketArr.push(ticketDetail)
-    ticketArr = JSON.stringify(ticketArr)
+
+    // 需要实名时，校验报名信息
+    if(param.split('_')[2] === '1') {
+      if(memberList.length === totalTicketNumber){
+        ticketDetail.member_detail = memberList;
+        ticketArr.push(ticketDetail)
+        ticketArr = JSON.stringify(ticketArr)
+      } else {
+        Toast.info('请完善报名信息', 2);
+        this.ajaxFlag = true;
+        return false;
+      }
+    }
 
     this.props.dispatch({
       type: 'global/post',
       url: '/api/orderweb/create',
       payload: {
         uid,
-        activity_id: id,
-        type,
+        activity_id: param.split('_')[0],
+        type: param.split('_')[1],
         order_amount: totalTicketPrice,
         ticket: ticketArr
       },
@@ -205,17 +222,17 @@ export default class ActivityOrder extends React.Component{
   render(){
 
     const {
-      id, loading, detail,
+      loading, param, detail,
       currentRound, currentTicket,
       currentTicketPrice, totalTicketPrice,
-      memberList
+      totalTicketNumber, memberList
     } = this.state;
 
     return(
       <>
       {
         loading ?
-          null
+          <Loading/>
           :
           <div className={styles.container}>
 
@@ -280,32 +297,58 @@ export default class ActivityOrder extends React.Component{
                 </div>
               </div>
 
-              <div className={styles.section + " " + styles.section5}>
-                <h2>参会成员</h2>
-                <div className={styles.con}>
-                  {
-                    memberList.map((item, index) => (
-                      <div key={index} className={styles.item}>
-                        <span className={styles.avatar}><Icon type="user"/></span>
-                        <p className={styles.name}>{item.name}</p>
-                        <p className={styles.mobile}>{filterTel(item.mobile)}</p>
-                        <a className={styles.del} onClick={() => this.delSignMember(index)}>
-                          <Icon type="minus-circle" />
-                          <span>移除</span>
-                        </a>
-                      </div>
-                    ))
-                  }
-                  <Button
-                    type="primary"
-                    size="large"
-                    icon="plus-circle"
-                    ghost
-                    onClick={this.showSignModal}>
-                    添加参会成员
-                  </Button>
-                </div>
-              </div>
+              {
+                param.split('_')[2] === '1' ?
+                  <div className={styles.section + " " + styles.section5}>
+                    <h2>参会成员</h2>
+                    <div className={styles.con}>
+                      {
+                        memberList.map((item, index) => (
+                          <div key={index} className={styles.item}>
+                            <span className={styles.avatar}><Icon type="user"/></span>
+                            <p className={styles.name}>
+                              {
+                                item.map((t, j) => (
+                                  t.type === '1' ?
+                                    <span key={j}>{t.val}</span>
+                                    : null
+                                ))
+                              }
+                            </p>
+                            <p className={styles.mobile}>
+                              {
+                                item.map((t, j) => (
+                                  t.type === '2' ?
+                                    <span key={j}>{filterTel(t.val)}</span>
+                                    : null
+                                ))
+                              }
+                            </p>
+                            <a className={styles.del} onClick={() => this.delSignMember(index)}>
+                              <Icon type="minus-circle" />
+                              <span>移除</span>
+                            </a>
+                          </div>
+                        ))
+                      }
+                      {
+                        totalTicketNumber > memberList.length ?
+                          <Button
+                            type="primary"
+                            size="large"
+                            icon="plus-circle"
+                            ghost
+                            onClick={this.showSignModal}>
+                            添加参会成员
+                          </Button>
+                          :
+                          null
+                      }
+                    </div>
+                  </div>
+                  :
+                  null
+              }
 
             </div>
 

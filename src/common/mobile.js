@@ -43,7 +43,7 @@ const BaseRoutes = app => [
           {
             name: '订单确认',
             key: 'order',
-            path: 'order/:id/:type',
+            path: 'order/:param',
             component: dynamicWrapper(app, [], () => import('../routes/Activity/ActivityOrder')),
           },
           {

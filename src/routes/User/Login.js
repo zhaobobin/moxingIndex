@@ -199,7 +199,9 @@ export default class Login extends React.Component {
       type = 'global/login_sms';
       payload = {
         tel: values.tel,
-        verity: values.smscode
+        verity: values.smscode,
+        invite_code: Storage.get(ENV.storageInviteCode) || '',
+        chanel_code: Storage.get(ENV.storageChanelCode) || ''
       }
     }else{
       type = 'global/login_psd';
