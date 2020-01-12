@@ -115,7 +115,8 @@ export default class ActivityPay extends React.Component{
         order_no: detail.order_no,
         order_amount: detail.price,
         pay_type,
-        token: Storage.get(ENV.storageAccessToken)
+        token: Storage.get(ENV.storageAccessToken),
+        chanel_code: Storage.get(ENV.storageChanelCode) || ''
       },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);

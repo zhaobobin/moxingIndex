@@ -8,6 +8,7 @@ import styles from './ActivityList.less'
 
 import InfiniteScroll from 'react-infinite-scroller';			// 无限加载
 import ActivityListItem from '~/components/Activity/ActivityListItem'
+import ActivityDownload from '~/components/Activity/ActivityDownload'
 
 @connect(state => ({
   global: state.global,
@@ -76,6 +77,8 @@ export default class ActivityList extends React.Component{
 
     return(
       <div className={styles.container}>
+
+        <ActivityDownload/>
 
         <InfiniteScroll
           pageStart={0}

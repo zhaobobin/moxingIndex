@@ -1,5 +1,5 @@
 /**
- * 活动 - 详情
+ * 活动 - 购买门票付款结果
  */
 import React from 'react'
 import {connect} from 'dva';
@@ -9,6 +9,7 @@ import styles from './ActivityTicket.less'
 
 import mapIcon from '~/assets/com/map.png'
 import Loading from '~/components/Common/Loading'
+import ActivityDownload from '~/components/Activity/ActivityDownload'
 
 @connect(state => ({
   global: state.global,
@@ -74,6 +75,8 @@ export default class ActivityTicket extends React.Component{
           :
           <div className={styles.container}>
 
+            <ActivityDownload/>
+
             <div className={styles.head + " " + styles.section}>
               {
                 detail.ticket.length > 1 ?
@@ -120,6 +123,7 @@ export default class ActivityTicket extends React.Component{
               <Link to={`/m/activity/address/${detail.place}`} className={styles.address}>
                 <img src={mapIcon} alt="address"/>
               </Link>
+              <Link to="/m/my/ticket" className={styles.link}>查看我的门票</Link>
             </div>
 
           </div>

@@ -138,6 +138,7 @@ export default class ActivityOrder extends React.Component{
       }
       arr.push(item);
     }
+    console.log(arr)
     memberList.unshift(arr);
     this.setState({
       memberList

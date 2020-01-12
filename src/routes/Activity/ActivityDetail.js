@@ -4,11 +4,13 @@
 import React from 'react'
 import {connect} from 'dva';
 import { Link } from 'dva/router'
+import {Icon} from 'antd';
 import {Toast} from 'antd-mobile';
 import styles from './ActivityDetail.less'
 
 import mapIcon from '~/assets/com/map.png'
 import Loading from '~/components/Common/Loading'
+import ActivityDownload from '~/components/Activity/ActivityDownload'
 
 @connect(state => ({
  global: state.global,
@@ -74,6 +76,8 @@ export default class ActivityDetail extends React.Component{
           :
           <div className={styles.container}>
 
+            <ActivityDownload/>
+
             <div className={styles.head}>
               <div className={styles.bg} style={{
                 backgroundImage: `url(${detail.image})`
@@ -83,6 +87,9 @@ export default class ActivityDetail extends React.Component{
                 </div>
                 <p className={styles.title}>{detail.title}</p>
                 <p className={styles.price}>¥{detail.range}</p>
+                <a onClick={() => { window.history.go(-1) }} className={styles.back}>
+                  <Icon type="left" />
+                </a>
               </div>
             </div>
 
