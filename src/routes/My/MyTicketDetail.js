@@ -74,52 +74,54 @@ export default class MyTicketDetail extends React.Component{
           :
           <div className={styles.container}>
 
-            <div className={styles.head + " " + styles.section}>
-              {
-                detail.ticket.length > 1 ?
-                  <Carousel autoplay={false} infinite>
-                    {
-                      detail.ticket.map((item, index) => (
-                        <div key={index} className={styles.item}>
-                          <span className={styles.state}>{item.is_use === '1' ? '已使用' : '未使用'}</span>
-                          <p className={styles.name}><strong>{item.name}</strong></p>
-                          <p><label>使用时间</label><span>{item.time}</span></p>
-                          <p><label>门票数量</label><span>{detail.ticket.length}</span></p>
-                          <p><label>门票价格</label><span>{item.ticket_price}</span></p>
-                          <p><label>姓名</label><span>{item.u_name}</span></p>
-                          <p><label>手机号</label><span>{item.u_tel}</span></p>
-                          <p><img src={item.image} alt="ma"/></p>
-                          <p className={styles.ma}>验证码：{item.code}</p>
-                        </div>
-                      ))
-                    }
-                  </Carousel>
-                  :
-                  detail.ticket.map((item, index) => (
-                    <div key={index} className={styles.item}>
-                      <span className={styles.state}>{item.is_use === '1' ? '已使用' : '未使用'}</span>
-                      <p className={styles.name}><strong>{item.name}</strong></p>
-                      <p><label>使用时间</label><span>{item.time}</span></p>
-                      <p><label>门票数量</label><span>{detail.ticket.length}</span></p>
-                      <p><label>门票价格</label><span>{item.ticket_price}</span></p>
-                      <p><label>姓名</label><span>{item.u_name}</span></p>
-                      <p><label>手机号</label><span>{item.u_tel}</span></p>
-                      <p><img src={item.image} alt="ma"/></p>
-                      <p className={styles.ma}>验证码：{item.code}</p>
-                    </div>
-                  ))
-              }
+            <div className={styles.content}>
+              <div className={styles.head + " " + styles.section}>
+                {
+                  detail.ticket.length > 1 ?
+                    <Carousel autoplay={false} infinite>
+                      {
+                        detail.ticket.map((item, index) => (
+                          <div key={index} className={styles.item}>
+                            <span className={styles.state}>{item.is_use === '1' ? '已使用' : '未使用'}</span>
+                            <p className={styles.name}><strong>{item.name}</strong></p>
+                            <p><label>使用时间</label><span>{item.time}</span></p>
+                            <p><label>门票数量</label><span>{detail.ticket.length}</span></p>
+                            <p><label>门票价格</label><span>{item.ticket_price}</span></p>
+                            <p><label>姓名</label><span>{item.u_name}</span></p>
+                            <p><label>手机号</label><span>{item.u_tel}</span></p>
+                            <p><img src={item.image} alt="ma"/></p>
+                            <p className={styles.ma}>验证码：{item.code}</p>
+                          </div>
+                        ))
+                      }
+                    </Carousel>
+                    :
+                    detail.ticket.map((item, index) => (
+                      <div key={index} className={styles.item}>
+                        <span className={styles.state}>{item.is_use === '1' ? '已使用' : '未使用'}</span>
+                        <p className={styles.name}><strong>{item.name}</strong></p>
+                        <p><label>使用时间</label><span>{item.time}</span></p>
+                        <p><label>门票数量</label><span>{detail.ticket.length}</span></p>
+                        <p><label>门票价格</label><span>{item.ticket_price}</span></p>
+                        <p><label>姓名</label><span>{item.u_name}</span></p>
+                        <p><label>手机号</label><span>{item.u_tel}</span></p>
+                        <p><img src={item.image} alt="ma"/></p>
+                        <p className={styles.ma}>验证码：{item.code}</p>
+                      </div>
+                    ))
+                }
 
-            </div>
+              </div>
 
-            <div className={styles.foot + " " + styles.section}>
-              <p><label>订单号</label><span>{detail.order_no}</span></p>
-              <p><label>总价</label><span>{detail.price}</span></p>
-              <div className={styles.line}/>
-              <p className={styles.place}>{detail.place}</p>
-              <Link to={`/m/activity/address/${detail.place}`} className={styles.address}>
-                <img src={mapIcon} alt="address"/>
-              </Link>
+              <div className={styles.foot + " " + styles.section}>
+                <p><label>订单号</label><span>{detail.order_no}</span></p>
+                <p><label>总价</label><span>{detail.price}</span></p>
+                <div className={styles.line}/>
+                <p className={styles.place}>{detail.place}</p>
+                <Link to={`/m/activity/address/${detail.place}`} className={styles.address}>
+                  <img src={mapIcon} alt="address"/>
+                </Link>
+              </div>
             </div>
 
           </div>

@@ -8,9 +8,9 @@ import {Icon} from 'antd';
 import {Toast} from 'antd-mobile';
 import styles from './ActivityDetail.less'
 
-import mapIcon from '~/assets/com/map.png'
-import Loading from '~/components/Common/Loading'
-import ActivityDownload from '~/components/Activity/ActivityDownload'
+import mapIcon from '~/assets/com/map.png';
+import Loading from '~/components/Common/Loading';
+import ActivityDownload from '~/components/Activity/ActivityDownload';
 
 @connect(state => ({
  global: state.global,
@@ -79,11 +79,13 @@ export default class ActivityDetail extends React.Component{
             <ActivityDownload/>
 
             <div className={styles.head}>
-              <div className={styles.bg} style={{
-                backgroundImage: `url(${detail.image})`
-              }}>
+              <div className={styles.bg}>
+                <div className={styles.img} style={{
+                  backgroundImage: `url(${detail.image})`
+                }}/>
+                <div className={styles.glass}/>
                 <div className={styles.thumb}>
-                  <img src={detail.share_image} alt="img"/>
+                  <img src={detail.image} alt="img"/>
                 </div>
                 <p className={styles.title}>{detail.title}</p>
                 <p className={styles.price}>¥{detail.range}</p>
@@ -94,13 +96,15 @@ export default class ActivityDetail extends React.Component{
             </div>
 
             <div className={styles.body}>
+              <h2>展会时间</h2>
               <div className={styles.date}>
                 <p>{detail.start_time}</p>
                 <p>{detail.end_time}</p>
               </div>
               <div className={styles.info}>
-                <p><strong>{detail.title}</strong></p>
-                <p className={styles.place}>{detail.place_details}</p>
+                <h2>展会地址</h2>
+                <p className={styles.place}><strong>{detail.place}</strong></p>
+                <p className={styles.place_detail}>{detail.place_details}</p>
                 <Link to={`/m/activity/address/${detail.place}`} className={styles.address}>
                   <img src={mapIcon} alt="address"/>
                 </Link>

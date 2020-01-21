@@ -25,7 +25,7 @@ export default class MobileLayout extends React.Component {
 
   componentDidMount(){
     if(paramsObj.invite) Storage.set(ENV.storageInviteCode, paramsObj.invite); // 保存邀请码
-    if(paramsObj.chanel) Storage.set(ENV.storageChanelCode, paramsObj.chanel); // 保存邀请码
+    if(paramsObj.channel) Storage.set(ENV.storageChannelCode, paramsObj.channel); // 保存邀请码
     const { isAuth } = this.props.global;
     if(isAuth) return;                              //isAuth为true时不校验token
     // console.log(Storage.get(ENV.storageAccessToken))

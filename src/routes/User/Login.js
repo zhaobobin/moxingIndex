@@ -201,7 +201,7 @@ export default class Login extends React.Component {
         tel: values.tel,
         verity: values.smscode,
         invite_code: Storage.get(ENV.storageInviteCode) || '',
-        chanel_code: Storage.get(ENV.storageChanelCode) || ''
+        chanel_code: Storage.get(ENV.storageChannelCode) || ''
       }
     }else{
       type = 'global/login_psd';

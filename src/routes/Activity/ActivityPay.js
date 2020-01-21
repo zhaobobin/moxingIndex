@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import {connect} from 'dva';
-import { routerRedux } from 'dva/router';
+import { Redirect, routerRedux } from 'dva/router';
 import { Icon } from 'antd';
 import { Carousel, Toast, Modal } from 'antd-mobile';
 import { Storage, ENV, numberFormat, getRandomStr, getUrlParams } from '~/utils/utils'
@@ -29,16 +29,16 @@ export default class ActivityPay extends React.Component{
       detail: '',
       payWay: [
         {
-          name: '微信支付',
-          key: 'wechat',
-          pay_type: '2',
-          icon: require('~/assets/com/pay_wechat.png')
-        },
-        {
           name: '支付宝',
           key: 'ali',
           pay_type: '1',
           icon: require('~/assets/com/pay_ali.png')
+        },
+        {
+          name: '微信支付',
+          key: 'wechat',
+          pay_type: '2',
+          icon: require('~/assets/com/pay_wechat.png')
         },
       ],
       selectedPayWay: 0,
@@ -47,17 +47,16 @@ export default class ActivityPay extends React.Component{
 
   componentDidMount(){
     window.scrollTo(0, 0);
-    const { isAuth } = this.props.global;
-    if(isAuth) {
-      let order_no = this.props.match.params.order_no;
-      // 支付宝回调
-      if(paramsObj.sign && paramsObj.method === 'alipay.trade.wap.pay.return') {
-        this.props.dispatch(routerRedux.push(`/m/activity/ticket/${order_no}`))
-      }
-      this.queryDetail(order_no);
-    } else {
-      this.props.dispatch(routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`))
+    let order_no = this.props.match.params.order_no;
+    // 支付宝回调
+    if(paramsObj.sign && paramsObj.method === 'alipay.trade.wap.pay.return') {
+      this.props.dispatch(routerRedux.push(`/m/activity/ticket/${order_no}`))
     }
+    // 微信回调
+    if(paramsObj.method === 'wxpay') {
+      this.props.dispatch(routerRedux.push(`/m/activity/ticket/${order_no}`))
+    }
+    this.queryDetail(order_no);
   }
 
   //处理用户登录、退出时，重新渲染文章数据
@@ -116,7 +115,7 @@ export default class ActivityPay extends React.Component{
         order_amount: detail.price,
         pay_type,
         token: Storage.get(ENV.storageAccessToken),
-        chanel_code: Storage.get(ENV.storageChanelCode) || ''
+        chanel_code: Storage.get(ENV.storageChannelCode) || ''
       },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);
@@ -156,7 +155,10 @@ export default class ActivityPay extends React.Component{
 
   // 微信支付
   goWechatPay = (data) => {
-
+    const url = `http://www.moxinga.com${window.location.pathname}?token=${Storage.get(ENV.storageAccessToken)}&method=wxpay`;
+    const redirect_url = encodeURIComponent(url)
+    window.location.href = data.wx_mweb_url + '&redirect_url=' + redirect_url;
+    this.payAlert();
   }
 
   // 支付弹框提示
@@ -231,51 +233,55 @@ export default class ActivityPay extends React.Component{
 
   render(){
 
+    const { isAuth } = this.props.global;
     const { loading, detail, payWay, selectedPayWay } = this.state;
 
     return(
       <>
       {
-        loading ?
-          <Loading/>
+        !isAuth ?
+          <Redirect to={`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`}/>
           :
-          <div className={styles.container}>
+          loading ?
+            <Loading/>
+            :
+            <div className={styles.container}>
 
-            <div className={styles.section}>
-              <h2>支付方式</h2>
-              <div className={styles.con}>
-                {
-                  payWay.map((item, index) => (
-                    <div key={index} className={styles.item} onClick={() => this.selectPayWay(index)}>
-                      <img src={item.icon} alt="icon" className={styles.icon}/>
-                      <span>{item.name}</span>
-                      <img src={
-                        selectedPayWay === index ?
-                          require('~/assets/com/check-circle-fill01@2x.png')
-                          :
-                          require('~/assets/com/check-circle-fill02@2x.png')
-                      } alt="selected" className={styles.selected}/>
-                    </div>
-                  ))
-                }
+              <div className={styles.section}>
+                <h2>支付方式</h2>
+                <div className={styles.con}>
+                  {
+                    payWay.map((item, index) => (
+                      <div key={index} className={styles.item} onClick={() => this.selectPayWay(index)}>
+                        <img src={item.icon} alt="icon" className={styles.icon}/>
+                        <span>{item.name}</span>
+                        <img src={
+                          selectedPayWay === index ?
+                            require('~/assets/com/check-circle-fill01@2x.png')
+                            :
+                            require('~/assets/com/check-circle-fill02@2x.png')
+                        } alt="selected" className={styles.selected}/>
+                      </div>
+                    ))
+                  }
+                </div>
               </div>
+
+              <div className={styles.foot}>
+                <div className={styles.left}>
+                  <label>订单金额：</label>
+                  <span>{detail.price ? numberFormat(detail.price) : ''}</span>
+                </div>
+                <div className={styles.right} onClick={this.submitPay}>
+                  <span>去支付</span>
+                </div>
+              </div>
+
+              <div id="aliPay"/>
+
+              <ActivityPayWechatModal onRef={e => this.activitySignWechatModal = e}/>
+
             </div>
-
-            <div className={styles.foot}>
-              <div className={styles.left}>
-                <label>订单金额：</label>
-                <span>{detail.price ? numberFormat(detail.price) : ''}</span>
-              </div>
-              <div className={styles.right} onClick={this.submitPay}>
-                <span>去支付</span>
-              </div>
-            </div>
-
-            <div id="aliPay"/>
-
-            <ActivityPayWechatModal onRef={e => this.activitySignWechatModal = e}/>
-
-          </div>
       }
       </>
     )

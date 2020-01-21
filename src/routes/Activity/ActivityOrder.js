@@ -4,7 +4,7 @@
  */
 import React from 'react'
 import {connect} from 'dva';
-import { Link, routerRedux } from 'dva/router'
+import { Link, Redirect, routerRedux } from 'dva/router'
 import { Row, Col, Button, Icon } from 'antd'
 import { Toast, Modal } from 'antd-mobile';
 import moment from 'moment'
@@ -41,12 +41,8 @@ export default class ActivityOrder extends React.Component{
   componentDidMount(){
     window.scrollTo(0, 0);
     const { isAuth } = this.props.global;
-    if(isAuth) {
-      let param = this.state.param;
-      this.queryDetail(param.split('_')[0]);
-    } else {
-      this.props.dispatch(routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`))
-    }
+    let param = this.state.param;
+    this.queryDetail(param.split('_')[0]);
   }
 
   //处理用户登录、退出时，重新渲染文章数据
@@ -198,7 +194,8 @@ export default class ActivityOrder extends React.Component{
         activity_id: param.split('_')[0],
         type: param.split('_')[1],
         order_amount: totalTicketPrice,
-        ticket: ticketArr
+        ticket: ticketArr,
+        chanel_code: Storage.get(ENV.storageChannelCode) || ''
       },
       callback: (res) => {
         setTimeout(() => { this.ajaxFlag = true }, 500);
@@ -209,7 +206,12 @@ export default class ActivityOrder extends React.Component{
           })
           const ua = window.navigator.userAgent.toLowerCase();
           if(ua.match(/MicroMessenger/i) == "micromessenger") {
-            window.location.replace(`${window.location.origin}/m/activity/pay/${res.data.order_no}?token=${Storage.get(ENV.storageAccessToken)}`);
+            let url = `${window.location.origin}/m/activity/pay/${res.data.order_no}?token=${Storage.get(ENV.storageAccessToken)}`
+            if(Storage.get(ENV.storageChannelCode)) {
+              url += `&channel=${Storage.get(ENV.storageChannelCode)}`
+            }
+            window.location.replace(url);
+
           } else {
             this.props.dispatch(routerRedux.push(`/m/activity/pay/${res.data.order_no}`))
           }
@@ -222,6 +224,7 @@ export default class ActivityOrder extends React.Component{
 
   render(){
 
+    const { isAuth } = this.props.global;
     const {
       loading, param, detail,
       currentRound, currentTicket,
@@ -232,149 +235,152 @@ export default class ActivityOrder extends React.Component{
     return(
       <>
       {
-        loading ?
-          <Loading/>
+        !isAuth ?
+          <Redirect to={`/user/login?redirect=${encodeURIComponent(window.location.pathname)}`}/>
           :
-          <div className={styles.container}>
+          loading ?
+            <Loading/>
+            :
+            <div className={styles.container}>
 
-            <div className={styles.content}>
+              <div className={styles.content}>
 
-              <div className={styles.section + " " + styles.section1}>
-                <h2>选择场次</h2>
-                <div className={styles.con}>
-                  {
-                    detail.map((item, index) => (
-                      <div key={index} className={styles.item}>
-                        <a
-                          className={currentRound === index ? styles.current : null}
-                          onClick={() => this.selectRound(index)}
-                        >
-                          {/*<span>{item.name}</span>*/}
-                          <span>{moment(item.start_time).format('YYYY-MM-DD HH:ss')}</span>
-                          <span>~</span>
-                          <span>{moment(item.end_time).format('HH:ss')}</span>
-                        </a>
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-
-              <div className={styles.section + " " + styles.section2}>
-                <h2>门票种类</h2>
-                <div className={styles.con}>
-                  <Row gutter={10}>
+                <div className={styles.section + " " + styles.section1}>
+                  <h2>选择场次</h2>
+                  <div className={styles.con}>
                     {
-                      detail[currentRound].ticket.map((item, index) => (
-                        <Col span={12} key={index} className={styles.item}>
+                      detail.map((item, index) => (
+                        <div key={index} className={styles.item}>
                           <a
-                            className={currentTicket === index ? styles.current : null}
-                            onClick={() => this.selectTicket(index)}
+                            className={currentRound === index ? styles.current : null}
+                            onClick={() => this.selectRound(index)}
                           >
-                            <span>{item.name}</span>
+                            {/*<span>{item.name}</span>*/}
+                            <span>{moment(item.start_time).format('YYYY-MM-DD HH:ss')}</span>
+                            <span>~</span>
+                            <span>{moment(item.end_time).format('HH:ss')}</span>
                           </a>
-                        </Col>
+                        </div>
                       ))
                     }
-                  </Row>
+                  </div>
                 </div>
-              </div>
 
-              <div className={styles.section + " " + styles.section3}>
-                <h2>门票单价</h2>
-                <div className={styles.con}>
-                  <label className={styles.label}>常规票</label>
-                  <span className={styles.p}>¥ {currentTicketPrice}</span>
-                </div>
-              </div>
-
-              <div className={styles.section + " " + styles.section4}>
-                <h2>选择数量</h2>
-                <div className={styles.con}>
-                  <label>常规票</label>
-                  <span className={styles.p}>
-                    <InputNumberPlus callback={this.InputNumberPlusCb}/>
-                  </span>
-                </div>
-              </div>
-
-              {
-                param.split('_')[2] === '1' ?
-                  <div className={styles.section + " " + styles.section5}>
-                    <h2>参会成员</h2>
-                    <div className={styles.con}>
+                <div className={styles.section + " " + styles.section2}>
+                  <h2>门票种类</h2>
+                  <div className={styles.con}>
+                    <Row gutter={10}>
                       {
-                        memberList.map((item, index) => (
-                          <div key={index} className={styles.item}>
-                            <span className={styles.avatar}><Icon type="user"/></span>
-                            <p className={styles.name}>
-                              {
-                                item.map((t, j) => (
-                                  t.type === '1' ?
-                                    <span key={j}>{t.val}</span>
-                                    : null
-                                ))
-                              }
-                            </p>
-                            <p className={styles.mobile}>
-                              {
-                                item.map((t, j) => (
-                                  t.type === '2' ?
-                                    <span key={j}>{filterTel(t.val)}</span>
-                                    : null
-                                ))
-                              }
-                            </p>
-                            <a className={styles.del} onClick={() => this.delSignMember(index)}>
-                              <Icon type="minus-circle" />
-                              <span>移除</span>
+                        detail[currentRound].ticket.map((item, index) => (
+                          <Col span={12} key={index} className={styles.item}>
+                            <a
+                              className={currentTicket === index ? styles.current : null}
+                              onClick={() => this.selectTicket(index)}
+                            >
+                              <span>{item.name}</span>
                             </a>
-                          </div>
+                          </Col>
                         ))
                       }
-                      {
-                        totalTicketNumber > memberList.length ?
-                          <Button
-                            type="primary"
-                            size="large"
-                            icon="plus-circle"
-                            ghost
-                            onClick={this.showSignModal}>
-                            添加参会成员
-                          </Button>
-                          :
-                          null
-                      }
-                    </div>
+                    </Row>
                   </div>
-                  :
-                  null
-              }
+                </div>
 
-            </div>
+                <div className={styles.section + " " + styles.section3}>
+                  <h2>门票单价</h2>
+                  <div className={styles.con}>
+                    <label className={styles.label}>常规票</label>
+                    <span className={styles.p}>¥ {currentTicketPrice}</span>
+                  </div>
+                </div>
 
-            <div className={styles.foot}>
+                <div className={styles.section + " " + styles.section4}>
+                  <h2>选择数量</h2>
+                  <div className={styles.con}>
+                    <label>常规票</label>
+                    <span className={styles.p}>
+                      <InputNumberPlus callback={this.InputNumberPlusCb}/>
+                    </span>
+                  </div>
+                </div>
 
-              <div className={styles.right}>
-                <a className={styles.start} onClick={this.createOrder}>
-                  立即购买
-                </a>
+                {
+                  param.split('_')[2] === '1' ?
+                    <div className={styles.section + " " + styles.section5}>
+                      <h2>参会成员</h2>
+                      <div className={styles.con}>
+                        {
+                          memberList.map((item, index) => (
+                            <div key={index} className={styles.item}>
+                              <span className={styles.avatar}><Icon type="user"/></span>
+                              <p className={styles.name}>
+                                {
+                                  item.map((t, j) => (
+                                    t.type === '1' ?
+                                      <span key={j}>{t.val}</span>
+                                      : null
+                                  ))
+                                }
+                              </p>
+                              <p className={styles.mobile}>
+                                {
+                                  item.map((t, j) => (
+                                    t.type === '2' ?
+                                      <span key={j}>{filterTel(t.val)}</span>
+                                      : null
+                                  ))
+                                }
+                              </p>
+                              <a className={styles.del} onClick={() => this.delSignMember(index)}>
+                                <Icon type="minus-circle" />
+                                <span>移除</span>
+                              </a>
+                            </div>
+                          ))
+                        }
+                        {
+                          totalTicketNumber > memberList.length ?
+                            <Button
+                              type="primary"
+                              size="large"
+                              icon="plus-circle"
+                              ghost
+                              onClick={this.showSignModal}>
+                              添加参会成员
+                            </Button>
+                            :
+                            null
+                        }
+                      </div>
+                    </div>
+                    :
+                    null
+                }
+
               </div>
 
-              <div className={styles.left}>
-                总价：
-                <span>¥{totalTicketPrice}</span>
+              <div className={styles.foot}>
+
+                <div className={styles.right}>
+                  <a className={styles.start} onClick={this.createOrder}>
+                    立即购买
+                  </a>
+                </div>
+
+                <div className={styles.left}>
+                  总价：
+                  <span>¥{totalTicketPrice}</span>
+                </div>
+
               </div>
 
+              <ActivitySignModal
+                onRef={e => this.activitySignModal = e}
+                explain={detail[currentRound].ticket[currentTicket].explain}
+                callback={this.addSignCb}
+              />
+
             </div>
-
-            <ActivitySignModal
-              onRef={e => this.activitySignModal = e}
-              explain={detail[currentRound].ticket[currentTicket].explain}
-              callback={this.addSignCb}
-            />
-
-          </div>
       }
       </>
     )
