@@ -142,6 +142,14 @@ const BaseRoutes = app => [
         component: dynamicWrapper(app, [], () => import('../routes/Other/page500')),
       },
 
+      {
+        name: '实时新型肺炎全国疫情追踪',
+        key: 'feiyan',
+        path: 'feiyan',
+        isHide: true,
+        component: dynamicWrapper(app, [], () => import('../routes/Other/Feiyan')),
+      },
+
     ]
   },
 ];

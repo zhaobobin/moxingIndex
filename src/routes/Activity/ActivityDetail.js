@@ -96,13 +96,16 @@ export default class ActivityDetail extends React.Component{
             </div>
 
             <div className={styles.body}>
-              <h2>展会时间</h2>
+              <h2>活动时间</h2>
               <div className={styles.date}>
-                <p>{detail.start_time}</p>
-                <p>{detail.end_time}</p>
+                {
+                  detail.time.map((item, index) => (
+                    <p key={index}>{item}</p>
+                  ))
+                }
               </div>
               <div className={styles.info}>
-                <h2>展会地址</h2>
+                <h2>活动地址</h2>
                 <p className={styles.place}><strong>{detail.place}</strong></p>
                 <p className={styles.place_detail}>{detail.place_details}</p>
                 <Link to={`/m/activity/address/${detail.place}`} className={styles.address}>
@@ -110,7 +113,7 @@ export default class ActivityDetail extends React.Component{
                 </Link>
               </div>
               <div className={styles.introduce}>
-                <h2>展会介绍</h2>
+                <h2>活动介绍</h2>
                 <div className={styles.content} dangerouslySetInnerHTML={{__html: detail.content}}/>
               </div>
             </div>

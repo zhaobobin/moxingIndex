@@ -106,6 +106,7 @@ export default class BaseLayout extends React.Component {
         {
           paramsObj.platform === 'app' ||
           location.pathname === '/download' ||
+          location.pathname === '/feiyan' ||
           location.pathname.split('/')[1] === 'activity' ?
             null
             :
@@ -146,6 +147,7 @@ export default class BaseLayout extends React.Component {
 
         {
           location.pathname === '/' ||
+          location.pathname === '/feiyan' ||
           location.pathname.split('/')[1] === 'activity' ?
             null
             :

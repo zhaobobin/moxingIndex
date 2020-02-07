@@ -255,10 +255,10 @@ export default class ActivityOrder extends React.Component{
                             className={currentRound === index ? styles.current : null}
                             onClick={() => this.selectRound(index)}
                           >
-                            {/*<span>{item.name}</span>*/}
-                            <span>{moment(item.start_time).format('YYYY-MM-DD HH:ss')}</span>
-                            <span>~</span>
-                            <span>{moment(item.end_time).format('HH:ss')}</span>
+                            <span>{item.name}</span>
+                            {/*<span>{moment(item.start_time).format('YYYY-MM-DD HH:ss')}</span>*/}
+                            {/*<span>~</span>*/}
+                            {/*<span>{moment(item.end_time).format('HH:ss')}</span>*/}
                           </a>
                         </div>
                       ))
