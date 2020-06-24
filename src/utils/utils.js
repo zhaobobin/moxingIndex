@@ -50,6 +50,8 @@ export const ENV = {
   storageLucky: 'qz-lucky',               // 抽奖记录
   storageInviteCode: 'qz-invite_code',               // 邀请码
   storageChannelCode: 'qz-chanel_code',               // 渠道码
+  storageLoginType: 'qz-login-type',
+  storageLoginCache: 'qz-login-cache'
 };
 
 /**

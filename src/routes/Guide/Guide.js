@@ -5,6 +5,10 @@ import GuideHtml from './GuideHtml'
 
 export default class Guide extends React.Component{
 
+  goBack = () => {
+    this.props.history.goBack();
+  };
+
   render(){
 
     const detail = {
@@ -20,6 +24,10 @@ export default class Guide extends React.Component{
           <Col xs={1} sm={2} md={4} lg={4}/>
 
           <Col xs={22} sm={20} md={16} lg={16}>
+
+            <div style={{marginTop: '15px', padding: '0 15px'}}>
+              <a onClick={this.goBack}>返回</a>
+            </div>
 
             <ArtivleDetail hideHead={true} detail={detail}/>
 

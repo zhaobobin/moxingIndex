@@ -190,7 +190,7 @@ export default class Feiyan extends React.Component{
               <Affix onChange={this.onChangeAffixed} showInkInFixed={false}>
                 <div className={styles.menu + " " + (affixed ? styles.fixed : null)}>
 
-                  <Row gutter={40}>
+                  <Row gutter={10}>
                     {
                       menus.map((item, index) => (
                         <Col span={8} key={index}>

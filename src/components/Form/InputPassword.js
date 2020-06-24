@@ -14,7 +14,7 @@ export default class InputPassword extends React.Component {
     super(props);
     this.ajaxFlag = true;
     this.state = {
-      value: '',            //输入框的值
+      value: props.defaultValue || '',            //输入框的值
       inputType: 'password'
     }
   }

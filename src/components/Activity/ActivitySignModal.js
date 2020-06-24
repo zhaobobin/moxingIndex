@@ -30,7 +30,7 @@ export default class ActivitySignModal extends React.Component {
   }
 
   componentWillUnmount(){
-    this.close()
+    this.close();
   }
 
   show = () => {
@@ -40,9 +40,13 @@ export default class ActivitySignModal extends React.Component {
   }
 
   close = () => {
+    const { values } = this.state;
+    for(let i in values) {
+      values[i].val = '';
+    }
     this.setState({
       visible: false,
-      values: ''
+      values
     })
   }
 
@@ -50,7 +54,7 @@ export default class ActivitySignModal extends React.Component {
     const { values } = this.state;
     for(let i in values) {
       if(values[i].name === name) {
-        values[i].val = value
+        values[i].val = value;
       }
     }
     this.setState({
@@ -75,7 +79,7 @@ export default class ActivitySignModal extends React.Component {
     }
     if(flag) {
       this.props.callback(values);
-      this.close()
+      this.close();
     }
   }
 

@@ -4,10 +4,9 @@
  */
 import React from 'react'
 import {connect} from 'dva';
-import { Link, Redirect, routerRedux } from 'dva/router'
+import { Redirect, routerRedux } from 'dva/router'
 import { Row, Col, Button, Icon } from 'antd'
-import { Toast, Modal } from 'antd-mobile';
-import moment from 'moment'
+import { Toast } from 'antd-mobile';
 import { filterTel, Storage, ENV } from '~/utils/utils'
 import styles from './ActivityOrder.less'
 
@@ -112,9 +111,10 @@ export default class ActivityOrder extends React.Component{
 
   InputNumberPlusCb = (value) => {
     const { currentTicketPrice } = this.state;
+    const totalTicketPrice = parseFloat(currentTicketPrice * value).toFixed(2);
     this.setState({
       totalTicketNumber: value,
-      totalTicketPrice: currentTicketPrice * value
+      totalTicketPrice
     })
   }
 
@@ -134,7 +134,6 @@ export default class ActivityOrder extends React.Component{
       }
       arr.push(item);
     }
-    console.log(arr)
     memberList.unshift(arr);
     this.setState({
       memberList

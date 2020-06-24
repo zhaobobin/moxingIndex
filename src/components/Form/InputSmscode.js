@@ -21,7 +21,7 @@ export default class InputSmscode extends React.Component {
     super(props);
     this.ajaxFlag = true;
     this.state = {
-      value: '',            //输入框的值
+      value: props.defaultValue || '',            //输入框的值
       tel: '',
       btnText: '获取验证码',
       btnStyle: styles.null,

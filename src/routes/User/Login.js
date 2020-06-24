@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'dva';
-import { NavLink, Link, routerRedux } from 'dva/router';
+import { Link, routerRedux } from 'dva/router';
 import { Toast } from 'antd-mobile';
-import { Form, Input, Button, Icon, Checkbox, Radio } from 'antd'
-import {
-  ENV, Storage, goBack, hasErrors,
-  checkPhone, isPhone, checkPsdLevel,
-  Encrypt, getUrlParams, yaoqingDecrypt, filterTel
-} from "~/utils/utils";
+import { Form, Input, Button, Icon } from 'antd'
+import { ENV, Storage, hasErrors, checkPhone, isPhone, getUrlParams } from "~/utils/utils";
 import styles from './Login.less';
 
-import {Confirm} from '~/components/Dialog/Dialog'
 import InputPassword from '~/components/Form/InputPassword'
 import InputSmscode from '~/components/Form/InputSmscode'
 
@@ -28,7 +23,7 @@ export default class Login extends React.Component {
     this.phoneFlag = true;
     this.state = {
       loading: false,
-      loginType: 'sms',
+      loginType: Storage.get(ENV.storageLoginType) || 'sms',
       captcha: '',
       tel: '',
       isRegister: false,    //手机号已注册
@@ -37,6 +32,18 @@ export default class Login extends React.Component {
       xieyiChecked: true,
       smscodeSended: false,       //短信验证码是否已发送
     }
+  }
+
+  componentDidMount() {
+    const values = Storage.get(ENV.storageLoginCache);
+    this.props.form.setFieldsValue({
+      ...values
+    });
+  }
+
+  componentWillUnmount() {
+    const values = this.props.form.getFieldsValue();
+    Storage.set(ENV.storageLoginCache, values);
   }
 
   //监控手机号输入
@@ -166,10 +173,12 @@ export default class Login extends React.Component {
 
   //切换登录方式
   changeLoginType = () => {
-    const {loginType} = this.state;
+    let {loginType} = this.state;
+    loginType = loginType === 'psd' ? 'sms' : 'psd';
+    Storage.set(ENV.storageLoginType, loginType);
     this.setState({
-      loginType: loginType === 'psd' ? 'sms' : 'psd'
-    })
+      loginType
+    });
   };
 
   //表单确认
@@ -215,6 +224,7 @@ export default class Login extends React.Component {
       payload: payload,
       callback: (res) => {
         if(res.code === '0'){
+          Storage.remove(ENV.storageLoginCache);
           Storage.set(ENV.storageLastTel, values.tel);      //手机号保存到本地存储;
           this.back()
         }else{
@@ -242,9 +252,7 @@ export default class Login extends React.Component {
 
     const {loading, loginType, isRegister} = this.state;
     const { getFieldDecorator, getFieldValue, getFieldsError } = this.props.form;
-
-    const winWidth = window.innerWidth - 30;
-
+    const defaultValues = Storage.get(ENV.storageLoginCache);
     return(
       <div className={styles.container}>
 
@@ -297,7 +305,10 @@ export default class Login extends React.Component {
                       { max: 20, message: '密码长度只能在6-20位字符之间' },
                     ],
                   })(
-                    <InputPassword psdLevelStyle={{width: '365px'}} callback={this.passwordCallback}/>
+                    <InputPassword
+                      defaultValue={defaultValues.pwd}
+                      psdLevelStyle={{width: '365px'}}
+                      callback={this.passwordCallback}/>
                   )}
                 </FormItem>
                 :
@@ -310,6 +321,7 @@ export default class Login extends React.Component {
                     ],
                   })(
                     <InputSmscode
+                      defaultValue={defaultValues.smscode}
                       tel={hasErrors(getFieldsError(['tel'])) ? '' : getFieldValue('tel')}
                       api={'/api/user/get_code'}
                       isrepeat={isRegister ? '3' : '1'}       // 1是注册, 2找回密码, 3验证码登录
