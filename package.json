@@ -49,7 +49,7 @@
     "react-sticky": "^6.0.3",
     "setprototypeof": "^1.1.0",
     "size-sensor": "^0.2.1",
-    "swiper": "^4.4.2",
+    "swiper": "^6.5.1",
     "url-polyfill": "^1.0.14"
   },
   "devDependencies": {
